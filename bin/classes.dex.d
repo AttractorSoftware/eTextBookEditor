@@ -13,3 +13,4 @@
 /home/ashedrin/devel/ebook/android-reader/bin/classes/com/example/ebook/ETextBook$1.class \
 /home/ashedrin/devel/ebook/android-reader/bin/classes/com/example/ebook/R$attr.class \
 /home/ashedrin/devel/ebook/android-reader/bin/classes/com/example/ebook/BuildConfig.class \
+/home/ashedrin/devel/ebook/android-reader/bin/dexedLibs/emma_device-5f3172ea0df85875915f8b18115986ed.jar \
