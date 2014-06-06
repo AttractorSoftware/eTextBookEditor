@@ -1,0 +1,275 @@
+html, body {
+  height: 100%;
+}
+
+body { padding: 50px 0 0 0; }
+
+.container { height: 100%; }
+
+.e-text-book-editor {
+  float: left;
+  width: 100%;
+  height: 100%;
+  .properties {
+    float: left;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 50px;
+    background: #eee;
+  }
+  .desktop, .display {
+    float: left;
+    width: 50%;
+    height: 100%;
+    padding: 20px;
+    overflow-y: scroll;
+  }
+  .desktop {
+    e-text-book {
+      float: left;
+      width: 100%;
+      add-module-button, add-block-button {
+        float: left;
+        width: 100%;
+        height: 1px;
+        overflow: hidden;
+        background: url('/img/add-button.png') no-repeat center bottom;
+        padding: 0 0 10px;
+        cursor: pointer;
+        transition: all 1s ease; -webkit-transition: all 1s ease; -moz-transition: all 1s ease;
+        &.open {
+          height: 50px;
+          wrap {
+            transition: all 1s ease; -webkit-transition: all 1s ease; -moz-transition: all 1s ease;
+            margin: 0;
+          }
+        }
+        wrap {
+          float: left;
+          width: 100%;
+          padding: 0 0 0 0;
+          margin: -20px 0 0 0;
+        }
+      }
+      add-block-button {
+        background-size: 30px auto;
+        margin: 0 0 20px;
+      }
+      block add-block-button {
+        position: relative;
+        margin: -20px 0 0 0;
+        top: 40px;
+      }
+      control-panel {
+        float: right;
+        height: 20px;
+        margin: -30px -15px 0 0;
+        position: relative;
+        display: none;
+        item {
+          float: left;
+          width: 20px;
+          height: 20px;
+          border: solid 1px #eee;
+          border-radius: 3px;
+          font-size: 13px;
+          margin: 5px 5px 0 0;
+          text-align: center;
+          cursor: pointer;
+          color: #999;
+          &:hover { color: #333; }
+          span {
+            position: relative;
+            top: 2px;
+          }
+          &.current {
+            background: #eee;
+          }
+        }
+      }
+      module {
+        float: left;
+        width: 100%;
+        padding: 20px 0 0 0;
+        &:hover {
+          control-panel.module-panel { display: block; }
+        }
+        edit-element {
+          display: none;
+          input[type=text] {
+            float: left;
+            width: 100%;
+            text-indent: 10px;
+            height: 30px;
+          }
+          textarea {
+            float: left;
+            width: 100%;
+            padding: 10px;
+          }
+        }
+        &[editable="1"] {
+          view-element.module-element { display: none; }
+          edit-element.module-element { display: block; }
+          control-panel.module-panel { display: block; }
+        }
+        module-title {
+          float: left;
+          width: 100%;
+          margin: 0 0 10px;
+        }
+        module-questions {
+          float: left;
+          width: 100%;
+          margin: 0 0 10px;
+        }
+        module-description {
+          float: left;
+          width: 100%;
+          margin: 0 0 10px;
+        }
+        blocks {
+          float: left;
+          width: 100%;
+          padding: 20px 0 0 0;
+          block {
+            float: left;
+            width: 100%;
+            border: solid 1px #eee;
+            padding: 30px 15px 15px 15px;
+            margin: 0 0 30px 0;
+            block-headline {
+              float: left;
+              width: 100%;
+              block-index {
+                float: left;
+              }
+              block-categories {
+                float: left;
+              }
+              block-title {
+                float: left;
+              }
+            }
+            block-content {
+              float: left;
+              width: 100%;
+              padding: 10px 0 0 0;
+            }
+            &[editable="1"] {
+              edit-element { display: block; }
+              view-element { display: none; }
+              control-panel { display: block; }
+            }
+            edit-element { display: none; }
+            &:hover {
+              control-panel { display: block; }
+            }
+          }
+        }
+      }
+    }
+  }
+  .display {
+    e-text-book {
+      float: left;
+      width: 100%;
+      module {
+        float: left;
+        width: 100%;
+        module-title {
+          float: left;
+          width: 150px;
+          height: 150px;
+          text-align: center;
+          vertical-align: middle;
+          font-size: 25px;
+          background: #2b542c;
+          color: #fff;
+          view-element {
+            display: table-cell;
+            vertical-align: middle;
+            height: 150px;
+          }
+        }
+        module-background-image {
+          float: left;
+          width: 360px;
+          height: 150px;
+          border: solid 1px #2b542c;
+        }
+        module-questions {
+          float: left;
+          clear: left;
+          width: 150px;
+          height: 130px;
+          border: solid 1px #2b542c;
+          border-width: 0 0 1px 1px;
+          view-element {
+            display: table-cell;
+            height: 130px;
+            vertical-align: middle;
+            padding: 0 0 0 20px;
+            font-size: 12px;
+          }
+        }
+        module-description {
+          float: left;
+          width: 360px;
+          height: 130px;
+          border: solid 1px #2b542c;
+          border-width: 0 1px 1px 1px;
+          view-element {
+            display: table-cell;
+            height: 130px;
+            vertical-align: middle;
+            padding: 0 0 0 20px;
+            font-size: 12px;
+          }
+        }
+      }
+      blocks {
+        float: left;
+        width: 100%;
+        padding: 20px 0 0 0;
+        block {
+          float: left;
+          width: 100%;
+          padding: 0 0 20px 0 0;
+          margin: 0 0 20px 0;
+          block-index {
+            float: left;
+            width: 30px;
+            height: 30px;
+          }
+          block-categories {
+            float: left;
+            width: 100px;
+            height: 30px;
+            block-category {
+              float: left;
+              width: 30px;
+              height: 30px;
+            }
+          }
+          block-title {
+            float: left;
+            font-weight: bold;
+            font-size: 13px;
+          }
+          block-content {
+            float: left;
+            width: 100%;
+            padding: 0 0 0 127px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.e-text-book-viewer {
+
+}

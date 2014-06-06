@@ -1,0 +1,49 @@
+body {
+  padding: 0;
+  margin: 0; }
+
+h4 {
+  margin: 20px 0; }
+
+.chapter span {
+  display: block;
+  padding: 0 0 0 10px;
+  font-size: 12px;
+  line-height: 16px; }
+
+.test-options {
+  list-style: lower-latin; }
+
+.question {
+  font-style: italic; }
+
+.ebook-editor {
+  float: left;
+  margin: 20px 0 0 0;
+  width: 100%;
+}
+
+.display, .result {
+  float: left;
+  width: 50%;
+  height: 500px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.display .paragraph {
+  float: left;
+  width: 100%;
+}
+
+.display .paragraph .title, .display .paragraph .text  {
+  float: left;
+  width: 100%;
+  border: solid 1px #eee;
+}
+
+.display .paragraph .title input, .display .paragraph .text textarea {
+  float: left;
+  width: 100%;
+  border: 0;
+}
