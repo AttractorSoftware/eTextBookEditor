@@ -31,43 +31,8 @@
                             style=" display: none; margin-top: 9px">Скачать учебник</a>
                     </div>
                 </div>
-                <div class="desktop">
-                    <e-text-book>
-                        <module>
-                            <module-title>
-                                <view-element class="module-element">1-тема Саякат</view-element>
-                            </module-title>
-                            <module-background-image>&nbsp;</module-background-image>
-                            <module-questions>
-                                <view-element class="module-element">
-                                    Унаанын түрлөрү. Унаанын ичинен кайсынысы жакшы? Саякатка эмне алыш керек? Эмне үчүн?
-                                </view-element>
-                            </module-questions>
-                            <module-description>
-                                <view-element class="module-element">
-                                    Абзий Кыдыров “Машине” Грамматика: Илик жөндөмөнүн мүчөсү. Барыш жөндөмөнүн мүчөсү. Жатыш жөндөмөнүн мүчөсү. Жактама ат атоо.Багыныңкы байланыштагы татаал сүйлөм: Эгерде..., анда...
-                                </view-element>
-                            </module-description>
-                            <blocks>
-                                <block>
-                                    <block-headline>
-                                        <block-index></block-index>
-                                        <block-categories>
-                                            <block-category type="key"></block-category>
-                                            <block-category type="write"></block-category>
-                                        </block-categories>
-                                        <block-title>
-                                            <view-element> Cөздөрдөн сүйлөм түзгүлө. иш дептерге аткаргыла. </view-element>
-                                        </block-title>
-                                    </block-headline>
-                                    <block-content></block-content>
-                                </block>
-                            </blocks>
-                        </module>
-                    </e-text-book>
-                </div>
-                <div class="display">
-                </div>
+                <div class="desktop"></div>
+                <div class="display"></div>
             </div>
         </div>
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />

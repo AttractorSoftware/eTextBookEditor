@@ -47,6 +47,7 @@ var eTextBookModule = Backbone.Model.extend({
         this.get('cont').find('control-panel.module-panel .remove').bind('click', function() {
             $this.get('cont').remove();
             $this = null;
+            App.eTextBookEditor.updateDisplay();
         });
     }
 

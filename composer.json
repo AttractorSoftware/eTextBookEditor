@@ -1,0 +1,12 @@
+{
+    "require": {
+        "behat/behat": "2.4.*@stable",
+        "behat/mink": "1.4@stable",
+        "behat/mink-selenium2-driver": "*",
+        "phpunit/phpunit": "3.7.*"
+    },
+
+    "config": {
+        "bin-dir": "vendor/"
+    }
+}
