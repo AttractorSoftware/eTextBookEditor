@@ -30,6 +30,7 @@ var eTextBookBlock = Backbone.Model.extend({
         this.get('cont').find('control-panel .remove').bind('click', function() {
             $this.get('cont').remove();
             $this = null;
+            App.eTextBookEditor.updateDisplay();
         });
     }
 

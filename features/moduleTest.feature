@@ -2,7 +2,7 @@ Feature: Добавление нового модуля
 
   Scenario: Создаем новый модуль, проверяем результат и удаляем его
     Given Открываем страницу "http://localhost"
-    When  Создаем новый модуль с заголовком "title", ключевыми вопросами "key questions" и описанием "description"
-    And   Проверяем новый модуль с заголовком "title", ключевыми вопросами "key questions" и описанием "description"
-    Then  Удаляем новый модуль
+    When  Создаем модуль с заголовком "Module title", ключевыми вопросами "key questions" и описанием "description"
+    And   Проверяем модуль с заголовком "Module title", ключевыми вопросами "key questions" и описанием "description"
+    Then  Удаляем модуль
     And   Проверяем удаленный модуль
