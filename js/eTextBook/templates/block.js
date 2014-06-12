@@ -6,9 +6,13 @@ App.eTextBookTemplate.addTemplate({
                 '<block-index>&nbsp;</block-index>' +
                 '<block-categories></block-categories>' +
                 '<block-title>' +
-                    '<view-element></view-element>' +
+                    '<view-element>Новый блок</view-element>' +
                 '</block-title>' +
             '</block-headline>' +
-            '<block-content></block-content>' +
+            '<block-content>' +
+                '<widget>' +
+                    '<widget-content></widget-content>' +
+                '</widget>' +
+            '</block-content>' +
         '</block>'
 });

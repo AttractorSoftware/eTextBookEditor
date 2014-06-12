@@ -6,7 +6,19 @@ var eTextBookEditor = Backbone.Model.extend({
         this.root = this.getRoot();
         this.modules = [];
         this.root.prepend(this.generateAddModuleButton());
+        this.clearViewElements(this.desktop);
         this.updateDisplay();
+        this.synchronizeScrolls();
+    }
+
+    ,synchronizeScrolls: function() {
+
+        var $this = this;
+
+        this.desktop.bind('scroll', function(e) {
+            var scrollTop = $this.desktop.prop('scrollTop') * $this.display.prop('scrollHeight') / $this.desktop.prop('scrollHeight')
+            $this.display.prop('scrollTop', scrollTop);
+        });
     }
 
     ,collectModules: function() {
@@ -68,7 +80,14 @@ var eTextBookEditor = Backbone.Model.extend({
     }
 
     ,clearEditElements: function(html) {
-        html.find('edit-element, add-module-button, add-block-button, control-panel').remove();
+        html.find(
+            'edit-element, add-module-button, add-block-button, control-panel, .widget-selector'
+        ).remove();
+        return html;
+    }
+
+    ,clearViewElements: function(html) {
+        html.find('block-index').html('');
         return html;
     }
 

@@ -43,9 +43,9 @@ class BlockContext extends BehatContext {
         $display = eTextBookDriver::getInstance()->getCurrentPage()->find('css', '.display');
         $block = $display->find('css', 'block');
 
-        $blockTitle = $block->find('css', 'block-title view-element');
+        $blockTitle = $block->find('css', 'block-headline block-title view-element');
 
-        assertEquals($blockTitle->getText(), $title);
+        assertEquals($blockTitle->getHTML(), $title);
 
     }
 

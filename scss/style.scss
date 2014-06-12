@@ -18,6 +18,10 @@ body { padding: 50px 0 0 0; }
     top: 0;
     height: 50px;
     background: #eee;
+    #book-list {
+      float: right;
+      margin: 10px 0 0 0;
+    }
   }
   .desktop, .display {
     float: left;
@@ -25,6 +29,9 @@ body { padding: 50px 0 0 0; }
     height: 100%;
     padding: 20px;
     overflow-y: scroll;
+  }
+  .display {
+    overflow: hidden;
   }
   .desktop {
     e-text-book {
@@ -151,17 +158,43 @@ body { padding: 50px 0 0 0; }
               }
               block-title {
                 float: left;
+                width: 100%;
+                input {
+                  float: left;
+                  width: 100%;
+                }
               }
             }
             block-content {
               float: left;
               width: 100%;
               padding: 10px 0 0 0;
+              widget {
+                float: left;
+                width: 100%;
+                margin: 10px 0 0 0;
+                .widget-selector {
+                  float: left;
+                  display: none;
+                }
+                widget-content {
+                  float: left;
+                  width: 100%;
+                  margin: 10px 0 0 0;
+                }
+              }
             }
             &[editable="1"] {
               edit-element { display: block; }
               view-element { display: none; }
               control-panel { display: block; }
+              block-content {
+                widget {
+                  .widget-selector {
+                    display: block;
+                  }
+                }
+              }
             }
             edit-element { display: none; }
             &:hover {
@@ -170,99 +203,55 @@ body { padding: 50px 0 0 0; }
           }
         }
       }
-    }
-  }
-  .display {
-    e-text-book {
-      float: left;
-      width: 100%;
-      module {
+      translate-comparative {
         float: left;
         width: 100%;
-        module-title {
-          float: left;
-          width: 150px;
-          height: 150px;
-          text-align: center;
-          vertical-align: middle;
-          font-size: 25px;
-          background: #2b542c;
-          color: #fff;
-          view-element {
-            display: table-cell;
-            vertical-align: middle;
-            height: 150px;
-          }
-        }
-        module-background-image {
-          float: left;
-          width: 360px;
-          height: 150px;
-          border: solid 1px #2b542c;
-        }
-        module-questions {
-          float: left;
-          clear: left;
-          width: 150px;
-          height: 130px;
-          border: solid 1px #2b542c;
-          border-width: 0 0 1px 1px;
-          view-element {
-            display: table-cell;
-            height: 130px;
-            vertical-align: middle;
-            padding: 0 0 0 20px;
-            font-size: 12px;
-          }
-        }
-        module-description {
-          float: left;
-          width: 360px;
-          height: 130px;
-          border: solid 1px #2b542c;
-          border-width: 0 1px 1px 1px;
-          view-element {
-            display: table-cell;
-            height: 130px;
-            vertical-align: middle;
-            padding: 0 0 0 20px;
-            font-size: 12px;
-          }
-        }
-      }
-      blocks {
-        float: left;
-        width: 100%;
-        padding: 20px 0 0 0;
-        block {
+        .new-item {
           float: left;
           width: 100%;
-          padding: 0 0 20px 0 0;
-          margin: 0 0 20px 0;
-          block-index {
+          input {
             float: left;
-            width: 30px;
-            height: 30px;
+            width: 40%;
+            margin: 10px 10px 0 0;
           }
-          block-categories {
+          add {
             float: left;
-            width: 100px;
-            height: 30px;
-            block-category {
-              float: left;
-              width: 30px;
-              height: 30px;
+            width: 10px;
+            height: 10px;
+            cursor: pointer;
+            color: #2b542c;
+            margin: 14px 0 0 0;
+          }
+        }
+        list {
+          float: left;
+          width: 50%;
+          item {
+            .remove {
+              font-size: 10px;
+              float: right;
+              width: 10px;
+              height: 10px;
+              margin: 4px 10px 0 0;
+              cursor: pointer;
+              color: #eee;
+            }
+            &:hover {
+              .remove {
+                color: #942a25;
+              }
             }
           }
-          block-title {
-            float: left;
-            font-weight: bold;
-            font-size: 13px;
-          }
-          block-content {
+        }
+        answers {
+          float: left;
+          width: 50%;
+        }
+        list, answers {
+          item {
             float: left;
             width: 100%;
-            padding: 0 0 0 127px;
+            padding: 5px;
           }
         }
       }
@@ -270,6 +259,4 @@ body { padding: 50px 0 0 0; }
   }
 }
 
-.e-text-book-viewer {
-
-}
+@import '../template/scss/style';

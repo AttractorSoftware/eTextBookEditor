@@ -4,7 +4,7 @@ $title = $_POST['title'];
 $content = $_POST['content'];
 $slug = slugGenerate($title);
 
-$rootDir = dirname(__FILE__)."/books/" . $slug;
+$rootDir = $tempDir = dirname(__FILE__)."/books/" . $slug;
 mkdir($rootDir);
 $rootDir .= "/" . $slug;
 
@@ -24,7 +24,6 @@ mkdir($jsDir);
 mkdir($fontsDir);
 mkdir($videoDir);
 mkdir($audioDir);
-mkdir($videoDir);
 
 copyFilesFromDirectory($templateDir . "/css", $cssDir);
 copyFilesFromDirectory($templateDir . "/js", $jsDir);
@@ -48,6 +47,12 @@ file_put_contents(
 );
 
 Zip($rootDir . "/../", $rootDir . "/../../" . $slug . ".etb");
+
+foreach(new RecursiveIteratorIterator(new RecursiveDirectoryIterator($tempDir, FilesystemIterator::SKIP_DOTS), RecursiveIteratorIterator::CHILD_FIRST) as $path) {
+    $path->isDir() ? rmdir($path->getPathname()) : unlink($path->getPathname());
+}
+
+rmdir($tempDir);
 
 echo $slug. '.etb';
 

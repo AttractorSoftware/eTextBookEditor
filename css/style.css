@@ -19,12 +19,17 @@ body {
     top: 0;
     height: 50px;
     background: #eee; }
+    .e-text-book-editor .properties #book-list {
+      float: right;
+      margin: 10px 0 0 0; }
   .e-text-book-editor .desktop, .e-text-book-editor .display {
     float: left;
     width: 50%;
     height: 100%;
     padding: 20px;
     overflow-y: scroll; }
+  .e-text-book-editor .display {
+    overflow: hidden; }
   .e-text-book-editor .desktop e-text-book {
     float: left;
     width: 100%; }
@@ -135,96 +140,170 @@ body {
             .e-text-book-editor .desktop e-text-book module blocks block block-headline block-categories {
               float: left; }
             .e-text-book-editor .desktop e-text-book module blocks block block-headline block-title {
-              float: left; }
+              float: left;
+              width: 100%; }
+              .e-text-book-editor .desktop e-text-book module blocks block block-headline block-title input {
+                float: left;
+                width: 100%; }
           .e-text-book-editor .desktop e-text-book module blocks block block-content {
             float: left;
             width: 100%;
             padding: 10px 0 0 0; }
+            .e-text-book-editor .desktop e-text-book module blocks block block-content widget {
+              float: left;
+              width: 100%;
+              margin: 10px 0 0 0; }
+              .e-text-book-editor .desktop e-text-book module blocks block block-content widget .widget-selector {
+                float: left;
+                display: none; }
+              .e-text-book-editor .desktop e-text-book module blocks block block-content widget widget-content {
+                float: left;
+                width: 100%;
+                margin: 10px 0 0 0; }
           .e-text-book-editor .desktop e-text-book module blocks block[editable="1"] edit-element {
             display: block; }
           .e-text-book-editor .desktop e-text-book module blocks block[editable="1"] view-element {
             display: none; }
           .e-text-book-editor .desktop e-text-book module blocks block[editable="1"] control-panel {
             display: block; }
+          .e-text-book-editor .desktop e-text-book module blocks block[editable="1"] block-content widget .widget-selector {
+            display: block; }
           .e-text-book-editor .desktop e-text-book module blocks block edit-element {
             display: none; }
           .e-text-book-editor .desktop e-text-book module blocks block:hover control-panel {
             display: block; }
-  .e-text-book-editor .display e-text-book {
-    float: left;
-    width: 100%; }
-    .e-text-book-editor .display e-text-book module {
+    .e-text-book-editor .desktop e-text-book translate-comparative {
       float: left;
       width: 100%; }
-      .e-text-book-editor .display e-text-book module module-title {
+      .e-text-book-editor .desktop e-text-book translate-comparative .new-item {
         float: left;
-        width: 150px;
-        height: 150px;
-        text-align: center;
-        vertical-align: middle;
-        font-size: 25px;
-        background: #2b542c;
-        color: #fff; }
-        .e-text-book-editor .display e-text-book module module-title view-element {
-          display: table-cell;
-          vertical-align: middle;
-          height: 150px; }
-      .e-text-book-editor .display e-text-book module module-background-image {
+        width: 100%; }
+        .e-text-book-editor .desktop e-text-book translate-comparative .new-item input {
+          float: left;
+          width: 40%;
+          margin: 10px 10px 0 0; }
+        .e-text-book-editor .desktop e-text-book translate-comparative .new-item add {
+          float: left;
+          width: 10px;
+          height: 10px;
+          cursor: pointer;
+          color: #2b542c;
+          margin: 14px 0 0 0; }
+      .e-text-book-editor .desktop e-text-book translate-comparative list {
         float: left;
-        width: 360px;
-        height: 150px;
-        border: solid 1px #2b542c; }
-      .e-text-book-editor .display e-text-book module module-questions {
+        width: 50%; }
+        .e-text-book-editor .desktop e-text-book translate-comparative list item .remove {
+          font-size: 10px;
+          float: right;
+          width: 10px;
+          height: 10px;
+          margin: 4px 10px 0 0;
+          cursor: pointer;
+          color: #eee; }
+        .e-text-book-editor .desktop e-text-book translate-comparative list item:hover .remove {
+          color: #942a25; }
+      .e-text-book-editor .desktop e-text-book translate-comparative answers {
         float: left;
-        clear: left;
-        width: 150px;
-        height: 130px;
-        border: solid 1px #2b542c;
-        border-width: 0 0 1px 1px; }
-        .e-text-book-editor .display e-text-book module module-questions view-element {
-          display: table-cell;
-          height: 130px;
-          vertical-align: middle;
-          padding: 0 0 0 20px;
-          font-size: 12px; }
-      .e-text-book-editor .display e-text-book module module-description {
-        float: left;
-        width: 360px;
-        height: 130px;
-        border: solid 1px #2b542c;
-        border-width: 0 1px 1px 1px; }
-        .e-text-book-editor .display e-text-book module module-description view-element {
-          display: table-cell;
-          height: 130px;
-          vertical-align: middle;
-          padding: 0 0 0 20px;
-          font-size: 12px; }
-    .e-text-book-editor .display e-text-book blocks {
-      float: left;
-      width: 100%;
-      padding: 20px 0 0 0; }
-      .e-text-book-editor .display e-text-book blocks block {
+        width: 50%; }
+      .e-text-book-editor .desktop e-text-book translate-comparative list item, .e-text-book-editor .desktop e-text-book translate-comparative answers item {
         float: left;
         width: 100%;
-        padding: 0 0 20px 0 0;
-        margin: 0 0 20px 0; }
-        .e-text-book-editor .display e-text-book blocks block block-index {
+        padding: 5px; }
+
+e-text-book-editor .display e-text-book, .e-text-book-viewer e-text-book {
+  float: left;
+  width: 100%; }
+  e-text-book-editor .display e-text-book module, .e-text-book-viewer e-text-book module {
+    float: left;
+    width: 100%; }
+    e-text-book-editor .display e-text-book module module-title, .e-text-book-viewer e-text-book module module-title {
+      float: left;
+      width: 28%;
+      height: 150px;
+      vertical-align: middle;
+      font-size: 25px;
+      background: #2b542c;
+      color: #fff; }
+      e-text-book-editor .display e-text-book module module-title view-element, .e-text-book-viewer e-text-book module module-title view-element {
+        display: table-cell;
+        vertical-align: middle;
+        height: 150px;
+        width: 100%;
+        padding: 0 0 0 20px; }
+    e-text-book-editor .display e-text-book module module-background-image, .e-text-book-viewer e-text-book module module-background-image {
+      float: left;
+      width: 72%;
+      height: 150px;
+      border: solid 1px #2b542c; }
+    e-text-book-editor .display e-text-book module module-questions, .e-text-book-viewer e-text-book module module-questions {
+      float: left;
+      clear: left;
+      width: 28%;
+      height: 130px;
+      border: solid 1px #2b542c;
+      border-width: 0 0 1px 1px; }
+      e-text-book-editor .display e-text-book module module-questions view-element, .e-text-book-viewer e-text-book module module-questions view-element {
+        display: table-cell;
+        height: 130px;
+        vertical-align: middle;
+        padding: 0 0 0 20px;
+        font-size: 12px; }
+    e-text-book-editor .display e-text-book module module-description, .e-text-book-viewer e-text-book module module-description {
+      float: left;
+      width: 72%;
+      height: 130px;
+      border: solid 1px #2b542c;
+      border-width: 0 1px 1px 1px; }
+      e-text-book-editor .display e-text-book module module-description view-element, .e-text-book-viewer e-text-book module module-description view-element {
+        display: table-cell;
+        height: 130px;
+        vertical-align: middle;
+        padding: 0 0 0 20px;
+        font-size: 12px; }
+  e-text-book-editor .display e-text-book blocks, .e-text-book-viewer e-text-book blocks {
+    float: left;
+    width: 100%;
+    padding: 20px 0 0 0; }
+    e-text-book-editor .display e-text-book blocks block, .e-text-book-viewer e-text-book blocks block {
+      float: left;
+      width: 100%;
+      padding: 0 0 20px 0 0;
+      margin: 0 0 20px 0; }
+      e-text-book-editor .display e-text-book blocks block block-index, .e-text-book-viewer e-text-book blocks block block-index {
+        float: left;
+        width: 3%;
+        height: 30px; }
+      e-text-book-editor .display e-text-book blocks block block-categories, .e-text-book-viewer e-text-book blocks block block-categories {
+        float: left;
+        width: 17%;
+        height: 30px; }
+        e-text-book-editor .display e-text-book blocks block block-categories block-category, .e-text-book-viewer e-text-book blocks block block-categories block-category {
           float: left;
           width: 30px;
           height: 30px; }
-        .e-text-book-editor .display e-text-book blocks block block-categories {
-          float: left;
-          width: 100px;
-          height: 30px; }
-          .e-text-book-editor .display e-text-book blocks block block-categories block-category {
-            float: left;
-            width: 30px;
-            height: 30px; }
-        .e-text-book-editor .display e-text-book blocks block block-title {
-          float: left;
-          font-weight: bold;
-          font-size: 13px; }
-        .e-text-book-editor .display e-text-book blocks block block-content {
+      e-text-book-editor .display e-text-book blocks block block-title, .e-text-book-viewer e-text-book blocks block block-title {
+        float: left;
+        font-weight: bold;
+        font-size: 13px;
+        width: 80%; }
+      e-text-book-editor .display e-text-book blocks block block-content, .e-text-book-viewer e-text-book blocks block block-content {
+        float: left;
+        width: 100%;
+        padding: 0 0 0 21%; }
+        e-text-book-editor .display e-text-book blocks block block-content widget, .e-text-book-viewer e-text-book blocks block block-content widget {
           float: left;
           width: 100%;
-          padding: 0 0 0 127px; }
+          padding: 10px 0 0 0; }
+      e-text-book-editor .display e-text-book blocks block translate-comparative, .e-text-book-viewer e-text-book blocks block translate-comparative {
+        float: left;
+        width: 100%; }
+        e-text-book-editor .display e-text-book blocks block translate-comparative list, .e-text-book-viewer e-text-book blocks block translate-comparative list {
+          float: left;
+          width: 50%; }
+        e-text-book-editor .display e-text-book blocks block translate-comparative answers, .e-text-book-viewer e-text-book blocks block translate-comparative answers {
+          float: left;
+          width: 50%; }
+        e-text-book-editor .display e-text-book blocks block translate-comparative list item, e-text-book-editor .display e-text-book blocks block translate-comparative answers item, .e-text-book-viewer e-text-book blocks block translate-comparative list item, .e-text-book-viewer e-text-book blocks block translate-comparative answers item {
+          float: left;
+          width: 100%;
+          margin: 0 0 5px 0; }

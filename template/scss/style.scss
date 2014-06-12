@@ -1,30 +1,122 @@
-body {
-  padding: 0;
-  margin: 0;
-}
-
-h4 {
-  margin: 20px 0;
-}
-
-.chapter {
-  span {
-    display: block;
-    padding: 0 0 0 10px;
-    font-size: 12px;
-    line-height: 16px;
+e-text-book-editor .display, .e-text-book-viewer {
+  e-text-book {
+    float: left;
+    width: 100%;
+    module {
+      float: left;
+      width: 100%;
+      module-title {
+        float: left;
+        width: 28%;
+        height: 150px;
+        vertical-align: middle;
+        font-size: 25px;
+        background: #2b542c;
+        color: #fff;
+        view-element {
+          display: table-cell;
+          vertical-align: middle;
+          height: 150px;
+          width: 100%;
+          padding: 0 0 0 20px;
+        }
+      }
+      module-background-image {
+        float: left;
+        width: 72%;
+        height: 150px;
+        border: solid 1px #2b542c;
+      }
+      module-questions {
+        float: left;
+        clear: left;
+        width: 28%;
+        height: 130px;
+        border: solid 1px #2b542c;
+        border-width: 0 0 1px 1px;
+        view-element {
+          display: table-cell;
+          height: 130px;
+          vertical-align: middle;
+          padding: 0 0 0 20px;
+          font-size: 12px;
+        }
+      }
+      module-description {
+        float: left;
+        width: 72%;
+        height: 130px;
+        border: solid 1px #2b542c;
+        border-width: 0 1px 1px 1px;
+        view-element {
+          display: table-cell;
+          height: 130px;
+          vertical-align: middle;
+          padding: 0 0 0 20px;
+          font-size: 12px;
+        }
+      }
+    }
+    blocks {
+      float: left;
+      width: 100%;
+      padding: 20px 0 0 0;
+      block {
+        float: left;
+        width: 100%;
+        padding: 0 0 20px 0 0;
+        margin: 0 0 20px 0;
+        block-index {
+          float: left;
+          width: 3%;
+          height: 30px;
+        }
+        block-categories {
+          float: left;
+          width: 17%;
+          height: 30px;
+          block-category {
+            float: left;
+            width: 30px;
+            height: 30px;
+          }
+        }
+        block-title {
+          float: left;
+          font-weight: bold;
+          font-size: 13px;
+          width: 80%;
+        }
+        block-content {
+          float: left;
+          width: 100%;
+          padding: 0 0 0 21%;
+          widget {
+            float: left;
+            width: 100%;
+            padding: 10px 0 0 0;
+          }
+        }
+        translate-comparative {
+          float: left;
+          width: 100%;
+          list {
+            float: left;
+            width: 50%;
+          }
+          answers {
+            float: left;
+            width: 50%;
+          }
+          list, answers {
+            item {
+              float: left;
+              width: 100%;
+              margin: 0 0 5px 0;
+            }
+          }
+        }
+      }
+    }
   }
-}
-
-.test-options {
-  list-style: lower-latin;
-}
-
-.question {
-  font-style: italic;
-}
-
-.ebook-editor {
-  float: left;
-  margin: 20px 0 0 0;
 }

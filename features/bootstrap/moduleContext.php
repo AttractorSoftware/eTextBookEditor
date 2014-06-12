@@ -48,9 +48,9 @@ class ModuleContext extends BehatContext {
         $moduleQuestions = $module->find('css', 'module-questions view-element');
         $moduleDescription = $module->find('css', 'module-description view-element');
 
-        assertEquals($moduleTitle->getText(), $title);
-        assertEquals($moduleQuestions->getText(), $questions);
-        assertEquals($moduleDescription->getText(), $description);
+        assertEquals($moduleTitle->getHTML(), $title);
+        assertEquals($moduleQuestions->getHTML(), $questions);
+        assertEquals($moduleDescription->getHTML(), $description);
     }
 
     /**
