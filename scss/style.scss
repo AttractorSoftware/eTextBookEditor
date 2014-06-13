@@ -18,6 +18,11 @@ body { padding: 50px 0 0 0; }
     top: 0;
     height: 50px;
     background: #eee;
+    .save {
+      .glyphicon {
+        margin: 0 5px 0 0;
+      }
+    }
     #book-list {
       float: right;
       margin: 10px 0 0 0;
@@ -254,6 +259,152 @@ body { padding: 50px 0 0 0; }
             padding: 5px;
           }
         }
+      }
+      image-description {
+        float: left;
+        width: 100%;
+        descs {
+          float: left;
+          width: 100%;
+          padding: 10px 0 0 0;
+          item {
+            float: left;
+            width: 50%;
+          }
+        }
+        images {
+          float: left;
+          width: 100%;
+          item {
+            float: left;
+            width: 100px;
+            height: 100px;
+            margin: 0 1px 1px 0;
+            background: #ccc;
+            &:hover {
+              .glyphicon-remove {
+                color: #777;
+              }
+            }
+            .glyphicon-remove {
+              float: right;
+              font-size: 12px;
+              color: #ccc;
+              margin: 5px 5px 0 0;
+              cursor: pointer;
+            }
+          }
+        }
+        .add-image {
+          position: relative;
+          cursor: pointer;
+          float: left;
+          width: 100px;
+          height: 100px;
+          background: #ccc;
+          text-shadow: 1px 1px 0 #fff;
+          font-size: 30px;
+          .glyphicon {
+            position: absolute;
+            top: 37px;
+            left: 37px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.file-manager {
+  display: none;
+  float: left;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: absolute;
+  top: 0; left : 0;
+  background: rgba(0, 0, 0 , 0.3);
+  .nav {
+    float: left;
+    width: 100%;
+    .form-group {
+      float: right;
+      margin: 10px 0 0 0;
+      label {
+        float: left;
+        margin: 3px 10px 0 0;
+        cursor: pointer;
+        .glyphicon {
+          margin: 0 5px 0 0;
+        }
+      }
+      input {
+        float: left;
+      }
+    }
+  }
+  .window {
+    float: left;
+    width: 800px;
+    height: 400px;
+    background: #fff;
+    overflow: hidden;
+    border-radius: 5px;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    margin: -150px 0 0 -400px;
+    padding: 30px;
+    .close {
+      float: right;
+      width: 10px;
+      height: 10px;
+      margin: -20px -10px 0 0;
+      cursor: pointer;
+    }
+    .list {
+      float: left;
+      width: 60%;
+      padding: 20px 0 0 0;
+      .item {
+        float: left;
+        width: 48%;
+        margin: 0 2% 10px 0;
+        font-size: 12px;
+        color: #555;
+        padding: 8px 0 7px 33px;
+        cursor: pointer;
+        overflow: hidden;
+        background-repeat: no-repeat;
+        background-position: left middle;
+        background-image: url('/img/file-ico/_blank.png');
+        &.png { background-image: url('/img/file-ico/png.png'); }
+        &.jpg { background-image: url('/img/file-ico/jpg.png'); }
+        &.gif { background-image: url('/img/file-ico/gif.png'); }
+        &.mp3 { background-image: url('/img/file-ico/mp3.png'); }
+        &.mp4 { background-image: url('/img/file-ico/mp4.png'); }
+        &.selected { font-weight: bold; }
+      }
+    }
+    .player {
+      float: left;
+      width: 40%;
+      padding: 20px 0 0 0;
+    }
+    #images .player {
+      height: 200px;
+      .display {
+        float: left;
+        border: solid 1px #ddd;
+        width: 90%;
+        height: 100%;
+        margin: 0 0 0 10%;
+        background-size: 100% auto;
+      }
+      .buttons {
+        float: left;
+        width: 100%;
+        padding: 10px 10% 0 10%;
       }
     }
   }

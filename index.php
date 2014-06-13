@@ -1,32 +1,14 @@
 <?php
+
+    require_once "lib/eTextBook.class.php";
+    require_once "lib/Util.class.php";
+
     $bookContent = "";
     $bookTitle = "";
     if(isset($_GET['book'])) {
-        $viewBook = $_GET['book'];
-        $bookSlug = explode('.', $viewBook);
-        $bookSlug = $bookSlug[0];
-        $zip = new ZipArchive();
-        $archive = $zip->open("books/".$_GET['book']);
-        if($archive === true) {
-            $zip->extractTo('/tmp/ebook');
-            $zip->close();
-            $bookContent = file_get_contents('/tmp/ebook/' . $bookSlug . '/index.html');
-            $bookContent = explode('<e-text-book>', $bookContent);
-            $bookContent = explode('</e-text-book>', $bookContent[1]);
-            $bookContent = $bookContent[0];
-            $bookContent = "<e-text-book>" . $bookContent . "</e-text-book>";
-            $bookInfo = file_get_contents('/tmp/ebook/' . $bookSlug . '/book.info');
-            $bookInfo = explode('=+=', $bookInfo);
-            $bookTitle = $bookInfo[1];
-        } else {
-            die('Archive not found');
-        }
+        $viewBook = new eTextBook($_GET['book']);
     }
-    $books = array();
-    foreach(new RecursiveIteratorIterator(new RecursiveDirectoryIterator('books', FilesystemIterator::SKIP_DOTS), RecursiveIteratorIterator::CHILD_FIRST) as $path) {
-        $book = explode('/', $path);
-        $books[] = $book[1];
-    }
+    $books = Util::fileList(Util::getRootDir().'books');
 
 ?>
 
@@ -49,14 +31,14 @@
                                 id="book-title"
                                 style="width: 330px; text-indent: 10px"
                                 placeholder="Учебник Кыргызского языка для 7-го класса"
-                                value="<?php echo $bookTitle; ?>"
+                                value="<?php echo isset($viewBook) ? $viewBook->getTitle() : ''; ?>"
                             />
                         </div>
                         <a
                             href="#"
                             class="btn btn-primary btn-sm save"
                             style="margin: 9px 0px 0 10px;"
-                        >Сохранить</a>
+                        > <span class="glyphicon glyphicon-floppy-save"></span>Сохранить</a>
                         <a
                             id="download-link"
                             class="btn btn-primary btn-sm"
@@ -66,16 +48,103 @@
                             <select id="book-list">
                                 <option value="">Новый учебник</option>
                                 <?php foreach($books as $book): ?>
-                                    <option value="<?php echo $book; ?>" <?php echo $viewBook == $book ? 'selected' : ''; ?>><?php echo $book; ?></option>
+                                    <option
+                                        value="<?php echo $book; ?>"
+                                        <?php echo isset($viewBook) && $viewBook->getSlug() . ".etb" == $book ? 'selected' : ''; ?>
+                                    >
+                                        <?php echo $book; ?>
+                                    </option>
                                 <?php endforeach; ?>
                             </select>
                         <?php endif; ?>
                     </div>
                 </div>
-                <div class="desktop"><?php echo $bookContent; ?></div>
+                <div class="desktop"><?php echo isset($viewBook) ? $viewBook->getContent() : ''; ?></div>
                 <div class="display e-text-book-viewer"></div>
             </div>
         </div>
+
+        <div
+            class="file-manager"
+            image-path="/content/<?php echo $viewBook->getSlug(); ?>/img"
+            video-path="/content/<?php echo $viewBook->getSlug(); ?>/video"
+            audio-path="/content/<?php echo $viewBook->getSlug(); ?>/audio"
+        >
+            <div class="window">
+                <div class="close glyphicon glyphicon-remove-circle"></div>
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#images" data-toggle="tab">Картинки</a></li>
+                    <li><a href="#videos" data-toggle="tab">Видео</a></li>
+                    <li><a href="#audios" data-toggle="tab">Аудио</a></li>
+
+                    <div class="form-group">
+                        <label for="uploadInput">
+                            <span class="glyphicon glyphicon-folder-open"></span>
+                            Загрузить файл
+                        </label>
+                        <input type="file" id="uploadInput" style="display: none">
+                    </div>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane active" id="images">
+                        <div class="list">
+                            <?php foreach($viewBook->getImages() as $img): ?>
+                                <div
+                                    class="item <?php echo $img['extension']; ?>"
+                                    data-toggle="tooltip"
+                                    data-placement="bottom"
+                                    title="<?php echo $img['title'] . "." . $img['extension'] ; ?>"
+                                >
+                                    <?php echo $img['title']; ?>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                        <div class="player">
+                            <div class="display"></div>
+                            <div class="buttons">
+                                <div class="btn btn-primary btn-sm"> <span class="glyphicon glyphicon-ok"></span> Выбрать</div>
+                                <div class="btn btn-danger btn-sm"> <span class="glyphicon glyphicon-remove"></span> Удалить</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="videos">
+                        <div class="list">
+                            <?php foreach($viewBook->getVideos() as $video): ?>
+                                <div
+                                    class="item <?php echo $video['extension']; ?>"
+                                    data-toggle="tooltip"
+                                    data-placement="bottom"
+                                    title="<?php echo $video['title'] . "." . $video['extension'] ; ?>"
+                                    >
+                                    <?php echo $video['title']; ?>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                        <div class="player"></div>
+                    </div>
+                    <div class="tab-pane" id="audios">
+                        <div class="list">
+                            <?php foreach($viewBook->getAudios() as $audio): ?>
+                                <div
+                                    class="item <?php echo $audio['extension']; ?>"
+                                    data-toggle="tooltip"
+                                    data-placement="bottom"
+                                    title="<?php echo $audio['title'] . "." . $audio['extension'] ; ?>"
+                                    >
+                                    <?php echo $audio['title']; ?>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                        <div class="player"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="css/style.css" />
         <script src="js/lib/jquery-2.1.1.min.js"></script>
@@ -92,6 +161,7 @@
         <script src="js/eTextBook/templates/block.js"></script>
         <script src="js/eTextBook/templates/questionWidget.js"></script>
         <script src="js/eTextBook/templates/translateComparativeWidget.js"></script>
+        <script src="js/eTextBook/templates/imageDescriptionWidget.js"></script>
         <script src="js/eTextBook/inline/inlineEdit.js"></script>
         <script src="js/eTextBook/inline/inlineEditInput.js"></script>
         <script src="js/eTextBook/inline/inlineEditTextarea.js"></script>
@@ -100,6 +170,8 @@
         <script src="js/eTextBook/widget/test.js"></script>
         <script src="js/eTextBook/widget/question.js"></script>
         <script src="js/eTextBook/widget/translateComparative.js"></script>
+        <script src="js/eTextBook/widget/imageDescription.js"></script>
         <script src="js/eTextBook/builder.js"></script>
+        <script src="js/eTextBook/fileManager.js"></script>
     </body>
 </html>
