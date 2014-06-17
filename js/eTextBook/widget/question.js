@@ -16,6 +16,10 @@ var eTextBookWidgetQuestion = eTextBookWidget.extend({
     ,activate: function() {
         this.editCont.append('<edit-element><textarea></textarea></edit-element>');
     }
+
+    ,viewActivate: function() {
+
+    }
 });
 
 App.eTextBookWidgetRepository.registerWidget(eTextBookWidgetQuestion);

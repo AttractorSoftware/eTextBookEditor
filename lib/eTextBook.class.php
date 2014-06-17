@@ -9,39 +9,44 @@
         private $images = array();
         private $videos = array();
         private $audios = array();
+        private $tmpDir;
+        private $rootDir;
 
         public function __construct($filePath = false) {
             $this->filePath = $filePath;
+            $this->tmpDir = Util::getRootDir() . 'tmp/';
+            $this->rootDir = Util::getRootDir();
             if($filePath) {
                 if($this->extractData()) {
                     $this->parseSlug();
                     $this->parseContent();
                     $this->parseTitle();
+                    $this->copyMultimediaContent();
                     $this->parseImages();
-                    $this->copyContent();
+                    Util::removeDir($this->tmpDir . $this->slug);
                 }
             }
         }
 
-        public function copyContent() {
+        public function copyMultimediaContent() {
             Util::copyFilesFromDirectory(
-                "/tmp/ebook/" . $this->slug . '/content/' . $this->slug . '/img',
-                Util::getRootDir() . 'content/'  . $this->slug . '/img'
+                $this->tmpDir . $this->slug . '/content/img',
+                $this->rootDir . 'content/'  . $this->slug . '/img'
             );
 
             Util::copyFilesFromDirectory(
-                "/tmp/ebook/" . $this->slug . '/content/' . $this->slug . '/video',
-                Util::getRootDir() . 'content/'  . $this->slug . '/video'
+                $this->tmpDir . $this->slug . '/content/video',
+                $this->rootDir . 'content/'  . $this->slug . '/video'
             );
 
             Util::copyFilesFromDirectory(
-                "/tmp/ebook/" . $this->slug . '/content/' . $this->slug . '/audio',
-                Util::getRootDir() . 'content/'  . $this->slug . '/audio'
+                $this->tmpDir . $this->slug . '/content/audio',
+                $this->rootDir . 'content/'  . $this->slug . '/audio'
             );
         }
 
         public function parseImages() {
-            $images = Util::fileList("/tmp/ebook/" . $this->slug . '/content/' . $this->slug . '/img');
+            $images = Util::fileList($this->rootDir . '/content/' . $this->slug . '/img');
             foreach($images as $img) {
                 $img = explode('.', $img);
                 $this->images[] = array(
@@ -57,7 +62,7 @@
         }
 
         public function parseContent() {
-            $bookContent = file_get_contents('/tmp/ebook/' . $this->slug . '/index.html');
+            $bookContent = file_get_contents($this->tmpDir . $this->slug . '/index.html');
             $bookContent = explode('<e-text-book>', $bookContent);
             $bookContent = explode('</e-text-book>', $bookContent[1]);
             $bookContent = $bookContent[0];
@@ -67,7 +72,7 @@
         }
 
         public function parseTitle() {
-            $bookInfo = file_get_contents('/tmp/ebook/' . $this->slug . '/book.info');
+            $bookInfo = file_get_contents($this->tmpDir . $this->slug . '/book.info');
             $bookInfo = explode('=+=', $bookInfo);
 
             $this->title = trim($bookInfo[1]);
@@ -79,7 +84,7 @@
             $archive = $zip->open("books/".$this->filePath);
 
             if($archive === true) {
-                $zip->extractTo('/tmp/ebook');
+                $zip->extractTo($this->tmpDir);
                 $zip->close();
             }
 

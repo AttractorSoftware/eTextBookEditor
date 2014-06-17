@@ -84,4 +84,13 @@
             return dirname(__FILE__).'/../';
         }
 
+        public static function removeDir($dir) {
+
+            foreach(new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS), RecursiveIteratorIterator::CHILD_FIRST) as $path) {
+                $path->isDir() ? rmdir($path->getPathname()) : unlink($path->getPathname());
+            }
+
+            rmdir($dir);
+        }
+
     }

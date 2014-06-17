@@ -27,7 +27,10 @@ var FileManager = function(cont) {
         this.cont.find('.close').bind('click', $this.close);
         this.images.bind('click', function() { $this.setViewImage(this); });
         this.uploadInput.bind('change', this.uploadFile);
-        this.show();
+        this.cont.find('.btn-primary').bind('click', function() {
+            $this.afterPick($this.viewImagePath);
+            $this.close();
+        });
     }
 
     this.uploadFile = function() {
@@ -38,6 +41,7 @@ var FileManager = function(cont) {
     }
 
     this.setViewImage = function(img) {
+        this.viewImagePath = this.imagePath + '/' + $(img).attr('title');
         this.imagePlayer.find('.display').css('backgroundImage', 'url(' + this.imagePath + '/' + $(img).attr('title') + ')')
         this.images.removeClass('selected');
         $(img).addClass('selected');
@@ -49,6 +53,11 @@ var FileManager = function(cont) {
 
     this.show = function() {
         this.cont.show();
+    }
+
+    this.pickFile = function(afterPick) {
+        this.afterPick = afterPick;
+        this.show();
     }
 
     this.init();

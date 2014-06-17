@@ -52,12 +52,7 @@
     );
 
     Util::zip($rootDir . "/../", $rootDir . "/../../" . $slug . ".etb");
-
-    foreach(new RecursiveIteratorIterator(new RecursiveDirectoryIterator($tempDir, FilesystemIterator::SKIP_DOTS), RecursiveIteratorIterator::CHILD_FIRST) as $path) {
-        $path->isDir() ? rmdir($path->getPathname()) : unlink($path->getPathname());
-    }
-
-    rmdir($tempDir);
+    Util::removeDir($tempDir);
 
     echo $slug. '.etb';
 

@@ -66,9 +66,11 @@
 
         <div
             class="file-manager"
-            image-path="/content/<?php echo $viewBook->getSlug(); ?>/img"
-            video-path="/content/<?php echo $viewBook->getSlug(); ?>/video"
-            audio-path="/content/<?php echo $viewBook->getSlug(); ?>/audio"
+            <?php if(isset($viewBook)): ?>
+                image-path="/content/<?php echo $viewBook->getSlug(); ?>/img"
+                video-path="/content/<?php echo $viewBook->getSlug(); ?>/video"
+                audio-path="/content/<?php echo $viewBook->getSlug(); ?>/audio"
+            <?php endif; ?>
         >
             <div class="window">
                 <div class="close glyphicon glyphicon-remove-circle"></div>
@@ -91,16 +93,18 @@
                 <div class="tab-content">
                     <div class="tab-pane active" id="images">
                         <div class="list">
-                            <?php foreach($viewBook->getImages() as $img): ?>
-                                <div
-                                    class="item <?php echo $img['extension']; ?>"
-                                    data-toggle="tooltip"
-                                    data-placement="bottom"
-                                    title="<?php echo $img['title'] . "." . $img['extension'] ; ?>"
-                                >
-                                    <?php echo $img['title']; ?>
-                                </div>
-                            <?php endforeach; ?>
+                            <?php if(isset($viewBook)): ?>
+                                <?php foreach($viewBook->getImages() as $img): ?>
+                                    <div
+                                        class="item <?php echo $img['extension']; ?>"
+                                        data-toggle="tooltip"
+                                        data-placement="bottom"
+                                        title="<?php echo $img['title'] . "." . $img['extension'] ; ?>"
+                                    >
+                                        <?php echo $img['title']; ?>
+                                    </div>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
                         </div>
                         <div class="player">
                             <div class="display"></div>
@@ -112,31 +116,35 @@
                     </div>
                     <div class="tab-pane" id="videos">
                         <div class="list">
-                            <?php foreach($viewBook->getVideos() as $video): ?>
-                                <div
-                                    class="item <?php echo $video['extension']; ?>"
-                                    data-toggle="tooltip"
-                                    data-placement="bottom"
-                                    title="<?php echo $video['title'] . "." . $video['extension'] ; ?>"
-                                    >
-                                    <?php echo $video['title']; ?>
-                                </div>
-                            <?php endforeach; ?>
+                            <?php if(isset($viewBook)): ?>
+                                <?php foreach($viewBook->getVideos() as $video): ?>
+                                    <div
+                                        class="item <?php echo $video['extension']; ?>"
+                                        data-toggle="tooltip"
+                                        data-placement="bottom"
+                                        title="<?php echo $video['title'] . "." . $video['extension'] ; ?>"
+                                        >
+                                        <?php echo $video['title']; ?>
+                                    </div>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
                         </div>
                         <div class="player"></div>
                     </div>
                     <div class="tab-pane" id="audios">
                         <div class="list">
-                            <?php foreach($viewBook->getAudios() as $audio): ?>
-                                <div
-                                    class="item <?php echo $audio['extension']; ?>"
-                                    data-toggle="tooltip"
-                                    data-placement="bottom"
-                                    title="<?php echo $audio['title'] . "." . $audio['extension'] ; ?>"
-                                    >
-                                    <?php echo $audio['title']; ?>
-                                </div>
-                            <?php endforeach; ?>
+                            <?php if(isset($viewBook)): ?>
+                                <?php foreach($viewBook->getAudios() as $audio): ?>
+                                    <div
+                                        class="item <?php echo $audio['extension']; ?>"
+                                        data-toggle="tooltip"
+                                        data-placement="bottom"
+                                        title="<?php echo $audio['title'] . "." . $audio['extension'] ; ?>"
+                                        >
+                                        <?php echo $audio['title']; ?>
+                                    </div>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
                         </div>
                         <div class="player"></div>
                     </div>

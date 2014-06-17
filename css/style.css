@@ -229,7 +229,8 @@ body {
           width: 100px;
           height: 100px;
           margin: 0 1px 1px 0;
-          background: #ccc; }
+          background: #ccc no-repeat center center;
+          background-size: 100% auto; }
           .e-text-book-editor .desktop e-text-book image-description images item:hover .glyphicon-remove {
             color: #777; }
           .e-text-book-editor .desktop e-text-book image-description images item .glyphicon-remove {
@@ -435,5 +436,28 @@ e-text-book-editor .display e-text-book, .e-text-book-viewer e-text-book {
           width: 50%; }
         e-text-book-editor .display e-text-book blocks block translate-comparative list item, e-text-book-editor .display e-text-book blocks block translate-comparative answers item, .e-text-book-viewer e-text-book blocks block translate-comparative list item, .e-text-book-viewer e-text-book blocks block translate-comparative answers item {
           float: left;
-          width: 100%;
-          margin: 0 0 5px 0; }
+          clear: both;
+          margin: 0 0 5px -7px;
+          padding: 0 7px;
+          position: relative;
+          cursor: pointer; }
+          e-text-book-editor .display e-text-book blocks block translate-comparative list item.selected, e-text-book-editor .display e-text-book blocks block translate-comparative answers item.selected, .e-text-book-viewer e-text-book blocks block translate-comparative list item.selected, .e-text-book-viewer e-text-book blocks block translate-comparative answers item.selected {
+            background: #ddd; }
+          e-text-book-editor .display e-text-book blocks block translate-comparative list item.success, e-text-book-editor .display e-text-book blocks block translate-comparative answers item.success, .e-text-book-viewer e-text-book blocks block translate-comparative list item.success, .e-text-book-viewer e-text-book blocks block translate-comparative answers item.success {
+            background: #89d489; }
+          e-text-book-editor .display e-text-book blocks block translate-comparative list item.failed, e-text-book-editor .display e-text-book blocks block translate-comparative answers item.failed, .e-text-book-viewer e-text-book blocks block translate-comparative list item.failed, .e-text-book-viewer e-text-book blocks block translate-comparative answers item.failed {
+            background: #e47A75; }
+
+image-description {
+  float: left;
+  width: 100%; }
+  image-description images {
+    float: left;
+    width: 100%; }
+    image-description images item {
+      float: left;
+      width: 100px;
+      height: 100px;
+      background: no-repeat center center;
+      background-size: 100% auto;
+      margin: 0 5px 0 0; }
