@@ -16,44 +16,29 @@
             $this->filePath = $filePath;
             $this->tmpDir = Util::getRootDir() . 'tmp/';
             $this->rootDir = Util::getRootDir();
+
             if($filePath) {
                 if($this->extractData()) {
                     $this->parseSlug();
                     $this->parseContent();
                     $this->parseTitle();
-                    $this->copyMultimediaContent();
                     $this->parseImages();
-                    Util::removeDir($this->tmpDir . $this->slug);
                 }
             }
         }
 
-        public function copyMultimediaContent() {
-            Util::copyFilesFromDirectory(
-                $this->tmpDir . $this->slug . '/content/img',
-                $this->rootDir . 'content/'  . $this->slug . '/img'
-            );
-
-            Util::copyFilesFromDirectory(
-                $this->tmpDir . $this->slug . '/content/video',
-                $this->rootDir . 'content/'  . $this->slug . '/video'
-            );
-
-            Util::copyFilesFromDirectory(
-                $this->tmpDir . $this->slug . '/content/audio',
-                $this->rootDir . 'content/'  . $this->slug . '/audio'
-            );
-        }
-
         public function parseImages() {
-            $images = Util::fileList($this->rootDir . '/content/' . $this->slug . '/img');
-            foreach($images as $img) {
-                $img = explode('.', $img);
-                $this->images[] = array(
-                    'title' => $img[0]
+            $images = Util::fileList($this->tmpDir . '/' . $this->slug . '/content/img');
+            if(count($images)) {
+                foreach($images as $img) {
+                    $img = explode('.', $img);
+                    $this->images[] = array(
+                        'title' => $img[0]
                     ,'extension' => $img[1]
-                );
+                    );
+                }
             }
+
         }
 
         public function parseSlug() {
@@ -66,6 +51,7 @@
             $bookContent = explode('<e-text-book>', $bookContent);
             $bookContent = explode('</e-text-book>', $bookContent[1]);
             $bookContent = $bookContent[0];
+            $bookContent = str_replace('content/', '/tmp/' . $this->slug . '/content/', $bookContent);
             $bookContent = "<e-text-book>" . $bookContent . "</e-text-book>";
 
             $this->content = $bookContent;

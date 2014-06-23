@@ -7,6 +7,7 @@
     $slug = Util::slugGenerate($title);
 
     $rootDir = $tempDir = dirname(__FILE__)."/books/" . $slug;
+    $tmpDir = dirname(__FILE__)."/tmp/" . $slug;
     mkdir($rootDir);
     $rootDir .= "/" . $slug;
 
@@ -35,12 +36,13 @@
     Util::copyFilesFromDirectory($templateDir . "/js", $jsDir);
     Util::copyFilesFromDirectory($templateDir . "/fonts", $fontsDir);
     Util::copyFilesFromDirectory($templateDir . "/img", $imgDir);
-    //Util::copyFilesFromDirectory($templateDir . "/content", $contentDir);
-
+    Util::copyFilesFromDirectory($tmpDir . '/content/img', $imgContentDir);
 
     file_put_contents($infoFilePath, "title =+= " . $title);
 
     $indexContent = file_get_contents($templateDir . "/index.html");
+
+    $content = str_replace('/tmp/' . $slug . '/', '', $content);
 
     file_put_contents(
         $indexFilePath,
@@ -51,14 +53,8 @@
         )
     );
 
+    unlink($rootDir . "/../../" . $slug . ".etb");
     Util::zip($rootDir . "/../", $rootDir . "/../../" . $slug . ".etb");
     Util::removeDir($tempDir);
 
     echo $slug. '.etb';
-
-
-
-
-
-
-

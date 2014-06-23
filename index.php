@@ -67,9 +67,10 @@
         <div
             class="file-manager"
             <?php if(isset($viewBook)): ?>
-                image-path="/content/<?php echo $viewBook->getSlug(); ?>/img"
-                video-path="/content/<?php echo $viewBook->getSlug(); ?>/video"
-                audio-path="/content/<?php echo $viewBook->getSlug(); ?>/audio"
+                image-path="/tmp/<?php echo $viewBook->getSlug(); ?>/content/img"
+                video-path="/tmp/<?php echo $viewBook->getSlug(); ?>/content/video"
+                audio-path="/tmp/<?php echo $viewBook->getSlug(); ?>/content/audio"
+                slug="<?php echo $viewBook->getSlug(); ?>"
             <?php endif; ?>
         >
             <div class="window">

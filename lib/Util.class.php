@@ -73,6 +73,7 @@
         }
 
         public static function fileList($dir) {
+            $files = array();
             foreach(new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS), RecursiveIteratorIterator::CHILD_FIRST) as $path) {
                 $file = explode('/', $path);
                 $files[] = $file[count($file) - 1];

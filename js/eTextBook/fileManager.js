@@ -6,6 +6,8 @@ var FileManager = function(cont) {
 
     this.uploadInput = this.cont.find('#uploadInput');
 
+    this.slug = this.cont.attr('slug');
+
     this.imagePath = this.cont.attr('image-path');
     this.videoPath = this.cont.attr('video-path');
     this.audioPath = this.cont.attr('audio-path');
@@ -38,6 +40,30 @@ var FileManager = function(cont) {
             .find('label')
             .text('Файл загружается...')
             .prepend('<span class="glyphicon glyphicon-send"></span>');
+
+        $this.createForm();
+        $this.createIFrame();
+        $this.form.append($this.uploadInput);
+        $this.uploadInput.attr('name', 'upload-file');
+        $this.form.trigger('submit');
+    }
+
+    this.createForm = function() {
+        this.form = $(
+            '<form enctype="multipart/form-data" method="post" action="/upload-file.php" target="upload-iframe">' +
+                '<input type="hidden" name="slug" value="' + this.slug + '" />' +
+            '</form>'
+        );
+        $('body').append(this.form);
+    }
+
+    this.createIFrame = function() {
+        this.iframe = $('<iframe id="upload-iframe" name="upload-iframe"></iframe>');
+        $('body').append(this.iframe);
+        this.iframe.bind('load', function() {
+           console.debug($(this).contents().find('body').html());
+        });
+        return this.iframe;
     }
 
     this.setViewImage = function(img) {
