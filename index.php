@@ -86,13 +86,13 @@
                             <span class="glyphicon glyphicon-folder-open"></span>
                             Загрузить файл
                         </label>
-                        <input type="file" id="uploadInput" style="display: none">
+                        <input type="file" id="uploadInput">
                     </div>
                 </ul>
 
                 <!-- Tab panes -->
                 <div class="tab-content">
-                    <div class="tab-pane active" id="images">
+                    <div class="tab-pane active image" id="images">
                         <div class="list">
                             <?php if(isset($viewBook)): ?>
                                 <?php foreach($viewBook->getImages() as $img): ?>
@@ -110,8 +110,8 @@
                         <div class="player">
                             <div class="display"></div>
                             <div class="buttons">
-                                <div class="btn btn-primary btn-sm"> <span class="glyphicon glyphicon-ok"></span> Выбрать</div>
-                                <div class="btn btn-danger btn-sm"> <span class="glyphicon glyphicon-remove"></span> Удалить</div>
+                                <div class="btn btn-primary btn-sm select"> <span class="glyphicon glyphicon-ok"></span> Выбрать</div>
+                                <div class="btn btn-danger btn-sm remove"> <span class="glyphicon glyphicon-remove"></span> Удалить</div>
                             </div>
                         </div>
                     </div>
@@ -165,6 +165,7 @@
         <script src="js/eTextBook/editor.js"></script>
         <script src="js/eTextBook/module.js"></script>
         <script src="js/eTextBook/block.js"></script>
+        <script src="js/eTextBook/rule.js"></script>
         <script src="js/eTextBook/template.js"></script>
         <script src="js/eTextBook/templates/module.js"></script>
         <script src="js/eTextBook/templates/block.js"></script>

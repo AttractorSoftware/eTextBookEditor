@@ -19,13 +19,14 @@ class FeatureContext extends BehatContext {
         $this->useContext('moduleContext', new ModuleContext());
         $this->useContext('blockContext', new BlockContext());
         $this->useContext('translateComparativeContext', new TranslateComparativeContext());
+        $this->useContext('imageDescriptionContext', new ImageDescriptionContext());
     }
 
     /**
      * @AfterFeature
      */
     public static function closePage() {
-        eTextBookDriver::getInstance()->closeBrowser();
+        //eTextBookDriver::getInstance()->closeBrowser();
     }
 
     /**

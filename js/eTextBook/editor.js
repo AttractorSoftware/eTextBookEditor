@@ -80,10 +80,12 @@ var eTextBookEditor = Backbone.Model.extend({
 
         for(var i = 0; i < this.display.find('widget').length; i++) {
             var widgetCont = $(this.display.find('widget')[i]);
-            var widget = App.eTextBookWidgetRepository.getWidgetBySlug(widgetCont.attr('widget-slug'));
-            widget = new widget();
-            widget.contentContainer = widgetCont.find('widget-content');
-            widget.viewActivate();
+            if(widgetCont.attr('widget-slug')) {
+                var widget = App.eTextBookWidgetRepository.getWidgetBySlug(widgetCont.attr('widget-slug'));
+                widget = new widget();
+                widget.contentContainer = widgetCont.find('widget-content');
+                widget.viewActivate();
+            }
         }
     }
 

@@ -27,12 +27,20 @@ var FileManager = function(cont) {
 
     this.init = function() {
         this.cont.find('.close').bind('click', $this.close);
-        this.images.bind('click', function() { $this.setViewImage(this); });
+        this.activateImages();
         this.uploadInput.bind('change', this.uploadFile);
-        this.cont.find('.btn-primary').bind('click', function() {
+        this.cont.find('.buttons .select').bind('click', function() {
             $this.afterPick($this.viewImagePath);
             $this.close();
         });
+        this.cont.find('.buttons .remove').bind('click', function() {
+            $.post('/remove-file.php', { file: $this.viewImagePath });
+        });
+    }
+
+    this.activateImages = function() {
+        this.imageList.find('.item').unbind('click');
+        this.imageList.find('.item').bind('click', function() { $this.setViewImage(this); });
     }
 
     this.uploadFile = function() {
@@ -61,9 +69,17 @@ var FileManager = function(cont) {
         this.iframe = $('<iframe id="upload-iframe" name="upload-iframe"></iframe>');
         $('body').append(this.iframe);
         this.iframe.bind('load', function() {
-           console.debug($(this).contents().find('body').html());
+           var response = $(this).contents().find('body').html().split('||');
+           $this.addFile(response);
         });
         return this.iframe;
+    }
+
+    this.addFile = function(response) {
+        this.cont.find('.tab-content .image .list').append(
+            '<div title="' + response[1] + '" data-placement="bottom" data-toggle="tooltip" class="item png">' + response[1] + '</div>'
+        );
+        this.activateImages();
     }
 
     this.setViewImage = function(img) {

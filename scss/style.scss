@@ -4,6 +4,7 @@ html, body {
 
 body { padding: 50px 0 0 0; }
 
+
 .container { height: 100%; }
 
 .e-text-book-editor {
@@ -68,6 +69,11 @@ body { padding: 50px 0 0 0; }
       add-block-button {
         background-size: 30px auto;
         margin: 0 0 20px;
+        a {
+          font-size: 12px;
+          margin: 0 5px 0 0;
+          padding: 0 0 0 15px;
+        }
       }
       block add-block-button {
         position: relative;
@@ -146,7 +152,18 @@ body { padding: 50px 0 0 0; }
           float: left;
           width: 100%;
           padding: 20px 0 0 0;
-          block {
+          rule {
+            float: left;
+            width: 100%;
+            margin: 0 0 15px 0;
+            rule-title {
+              float: left;
+              width: 100%;
+              padding: 30px;
+              background: #ccedcd;
+            }
+          }
+          block, rule {
             float: left;
             width: 100%;
             border: solid 1px #eee;
@@ -278,10 +295,17 @@ body { padding: 50px 0 0 0; }
           item {
             float: left;
             width: 100px;
-            height: 100px;
             margin: 0 1px 1px 0;
-            background: #ccc no-repeat center center;
-            background-size: 100% auto;
+            image-view {
+              float: left;
+              width: 100%;
+              height: 100px;
+              background: #ccc no-repeat center center;
+              background-size: 100% auto;
+            }
+            image-title {
+              font-size: 12px;
+            }
             &:hover {
               .glyphicon-remove {
                 color: #777;
@@ -367,9 +391,13 @@ body { padding: 50px 0 0 0; }
       float: left;
       width: 60%;
       padding: 20px 0 0 0;
+      overflow-y: scroll;
+      height: 328px;
       .item {
         float: left;
         width: 48%;
+        height: 35px;
+        line-height: 22px;
         margin: 0 2% 10px 0;
         font-size: 12px;
         color: #555;
@@ -401,6 +429,7 @@ body { padding: 50px 0 0 0; }
         height: 100%;
         margin: 0 0 0 10%;
         background-size: 100% auto;
+        background: no-repeat center center;
       }
       .buttons {
         float: left;

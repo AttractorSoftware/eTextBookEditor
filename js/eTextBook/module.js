@@ -17,6 +17,12 @@ var eTextBookModule = Backbone.Model.extend({
                 ,module: this
             }));
         }
+        for(var i = 0; i < this.get('cont').find('blocks rule').length; i++) {
+            this.blocks.push(new eTextBookRule({
+                cont: $(this.get('cont').find('blocks rule')[i])
+                ,module: this
+            }));
+        }
     }
 
     ,addControlPanel: function() {
@@ -91,7 +97,14 @@ var eTextBookModule = Backbone.Model.extend({
 
     ,generateAddBlockButton: function() {
         var $this = this;
-        var button = $('<add-block-button><wrap><a href="#" class="add-block">Добавить блок</a></wrap></add-module-button>');
+        var button = $(
+            '<add-block-button>' +
+                '<wrap>' +
+                    '<a href="#" class="add-block"><span class="glyphicon glyphicon-ok-sign"></span>Добавить задание</a>' +
+                    '<a href="#" class="add-rule"><span class="glyphicon glyphicon-info-sign"></span>Добавить правило</a>' +
+                '</wrap>' +
+            '</add-module-button>'
+        );
 
         button.bind('click', function() {
             if($(this).hasClass('open')){
@@ -103,7 +116,28 @@ var eTextBookModule = Backbone.Model.extend({
             $this.addBlock(button);
         });
 
+        button.find('a.add-rule').bind('click', function() {
+            $this.addRule(button);
+        });
+
         return button;
+    }
+
+    ,addRule: function(button) {
+        var template = $('<rule>' +
+            '<rule-title>' +
+                '<view-element>Bla Bla</view-element>' +
+            '</rule-title>' +
+        '</rule>');
+
+        if(button.parent().prop('tagName') == 'BLOCK') {
+            button.parent().after(template);
+        } else {
+            $(button).parent().find('blocks').prepend(template);
+        }
+
+        var rule = new eTextBookRule({ cont: template, module: this });
+        rule.startEdit();
     }
 
     ,addBlock: function(button) {

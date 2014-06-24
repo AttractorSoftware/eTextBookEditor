@@ -15,4 +15,4 @@
         }
     }
 
-    echo '/' . $uploadFilePath;
+    echo $fileType[0] . '||' . $file['name'];

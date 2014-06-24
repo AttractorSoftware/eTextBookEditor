@@ -61,6 +61,10 @@ body {
     .e-text-book-editor .desktop e-text-book add-block-button {
       background-size: 30px auto;
       margin: 0 0 20px; }
+      .e-text-book-editor .desktop e-text-book add-block-button a {
+        font-size: 12px;
+        margin: 0 5px 0 0;
+        padding: 0 0 0 15px; }
     .e-text-book-editor .desktop e-text-book block add-block-button {
       position: relative;
       margin: -20px 0 0 0;
@@ -128,51 +132,60 @@ body {
         float: left;
         width: 100%;
         padding: 20px 0 0 0; }
-        .e-text-book-editor .desktop e-text-book module blocks block {
+        .e-text-book-editor .desktop e-text-book module blocks rule {
+          float: left;
+          width: 100%;
+          margin: 0 0 15px 0; }
+          .e-text-book-editor .desktop e-text-book module blocks rule rule-title {
+            float: left;
+            width: 100%;
+            padding: 30px;
+            background: #ccedcd; }
+        .e-text-book-editor .desktop e-text-book module blocks block, .e-text-book-editor .desktop e-text-book module blocks rule {
           float: left;
           width: 100%;
           border: solid 1px #eee;
           padding: 30px 15px 15px 15px;
           margin: 0 0 30px 0; }
-          .e-text-book-editor .desktop e-text-book module blocks block block-headline {
+          .e-text-book-editor .desktop e-text-book module blocks block block-headline, .e-text-book-editor .desktop e-text-book module blocks rule block-headline {
             float: left;
             width: 100%; }
-            .e-text-book-editor .desktop e-text-book module blocks block block-headline block-index {
+            .e-text-book-editor .desktop e-text-book module blocks block block-headline block-index, .e-text-book-editor .desktop e-text-book module blocks rule block-headline block-index {
               float: left; }
-            .e-text-book-editor .desktop e-text-book module blocks block block-headline block-categories {
+            .e-text-book-editor .desktop e-text-book module blocks block block-headline block-categories, .e-text-book-editor .desktop e-text-book module blocks rule block-headline block-categories {
               float: left; }
-            .e-text-book-editor .desktop e-text-book module blocks block block-headline block-title {
+            .e-text-book-editor .desktop e-text-book module blocks block block-headline block-title, .e-text-book-editor .desktop e-text-book module blocks rule block-headline block-title {
               float: left;
               width: 100%; }
-              .e-text-book-editor .desktop e-text-book module blocks block block-headline block-title input {
+              .e-text-book-editor .desktop e-text-book module blocks block block-headline block-title input, .e-text-book-editor .desktop e-text-book module blocks rule block-headline block-title input {
                 float: left;
                 width: 100%; }
-          .e-text-book-editor .desktop e-text-book module blocks block block-content {
+          .e-text-book-editor .desktop e-text-book module blocks block block-content, .e-text-book-editor .desktop e-text-book module blocks rule block-content {
             float: left;
             width: 100%;
             padding: 10px 0 0 0; }
-            .e-text-book-editor .desktop e-text-book module blocks block block-content widget {
+            .e-text-book-editor .desktop e-text-book module blocks block block-content widget, .e-text-book-editor .desktop e-text-book module blocks rule block-content widget {
               float: left;
               width: 100%;
               margin: 10px 0 0 0; }
-              .e-text-book-editor .desktop e-text-book module blocks block block-content widget .widget-selector {
+              .e-text-book-editor .desktop e-text-book module blocks block block-content widget .widget-selector, .e-text-book-editor .desktop e-text-book module blocks rule block-content widget .widget-selector {
                 float: left;
                 display: none; }
-              .e-text-book-editor .desktop e-text-book module blocks block block-content widget widget-content {
+              .e-text-book-editor .desktop e-text-book module blocks block block-content widget widget-content, .e-text-book-editor .desktop e-text-book module blocks rule block-content widget widget-content {
                 float: left;
                 width: 100%;
                 margin: 10px 0 0 0; }
-          .e-text-book-editor .desktop e-text-book module blocks block[editable="1"] edit-element {
+          .e-text-book-editor .desktop e-text-book module blocks block[editable="1"] edit-element, .e-text-book-editor .desktop e-text-book module blocks rule[editable="1"] edit-element {
             display: block; }
-          .e-text-book-editor .desktop e-text-book module blocks block[editable="1"] view-element {
+          .e-text-book-editor .desktop e-text-book module blocks block[editable="1"] view-element, .e-text-book-editor .desktop e-text-book module blocks rule[editable="1"] view-element {
             display: none; }
-          .e-text-book-editor .desktop e-text-book module blocks block[editable="1"] control-panel {
+          .e-text-book-editor .desktop e-text-book module blocks block[editable="1"] control-panel, .e-text-book-editor .desktop e-text-book module blocks rule[editable="1"] control-panel {
             display: block; }
-          .e-text-book-editor .desktop e-text-book module blocks block[editable="1"] block-content widget .widget-selector {
+          .e-text-book-editor .desktop e-text-book module blocks block[editable="1"] block-content widget .widget-selector, .e-text-book-editor .desktop e-text-book module blocks rule[editable="1"] block-content widget .widget-selector {
             display: block; }
-          .e-text-book-editor .desktop e-text-book module blocks block edit-element {
+          .e-text-book-editor .desktop e-text-book module blocks block edit-element, .e-text-book-editor .desktop e-text-book module blocks rule edit-element {
             display: none; }
-          .e-text-book-editor .desktop e-text-book module blocks block:hover control-panel {
+          .e-text-book-editor .desktop e-text-book module blocks block:hover control-panel, .e-text-book-editor .desktop e-text-book module blocks rule:hover control-panel {
             display: block; }
     .e-text-book-editor .desktop e-text-book translate-comparative {
       float: left;
@@ -227,10 +240,15 @@ body {
         .e-text-book-editor .desktop e-text-book image-description images item {
           float: left;
           width: 100px;
-          height: 100px;
-          margin: 0 1px 1px 0;
-          background: #ccc no-repeat center center;
-          background-size: 100% auto; }
+          margin: 0 1px 1px 0; }
+          .e-text-book-editor .desktop e-text-book image-description images item image-view {
+            float: left;
+            width: 100%;
+            height: 100px;
+            background: #ccc no-repeat center center;
+            background-size: 100% auto; }
+          .e-text-book-editor .desktop e-text-book image-description images item image-title {
+            font-size: 12px; }
           .e-text-book-editor .desktop e-text-book image-description images item:hover .glyphicon-remove {
             color: #777; }
           .e-text-book-editor .desktop e-text-book image-description images item .glyphicon-remove {
@@ -298,10 +316,14 @@ body {
     .file-manager .window .list {
       float: left;
       width: 60%;
-      padding: 20px 0 0 0; }
+      padding: 20px 0 0 0;
+      overflow-y: scroll;
+      height: 328px; }
       .file-manager .window .list .item {
         float: left;
         width: 48%;
+        height: 35px;
+        line-height: 22px;
         margin: 0 2% 10px 0;
         font-size: 12px;
         color: #555;
@@ -335,7 +357,8 @@ body {
         width: 90%;
         height: 100%;
         margin: 0 0 0 10%;
-        background-size: 100% auto; }
+        background-size: 100% auto;
+        background: no-repeat center center; }
       .file-manager .window #images .player .buttons {
         float: left;
         width: 100%;
@@ -395,6 +418,15 @@ e-text-book-editor .display e-text-book, .e-text-book-viewer e-text-book {
     float: left;
     width: 100%;
     padding: 20px 0 0 0; }
+    e-text-book-editor .display e-text-book blocks rule, .e-text-book-viewer e-text-book blocks rule {
+      float: left;
+      width: 100%;
+      margin: 0 0 15px 0; }
+      e-text-book-editor .display e-text-book blocks rule rule-title, .e-text-book-viewer e-text-book blocks rule rule-title {
+        float: left;
+        width: 100%;
+        padding: 30px;
+        background: #ccedcd; }
     e-text-book-editor .display e-text-book blocks block, .e-text-book-viewer e-text-book blocks block {
       float: left;
       width: 100%;
@@ -455,9 +487,39 @@ image-description {
     float: left;
     width: 100%; }
     image-description images item {
-      float: left;
       width: 100px;
-      height: 100px;
-      background: no-repeat center center;
-      background-size: 100% auto;
+      float: left;
       margin: 0 5px 0 0; }
+      image-description images item image-title {
+        float: left;
+        width: 100%; }
+      image-description images item image-view {
+        float: left;
+        width: 100px;
+        height: 100px;
+        background: no-repeat center center;
+        background-size: 100% auto; }
+        image-description images item image-view span {
+          border: solid 1px #398439;
+          padding: 2px 5px;
+          font-size: 12px; }
+
+.e-text-book-viewer image-description images item image-title {
+  display: none; }
+.e-text-book-viewer image-description descs {
+  float: left;
+  width: 100%;
+  padding: 10px 0 0 0; }
+  .e-text-book-viewer image-description descs item {
+    float: left;
+    width: 50%;
+    margin: 0 0 5px 0; }
+    .e-text-book-viewer image-description descs item select {
+      margin: 0 5px 0 0;
+      color: #000; }
+    .e-text-book-viewer image-description descs item.failed {
+      background: #942a25;
+      color: #fff; }
+    .e-text-book-viewer image-description descs item.success {
+      background: #398439;
+      color: #fff; }

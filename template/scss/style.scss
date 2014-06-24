@@ -61,6 +61,17 @@ e-text-book-editor .display, .e-text-book-viewer {
       float: left;
       width: 100%;
       padding: 20px 0 0 0;
+      rule {
+        float: left;
+        width: 100%;
+        margin: 0 0 15px 0;
+        rule-title {
+          float: left;
+          width: 100%;
+          padding: 30px;
+          background: #ccedcd;
+        }
+      }
       block {
         float: left;
         width: 100%;
@@ -134,12 +145,59 @@ image-description {
     float: left;
     width: 100%;
     item {
-      float: left;
       width: 100px;
-      height: 100px;
-      background: no-repeat center center;
-      background-size: 100% auto;
+      float: left;
       margin: 0 5px 0 0;
+      image-title {
+        float: left;
+        width: 100%;
+      }
+      image-view {
+        float: left;
+        width: 100px;
+        height: 100px;
+        background: no-repeat center center;
+        background-size: 100% auto;
+        span {
+          border: solid 1px #398439;
+          padding: 2px 5px;
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}
+
+.e-text-book-viewer {
+  image-description {
+    images {
+      item {
+        image-title {
+          display: none;
+        }
+      }
+    }
+    descs {
+      float: left;
+      width: 100%;
+      padding: 10px 0 0 0;
+      item {
+        float: left;
+        width: 50%;
+        margin: 0 0 5px 0;
+        select {
+          margin: 0 5px 0 0;
+          color: #000;
+        }
+        &.failed {
+          background: #942a25;
+          color: #fff;
+        }
+        &.success {
+          background: #398439;
+          color: #fff;
+        }
+      }
     }
   }
 }

@@ -52,6 +52,15 @@ e-text-book-editor .display e-text-book, .e-text-book-viewer e-text-book {
     float: left;
     width: 100%;
     padding: 20px 0 0 0; }
+    e-text-book-editor .display e-text-book blocks rule, .e-text-book-viewer e-text-book blocks rule {
+      float: left;
+      width: 100%;
+      margin: 0 0 15px 0; }
+      e-text-book-editor .display e-text-book blocks rule rule-title, .e-text-book-viewer e-text-book blocks rule rule-title {
+        float: left;
+        width: 100%;
+        padding: 30px;
+        background: #ccedcd; }
     e-text-book-editor .display e-text-book blocks block, .e-text-book-viewer e-text-book blocks block {
       float: left;
       width: 100%;
@@ -112,9 +121,39 @@ image-description {
     float: left;
     width: 100%; }
     image-description images item {
-      float: left;
       width: 100px;
-      height: 100px;
-      background: no-repeat center center;
-      background-size: 100% auto;
+      float: left;
       margin: 0 5px 0 0; }
+      image-description images item image-title {
+        float: left;
+        width: 100%; }
+      image-description images item image-view {
+        float: left;
+        width: 100px;
+        height: 100px;
+        background: no-repeat center center;
+        background-size: 100% auto; }
+        image-description images item image-view span {
+          border: solid 1px #398439;
+          padding: 2px 5px;
+          font-size: 12px; }
+
+.e-text-book-viewer image-description images item image-title {
+  display: none; }
+.e-text-book-viewer image-description descs {
+  float: left;
+  width: 100%;
+  padding: 10px 0 0 0; }
+  .e-text-book-viewer image-description descs item {
+    float: left;
+    width: 50%;
+    margin: 0 0 5px 0; }
+    .e-text-book-viewer image-description descs item select {
+      margin: 0 5px 0 0;
+      color: #000; }
+    .e-text-book-viewer image-description descs item.failed {
+      background: #942a25;
+      color: #fff; }
+    .e-text-book-viewer image-description descs item.success {
+      background: #398439;
+      color: #fff; }
