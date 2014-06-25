@@ -36,7 +36,9 @@
     Util::copyFilesFromDirectory($templateDir . "/js", $jsDir);
     Util::copyFilesFromDirectory($templateDir . "/fonts", $fontsDir);
     Util::copyFilesFromDirectory($templateDir . "/img", $imgDir);
-    Util::copyFilesFromDirectory($tmpDir . '/content/img', $imgContentDir);
+    if(is_dir($tmpDir)) {
+        Util::copyFilesFromDirectory($tmpDir . '/content/img', $imgContentDir);
+    }
 
     file_put_contents($infoFilePath, "title =+= " . $title);
 
@@ -53,7 +55,10 @@
         )
     );
 
-    unlink($rootDir . "/../../" . $slug . ".etb");
+    if(is_file($rootDir . "/../../" . $slug . ".etb")) {
+        unlink($rootDir . "/../../" . $slug . ".etb");
+    }
+
     Util::zip($rootDir . "/../", $rootDir . "/../../" . $slug . ".etb");
     Util::removeDir($tempDir);
 

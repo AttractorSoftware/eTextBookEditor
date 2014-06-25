@@ -30,7 +30,7 @@
                                 type="text"
                                 id="book-title"
                                 style="width: 330px; text-indent: 10px"
-                                placeholder="Учебник Кыргызского языка для 7-го класса"
+                                placeholder="Название учебника"
                                 value="<?php echo isset($viewBook) ? $viewBook->getTitle() : ''; ?>"
                             />
                         </div>
@@ -39,13 +39,15 @@
                             class="btn btn-primary btn-sm save"
                             style="margin: 9px 0px 0 10px;"
                         > <span class="glyphicon glyphicon-floppy-save"></span>Сохранить</a>
-                        <a
-                            id="download-link"
-                            class="btn btn-primary btn-sm"
-                            href="/books/uchebnik-kirgizskogo-yazika-dlya-7-go-klassa.etb"
-                            style=" display: none; margin-top: 9px">Скачать учебник</a>
+                        <?php if(isset($viewBook)): ?>
+                            <a
+                                id="download-link"
+                                class="btn btn-primary btn-sm"
+                                href="/books/<?php echo $viewBook->getSlug(); ?>.etb"
+                                style="margin-top: 9px">Скачать учебник</a>
+                        <?php endif; ?>
                         <?php if(count($books)): ?>
-                            <select id="book-list">
+                            <select id="book-list" style="width: 300px;">
                                 <option value="">Новый учебник</option>
                                 <?php foreach($books as $book): ?>
                                     <option
@@ -57,6 +59,7 @@
                                 <?php endforeach; ?>
                             </select>
                         <?php endif; ?>
+                        <a href="/ebook.apk" style="float: right; margin: 12px 10px 0 0">Андройд ридер</a>
                     </div>
                 </div>
                 <div class="desktop"><?php echo isset($viewBook) ? $viewBook->getContent() : ''; ?></div>
