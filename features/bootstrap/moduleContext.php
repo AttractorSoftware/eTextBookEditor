@@ -108,4 +108,39 @@ class ModuleContext extends BehatContext {
         assertEquals(false, is_object($module));
 
     }
+
+    /**
+     * @When /^Создаем правило с текстом "([^"]*)"$/
+     */
+    public function createRule($text) {
+        $desktop = eTextBookDriver::getInstance()->getCurrentPage()->find('css', '.desktop');
+
+        $addBlockButton = $desktop->find('css', 'add-block-button');
+        $addBlockButton->click();
+        sleep(1);
+        $addRuleLink = $addBlockButton->find('css', 'a.add-rule');
+        $addRuleLink->click();
+        $rule = $desktop->find('css', 'rule');
+
+        $ruleTextInput = $rule->find('css', 'rule-title textarea');
+        $ruleTextInput->setValue($text);
+
+        $editButton = $rule->find('css', 'control-panel item.edit');
+
+        $editButton->click();
+    }
+
+    /**
+     * @Then /^Проверяем правило с текстом "([^"]*)"$/
+     */
+    public function checkRule($text) {
+
+        $display = eTextBookDriver::getInstance()->getCurrentPage()->find('css', '.display');
+        $rule = $display->find('css', 'rule');
+
+        $ruleText = $rule->find('css', 'rule-title view-element');
+
+        assertEquals($ruleText->getHTML(), $text);
+
+    }
 }
