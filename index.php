@@ -47,7 +47,7 @@
                                 style="margin-top: 9px">Скачать учебник</a>
                         <?php endif; ?>
                         <?php if(count($books)): ?>
-                            <select id="book-list" style="width: 300px;">
+                            <select id="book-list" style="width: 200px;">
                                 <option value="">Новый учебник</option>
                                 <?php foreach($books as $book): ?>
                                     <option
@@ -59,7 +59,7 @@
                                 <?php endforeach; ?>
                             </select>
                         <?php endif; ?>
-                        <a href="/ebook.apk" style="float: right; margin: 12x 10px 0 0">Андройд ридер</a>
+                        <a href="/ebook.apk" style="float: right; margin: 12px 10px 0 0">Андройд ридер</a>
                     </div>
                 </div>
                 <div class="desktop"><?php echo isset($viewBook) ? $viewBook->getContent() : ''; ?></div>
