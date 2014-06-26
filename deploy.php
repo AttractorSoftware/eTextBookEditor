@@ -2,8 +2,7 @@
     $print = '';
     $print .= 'Start deploy <br />';
     $print .= 'Current directory: '. shell_exec('echo $PWD') . '<br />';
-    $print .= shell_exec('git reset --hard');
-    $print .= shell_exec('git pull');
+    $print .= shell_exec('git pull 2>&1');
 ?>
 
 <!Doctype html>

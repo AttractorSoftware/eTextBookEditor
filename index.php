@@ -29,7 +29,7 @@
                             <input
                                 type="text"
                                 id="book-title"
-                                style="width: 330px; text-indent: 10px"
+                                style="width: 230px; text-indent: 10px"
                                 placeholder="Название учебника"
                                 value="<?php echo isset($viewBook) ? $viewBook->getTitle() : ''; ?>"
                             />
