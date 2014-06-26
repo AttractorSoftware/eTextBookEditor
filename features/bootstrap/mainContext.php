@@ -36,4 +36,10 @@ class FeatureContext extends BehatContext {
         eTextBookDriver::getInstance()->openPage($url);
     }
 
+    /**
+     * @Given /^Закрываем страницу$/
+     */
+    public function closeBrowser() {
+        eTextBookDriver::getInstance()->closeBrowser();
+    }
 }

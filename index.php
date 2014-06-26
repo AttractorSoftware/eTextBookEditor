@@ -38,6 +38,7 @@
                             href="#"
                             class="btn btn-primary btn-sm save"
                             style="margin: 9px 0px 0 10px;"
+                            id="save-book-btn"
                         > <span class="glyphicon glyphicon-floppy-save"></span>Сохранить</a>
                         <?php if(isset($viewBook)): ?>
                             <a

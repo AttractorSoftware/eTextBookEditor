@@ -8,6 +8,40 @@ use Behat\Behat\Context\BehatContext;
 class ModuleContext extends BehatContext {
 
     /**
+     * @When /^Указываем название учебника "([^"]*)"$/
+     */
+    public function setETextBookTitle($title) {
+        $bookTitleInput = eTextBookDriver::getInstance()->getCurrentPage()->find('css', '#book-title');
+        $bookTitleInput->setValue($title);
+    }
+
+    /**
+     * @Given /^Сохраняем учебник$/
+     */
+    public function saveETextBook() {
+        $saveButton = eTextBookDriver::getInstance()->getCurrentPage()->find('css', '#save-book-btn');
+        $saveButton->click();
+        sleep(2);
+    }
+
+    /**
+     * @When /^Выбираем из выпадающего списка учебник со слагом "([^"]*)"$/
+     */
+    public function selectViewETextBook($slug) {
+        $driver = eTextBookDriver::getInstance()->getDriver();
+        $driver->selectOption("//select[@id='book-list']", $slug);
+        sleep(2);
+    }
+
+    /**
+     * @Then /^Проверяем название редактируемого учебника "([^"]*)"$/
+     */
+    public function checkETextBookTitle($title) {
+        $bookTitleInput = eTextBookDriver::getInstance()->getCurrentPage()->find('css', '#book-title');
+        assertEquals($title, $bookTitleInput->getValue());
+    }
+
+    /**
      * @When /^Создаем модуль с заголовком "([^"]*)", ключевыми вопросами "([^"]*)" и описанием "([^"]*)"$/
      */
     public function createModule($title, $questions, $description) {
