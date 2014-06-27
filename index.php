@@ -119,7 +119,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane" id="videos">
+                    <div class="tab-pane video" id="videos">
                         <div class="list">
                             <?php if(isset($viewBook)): ?>
                                 <?php foreach($viewBook->getVideos() as $video): ?>
@@ -134,9 +134,15 @@
                                 <?php endforeach; ?>
                             <?php endif; ?>
                         </div>
-                        <div class="player"></div>
+                        <div class="player">
+                            <video controls></video>
+                            <div class="buttons">
+                                <div class="btn btn-primary btn-sm select"> <span class="glyphicon glyphicon-ok"></span> Выбрать</div>
+                                <div class="btn btn-danger btn-sm remove"> <span class="glyphicon glyphicon-remove"></span> Удалить</div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="tab-pane" id="audios">
+                    <div class="tab-pane audio" id="audios">
                         <div class="list">
                             <?php if(isset($viewBook)): ?>
                                 <?php foreach($viewBook->getAudios() as $audio): ?>
@@ -151,7 +157,15 @@
                                 <?php endforeach; ?>
                             <?php endif; ?>
                         </div>
-                        <div class="player"></div>
+                        <div class="player">
+                            <audio controls>
+                                Your browser does not support the audio element.
+                            </audio>
+                            <div class="buttons">
+                                <div class="btn btn-primary btn-sm select"> <span class="glyphicon glyphicon-ok"></span> Выбрать</div>
+                                <div class="btn btn-danger btn-sm remove"> <span class="glyphicon glyphicon-remove"></span> Удалить</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -171,20 +185,17 @@
         <script src="js/eTextBook/block.js"></script>
         <script src="js/eTextBook/rule.js"></script>
         <script src="js/eTextBook/template.js"></script>
-        <script src="js/eTextBook/templates/module.js"></script>
-        <script src="js/eTextBook/templates/block.js"></script>
-        <script src="js/eTextBook/templates/questionWidget.js"></script>
-        <script src="js/eTextBook/templates/translateComparativeWidget.js"></script>
-        <script src="js/eTextBook/templates/imageDescriptionWidget.js"></script>
+        <?php foreach(Util::fileList(Util::getRootDir().'js/eTextBook/templates') as $template): ?>
+            <script src="js/eTextBook/templates/<?php echo $template; ?>"></script>
+        <?php endforeach; ?>
         <script src="js/eTextBook/inline/inlineEdit.js"></script>
         <script src="js/eTextBook/inline/inlineEditInput.js"></script>
         <script src="js/eTextBook/inline/inlineEditTextarea.js"></script>
         <script src="js/eTextBook/widgetRepository.js"></script>
         <script src="js/eTextBook/widget.js"></script>
-        <script src="js/eTextBook/widget/test.js"></script>
-        <script src="js/eTextBook/widget/question.js"></script>
-        <script src="js/eTextBook/widget/translateComparative.js"></script>
-        <script src="js/eTextBook/widget/imageDescription.js"></script>
+        <?php foreach(Util::fileList(Util::getRootDir().'js/eTextBook/widget') as $widget): ?>
+            <script src="js/eTextBook/widget/<?php echo $widget; ?>"></script>
+        <?php endforeach; ?>
         <script src="js/eTextBook/builder.js"></script>
         <script src="js/eTextBook/fileManager.js"></script>
     </body>

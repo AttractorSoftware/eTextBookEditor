@@ -270,6 +270,62 @@ body {
           position: absolute;
           top: 37px;
           left: 37px; }
+    .e-text-book-editor .desktop e-text-book video-list {
+      float: left;
+      width: 100%; }
+      .e-text-book-editor .desktop e-text-book video-list .add-video {
+        float: left;
+        width: 100%;
+        padding: 10px;
+        text-align: center;
+        background: #ddd;
+        cursor: pointer; }
+      .e-text-book-editor .desktop e-text-book video-list video-item {
+        float: left;
+        width: 100%; }
+        .e-text-book-editor .desktop e-text-book video-list video-item video {
+          float: left;
+          width: 90%;
+          margin: 0 0 15px 0; }
+        .e-text-book-editor .desktop e-text-book video-list video-item .glyphicon-remove {
+          float: left;
+          width: 20px;
+          height: 20px;
+          margin: 5px 0 0 15px;
+          cursor: pointer; }
+    .e-text-book-editor .desktop e-text-book video-description {
+      float: left;
+      width: 100%; }
+      .e-text-book-editor .desktop e-text-book video-description edit-element {
+        margin: 10px 0 0 0; }
+    .e-text-book-editor .desktop e-text-book audio-description {
+      float: left;
+      width: 100%; }
+      .e-text-book-editor .desktop e-text-book audio-description edit-element {
+        margin: 10px 0 0 0; }
+    .e-text-book-editor .desktop e-text-book audio-list {
+      float: left;
+      width: 100%; }
+      .e-text-book-editor .desktop e-text-book audio-list audio-item {
+        float: left;
+        width: 100%; }
+        .e-text-book-editor .desktop e-text-book audio-list audio-item audio {
+          float: left;
+          width: 90%;
+          margin: 0 0 15px 0; }
+        .e-text-book-editor .desktop e-text-book audio-list audio-item .glyphicon-remove {
+          float: left;
+          width: 20px;
+          height: 20px;
+          margin: 5px 0 0 15px;
+          cursor: pointer; }
+      .e-text-book-editor .desktop e-text-book audio-list .add-audio {
+        float: left;
+        width: 100%;
+        padding: 10px;
+        text-align: center;
+        background: #ddd;
+        cursor: pointer; }
 
 .file-manager {
   display: none;
@@ -360,6 +416,26 @@ body {
         background-size: 100% auto;
         background: no-repeat center center; }
       .file-manager .window #images .player .buttons {
+        float: left;
+        width: 100%;
+        padding: 10px 10% 0 10%; }
+    .file-manager .window #audios .player {
+      float: left; }
+      .file-manager .window #audios .player audio {
+        float: left;
+        width: 80%;
+        margin: 0 0 0 10%; }
+      .file-manager .window #audios .player .buttons {
+        float: left;
+        width: 100%;
+        padding: 10px 10% 0 10%; }
+    .file-manager .window #videos .player {
+      float: left; }
+      .file-manager .window #videos .player video {
+        float: left;
+        width: 80%;
+        margin: 0 0 0 10%; }
+      .file-manager .window #videos .player .buttons {
         float: left;
         width: 100%;
         padding: 10px 10% 0 10%; }
@@ -523,3 +599,25 @@ image-description {
     .e-text-book-viewer image-description descs item.success {
       background: #398439;
       color: #fff; }
+
+.e-text-book-viewer audio-list {
+  float: left;
+  width: 100%; }
+  .e-text-book-viewer audio-list audio-item {
+    float: left;
+    width: 100%;
+    margin: 0 0 15px; }
+.e-text-book-viewer audio-description {
+  float: left;
+  width: 100%; }
+
+.e-text-book-viewer video-list {
+  float: left;
+  width: 100%; }
+  .e-text-book-viewer video-list video-item {
+    float: left;
+    width: 100%;
+    margin: 0 0 15px; }
+.e-text-book-viewer video-description {
+  float: left;
+  width: 100%; }

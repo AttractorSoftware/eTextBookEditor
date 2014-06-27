@@ -23,6 +23,8 @@
                     $this->parseContent();
                     $this->parseTitle();
                     $this->parseImages();
+                    $this->parseAudio();
+                    $this->parseVideo();
                 }
             }
         }
@@ -35,6 +37,34 @@
                     $this->images[] = array(
                         'title' => $img[0]
                     ,'extension' => $img[1]
+                    );
+                }
+            }
+
+        }
+
+        public function parseAudio() {
+            $audios = Util::fileList($this->tmpDir . '/' . $this->slug . '/content/audio');
+            if(count($audios)) {
+                foreach($audios as $audio) {
+                    $audio = explode('.', $audio);
+                    $this->audios[] = array(
+                        'title' => $audio[0]
+                        ,'extension' => $audio[1]
+                    );
+                }
+            }
+
+        }
+
+        public function parseVideo() {
+            $videos = Util::fileList($this->tmpDir . '/' . $this->slug . '/content/video');
+            if(count($videos)) {
+                foreach($videos as $video) {
+                    $video = explode('.', $video);
+                    $this->videos[] = array(
+                        'title' => $video[0]
+                        ,'extension' => $video[1]
                     );
                 }
             }

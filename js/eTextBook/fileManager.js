@@ -28,19 +28,49 @@ var FileManager = function(cont) {
     this.init = function() {
         this.cont.find('.close').bind('click', $this.close);
         this.activateImages();
+        this.activateAudios();
+        this.activateVideos();
         this.uploadInput.bind('change', this.uploadFile);
-        this.cont.find('.buttons .select').bind('click', function() {
+        this.imagePlayer.find('.buttons .select').bind('click', function() {
             $this.afterPick($this.viewImagePath);
             $this.close();
         });
-        this.cont.find('.buttons .remove').bind('click', function() {
+        this.audioPlayer.find('.buttons .select').bind('click', function() {
+            $this.afterPick($this.viewAudioPath);
+            $this.close();
+        });
+
+        this.videoPlayer.find('.buttons .select').bind('click', function() {
+            $this.afterPick($this.viewVideoPath);
+            $this.close();
+        });
+
+        this.imagePlayer.find('.buttons .remove').bind('click', function() {
             $.post('/remove-file.php', { file: $this.viewImagePath });
+        });
+
+        this.audioPlayer.find('.buttons .remove').bind('click', function() {
+            $.post('/remove-file.php', { file: $this.viewAudioPath });
+        });
+
+        this.videoPlayer.find('.buttons .remove').bind('click', function() {
+            $.post('/remove-file.php', { file: $this.viewVideoPath });
         });
     }
 
     this.activateImages = function() {
         this.imageList.find('.item').unbind('click');
         this.imageList.find('.item').bind('click', function() { $this.setViewImage(this); });
+    }
+
+    this.activateAudios = function() {
+        this.audioList.find('.item').unbind('click');
+        this.audioList.find('.item').bind('click', function() { $this.setViewAudio(this); });
+    }
+
+    this.activateVideos = function() {
+        this.videoList.find('.item').unbind('click');
+        this.videoList.find('.item').bind('click', function() { $this.setViewVideo(this); });
     }
 
     this.uploadFile = function() {
@@ -76,10 +106,15 @@ var FileManager = function(cont) {
     }
 
     this.addFile = function(response) {
-        this.cont.find('.tab-content .image .list').append(
-            '<div title="' + response[1] + '" data-placement="bottom" data-toggle="tooltip" class="item png">' + response[1] + '</div>'
+
+        var file = response[1].split('.');
+
+        this.cont.find('.tab-content .' + response[0] + ' .list').append(
+            '<div title="' + response[1] + '" data-placement="bottom" data-toggle="tooltip" class="item ' + file[1] + '">' + file[0] + '</div>'
         );
         this.activateImages();
+        this.activateAudios();
+        this.activateVideos();
     }
 
     this.setViewImage = function(img) {
@@ -87,6 +122,24 @@ var FileManager = function(cont) {
         this.imagePlayer.find('.display').css('backgroundImage', 'url(' + this.imagePath + '/' + $(img).attr('title') + ')')
         this.images.removeClass('selected');
         $(img).addClass('selected');
+    }
+
+    this.setViewAudio = function(audio) {
+        this.viewAudioPath = this.audioPath + '/' + $(audio).attr('title');
+        this.audioPlayer.find('audio').html('');
+        this.audioPlayer.find('audio').append('<source src="' + this.viewAudioPath + '" type="audio/mpeg">');
+        this.audioPlayer.find('audio')[0].load();
+        this.audios.removeClass('selected');
+        $(audio).addClass('selected');
+    }
+
+    this.setViewVideo = function(video) {
+        this.viewVideoPath = this.videoPath + '/' + $(video).attr('title');
+        this.videoPlayer.find('video').html('');
+        this.videoPlayer.find('video').append('<source src="' + this.viewVideoPath + '" type="video/mp4">');
+        this.videoPlayer.find('video')[0].load();
+        this.videos.removeClass('selected');
+        $(video).addClass('selected');
     }
 
     this.close = function() {

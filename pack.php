@@ -40,6 +40,14 @@
         Util::copyFilesFromDirectory($tmpDir . '/content/img', $imgContentDir);
     }
 
+    if(is_dir($tmpDir)) {
+        Util::copyFilesFromDirectory($tmpDir . '/content/audio', $audioContentDir);
+    }
+
+    if(is_dir($tmpDir)) {
+        Util::copyFilesFromDirectory($tmpDir . '/content/video', $videoContentDir);
+    }
+
     file_put_contents($infoFilePath, "title =+= " . $title);
 
     $indexContent = file_get_contents($templateDir . "/index.html");

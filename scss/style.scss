@@ -336,6 +336,76 @@ body { padding: 50px 0 0 0; }
           }
         }
       }
+      video-list {
+        float: left;
+        width: 100%;
+        .add-video {
+          float: left;
+          width: 100%;
+          padding: 10px;
+          text-align: center;
+          background: #ddd;
+          cursor: pointer;
+        }
+        video-item {
+          float: left;
+          width: 100%;
+          video {
+            float: left;
+            width: 90%;
+            margin: 0 0 15px 0;
+          }
+          .glyphicon-remove {
+            float: left;
+            width: 20px;
+            height: 20px;
+            margin: 5px 0 0 15px;
+            cursor: pointer;
+          }
+        }
+      }
+      video-description {
+        float: left;
+        width: 100%;
+        edit-element {
+          margin: 10px 0 0 0;
+        }
+      }
+      audio-description {
+        float: left;
+        width: 100%;
+        edit-element {
+          margin: 10px 0 0 0;
+        }
+      }
+      audio-list {
+        float: left;
+        width: 100%;
+        audio-item {
+          float: left;
+          width: 100%;
+          audio {
+            float: left;
+            width: 90%;
+            margin: 0 0 15px 0;
+          }
+          .glyphicon-remove {
+            float: left;
+            width: 20px;
+            height: 20px;
+            margin: 5px 0 0 15px;
+            cursor: pointer;
+          }
+        }
+        .add-audio {
+          float: left;
+          width: 100%;
+          padding: 10px;
+          text-align: center;
+          background: #ddd;
+          cursor: pointer;
+        }
+      }
     }
   }
 }
@@ -430,6 +500,32 @@ body { padding: 50px 0 0 0; }
         margin: 0 0 0 10%;
         background-size: 100% auto;
         background: no-repeat center center;
+      }
+      .buttons {
+        float: left;
+        width: 100%;
+        padding: 10px 10% 0 10%;
+      }
+    }
+    #audios .player {
+      float: left;
+      audio {
+        float: left;
+        width: 80%;
+        margin: 0 0 0 10%;
+      }
+      .buttons {
+        float: left;
+        width: 100%;
+        padding: 10px 10% 0 10%;
+      }
+    }
+    #videos .player {
+      float: left;
+      video {
+        float: left;
+        width: 80%;
+        margin: 0 0 0 10%;
       }
       .buttons {
         float: left;

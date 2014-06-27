@@ -13,6 +13,16 @@
             copy($file['tmp_name'], Util::getRootDir() . $uploadFilePath);
             break;
         }
+        case 'audio': {
+            $uploadFilePath = 'tmp/' . $slug . '/content/audio/' . $file['name'];
+            copy($file['tmp_name'], Util::getRootDir() . $uploadFilePath);
+            break;
+        }
+        case 'video': {
+            $uploadFilePath = 'tmp/' . $slug . '/content/video/' . $file['name'];
+            copy($file['tmp_name'], Util::getRootDir() . $uploadFilePath);
+            break;
+        }
     }
 
     echo $fileType[0] . '||' . $file['name'];

@@ -201,3 +201,33 @@ image-description {
     }
   }
 }
+.e-text-book-viewer {
+  audio-list {
+    float: left;
+    width: 100%;
+    audio-item {
+      float: left;
+      width : 100%;
+      margin: 0 0 15px;
+    }
+  }
+  audio-description {
+    float: left;
+    width: 100%;
+  }
+}
+.e-text-book-viewer {
+  video-list {
+    float: left;
+    width: 100%;
+    video-item {
+      float: left;
+      width : 100%;
+      margin: 0 0 15px;
+    }
+  }
+  video-description {
+    float: left;
+    width: 100%;
+  }
+}
