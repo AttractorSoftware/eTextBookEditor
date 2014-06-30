@@ -3,3 +3,6 @@ books/
 vendor/
 content/
 tmp/
+js/script.js
+js/script.min.js
+node_modules/

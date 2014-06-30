@@ -174,29 +174,6 @@
 
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="css/style.css" />
-        <script src="js/lib/jquery-2.1.1.min.js"></script>
-        <script src="js/lib/bootstrap.min.js"></script>
-        <script src="js/lib/underscore-min.js"></script>
-        <script src="js/lib/backbone-min.js"></script>
-        <script src="js/app.js"></script>
-        <script src="js/eTextBook/utils.js"></script>
-        <script src="js/eTextBook/editor.js"></script>
-        <script src="js/eTextBook/module.js"></script>
-        <script src="js/eTextBook/block.js"></script>
-        <script src="js/eTextBook/rule.js"></script>
-        <script src="js/eTextBook/template.js"></script>
-        <?php foreach(Util::fileList(Util::getRootDir().'js/eTextBook/templates') as $template): ?>
-            <script src="js/eTextBook/templates/<?php echo $template; ?>"></script>
-        <?php endforeach; ?>
-        <script src="js/eTextBook/inline/inlineEdit.js"></script>
-        <script src="js/eTextBook/inline/inlineEditInput.js"></script>
-        <script src="js/eTextBook/inline/inlineEditTextarea.js"></script>
-        <script src="js/eTextBook/widgetRepository.js"></script>
-        <script src="js/eTextBook/widget.js"></script>
-        <?php foreach(Util::fileList(Util::getRootDir().'js/eTextBook/widget') as $widget): ?>
-            <script src="js/eTextBook/widget/<?php echo $widget; ?>"></script>
-        <?php endforeach; ?>
-        <script src="js/eTextBook/builder.js"></script>
-        <script src="js/eTextBook/fileManager.js"></script>
+        <script src="js/script.min.js"></script>
     </body>
 </html>

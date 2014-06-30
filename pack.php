@@ -36,6 +36,7 @@
     Util::copyFilesFromDirectory($templateDir . "/js", $jsDir);
     Util::copyFilesFromDirectory($templateDir . "/fonts", $fontsDir);
     Util::copyFilesFromDirectory($templateDir . "/img", $imgDir);
+
     if(is_dir($tmpDir)) {
         Util::copyFilesFromDirectory($tmpDir . '/content/img', $imgContentDir);
     }
