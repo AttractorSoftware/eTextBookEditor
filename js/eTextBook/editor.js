@@ -91,13 +91,14 @@ var eTextBookEditor = Backbone.Model.extend({
 
     ,clearEditElements: function(html) {
         html.find(
-            'edit-element, add-module-button, add-block-button, control-panel, .widget-selector'
+            'edit-element, add-module-button, add-block-button, control-panel, .widget-selector, .html5-controls'
         ).remove();
         return html;
     }
 
     ,clearViewElements: function(html) {
         html.find('block-index').html('');
+        html.find('.html5-controls').remove();
         return html;
     }
 

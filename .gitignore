@@ -3,6 +3,12 @@ books/
 vendor/
 content/
 tmp/
+css/main-style.css
+css/main-style.min.css
+template/css/main-style.css
+template/css/main-style.min.css
 js/script.js
 js/script.min.js
+template/js/script.js
+template/js/script.min.js
 node_modules/

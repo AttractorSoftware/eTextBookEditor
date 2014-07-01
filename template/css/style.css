@@ -176,6 +176,8 @@ image-description {
     float: left;
     width: 100%;
     margin: 0 0 15px; }
+    .e-text-book-viewer video-list video-item video {
+      float: left; }
 .e-text-book-viewer video-description {
   float: left;
   width: 100%; }

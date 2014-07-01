@@ -172,8 +172,7 @@
             </div>
         </div>
 
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <link rel="stylesheet" type="text/css" href="css/main-style.min.css" />
         <script src="js/script.min.js"></script>
     </body>
 </html>

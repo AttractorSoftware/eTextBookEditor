@@ -27,7 +27,7 @@ var eTextBookWidgetAudio = eTextBookWidget.extend({
             App.fileManager.pickFile(function(path) {
                 $this.editCont.find('audio-list').prepend(
                     '<audio-item>' +
-                        '<audio controls><source src="' + path + '"></audio>' +
+                        '<video controls><source src="' + path + '" type="audio/mpeg"></video>' +
                         '<edit-element class="glyphicon glyphicon-remove"></edit-element>' +
                     '</audio-item>'
                 );
