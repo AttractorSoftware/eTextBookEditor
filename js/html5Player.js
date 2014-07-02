@@ -45,7 +45,7 @@ var html5Player = function(target) {
 
         this.controls.css({
             marginTop: -this.controlHeight-this.marginBottom - 5,
-            width: 300
+            width: this.width - 10
         });
     }
 

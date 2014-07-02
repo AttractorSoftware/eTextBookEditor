@@ -225,6 +225,54 @@ body { padding: 50px 0 0 0; }
           }
         }
       }
+      logic-statement {
+        float: left;
+        width: 100%;
+        item {
+          float: left;
+          width: 100%;
+          margin: 0 0 10px 0;
+
+          .text {
+            float: left;
+            width: 70%;
+          }
+
+          .value {
+            float: left;
+            width: 18%;
+            margin: 2px 0 0 2%;
+            select {
+              float: left;
+              width: 100%;
+            }
+          }
+          .remove {
+            float: left;
+            margin: 7px 0 0 2%;
+            cursor: pointer;
+          }
+        }
+        edit-element.new-statement {
+          float: left;
+          width: 100%;
+          input {
+            float: left;
+            width: 70%;
+          }
+          select {
+            float: left;
+            width: 18%;
+            margin: 2px 0 0 2%;
+          }
+          add {
+            float: left;
+            margin: 7px 0 0 2%;
+            width: 2%;
+            cursor: pointer;
+          }
+        }
+      }
       translate-comparative {
         float: left;
         width: 100%;

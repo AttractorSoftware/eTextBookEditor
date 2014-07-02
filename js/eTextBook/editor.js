@@ -102,6 +102,13 @@ var eTextBookEditor = Backbone.Model.extend({
         return html;
     }
 
+    ,getContent: function() {
+        var saveData = this.display;
+        saveData.find('.not-saved').remove();
+        console.debug(saveData.find('.not-saved'));
+        return saveData.html();
+    }
+
     ,setIndexes: function(html) {
         var modules = html.find('module');
         for(var i = 0; i < modules.length; i++) {

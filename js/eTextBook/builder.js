@@ -21,7 +21,7 @@ var eTextBookBuilder = function() {
     this.save = function() {
         $.post('/pack.php', {
             title: this.titleInput.val(),
-            content: App.eTextBookEditor.display.html()
+            content: App.eTextBookEditor.getContent()
         }, function(response) {
             location.href = "/?book=" + response;
         });

@@ -234,3 +234,33 @@ image-description {
     width: 100%;
   }
 }
+.e-text-book-viewer {
+  logic-statement {
+    float: left;
+    width: 100%;
+    item {
+      float: left;
+      width: 100%;
+      margin: 0 0 10px 0;
+      &.failed {
+        background: #942a25;
+        color: #fff;
+      }
+      &.success {
+        background: #398439;
+        color: #fff;
+      }
+      view-element {
+        float: left;
+        width: 80%;
+        padding: 4px 0 0 10px;
+      }
+      select {
+        float: left;
+        width: 18%;
+        margin: 0 0 0 2%;
+        color: #000;
+      }
+    }
+  }
+}
