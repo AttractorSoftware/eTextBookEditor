@@ -85,6 +85,7 @@ var html5Player = function(target) {
     }
 
     this.play = function() {
+        console.debug('q');
         this.target[0].play();
         this.controls.find('.play').hide();
         this.controls.find('.pause').show();

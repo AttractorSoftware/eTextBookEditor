@@ -172,6 +172,8 @@
             </div>
         </div>
 
+        <?php require_once 'jsTemplates.php'; ?>
+
         <link rel="stylesheet" type="text/css" href="css/main-style.min.css" />
         <script src="js/script.min.js"></script>
     </body>

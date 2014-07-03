@@ -25,12 +25,9 @@ var eTextBookWidgetVideo = eTextBookWidget.extend({
         $this.bindRemoveEvent();
         this.editCont.find('.add-video').bind('click', function() {
             App.fileManager.pickFile(function(path) {
-                $this.editCont.find('video-list').prepend(
-                    '<video-item>' +
-                        '<video controls><source src="' + path + '"></video>' +
-                        '<edit-element class="glyphicon glyphicon-remove"></edit-element>' +
-                    '</video-item>'
-                );
+                var video = $(App.eTextBookTemplate.getTemplateWithParams('videoItem')({ path: path }));
+                video.find('video').removeAttr('preload');
+                $this.editCont.find('video-list').prepend(video);
                 $this.bindRemoveEvent();
             });
         });

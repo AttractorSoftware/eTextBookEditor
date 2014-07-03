@@ -24,25 +24,16 @@ var eTextBookWidgetLogicStatement = eTextBookWidget.extend({
     ,activate: function() {
         var $this = this;
         this.cont = this.editCont.find('logic-statement');
-        this.cont.append('<edit-element class="new-statement">\n    <input type="text">\n    <select>\n        <option value="0">ката</option>\n        <option value="1">тура</option>\n    </select>\n    <add class="glyphicon glyphicon-plus"></add>\n</edit-element>');
+        this.cont.append(App.eTextBookTemplate.getTemplate('logicStatementAddInput'));
         this.appendEditElements();
         this.cont.find('.new-statement add').bind('click', function() {
             var text = $this.cont.find('.new-statement input').val();
                 $this.cont.find('.new-statement input').val('');
             var value = $this.cont.find('.new-statement select').val();
                 $this.cont.find('.new-statement select').val(0);
-            var item =
-                $('<item value="' + value + '">' +
-                    '<view-element>' + text + '</view-element>' +
-                    '<edit-element class="text"><input type="text" value="' + text + '"></edit-element>' +
-                    '<edit-element class="value">' +
-                        '<select>' +
-                            '<option value="0">ката</option>' +
-                            '<option value="1">тура</option>' +
-                        '</select>' +
-                    '</edit-element>' +
-                    ' <edit-element class="remove glyphicon glyphicon-remove"></edit-element> ' +
-                '</item>');
+            var item = $(App.eTextBookTemplate.getTemplateWithParams('logicStatementItem')(
+                { value: value, text: text }
+            ));
             $this.cont.find('.new-statement').before(item);
             item.find('select').val(value);
             $this.bindRemoveEvent();

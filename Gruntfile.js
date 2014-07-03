@@ -9,7 +9,6 @@ module.exports = function(grunt) {
                     ,'js/lib/backbone-min.js'
                     ,'js/app.js'
                     ,'js/eTextBook/*.js'
-                    ,'js/eTextBook/templates/*.js'
                     ,'js/eTextBook/inline/*.js'
                     ,'js/eTextBook/widget/*.js'
                 ],

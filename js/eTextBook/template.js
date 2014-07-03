@@ -3,16 +3,12 @@ var eTextBookTemplate = Backbone.Model.extend({
         this.templates = [];
     }
 
-    ,addTemplate: function(template) {
-        this.templates.push(template);
+    ,getTemplate: function(templateName) {
+        return $('.templates .template[name=' + templateName + ']').html();
     }
 
-    ,getTemplate: function(templateName) {
-        for(var i = 0; i < this.templates.length; i++) {
-            if(this.templates[i].name == templateName) {
-                return this.templates[i].content;
-            }
-        } return 'Template with name "' + templateName + '" not found';
+    ,getTemplateWithParams: function(templateName) {
+        return _.template($('.templates .template[name=' + templateName + ']').html());
     }
 });
 

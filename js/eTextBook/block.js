@@ -13,13 +13,7 @@ var eTextBookBlock = Backbone.Model.extend({
 
         var $this = this;
 
-        this.get('cont').prepend(
-            '<control-panel>' +
-                '<item class="edit" title="Редактировать"><span class="glyphicon glyphicon-pencil"></span></item>' +
-                '<item class="duplicate" title="Дублировать"><span class="glyphicon glyphicon-repeat"></span></item>' +
-                '<item class="remove" title="Удалить"><span class="glyphicon glyphicon-trash"></span></item>' +
-            '</control-panel>'
-        );
+        this.get('cont').prepend(App.eTextBookTemplate.getTemplate('blockControlPanel'));
 
         this.get('cont').append(this.get('module').generateAddBlockButton());
 
