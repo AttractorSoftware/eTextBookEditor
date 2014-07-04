@@ -79,7 +79,10 @@ class WidgetsContext extends BehatContext {
         $fileManager = eTextBookDriver::getInstance()->getCurrentPage()->find('css', '.file-manager');
         $uploadButton = $fileManager->find('css', '#uploadInput');
 
-        $uploadButton->attachFile('C:\\PATH\\TO_FILE.txt');
+        $uploadButton->attachFile(dirname(__FILE__).'/../../fixtures/img/shoes.png');
+
+        $fileManager->find('css', '#images .list .item')->click();
+        $fileManager->find('css', '#images .player .buttons .select')->click();
     }
 
     /**
@@ -114,6 +117,71 @@ class WidgetsContext extends BehatContext {
         $logicStatementItem = $logicStatement->find('css', 'item');
         $logicStatementTitle = $logicStatement->find('css', 'view-element');
         assertEquals($logicStatementTitle->getHTML(), $title);
+    }
+
+    /**
+     * @Then /^Добавляем окончание "([^"]*)"$/
+     */
+    public function addEnding($ending) {
+        $desktop = eTextBookDriver::getInstance()->getCurrentPage()->find('css', '.desktop');
+        $checkEndings = $desktop->find('css', '.check-endings');
+        $addEnding = $checkEndings->find('css', '.endings .add-ending');
+        $addEnding->find('css', 'input')->setValue($ending);
+        $addEnding->find('css', '.add')->click();
+    }
+
+    /**
+     * @Given /^Добавляем окончания "([^"]*)"$/
+     */
+    public function addEndings($endingsStr){
+        $endings = explode(', ', $endingsStr);
+        for($i = 0; $i < count($endings); $i++ ) {
+            $this->addEnding($endings[$i]);
+        }
+    }
+
+    /**
+     * @Given /^Добавляем слово "([^"]*)" с окончанием "([^"]*)"$/
+     */
+    public function addWord($word, $ending) {
+        $desktop = eTextBookDriver::getInstance()->getCurrentPage()->find('css', '.desktop');
+        $checkEndings = $desktop->find('css', '.check-endings');
+        $addWord = $checkEndings->find('css', '.words .add-word');
+        $addWord->find('css', 'input')->setValue($word);
+        $addWord->find('css', '.add')->click();
+        $words = $checkEndings->findAll('css', '.words .list .item');
+        foreach($words as $w) {
+            if($w->find('css', 'input')->getValue() == $word) {
+                $w->find('css', 'select')->setValue($ending);
+            }
+        }
+    }
+
+    /**
+     * @Given /^Завершаем редактирование блока$/
+     */
+    public function blockEditOver() {
+        eTextBookDriver::getInstance()
+            ->getCurrentPage()
+            ->find('css', '.desktop block control-panel .edit')->click();
+    }
+
+    /**
+     * @Given /^Проверяем слово "([^"]*)" с окончанием "([^"]*)"$/
+     */
+    public function checkWordWithEnding($word, $ending) {
+        $display = eTextBookDriver::getInstance()->getCurrentPage()->find('css', '.display');
+        $items = $display->findAll('css', '.check-endings .words .list .item');
+        $findItem = '';
+        foreach($items as $item) {
+            if($item->find('css', 'view-element')->getHTML() == $word) {
+                $findItem = $item;
+                $item->find('css', 'select option[value="' . $ending . '"]')->click();
+            }
+        }
+
+        assertEquals($findItem->find('css', 'view-element')->getHTML(), $word);
+        assertEquals(true, in_array('success', explode(' ', $findItem->getAttribute('class'))));
     }
 
 }
