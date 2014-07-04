@@ -7,6 +7,7 @@ class eTextBookDriver {
     private static $instance;
     private $driver;
     private $page;
+    private $variables = array();
 
     public static function getInstance() {
         if ( empty(self::$instance) ) {
@@ -34,5 +35,13 @@ class eTextBookDriver {
 
     public function closeBrowser() {
         $this->driver->stop();
+    }
+
+    public function getVar($variableName) {
+        return isset($this->variables[$variableName]) ? $this->variables[$variableName] : 'Variable not defined';
+    }
+
+    public function setVar($variableName, $variableValue) {
+        $this->variables[$variableName] = $variableValue;
     }
 }

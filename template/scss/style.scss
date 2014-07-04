@@ -264,3 +264,40 @@ image-description {
     }
   }
 }
+
+.e-text-book-viewer {
+  .check-endings {
+    float: left;
+    width: 100%;
+    .words {
+      .title { display: none; }
+      .list {
+        float: left;
+        width: 100%;
+        .item {
+          float: left;
+          width: 50%;
+          padding: 5px;
+          &.failed {
+            background: #942a25;
+            color: #fff;
+          }
+          &.success {
+            background: #398439;
+            color: #fff;
+          }
+          view-element {
+            float: left;
+          }
+          select {
+            float: left;
+            color: #000;
+          }
+        }
+      }
+    }
+    .endings-list {
+      display: none;
+    }
+  }
+}

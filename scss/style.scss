@@ -273,6 +273,78 @@ body { padding: 50px 0 0 0; }
           }
         }
       }
+      block[editable='0']{
+        .check-endings {
+          .words {
+            width: 100%;
+            .list {
+              .item {
+                width: 50%;
+              }
+            }
+          }
+        }
+      }
+      .check-endings {
+        float: left;
+        width: 100%;
+        .endings-list {
+          display: none;
+        }
+        .words {
+          float: left;
+          width: 70%;
+          .item {
+            float: left;
+            width: 91%;
+            margin: 5px 0 5px 0;
+            .glyphicon-remove {
+              float: left;
+              width: 5%;
+              margin: 7px 0 0 0;
+              cursor: pointer;
+            }
+            edit-element {
+              float: left;
+              width: 95%;
+              input { width: 70%; }
+              select {
+                float: left;
+                width: 28%;
+                margin: 2px 0 0 0;
+              }
+            }
+          }
+        }
+        .endings {
+          float: left;
+          width: 30%;
+          .item {
+            float: left;
+            width: 97%;
+            margin: 5px 0 5px 0;
+            .glyphicon-remove {
+              float: left;
+              width: 5%;
+              margin: 7px 0 0 0;
+              cursor: pointer;
+            }
+            edit-element {
+              float: left;
+              width: 90%;
+              input { width: 98%; }
+            }
+          }
+        }
+        .add-word, .add-ending {
+          input { width: 85%; }
+          .add {
+            cursor: pointer;
+            float: left;
+            margin: 7px 0 0 5px;
+          }
+        }
+      }
       translate-comparative {
         float: left;
         width: 100%;

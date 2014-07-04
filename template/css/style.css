@@ -204,3 +204,29 @@ image-description {
       width: 18%;
       margin: 0 0 0 2%;
       color: #000; }
+
+.e-text-book-viewer .check-endings {
+  float: left;
+  width: 100%; }
+  .e-text-book-viewer .check-endings .words .title {
+    display: none; }
+  .e-text-book-viewer .check-endings .words .list {
+    float: left;
+    width: 100%; }
+    .e-text-book-viewer .check-endings .words .list .item {
+      float: left;
+      width: 50%;
+      padding: 5px; }
+      .e-text-book-viewer .check-endings .words .list .item.failed {
+        background: #942a25;
+        color: #fff; }
+      .e-text-book-viewer .check-endings .words .list .item.success {
+        background: #398439;
+        color: #fff; }
+      .e-text-book-viewer .check-endings .words .list .item view-element {
+        float: left; }
+      .e-text-book-viewer .check-endings .words .list .item select {
+        float: left;
+        color: #000; }
+  .e-text-book-viewer .check-endings .endings-list {
+    display: none; }

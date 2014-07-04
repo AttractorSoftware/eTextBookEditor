@@ -40,7 +40,7 @@ var eTextBookEditor = Backbone.Model.extend({
 
     ,generateAddModuleButton: function() {
         var $this = this;
-        var button = $('<add-module-button><wrap><a href="#" class="add-module">Добавить модуль</a></wrap></add-module-button>');
+        var button = $(App.eTextBookTemplate.getTemplate('addModuleButton'));
 
         button.bind('click', function() {
             if($(this).hasClass('open')){
@@ -57,6 +57,7 @@ var eTextBookEditor = Backbone.Model.extend({
 
     ,addModule: function(button) {
         var template = $(App.eTextBookTemplate.getTemplate('module'));
+        template.attr('uid', App.eTextBookUtils.generateUID());
 
         if(button.parent().prop('tagName') == 'MODULE') {
             button.parent().after(template);
@@ -91,9 +92,13 @@ var eTextBookEditor = Backbone.Model.extend({
 
     ,clearEditElements: function(html) {
         html.find(
-            'edit-element, add-module-button, add-block-button, control-panel, .widget-selector, .html5-controls'
-        ).remove();
-        return html;
+            'edit-element,' +
+            'add-module-button,' +
+            'add-block-button,' +
+            'control-panel,' +
+            '.widget-selector,' +
+            '.html5-controls'
+        ).remove(); return html;
     }
 
     ,clearViewElements: function(html) {
@@ -105,7 +110,6 @@ var eTextBookEditor = Backbone.Model.extend({
     ,getContent: function() {
         var saveData = this.display;
         saveData.find('.not-saved').remove();
-        console.debug(saveData.find('.not-saved'));
         return saveData.html();
     }
 

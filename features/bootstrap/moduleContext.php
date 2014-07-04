@@ -68,15 +68,28 @@ class ModuleContext extends BehatContext {
 
         $editButton->click();
 
+        eTextBookDriver::getInstance()->setVar('latestModuleUID', $module->getAttribute('uid'));
+
     }
 
     /**
-     * @Given /^Проверяем модуль с заголовком "([^"]*)", ключевыми вопросами "([^"]*)" и описанием "([^"]*)"$/
+     * @When /^Создаем "([^"]*)" модулей с заголовком "([^"]*)", ключевыми вопросами "([^"]*)" и описанием "([^"]*)"$/
      */
-    public function checkModule($title, $questions, $description) {
+    public function createManyModules($count, $title, $questions, $description) {
+
+        for($i = 0; $i < $count; $i++) {
+            $this->createModule($title, $questions, $description);
+        }
+
+    }
+
+    /**
+     * @Given /^Проверяем последний добавленный модуль с заголовком "([^"]*)", ключевыми вопросами "([^"]*)" и описанием "([^"]*)"$/
+     */
+    public function checkLatestModule($title, $questions, $description) {
 
         $display = eTextBookDriver::getInstance()->getCurrentPage()->find('css', '.display');
-        $module = $display->find('css', 'module');
+        $module = $display->find('css', 'module[uid='. eTextBookDriver::getInstance()->getVar('latestModuleUID') .']');
 
         $moduleTitle = $module->find('css', 'module-title view-element');
         $moduleQuestions = $module->find('css', 'module-questions view-element');
@@ -88,23 +101,23 @@ class ModuleContext extends BehatContext {
     }
 
     /**
-     * @Then /^Удаляем модуль$/
+     * @Then /^Удаляем последний созданный модуль$/
      */
-    public function removeModule() {
+    public function removeLatestModule() {
 
         $desktop = eTextBookDriver::getInstance()->getCurrentPage()->find('css', '.desktop');
-        $removeButton = $desktop->find('css', 'module control-panel .remove');
+        $removeButton = $desktop->find('css', 'module[uid='. eTextBookDriver::getInstance()->getVar('latestModuleUID') .'] control-panel .remove');
         $removeButton->click();
 
     }
 
     /**
-     * @Then /^Проверяем удаленный модуль$/
+     * @Then /^Проверяем последний созданный удаленный модуль$/
      */
-    public function checkRemovedModule() {
+    public function checkLatestRemovedModule() {
 
         $display = eTextBookDriver::getInstance()->getCurrentPage()->find('css', '.display');
-        $module = $display->find('css', 'module');
+        $module = $display->find('css', 'module[uid='. eTextBookDriver::getInstance()->getVar('latestModuleUID') .']');
         assertEquals(false, is_object($module));
 
     }
@@ -128,15 +141,17 @@ class ModuleContext extends BehatContext {
         $editButton = $rule->find('css', 'control-panel item.edit');
 
         $editButton->click();
+
+        eTextBookDriver::getInstance()->setVar('latestRuleUID', $rule->getAttribute('uid'));
     }
 
     /**
-     * @Then /^Проверяем правило с текстом "([^"]*)"$/
+     * @Then /^Проверяем последнее созданное правило с текстом "([^"]*)"$/
      */
     public function checkRule($text) {
 
         $display = eTextBookDriver::getInstance()->getCurrentPage()->find('css', '.display');
-        $rule = $display->find('css', 'rule');
+        $rule = $display->find('css', 'rule[uid='. eTextBookDriver::getInstance()->getVar('latestRuleUID') .']');
 
         $ruleText = $rule->find('css', 'rule-title view-element');
 
@@ -164,6 +179,8 @@ class ModuleContext extends BehatContext {
         $editButton = $block->find('css', 'control-panel item.edit');
 
         $editButton->click();
+
+        eTextBookDriver::getInstance()->setVar('latestBlockUID', $block->getAttribute('uid'));
 
     }
 

@@ -29,13 +29,7 @@ var eTextBookModule = Backbone.Model.extend({
 
         var $this = this;
 
-        this.get('cont').prepend(
-            '<control-panel class="module-panel">' +
-                '<item class="edit" title="Редактировать"><span class="glyphicon glyphicon-pencil"></span></item>' +
-                '<item class="duplicate" title="Дублировать"><span class="glyphicon glyphicon-repeat"></span></item>' +
-                '<item class="remove" title="Удалить"><span class="glyphicon glyphicon-trash"></span></item>' +
-            '</control-panel>'
-        );
+        this.get('cont').prepend(App.eTextBookTemplate.getTemplate('moduleControlPanel'));
 
         this.get('cont').append(App.eTextBookEditor.generateAddModuleButton());
         this.get('cont').find('blocks').before(this.generateAddBlockButton());
@@ -97,14 +91,7 @@ var eTextBookModule = Backbone.Model.extend({
 
     ,generateAddBlockButton: function() {
         var $this = this;
-        var button = $(
-            '<add-block-button>' +
-                '<wrap>' +
-                    '<a href="#" class="add-block"><span class="glyphicon glyphicon-ok-sign"></span>Добавить задание</a>' +
-                    '<a href="#" class="add-rule"><span class="glyphicon glyphicon-info-sign"></span>Добавить правило</a>' +
-                '</wrap>' +
-            '</add-module-button>'
-        );
+        var button = $(App.eTextBookTemplate.getTemplate('addBlockButton'));
 
         button.bind('click', function() {
             if($(this).hasClass('open')){
@@ -126,11 +113,13 @@ var eTextBookModule = Backbone.Model.extend({
     ,addRule: function(button) {
         var template = $('<rule>' +
             '<rule-title>' +
-                '<view-element>Bla Bla</view-element>' +
+                '<view-element></view-element>' +
             '</rule-title>' +
         '</rule>');
 
-        if(button.parent().prop('tagName') == 'BLOCK') {
+        template.attr('uid', App.eTextBookUtils.generateUID());
+
+        if(button.parent().prop('tagName') == 'BLOCK' || button.parent().prop('tagName') == 'RULE') {
             button.parent().after(template);
         } else {
             $(button).parent().find('blocks').prepend(template);
@@ -143,7 +132,9 @@ var eTextBookModule = Backbone.Model.extend({
     ,addBlock: function(button) {
         var template = $(App.eTextBookTemplate.getTemplate('block'));
 
-        if(button.parent().prop('tagName') == 'BLOCK') {
+        template.attr('uid', App.eTextBookUtils.generateUID());
+
+        if(button.parent().prop('tagName') == 'BLOCK' || button.parent().prop('tagName') == 'RULE') {
             button.parent().after(template);
         } else {
             $(button).parent().find('blocks').prepend(template);

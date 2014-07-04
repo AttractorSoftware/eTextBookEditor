@@ -25,6 +25,20 @@ var eTextBookUtils = function() {
         }
         return result;
     }
+
+    this.generateUID = function() {
+        var date = new Date();
+        return  this.firstZero(date.getDate()) +
+                this.firstZero(date.getMonth()) +
+                this.firstZero(date.getFullYear()) +
+                this.firstZero(date.getHours()) +
+                this.firstZero(date.getMinutes()) +
+                this.firstZero(date.getSeconds());
+    }
+
+    this.firstZero = function(value) {
+        return value > 9 ? value : '0' + value;
+    }
 }
 
 App.eTextBookUtils = new eTextBookUtils();
