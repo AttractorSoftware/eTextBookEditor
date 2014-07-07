@@ -18,11 +18,15 @@ public class MyActivity extends Activity {
         setContentView(R.layout.main);
 
         WebView webView = (WebView) findViewById(R.id.webview);
+        webView.setWebChromeClient(new WebChromeClient());
 
         WebSettings webSettings = webView.getSettings();
+        webSettings.setPluginState(WebSettings.PluginState.ON_DEMAND);
         webSettings.setJavaScriptEnabled(true);
-
-        webView.setWebChromeClient(new WebChromeClient());
+        webSettings.setUseWideViewPort(true);
+        webSettings.setSupportZoom(true) ;
+        webSettings.setBuiltInZoomControls(true);
+        webSettings.setDisplayZoomControls(false);
 
         webView.loadUrl("file:///sdcard/eTextBook/cache/"+ getIntent().getStringExtra("viewBook")+"/index.html");
 
