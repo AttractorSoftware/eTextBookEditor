@@ -72,8 +72,6 @@
         <?php require_once 'jsTemplates.php'; ?>
 
         <link rel="stylesheet" type="text/css" href="css/main-style.min.css" />
-        <link rel="stylesheet" type="text/css" href="css/style.css" />
         <script src="js/script.min.js"></script>
-        <script src="js/eTextBook/widget/checkEndings.js"></script>
     </body>
 </html>
