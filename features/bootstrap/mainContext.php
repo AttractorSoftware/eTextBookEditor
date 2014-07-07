@@ -23,7 +23,7 @@ class FeatureContext extends BehatContext {
      * @AfterFeature
      */
     public static function closePage() {
-        //eTextBookDriver::getInstance()->closeBrowser();
+        eTextBookDriver::getInstance()->closeBrowser();
     }
 
     /**
