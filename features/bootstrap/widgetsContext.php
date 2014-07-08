@@ -171,4 +171,20 @@ class WidgetsContext extends BehatContext {
         assertEquals(true, in_array('success', explode(' ', $findItem->getAttribute('class'))));
     }
 
+    /**
+     * @Given /^Кликаем по кнопке добавить видео$/
+     */
+    public function addVideoButtonClick() {
+        $desktop = eTextBookDriver::getInstance()->getCurrentPage()->find('css', '.desktop');
+        $desktop->find('css', 'video-list .add-video')->click();
+    }
+
+    /**
+     * @Given /^Указываем текст для видео "([^"]*)"$/
+     */
+    public function setTextForVideo($text) {
+        $desktop = eTextBookDriver::getInstance()->getCurrentPage()->find('css', '.desktop');
+        $desktop->find('css', 'video-description textarea')->setValue($text);
+    }
+
 }

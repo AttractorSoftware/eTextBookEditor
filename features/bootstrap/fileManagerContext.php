@@ -51,4 +51,20 @@ class FileManagerContext extends BehatContext {
         $lastImage->click();
         $this->getManager()->find('css', '#images .player .buttons .select')->click();
     }
+
+    /**
+     * @Given /^Выбираем последнее видео из списка в менеджере файлов$/
+     */
+    public function selectFirstVideoFromFileManager() {
+        $lastImage = end($this->getManager()->findAll('css', '#videos .list .item'));
+        $lastImage->click();
+        $this->getManager()->find('css', '#videos .player .buttons .select')->click();
+    }
+
+    /**
+     * @Given /^Переходим во вкладку с ссылкой "([^"]*)"$/
+     */
+    public function setVideoTab($tabHref) {
+        $this->getManager()->find('css', '.nav a[href="' . $tabHref . '"]')->click();
+    }
 }
