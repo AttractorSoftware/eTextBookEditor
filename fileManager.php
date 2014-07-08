@@ -15,12 +15,12 @@
             <li><a href="#videos" data-toggle="tab">Видео</a></li>
             <li><a href="#audios" data-toggle="tab">Аудио</a></li>
 
-            <div class="form-group">
+            <div class="form-group upload-container">
                 <label for="uploadInput">
                     <span class="glyphicon glyphicon-folder-open"></span>
                     Загрузить файл
                 </label>
-                <input type="file" id="uploadInput">
+                <input type="file" id="uploadInput" name="upload-file">
             </div>
         </ul>
 

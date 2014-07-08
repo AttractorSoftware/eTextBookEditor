@@ -98,7 +98,8 @@ var eTextBookEditor = Backbone.Model.extend({
             'control-panel,' +
             '.widget-selector,' +
             '.html5-controls'
-        ).remove(); return html;
+        ).remove();
+        return html;
     }
 
     ,clearViewElements: function(html) {

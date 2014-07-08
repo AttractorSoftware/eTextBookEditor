@@ -52,7 +52,12 @@ var eTextBookModule = Backbone.Model.extend({
     }
 
     ,duplicate: function() {
-        var html = App.eTextBookEditor.clearEditElements(this.get('cont').html());
+        var html = $(this.get('cont').html());
+        html = App.eTextBookEditor.clearEditElements(html);
+        var module = $('<module></module>');
+        module.append(html);
+        App.eTextBookEditor.root.append(module);
+        App.eTextBookEditor.modules.append(new eTextBookModule({ cont: module }));
     }
 
     ,startEdit: function() {

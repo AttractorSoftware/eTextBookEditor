@@ -4,7 +4,7 @@ var FileManager = function(cont) {
 
     this.cont = $(cont);
 
-    this.uploadInput = this.cont.find('#uploadInput');
+    this.uploadCont = this.cont.find('.upload-container');
 
     this.slug = this.cont.attr('slug');
 
@@ -30,7 +30,7 @@ var FileManager = function(cont) {
         this.activateImages();
         this.activateAudios();
         this.activateVideos();
-        this.uploadInput.bind('change', this.uploadFile);
+        this.uploadCont.find('input').bind('change', this.uploadFile);
         this.imagePlayer.find('.buttons .select').bind('click', function() {
             $this.afterPick($this.viewImagePath);
             $this.close();
@@ -74,15 +74,17 @@ var FileManager = function(cont) {
     }
 
     this.uploadFile = function() {
-        $this.uploadInput.parent()
+
+        var input = $this.uploadCont.find('input');
+
+        $this.uploadCont
             .find('label')
             .text('Файл загружается...')
             .prepend('<span class="glyphicon glyphicon-send"></span>');
 
         $this.createForm();
         $this.createIFrame();
-        $this.form.append($this.uploadInput);
-        $this.uploadInput.attr('name', 'upload-file');
+        $this.form.append(input);
         $this.form.trigger('submit');
     }
 
@@ -99,10 +101,22 @@ var FileManager = function(cont) {
         this.iframe = $('<iframe id="upload-iframe" name="upload-iframe"></iframe>');
         $('body').append(this.iframe);
         this.iframe.bind('load', function() {
-           var response = $(this).contents().find('body').html().split('||');
-           $this.addFile(response);
+            $this.isLoaded($(this).contents().find('body').html().split('||'));
         });
         return this.iframe;
+    }
+
+    this.isLoaded = function(response) {
+        $this.addFile(response);
+        $this.iframe.remove();
+        $this.form.remove();
+
+        $this.uploadCont
+            .find('label')
+            .text('Выберите файл')
+            .prepend('<span class="glyphicon glyphicon-folder-open"></span>');
+        $this.uploadCont.append('<input type="file" name="upload-file" id="uploadInput" />');
+        $this.uploadCont.find('input').bind('change', this.uploadFile);
     }
 
     this.addFile = function(response) {

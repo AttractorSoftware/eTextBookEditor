@@ -73,19 +73,6 @@ class WidgetsContext extends BehatContext {
     }
 
     /**
-     * @Given /^Выбираем и загружаем картинку в менеджере файлов$/
-     */
-    public function uploadImage() {
-        $fileManager = eTextBookDriver::getInstance()->getCurrentPage()->find('css', '.file-manager');
-        $uploadButton = $fileManager->find('css', '#uploadInput');
-
-        $uploadButton->attachFile(dirname(__FILE__).'/../../fixtures/img/shoes.png');
-
-        $fileManager->find('css', '#images .list .item')->click();
-        $fileManager->find('css', '#images .player .buttons .select')->click();
-    }
-
-    /**
      * @Then /^Добавляем логическое выражение "([^"]*)" с значение "([^"]*)"$/
      */
     public function addLogicStatement($title, $value) {

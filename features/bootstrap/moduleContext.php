@@ -25,6 +25,14 @@ class ModuleContext extends BehatContext {
     }
 
     /**
+     * @Given /^Создаем учебник со случайным названием$/
+     */
+    public function createRandomBook() {
+        $this->setETextBookTitle(date('d-m-Y-H-i-s'));
+        $this->saveETextBook();
+    }
+
+    /**
      * @When /^Выбираем из выпадающего списка учебник со слагом "([^"]*)"$/
      */
     public function selectViewETextBook($slug) {

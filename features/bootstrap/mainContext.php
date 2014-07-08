@@ -8,6 +8,7 @@ require_once dirname(__FILE__).'/../../vendor/phpunit/phpunit/PHPUnit/Framework/
 require_once "eTextBookContext.php";
 require_once "moduleContext.php";
 require_once "widgetsContext.php";
+require_once "fileManagerContext.php";
 
 /**
  * Features context.
@@ -17,6 +18,7 @@ class FeatureContext extends BehatContext {
     public function __construct(array $parameters) {
         $this->useContext('moduleContext', new ModuleContext());
         $this->useContext('widgetsContext', new WidgetsContext());
+        $this->useContext('fileManagerContext', new FileManagerContext());
     }
 
     /**
@@ -38,5 +40,12 @@ class FeatureContext extends BehatContext {
      */
     public function closeBrowser() {
         eTextBookDriver::getInstance()->closeBrowser();
+    }
+
+    /**
+     * @Given /^Ждем "([^"]*)" секунд$/
+     */
+    public function wait($seconds) {
+        sleep($seconds);
     }
 }
