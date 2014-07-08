@@ -39,6 +39,20 @@ var eTextBookUtils = function() {
     this.firstZero = function(value) {
         return value > 9 ? value : '0' + value;
     }
+
+    this.markBackgroundImage = function(target) {
+        var imageSrc = $(target).css('backgroundImage');
+        imageSrc = imageSrc.substr(5, imageSrc.length - 7);
+        var image = new Image();
+        $(image).bind('load', function() {
+            if($(this).prop('width') > $(this).prop('height')) {
+                $(target).addClass('image-wide');
+            } else {
+                $(target).addClass('image-tall');
+            }
+        });
+        image.src = imageSrc;
+    }
 }
 
 App.eTextBookUtils = new eTextBookUtils();

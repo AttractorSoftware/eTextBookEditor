@@ -93,6 +93,10 @@ var eTextBookWidgetImageDescription = eTextBookWidget.extend({
             }
         });
 
+        for(var i = 0; i < this.contentContainer.find('image-view').length; i++) {
+            App.eTextBookUtils.markBackgroundImage(this.contentContainer.find('image-view')[i]);
+        }
+
     }
 
     ,generateSelect: function(count, answer) {

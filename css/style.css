@@ -761,3 +761,9 @@ image-description {
         color: #000; }
   .e-text-book-viewer .check-endings .endings-list {
     display: none; }
+
+.image-tall {
+  background-size: auto 100% !important; }
+
+.image-wide {
+  background-size: 100% auto !important; }
