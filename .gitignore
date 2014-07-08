@@ -1,8 +1,10 @@
 .idea/
-books/
+books/*
 vendor/
-content/
-tmp/
+content/css/*
+content/img/*
+content/js/*
+tmp/*
 css/main-style.css
 css/main-style.min.css
 template/css/main-style.css
