@@ -1,6 +1,5 @@
 package com.example.ebook;
 
-import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 
 /**
@@ -13,24 +12,10 @@ import android.test.ActivityInstrumentationTestCase2;
  * -e class com.example.ebook.MyActivityTest \
  * com.example.ebook.tests/android.test.InstrumentationTestRunner
  */
-public class MyActivityTest extends ActivityInstrumentationTestCase2<BookListActivity> {
-
-    Activity activity;
+public class MyActivityTest extends ActivityInstrumentationTestCase2<MyActivity> {
 
     public MyActivityTest() {
-        super("com.example.ebook", BookListActivity.class);
-    }
-
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-        activity = getActivity();
-
-
-    }
-
-    public void testActivity() {
-        assertNotNull(activity);
+        super("com.example.ebook", MyActivity.class);
     }
 
 }
