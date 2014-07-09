@@ -62,6 +62,15 @@ class FileManagerContext extends BehatContext {
     }
 
     /**
+     * @Given /^Выбираем последнее аудио из списка в менеджере файлов$/
+     */
+    public function selectFirstAudioFromFileManager() {
+        $lastImage = end($this->getManager()->findAll('css', '#audios .list .item'));
+        $lastImage->click();
+        $this->getManager()->find('css', '#audios .player .buttons .select')->click();
+    }
+
+    /**
      * @Given /^Переходим во вкладку с ссылкой "([^"]*)"$/
      */
     public function setVideoTab($tabHref) {

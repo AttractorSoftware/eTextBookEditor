@@ -187,4 +187,20 @@ class WidgetsContext extends BehatContext {
         $desktop->find('css', 'video-description textarea')->setValue($text);
     }
 
+    /**
+     * @Given /^Кликаем по кнопке добавить аудио$/
+     */
+    public function addAudioButtonClick() {
+        $desktop = eTextBookDriver::getInstance()->getCurrentPage()->find('css', '.desktop');
+        $desktop->find('css', 'audio-list .add-audio')->click();
+    }
+
+    /**
+     * @Given /^Указываем текст для аудио "([^"]*)"$/
+     */
+    public function setTextForAudio($text) {
+        $desktop = eTextBookDriver::getInstance()->getCurrentPage()->find('css', '.desktop');
+        $desktop->find('css', 'audio-description textarea')->setValue($text);
+    }
+
 }
