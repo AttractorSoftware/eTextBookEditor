@@ -1,2 +1,6 @@
 .idea/
 out/
+bin/*
+gen/*
+tests/bin/*
+tests/gen/*
