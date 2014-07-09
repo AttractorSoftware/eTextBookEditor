@@ -12,5 +12,5 @@
 /home/ashedrin/devel/ebook/android-reader/bin/res/drawable-xhdpi/ic_launcher.png \
 /home/ashedrin/devel/ebook/android-reader/assets/config.cfg \
 /home/ashedrin/devel/ebook/android-reader/assets/books \
-/home/ashedrin/devel/ebook/android-reader/assets/books/uchebnik-s-video-failom.etb \
+/home/ashedrin/devel/ebook/android-reader/assets/books/uchebnik-kirgizskogo-yazika-dlya-7-go-klassa.etb \
 /home/ashedrin/devel/ebook/android-reader/bin/AndroidManifest.xml \
