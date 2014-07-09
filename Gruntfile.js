@@ -19,6 +19,7 @@ module.exports = function (grunt) {
                     , 'js/lib/underscore-min.js'
                     , 'js/lib/backbone-min.js'
                     , 'js/app.js'
+                    , 'js/eTextBook/utils.js'
                     , 'js/eTextBook/widget.js'
                     , 'js/eTextBook/widgetRepository.js'
                     , 'js/eTextBook/widget/*.js'
@@ -66,5 +67,6 @@ module.exports = function (grunt) {
     require('time-grunt')(grunt);
 
     grunt.registerTask('default', ['newer:concat', 'newer:concat_css', 'newer:cssmin', 'newer:uglify']);
+    grunt.registerTask('full', ['concat', 'concat_css', 'cssmin', 'uglify']);
 
 };
