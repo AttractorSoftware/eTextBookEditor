@@ -2,7 +2,12 @@ html, body {
   height: 100%;
 }
 
-body { padding: 50px 0 0 0; }
+body {
+  padding: 50px 0 0 0;
+  &.without-padding {
+    padding: 0;
+  }
+}
 
 
 .container { height: 100%; }
@@ -653,6 +658,19 @@ body { padding: 50px 0 0 0; }
         padding: 10px 10% 0 10%;
       }
     }
+  }
+}
+
+.book-list {
+  a { color: #333; }
+  li { margin: 0 0 5px 0; }
+  span { margin: 0 3px 0 0; }
+}
+
+.breadcrumb {
+  .glyphicon {
+    color: #245269;
+    text-shadow: 1px 1px 0 #fff;
   }
 }
 

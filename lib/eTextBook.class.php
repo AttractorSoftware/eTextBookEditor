@@ -1,5 +1,7 @@
 <?php
 
+    include_once('Util.class.php');
+
     class eTextBook {
 
         private $filePath;
@@ -141,6 +143,71 @@
 
         public function getAudios() {
             return $this->audios;
+        }
+
+        public static function create($data) {
+
+            $slug = Util::slugGenerate($data['title']);
+
+            $rootDir = $tempDir = Util::getRootDir() . "/books/" . $slug;
+            $tmpDir = Util::getRootDir() . "/tmp/" . $slug;
+            mkdir($rootDir);
+            $rootDir .= "/" . $slug;
+
+            $templateDir = Util::getRootDir() . "/template";
+            $cssDir = $rootDir . '/css';
+            $fontsDir = $rootDir . '/fonts';
+            $jsDir = $rootDir . '/js';
+            $imgDir = $rootDir . '/img';
+            $contentDir = $rootDir . '/content';
+            $videoContentDir = $contentDir . '/video';
+            $audioContentDir = $contentDir . '/audio';
+            $imgContentDir = $contentDir . '/img';
+            $infoFilePath = $rootDir . '/book.info';
+            $indexFilePath = $rootDir . '/index.html';
+
+            mkdir($rootDir);
+            mkdir($cssDir);
+            mkdir($jsDir);
+            mkdir($fontsDir);
+            mkdir($contentDir);
+            mkdir($videoContentDir);
+            mkdir($audioContentDir);
+            mkdir($imgContentDir);
+
+            Util::copyFilesFromDirectory($templateDir . "/css", $cssDir);
+            Util::copyFilesFromDirectory($templateDir . "/js", $jsDir);
+            Util::copyFilesFromDirectory($templateDir . "/fonts", $fontsDir);
+            Util::copyFilesFromDirectory($templateDir . "/img", $imgDir);
+
+            if(is_dir($tmpDir)) {
+                Util::copyFilesFromDirectory($tmpDir . '/content/img', $imgContentDir);
+                Util::copyFilesFromDirectory($tmpDir . '/content/audio', $audioContentDir);
+                Util::copyFilesFromDirectory($tmpDir . '/content/video', $videoContentDir);
+            }
+
+            file_put_contents($infoFilePath, "title =+= " . $data['title']);
+
+            $indexContent = file_get_contents($templateDir . "/index.html");
+
+            $content = '<e-text-book></e-text-book>';
+
+            file_put_contents(
+                $indexFilePath,
+                str_replace(
+                    array("-- title --", "-- content --"),
+                    array($data['title'], $content),
+                    $indexContent
+                )
+            );
+
+            if(is_file($rootDir . "/../../" . $slug . ".etb")) {
+                unlink($rootDir . "/../../" . $slug . ".etb");
+            }
+
+            Util::zip($rootDir . "/../", $rootDir . "/../../" . $slug . ".etb");
+            Util::removeDir($tempDir);
+
         }
 
     }

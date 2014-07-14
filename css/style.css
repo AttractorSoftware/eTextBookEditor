@@ -3,6 +3,8 @@ html, body {
 
 body {
   padding: 50px 0 0 0; }
+  body.without-padding {
+    padding: 0; }
 
 .container {
   height: 100%; }
@@ -528,6 +530,17 @@ body {
         float: left;
         width: 100%;
         padding: 10px 10% 0 10%; }
+
+.book-list a {
+  color: #333; }
+.book-list li {
+  margin: 0 0 5px 0; }
+.book-list span {
+  margin: 0 3px 0 0; }
+
+.breadcrumb .glyphicon {
+  color: #245269;
+  text-shadow: 1px 1px 0 #fff; }
 
 e-text-book-editor .display e-text-book, .e-text-book-viewer e-text-book {
   float: left;

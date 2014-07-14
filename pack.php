@@ -39,13 +39,7 @@
 
     if(is_dir($tmpDir)) {
         Util::copyFilesFromDirectory($tmpDir . '/content/img', $imgContentDir);
-    }
-
-    if(is_dir($tmpDir)) {
         Util::copyFilesFromDirectory($tmpDir . '/content/audio', $audioContentDir);
-    }
-
-    if(is_dir($tmpDir)) {
         Util::copyFilesFromDirectory($tmpDir . '/content/video', $videoContentDir);
     }
 

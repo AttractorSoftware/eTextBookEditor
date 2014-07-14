@@ -1,7 +1,6 @@
 <?php
 
     require_once "lib/eTextBook.class.php";
-    require_once "lib/Util.class.php";
 
     $bookContent = "";
     $bookTitle = "";
