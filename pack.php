@@ -2,9 +2,8 @@
 
     require_once "lib/Util.class.php";
 
-    $title = $_POST['title'];
     $content = $_POST['content'];
-    $slug = Util::slugGenerate($title);
+    $slug = $_POST['book'];
 
     $rootDir = $tempDir = dirname(__FILE__)."/books/" . $slug;
     $tmpDir = dirname(__FILE__)."/tmp/" . $slug;
@@ -16,12 +15,13 @@
     $fontsDir = $rootDir . '/fonts';
     $jsDir = $rootDir . '/js';
     $imgDir = $rootDir . '/img';
+    $modulesDir = $rootDir . '/modules';
     $contentDir = $rootDir . '/content';
     $videoContentDir = $contentDir . '/video';
     $audioContentDir = $contentDir . '/audio';
     $imgContentDir = $contentDir . '/img';
     $infoFilePath = $rootDir . '/book.info';
-    $indexFilePath = $rootDir . '/index.html';
+    $moduleFilePath = $rootDir . '/modules/' . $_POST['module'];
 
     mkdir($rootDir);
     mkdir($cssDir);
@@ -31,6 +31,7 @@
     mkdir($videoContentDir);
     mkdir($audioContentDir);
     mkdir($imgContentDir);
+    mkdir($modulesDir);
 
     Util::copyFilesFromDirectory($templateDir . "/css", $cssDir);
     Util::copyFilesFromDirectory($templateDir . "/js", $jsDir);
@@ -43,17 +44,15 @@
         Util::copyFilesFromDirectory($tmpDir . '/content/video', $videoContentDir);
     }
 
-    file_put_contents($infoFilePath, "title =+= " . $title);
-
     $indexContent = file_get_contents($templateDir . "/index.html");
 
     $content = str_replace('/tmp/' . $slug . '/', '', $content);
 
     file_put_contents(
-        $indexFilePath,
+        $moduleFilePath,
         str_replace(
             array("-- title --", "-- content --"),
-            array($title, $content),
+            array('', $content),
             $indexContent
         )
     );

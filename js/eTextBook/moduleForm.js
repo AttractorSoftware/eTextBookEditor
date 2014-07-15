@@ -1,14 +1,14 @@
-var bookForm = function() {
+var moduleForm = function() {
 
     var $this = this;
-    this.modal = $('#bookFormModal');
+    this.modal = $('#moduleFormModal');
     this.alertBox = this.modal.find('#alertBox');
-    this.action = '/create-book.php';
+    this.action = '/create-module.php';
 
     this.init = function() {
         this.modal.on('hidden.bs.modal', function (e) {
             $this.scope.$apply(function() {
-                $this.scope.book = {};
+                $this.scope.module = {};
             });
             $this.alertHide();
             $this.modal.find('.modal-footer .btn-primary').show();
@@ -36,20 +36,15 @@ var bookForm = function() {
 
         $this.scope = $scope;
 
-        $scope.submit = function(book) {
+        $scope.submit = function(module) {
             $this.wait();
-            $.post($this.action, { book: book }, function(response) {
+            module.bookSlug = $this.modal.find('form').attr('book-slug');
+            $.post($this.action, { module: module }, function(response) {
                 if(response.status == 'failed') {
                     $this.failed(response.reason);
                     $this.modal.find('.modal-footer .btn-primary').show();
                 } else {
-                    $this.success('Учебник успешно создан');
-                    $('.book-list').append(
-                        '<li>' +
-                            '<span class="glyphicon glyphicon-book"></span>' +
-                            '<a href="/editor.php?book=' + response.data.slug + '.etb"> ' + book.title + '</a>' +
-                        '</li>'
-                    );
+                    $this.success('Модуль успешно создан');
                 }
             });
         }
@@ -63,6 +58,6 @@ var bookForm = function() {
 }
 
 
-App.bookForm = new bookForm();
+App.moduleForm = new moduleForm();
 
 

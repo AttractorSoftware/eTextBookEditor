@@ -1,11 +1,11 @@
 var eTextBookEditor = Backbone.Model.extend({
 
     initialize: function() {
+        var $this = this;
         this.desktop = this.get('cont').find('.desktop');
         this.display = this.get('cont').find('.display');
         this.root = this.getRoot();
         this.modules = [];
-        this.root.prepend(this.generateAddModuleButton());
         this.clearViewElements(this.desktop);
         this.updateDisplay();
         this.synchronizeScrolls();
@@ -72,7 +72,7 @@ var eTextBookEditor = Backbone.Model.extend({
         module.startEdit();
     }
 
-    ,updateDisplay: function() {
+    ,updateDisplay: function(missSave) {
         var book = $(this.desktop.html());
 
         book = this.clearEditElements(book);
@@ -90,6 +90,21 @@ var eTextBookEditor = Backbone.Model.extend({
                 widget.viewActivate();
             }
         }
+        if(missSave) {
+            this.save();
+        }
+
+    }
+
+    ,save: function() {
+        var $this = this;
+        $.post('/pack.php', {
+            book: this.get('cont').attr('book')
+            ,module: this.get('cont').attr('module')
+            ,content: this.getContent()
+        }, function(response) {
+            $this.updateDisplay(true);
+        });
     }
 
     ,clearEditElements: function(html) {

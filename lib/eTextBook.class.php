@@ -22,7 +22,8 @@
             if($filePath) {
                 if($this->extractData()) {
                     $this->parseSlug();
-                    $this->parseContent();
+                    $this->modulesPath = $this->tmpDir . $this->getSlug() .'/modules/';
+                    $this->content = $this->parseBookContent($this->tmpDir . $this->slug . '/index.html');
                     $this->parseTitle();
                     $this->parseImages();
                     $this->parseAudio();
@@ -78,15 +79,14 @@
             $this->slug = $bookSlug[0];
         }
 
-        public function parseContent() {
-            $bookContent = file_get_contents($this->tmpDir . $this->slug . '/index.html');
+        public function parseBookContent($filePath) {
+            $bookContent = file_get_contents($filePath);
             $bookContent = explode('<e-text-book>', $bookContent);
             $bookContent = explode('</e-text-book>', $bookContent[1]);
             $bookContent = $bookContent[0];
             $bookContent = str_replace('content/', '/tmp/' . $this->slug . '/content/', $bookContent);
             $bookContent = "<e-text-book>" . $bookContent . "</e-text-book>";
-
-            $this->content = $bookContent;
+            return $bookContent;
         }
 
         public function parseTitle() {
@@ -145,6 +145,47 @@
             return $this->audios;
         }
 
+        public function getModules() {
+            $modules = Util::fileList(Util::getRootDir() . 'tmp/' . $this->getSlug() . '/modules');
+            sort($modules);
+            return $modules;
+        }
+
+        public function createModule($data) {
+
+            $slug = Util::slugGenerate($data['title']);
+
+            $indexContent = file_get_contents(Util::getRootDir() . "template/index.html");
+
+            $content = '<e-text-book>
+                <module>
+                    <module-title>
+                        <edit-element class="module-element">Название модуля</edit-element>
+                        <view-element class="module-element">' . $data['title'] . '</view-element>
+                    </module-title>
+                    <module-background-image>&nbsp;</module-background-image>
+                    <module-questions>
+                        <edit-element class="module-element">Ключевые вопросы модуля</edit-element>
+                        <view-element class="module-element"></view-element>
+                    </module-questions>
+                    <module-description>
+                        <edit-element class="module-element">Описание модуля</edit-element>
+                        <view-element class="module-element"></view-element>
+                    </module-description>
+                    <blocks></blocks>
+                </module>
+            </e-text-book>';
+
+            file_put_contents(
+                Util::getRootDir() . 'tmp/' . $this->getSlug() . '/modules/' . $slug . '.html',
+                str_replace(
+                    array("-- title --", "-- content --"),
+                    array($data['title'], $content),
+                    $indexContent
+                )
+            );
+        }
+
         public static function create($data) {
 
             $slug = Util::slugGenerate($data['title']);
@@ -159,6 +200,7 @@
             $fontsDir = $rootDir . '/fonts';
             $jsDir = $rootDir . '/js';
             $imgDir = $rootDir . '/img';
+            $modulesDir = $rootDir . '/modules';
             $contentDir = $rootDir . '/content';
             $videoContentDir = $contentDir . '/video';
             $audioContentDir = $contentDir . '/audio';
@@ -169,11 +211,13 @@
             mkdir($rootDir);
             mkdir($cssDir);
             mkdir($jsDir);
+            mkdir($imgDir);
             mkdir($fontsDir);
             mkdir($contentDir);
             mkdir($videoContentDir);
             mkdir($audioContentDir);
             mkdir($imgContentDir);
+            mkdir($modulesDir);
 
             Util::copyFilesFromDirectory($templateDir . "/css", $cssDir);
             Util::copyFilesFromDirectory($templateDir . "/js", $jsDir);
@@ -208,6 +252,22 @@
             Util::zip($rootDir . "/../", $rootDir . "/../../" . $slug . ".etb");
             Util::removeDir($tempDir);
 
+        }
+
+        public function getFirstModuleContent() {
+
+            $modules = Util::fileList($this->modulesPath);
+
+            if(count($modules)) {
+                sort($modules);
+                $content = $this->getModuleContent($modules[0]);
+            } else { $content = ''; }
+
+            return $content;
+        }
+
+        public function getModuleContent($filePath) {
+            return $this->parseBookContent($this->modulesPath . $filePath);
         }
 
     }

@@ -5,6 +5,12 @@
     $bookTitle = "";
     if(isset($_GET['book'])) {
         $viewBook = new eTextBook($_GET['book']);
+        if(isset($_GET['module'])) {
+            $currentModule = $_GET['module'];
+            $viewModuleContent = $viewBook->getModuleContent($currentModule);
+        } else {
+            $viewModuleContent = $viewBook->getFirstModuleContent();
+        }
     }
 ?>
 
@@ -48,8 +54,75 @@
             </li>
         </ol>
 
-        <div class="e-text-book-editor">
-            <div class="desktop"><?php echo isset($viewBook) ? $viewBook->getContent() : ''; ?></div>
+        <ol class="breadcrumb">
+            <?php
+                $modules = $viewBook->getModules();
+                foreach($modules as $module):
+                    $currentModule = isset($currentModule) ? $currentModule : $modules[0];
+            ?>
+                <?php if($module != $currentModule): ?>
+                    <li>
+                        <a href="/editor.php?book=<?php echo $viewBook->getSlug()?>.etb&module=<?php echo $module; ?>">
+                            <?php echo $module; ?>
+                        </a>
+                    </li>
+                <?php else: ?>
+                    <li class="active">
+                        <?php echo $module; ?>
+                    </li>
+                <?php endif; ?>
+            <?php endforeach; ?>
+            <li><a href="#" id="addModuleBtn" data-toggle="modal" data-target="#moduleFormModal">Добавить модуль</a></li>
+        </ol>
+
+        <div class="modal fade" id="moduleFormModal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        <h4 class="modal-title">Новый модуль</h4>
+                    </div>
+                    <form ng-controller="App.moduleForm.controller" name="moduleForm" book-slug="<?php echo $viewBook->getSlug(); ?>">
+                        <div class="modal-body">
+                            <div id="alertBox" style="display: none" class="alert alert-success" role="alert">QQQ</div>
+                            <div class="form-group">
+                                <label for="moduleTitle">
+                                    Название модуля:
+                                        <span class="label label-danger" ng-show="moduleForm.title.$error.required">
+                                            обязательно для заполнения
+                                        </span>
+                                </label>
+                                <input
+                                    id="moduleTitle"
+                                    class="form-control"
+                                    type="text"
+                                    name="title"
+                                    ng-model="module.title"
+                                    required />
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                <span class="glyphicon glyphicon-remove"></span>
+                                Закрыть
+                            </button>
+                            <button type="button" class="btn btn-primary" ng-click="submit(module)" ng-disabled="moduleForm.$invalid || isUnchanged(book)">
+                                <span class="glyphicon glyphicon-ok"></span>
+                                Добавить модуль
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="e-text-book-editor" book="<?php echo $viewBook->getSlug(); ?>" module="<?php echo $currentModule; ?>">
+            <div class="desktop">
+                <?php echo isset($viewBook) ? $viewModuleContent : ''; ?>
+            </div>
             <div class="display e-text-book-viewer"></div>
         </div>
 
@@ -62,5 +135,7 @@
 
 <link rel="stylesheet" type="text/css" href="css/main-style.min.css" />
 <script src="js/script.min.js"></script>
+<script src="js/lib/angular.min.js"></script>
+<script src="js/eTextBook/moduleForm.js"></script>
 </body>
 </html>

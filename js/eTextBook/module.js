@@ -31,7 +31,6 @@ var eTextBookModule = Backbone.Model.extend({
 
         this.get('cont').prepend(App.eTextBookTemplate.getTemplate('moduleControlPanel'));
 
-        this.get('cont').append(App.eTextBookEditor.generateAddModuleButton());
         this.get('cont').find('blocks').before(this.generateAddBlockButton());
 
         this.get('cont').find('control-panel.module-panel .edit').bind('click', function() {
@@ -104,12 +103,18 @@ var eTextBookModule = Backbone.Model.extend({
             } else { $(this).addClass('open'); }
         });
 
-        button.find('a.add-block').bind('click', function() {
+        button.find('.add-block').popover();
+        button.find('.add-block').bind('click', function() {
             $this.addBlock(button);
+            $(this).parent().parent().removeClass('open');
+            return false;
         });
 
-        button.find('a.add-rule').bind('click', function() {
+        button.find('.add-rule').popover();
+        button.find('.add-rule').bind('click', function() {
             $this.addRule(button);
+            $(this).parent().parent().removeClass('open');
+            return false;
         });
 
         return button;
