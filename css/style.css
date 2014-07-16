@@ -40,35 +40,37 @@ body {
     .e-text-book-editor .desktop e-text-book add-module-button, .e-text-book-editor .desktop e-text-book add-block-button {
       float: left;
       width: 100%;
-      height: 22px;
+      height: 1px;
       overflow: hidden;
-      text-align: center;
+      background: url("/img/add-button.png") no-repeat center bottom;
+      padding: 0 0 10px;
       cursor: pointer;
       transition: all 1s ease;
       -webkit-transition: all 1s ease;
       -moz-transition: all 1s ease; }
       .e-text-book-editor .desktop e-text-book add-module-button.open, .e-text-book-editor .desktop e-text-book add-block-button.open {
-        overflow: visible; }
+        height: 50px; }
         .e-text-book-editor .desktop e-text-book add-module-button.open wrap, .e-text-book-editor .desktop e-text-book add-block-button.open wrap {
           transition: all 1s ease;
           -webkit-transition: all 1s ease;
           -moz-transition: all 1s ease;
           margin: 0; }
-        .e-text-book-editor .desktop e-text-book add-module-button.open .trigger, .e-text-book-editor .desktop e-text-book add-block-button.open .trigger {
-          display: none; }
       .e-text-book-editor .desktop e-text-book add-module-button wrap, .e-text-book-editor .desktop e-text-book add-block-button wrap {
         float: left;
         width: 100%;
         padding: 0 0 0 0;
-        margin: -25px 0 0 0; }
-    .e-text-book-editor .desktop e-text-book add-block-button a {
-      font-size: 12px;
-      margin: 0 5px 0 0;
-      padding: 0 0 0 15px; }
-    .e-text-book-editor .desktop e-text-book block add-block-button, .e-text-book-editor .desktop e-text-book rule add-block-button {
+        margin: -20px 0 0 0; }
+    .e-text-book-editor .desktop e-text-book add-block-button {
+      background-size: 30px auto;
+      margin: 0 0 20px; }
+      .e-text-book-editor .desktop e-text-book add-block-button a {
+        font-size: 12px;
+        margin: 0 5px 0 0;
+        padding: 0 0 0 15px; }
+    .e-text-book-editor .desktop e-text-book block add-block-button {
       position: relative;
-      margin: -50px 0 0 0;
-      top: 80px; }
+      margin: -20px 0 0 0;
+      top: 40px; }
     .e-text-book-editor .desktop e-text-book control-panel {
       float: right;
       height: 20px;
@@ -146,12 +148,11 @@ body {
           width: 100%;
           border: solid 1px #eee;
           padding: 30px 15px 15px 15px;
-          margin: 0 0 52px 0; }
+          margin: 0 0 30px 0; }
           .e-text-book-editor .desktop e-text-book module blocks block block-headline, .e-text-book-editor .desktop e-text-book module blocks rule block-headline {
             float: left;
             width: 100%; }
             .e-text-book-editor .desktop e-text-book module blocks block block-headline block-index, .e-text-book-editor .desktop e-text-book module blocks rule block-headline block-index {
-              display: none;
               float: left; }
             .e-text-book-editor .desktop e-text-book module blocks block block-headline block-categories, .e-text-book-editor .desktop e-text-book module blocks rule block-headline block-categories {
               float: left; }
@@ -169,6 +170,10 @@ body {
               float: left;
               width: 100%;
               margin: 10px 0 0 0; }
+              .e-text-book-editor .desktop e-text-book module blocks block block-content widget label, .e-text-book-editor .desktop e-text-book module blocks rule block-content widget label {
+                width: 100px;
+                float: left;
+                display: none; }
               .e-text-book-editor .desktop e-text-book module blocks block block-content widget .widget-selector, .e-text-book-editor .desktop e-text-book module blocks rule block-content widget .widget-selector {
                 float: left;
                 display: none; }
@@ -176,13 +181,11 @@ body {
                 float: left;
                 width: 100%;
                 margin: 10px 0 0 0; }
-          .e-text-book-editor .desktop e-text-book module blocks block[editable="1"] edit-element, .e-text-book-editor .desktop e-text-book module blocks rule[editable="1"] edit-element {
+          .e-text-book-editor .desktop e-text-book module blocks block[editable="1"] edit-element, .e-text-book-editor .desktop e-text-book module blocks block[editable="1"] control-panel, .e-text-book-editor .desktop e-text-book module blocks rule[editable="1"] edit-element, .e-text-book-editor .desktop e-text-book module blocks rule[editable="1"] control-panel {
             display: block; }
           .e-text-book-editor .desktop e-text-book module blocks block[editable="1"] view-element, .e-text-book-editor .desktop e-text-book module blocks rule[editable="1"] view-element {
             display: none; }
-          .e-text-book-editor .desktop e-text-book module blocks block[editable="1"] control-panel, .e-text-book-editor .desktop e-text-book module blocks rule[editable="1"] control-panel {
-            display: block; }
-          .e-text-book-editor .desktop e-text-book module blocks block[editable="1"] block-content widget .widget-selector, .e-text-book-editor .desktop e-text-book module blocks rule[editable="1"] block-content widget .widget-selector {
+          .e-text-book-editor .desktop e-text-book module blocks block[editable="1"] block-content widget .widget-selector, .e-text-book-editor .desktop e-text-book module blocks block[editable="1"] block-content widget label, .e-text-book-editor .desktop e-text-book module blocks rule[editable="1"] block-content widget .widget-selector, .e-text-book-editor .desktop e-text-book module blocks rule[editable="1"] block-content widget label {
             display: block; }
           .e-text-book-editor .desktop e-text-book module blocks block edit-element, .e-text-book-editor .desktop e-text-book module blocks rule edit-element {
             display: none; }
@@ -277,6 +280,37 @@ body {
         cursor: pointer;
         float: left;
         margin: 7px 0 0 5px; }
+    .e-text-book-editor .desktop e-text-book .test-widget {
+      float: left;
+      width: 100%; }
+      .e-text-book-editor .desktop e-text-book .test-widget .glyphicon {
+        float: left;
+        width: 17px;
+        padding: 5px 2px;
+        height: inherit;
+        cursor: pointer; }
+      .e-text-book-editor .desktop e-text-book .test-widget edit-element input[type=text] {
+        float: left;
+        width: calc(100% - 20px); }
+      .e-text-book-editor .desktop e-text-book .test-widget .question {
+        float: none;
+        width: 100%;
+        height: 30px;
+        clear: both;
+        margin-bottom: 10px; }
+      .e-text-book-editor .desktop e-text-book .test-widget .choices {
+        width: 100%;
+        display: table; }
+        .e-text-book-editor .desktop e-text-book .test-widget .choices label {
+          width: 100% !important;
+          margin: 10px 0 2px; }
+        .e-text-book-editor .desktop e-text-book .test-widget .choices edit-element {
+          float: left;
+          max-width: 100%;
+          min-width: 240px;
+          margin-bottom: 10px; }
+          .e-text-book-editor .desktop e-text-book .test-widget .choices edit-element input[type="text"] {
+            width: calc(100% - 17px) !important; }
     .e-text-book-editor .desktop e-text-book translate-comparative {
       float: left;
       width: 100%; }
@@ -423,7 +457,7 @@ body {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   background: rgba(0, 0, 0, 0.3); }
@@ -540,9 +574,6 @@ body {
 .breadcrumb .glyphicon {
   color: #245269;
   text-shadow: 1px 1px 0 #fff; }
-
-.popover-text {
-  font-size: 12px; }
 
 e-text-book-editor .display e-text-book, .e-text-book-viewer e-text-book {
   float: left;

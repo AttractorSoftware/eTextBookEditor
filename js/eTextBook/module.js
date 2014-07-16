@@ -17,7 +17,7 @@ var eTextBookModule = Backbone.Model.extend({
                 ,module: this
             }));
         }
-        for(var i = 0; i < this.get('cont').find('blocks rule').length; i++) {
+        for(i = 0; i < this.get('cont').find('blocks rule').length; i++) {
             this.blocks.push(new eTextBookRule({
                 cont: $(this.get('cont').find('blocks rule')[i])
                 ,module: this

@@ -11,7 +11,7 @@ var eTextBookUtils = function() {
             }
         }
         return result;
-    }
+    };
 
     this.parseTextBlockToHtml = function(text) {
         var strings = text.split("\n");
@@ -24,7 +24,7 @@ var eTextBookUtils = function() {
             }
         }
         return result;
-    }
+    };
 
     this.generateUID = function() {
         var date = new Date();
@@ -34,15 +34,15 @@ var eTextBookUtils = function() {
                 this.firstZero(date.getHours()) +
                 this.firstZero(date.getMinutes()) +
                 this.firstZero(date.getSeconds());
-    }
+    };
 
     this.firstZero = function(value) {
         return value > 9 ? value : '0' + value;
-    }
+    };
 
     this.markBackgroundImage = function(target) {
         var imageSrc = $(target).css('backgroundImage');
-        imageSrc = imageSrc.substr(5, imageSrc.length - 7);
+        imageSrc = imageSrc.substr(4, imageSrc.length - 5);
         var image = new Image();
         $(image).bind('load', function() {
             if($(this).prop('width') > $(this).prop('height')) {
@@ -53,6 +53,6 @@ var eTextBookUtils = function() {
         });
         image.src = imageSrc;
     }
-}
+};
 
 App.eTextBookUtils = new eTextBookUtils();

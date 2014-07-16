@@ -18,3 +18,4 @@ js/script.min.js
 template/js/script.js
 template/js/script.min.js
 node_modules/
+.sass-cache/

@@ -9,7 +9,6 @@ body {
   }
 }
 
-
 .container { height: 100%; }
 
 .e-text-book-editor {
@@ -51,37 +50,39 @@ body {
       add-module-button, add-block-button {
         float: left;
         width: 100%;
-        height: 22px;
+        height: 1px;
         overflow: hidden;
-        text-align: center;
+        background: url('/img/add-button.png') no-repeat center bottom;
+        padding: 0 0 10px;
         cursor: pointer;
         transition: all 1s ease; -webkit-transition: all 1s ease; -moz-transition: all 1s ease;
         &.open {
-          overflow: visible;
+          height: 50px;
           wrap {
             transition: all 1s ease; -webkit-transition: all 1s ease; -moz-transition: all 1s ease;
             margin: 0;
           }
-          .trigger { display: none; }
         }
         wrap {
           float: left;
           width: 100%;
           padding: 0 0 0 0;
-          margin: -25px 0 0 0;
+          margin: -20px 0 0 0;
         }
       }
       add-block-button {
+        background-size: 30px auto;
+        margin: 0 0 20px;
         a {
           font-size: 12px;
           margin: 0 5px 0 0;
           padding: 0 0 0 15px;
         }
       }
-      block add-block-button, rule add-block-button {
+      block add-block-button {
         position: relative;
-        margin: -50px 0 0 0;
-        top: 80px;
+        margin: -20px 0 0 0;
+        top: 40px;
       }
       control-panel {
         float: right;
@@ -171,12 +172,11 @@ body {
             width: 100%;
             border: solid 1px #eee;
             padding: 30px 15px 15px 15px;
-            margin: 0 0 52px 0;
+            margin: 0 0 30px 0;
             block-headline {
               float: left;
               width: 100%;
               block-index {
-                display: none;
                 float: left;
               }
               block-categories {
@@ -199,6 +199,10 @@ body {
                 float: left;
                 width: 100%;
                 margin: 10px 0 0 0;
+                label{
+                  width: 100px;
+                  float: left;
+                  display: none;}
                 .widget-selector {
                   float: left;
                   display: none;
@@ -211,12 +215,11 @@ body {
               }
             }
             &[editable="1"] {
-              edit-element { display: block; }
+              edit-element ,control-panel { display: block; }
               view-element { display: none; }
-              control-panel { display: block; }
               block-content {
                 widget {
-                  .widget-selector {
+                  .widget-selector, label {
                     display: block;
                   }
                 }
@@ -346,6 +349,48 @@ body {
             cursor: pointer;
             float: left;
             margin: 7px 0 0 5px;
+          }
+        }
+      }
+
+      .test-widget {
+        float: left;
+        width: 100%;
+        .glyphicon {
+          float: left;
+          width: 17px;
+          padding: 5px 2px;
+          height: inherit;
+          cursor: pointer;
+        }
+        edit-element {
+          input[type=text] {
+            float: left;
+            width: calc(100% - 20px);
+          }
+        }
+        .question {
+          float: none;
+          width: 100%;
+          height: 30px;
+          clear: both;
+          margin-bottom: 10px;
+        }
+        .choices {
+          width: 100%;
+          display: table;
+          label{
+            width: 100% !important;
+            margin: 10px 0 2px;
+          }
+          edit-element {
+            float: left;
+            max-width: 100%;
+            min-width: 240px;
+            margin-bottom:10px;
+            input[type="text"] {
+              width: calc(100% - 17px) !important;
+            }
           }
         }
       }
@@ -540,7 +585,7 @@ body {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  position: fixed;
+  position: absolute;
   top: 0; left : 0;
   background: rgba(0, 0, 0 , 0.3);
   .nav {
@@ -671,10 +716,6 @@ body {
     color: #245269;
     text-shadow: 1px 1px 0 #fff;
   }
-}
-
-.popover-text {
-  font-size: 12px;
 }
 
 @import '../template/scss/style';
