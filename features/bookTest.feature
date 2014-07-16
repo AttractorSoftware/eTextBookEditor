@@ -1,6 +1,6 @@
 #noinspection CucumberUndefinedStep
 Feature: Создание нового учебника
-  Scenario: Создаем новый учебник
+  Scenario: Создаем новый учебник и проверяем его
     Given Открываем страницу "http://localhost/books.php"
     When  Кликаем по ссылке добавить учебник
     And   Заполняем форму учебника случайными значениями

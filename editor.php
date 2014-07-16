@@ -54,7 +54,7 @@
             </li>
         </ol>
 
-        <ol class="breadcrumb">
+        <ol id="moduleList" class="breadcrumb">
             <?php
                 $modules = $viewBook->getModules();
                 foreach($modules as $module):
@@ -105,11 +105,17 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                            <button id="moduleFormClose" type="button" class="btn btn-default" data-dismiss="modal">
                                 <span class="glyphicon glyphicon-remove"></span>
                                 Закрыть
                             </button>
-                            <button type="button" class="btn btn-primary" ng-click="submit(module)" ng-disabled="moduleForm.$invalid || isUnchanged(book)">
+                            <button
+                                id="moduleFormSubmit"
+                                type="button"
+                                class="btn btn-primary"
+                                ng-click="submit(module)"
+                                ng-disabled="moduleForm.$invalid || isUnchanged(book)"
+                            >
                                 <span class="glyphicon glyphicon-ok"></span>
                                 Добавить модуль
                             </button>

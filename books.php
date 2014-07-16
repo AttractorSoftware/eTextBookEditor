@@ -44,7 +44,12 @@
                 <ul class="list-unstyled book-list">
                     <li>
                         <span class="glyphicon glyphicon-file"></span>
-                        <a href="#" data-toggle="modal" data-target="#bookFormModal">Создать новый учебник</a>
+                        <a
+                            id="addBookButton"
+                            href="#"
+                            data-toggle="modal"
+                            data-target="#bookFormModal"
+                        > Создать новый учебник </a>
 
                         <div class="modal fade" id="bookFormModal" role="dialog">
                             <div class="modal-dialog">
@@ -60,14 +65,14 @@
                                         <div class="modal-body">
                                             <div id="alertBox" style="display: none" class="alert alert-success" role="alert">QQQ</div>
                                             <div class="form-group">
-                                                <label for="newBookTitle">
+                                                <label for="bookTitle">
                                                     Название учебника:
                                                     <span class="label label-danger" ng-show="bookForm.title.$error.required">
                                                         обязательно для заполнения
                                                     </span>
                                                 </label>
                                                 <input
-                                                    id="newBookTitle"
+                                                    id="bookTitle"
                                                     class="form-control"
                                                     type="text"
                                                     name="title"
@@ -76,11 +81,11 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="newBookTitle">
+                                                <label for="bookAuthors">
                                                     Авторы:
                                                 </label>
                                                 <input
-                                                    id="newBookTitle"
+                                                    id="bookAuthors"
                                                     class="form-control"
                                                     type="text"
                                                     ng-model="book.authors"
@@ -88,9 +93,9 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="newBookTitle">Под редакцией:</label>
+                                                <label for="bookEditor">Под редакцией:</label>
                                                 <input
-                                                    id="newBookTitle"
+                                                    id="bookEditor"
                                                     class="form-control"
                                                     type="text"
                                                     name="editor"
@@ -98,9 +103,9 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="newBookTitle">ISBN:</label>
+                                                <label for="bookISBN">ISBN:</label>
                                                 <input
-                                                    id="newBookTitle"
+                                                    id="bookISBN"
                                                     class="form-control"
                                                     type="text"
                                                     name="isbn"
@@ -108,11 +113,17 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                            <button id="bookFormClose" type="button" class="btn btn-default" data-dismiss="modal">
                                                 <span class="glyphicon glyphicon-remove"></span>
                                                 Закрыть
                                             </button>
-                                            <button type="button" class="btn btn-primary" ng-click="submit(book)" ng-disabled="bookForm.$invalid || isUnchanged(book)">
+                                            <button
+                                                id="bookFormSubmit"
+                                                type="button"
+                                                class="btn btn-primary"
+                                                ng-click="submit(book)"
+                                                ng-disabled="bookForm.$invalid || isUnchanged(book)"
+                                            >
                                                 <span class="glyphicon glyphicon-ok"></span>
                                                 Создать учебник
                                             </button>
@@ -122,9 +133,7 @@
                             </div>
                         </div>
                     </li>
-                    <li>
-                        &nbsp;
-                    </li>
+                    <li> &nbsp; </li>
                     <?php foreach($books as $book): ?>
                         <li>
                             <span class="glyphicon glyphicon-book"></span>

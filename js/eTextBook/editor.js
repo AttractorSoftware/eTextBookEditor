@@ -90,7 +90,7 @@ var eTextBookEditor = Backbone.Model.extend({
                 widget.viewActivate();
             }
         }
-        if(missSave) {
+        if(!missSave) {
             this.save();
         }
 

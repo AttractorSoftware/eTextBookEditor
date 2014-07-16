@@ -1,11 +1,12 @@
 <?php
 
 use Behat\Behat\Context\BehatContext;
+use Features\Bootstrap\eTextBookDriver;
 
 require_once dirname(__FILE__).'/../../vendor/phpunit/phpunit/PHPUnit/Autoload.php';
 require_once dirname(__FILE__).'/../../vendor/phpunit/phpunit/PHPUnit/Framework/Assert/Functions.php';
 
-require_once "eTextBookContext.php";
+require_once "eTextBookDriver.php";
 require_once "moduleContext.php";
 require_once "widgetsContext.php";
 require_once "fileManagerContext.php";
