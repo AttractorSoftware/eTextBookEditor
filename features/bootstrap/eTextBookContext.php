@@ -16,6 +16,11 @@ class eTextBookContext extends BehatContext {
         $driver->executeScript('$("'. $cssStringTarget .'").attr({ ' . $attribute . ': "' . $value . '"})');
     }
 
+    public function selectSetValue($cssStringSelect, $value) {
+        $driver = $this->getDriver();
+        $driver->executeScript('$("'. $cssStringSelect .'").val(' . $value . ')');
+    }
+
     public function setVar($variableName, $variableValue) {
         eTextBookDriver::getInstance()->setVar($variableName, $variableValue);
     }

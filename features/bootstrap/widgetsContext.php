@@ -148,6 +148,7 @@ class WidgetsContext extends eTextBookContext {
      */
     public function blockEditOver() {
         $this->findCss('.desktop block control-panel .edit')->click();
+        sleep(1);
     }
 
     /**
@@ -161,6 +162,7 @@ class WidgetsContext extends eTextBookContext {
             if($item->find('css', 'view-element')->getHTML() == $word) {
                 $findItem = $item;
                 $item->find('css', 'select option[value="' . $ending . '"]')->click();
+                break;
             }
         }
 

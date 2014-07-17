@@ -2,6 +2,7 @@
 
 use Behat\Behat\Context\BehatContext;
 use Features\Bootstrap\eTextBookDriver;
+use Features\Bootstrap\eTextBookContext;
 
 require_once dirname(__FILE__).'/../../vendor/phpunit/phpunit/PHPUnit/Autoload.php';
 require_once dirname(__FILE__).'/../../vendor/phpunit/phpunit/PHPUnit/Framework/Assert/Functions.php';
@@ -14,7 +15,7 @@ require_once "fileManagerContext.php";
 /**
  * Features context.
  */
-class FeatureContext extends BehatContext {
+class FeatureContext extends eTextBookContext {
 
     public function __construct(array $parameters) {
         $this->useContext('moduleContext', new ModuleContext());
@@ -34,6 +35,8 @@ class FeatureContext extends BehatContext {
      */
     public function openPage($url) {
         eTextBookDriver::getInstance()->openPage($url);
+        sleep(1);
+        $this->getDriver()->executeScript('window.resizeTo(1300, 1000)');
     }
 
     /**
