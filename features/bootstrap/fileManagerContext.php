@@ -1,6 +1,6 @@
 <?php
 
-use Behat\Behat\Context\BehatContext;
+use Features\Bootstrap\eTextBookContext;
 
 require_once dirname(__FILE__).'/../../vendor/phpunit/phpunit/PHPUnit/Autoload.php';
 require_once dirname(__FILE__).'/../../vendor/phpunit/phpunit/PHPUnit/Framework/Assert/Functions.php';
@@ -9,13 +9,13 @@ require_once dirname(__FILE__).'/../../vendor/phpunit/phpunit/PHPUnit/Framework/
 /**
  * Features context.
  */
-class FileManagerContext extends BehatContext {
+class FileManagerContext extends eTextBookContext {
 
     private $manager;
 
     private function getManager() {
         if(!$this->manager) {
-            $this->manager = eTextBookDriver::getInstance()->getCurrentPage()->find('css', '.file-manager');
+            $this->manager = $this->findCss('.file-manager');
         } return $this->manager;
     }
 
