@@ -2,7 +2,8 @@
     <div class="template" name="module">
         <module>
             <module-title>
-                <view-element class="module-element">Новый модуль</view-element>
+                <edit-element><label>Название модуля</label></edit-element>
+                <view-element class="module-element"></view-element>
             </module-title>
             <module-background-image>&nbsp;</module-background-image>
             <module-questions>
@@ -37,7 +38,8 @@
                 <block-index>&nbsp;</block-index>
                 <block-categories></block-categories>
                 <block-title>
-                    <view-element>Новый блок</view-element>
+                    <edit-element><label>Название модуля</label></edit-element>
+                    <view-element class="module-element"></view-element>
                 </block-title>
             </block-headline>
             <block-content>
@@ -51,9 +53,32 @@
     <div class="template" name="addBlockButton">
         <add-block-button>
             <wrap>
-                <a href="#" class="add-block"><span class="glyphicon glyphicon-ok-sign"></span>Добавить задание</a>
-                <a href="#" class="add-rule"><span class="glyphicon glyphicon-info-sign"></span>Добавить правило</a>
+                <button
+                    class="add-block btn btn-primary btn-xs popover-dismiss"
+                    data-toggle="popover"
+                    title="Блок задание"
+                    data-content="<img src='/img/task-sample.png'> <div class='popover-text'>Задания представляют из себя текст задания и управляющие инструменты, которые вы сможете добавить после того как добавите блок задания.</div>"
+                    data-trigger="hover"
+                    data-html="true"
+                    data-placement="top"
+                    >
+                    <span class="glyphicon glyphicon-ok-sign"></span>
+                    Добавить задание
+                </button>
+                <button
+                    class="add-rule btn btn-primary btn-xs popover-dismiss"
+                    data-toggle="popover"
+                    title="Блок правило"
+                    data-content="<img src='/img/rule-sample.png'> <div class='popover-text'>Правило представляет из себя обычный текст, помещенный в зеленный прямоугольник. Используется для заострения внимания на вызказывание.</div>"
+                    data-trigger="hover"
+                    data-html="true"
+                    data-placement="top"
+                    >
+                    <span class="glyphicon glyphicon-info-sign"></span>
+                    Добавить правило
+                </button>
             </wrap>
+            <span class="label label-primary trigger">Добавить блок</span>
         </add-block-button>
     </div>
 
@@ -99,7 +124,7 @@
             <edit-element class="value">
                 <select>
                     <option value="0">ката</option>
-                    <option value="1">тура</option>
+                    <option value="1">туура</option>
                 </select>
             </edit-element>
             <edit-element class="remove glyphicon glyphicon-remove"></edit-element>
@@ -111,7 +136,7 @@
             <input type="text">
             <select>
                 <option value="0">ката</option>
-                <option value="1">тура</option>
+                <option value="1">туура</option>
             </select>
             <add class="glyphicon glyphicon-plus"></add>
         </edit-element>

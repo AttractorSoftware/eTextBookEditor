@@ -49,7 +49,7 @@ var eTextBookWidgetLogicStatement = eTextBookWidget.extend({
                 '<edit-element class="value">' +
                     '<select>' +
                         '<option value="0">ката</option>' +
-                        '<option value="1">тура</option>' +
+                        '<option value="1">туура</option>' +
                     '</select>' +
                 '</edit-element>' +
                 ' <edit-element class="remove glyphicon glyphicon-remove"></edit-element> '
@@ -65,7 +65,7 @@ var eTextBookWidgetLogicStatement = eTextBookWidget.extend({
     }
 
     ,viewActivate: function() {
-        this.contentContainer.find('item').append('<select class="not-saved"><option value=""></option><option value="0">ката</option><option value="1">тура</option></select>');
+        this.contentContainer.find('item').append('<select class="not-saved"><option value=""></option><option value="0">ката</option><option value="1">туура</option></select>');
         this.contentContainer.find('item select').bind('change', function() {
 
             var selectedValue = $(this).val();

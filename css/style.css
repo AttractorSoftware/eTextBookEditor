@@ -40,37 +40,35 @@ body {
     .e-text-book-editor .desktop e-text-book add-module-button, .e-text-book-editor .desktop e-text-book add-block-button {
       float: left;
       width: 100%;
-      height: 1px;
+      height: 22px;
       overflow: hidden;
-      background: url("/img/add-button.png") no-repeat center bottom;
-      padding: 0 0 10px;
+      text-align: center;
       cursor: pointer;
       transition: all 1s ease;
       -webkit-transition: all 1s ease;
       -moz-transition: all 1s ease; }
       .e-text-book-editor .desktop e-text-book add-module-button.open, .e-text-book-editor .desktop e-text-book add-block-button.open {
-        height: 50px; }
+        overflow: visible; }
         .e-text-book-editor .desktop e-text-book add-module-button.open wrap, .e-text-book-editor .desktop e-text-book add-block-button.open wrap {
           transition: all 1s ease;
           -webkit-transition: all 1s ease;
           -moz-transition: all 1s ease;
           margin: 0; }
+        .e-text-book-editor .desktop e-text-book add-module-button.open .trigger, .e-text-book-editor .desktop e-text-book add-block-button.open .trigger {
+          display: none; }
       .e-text-book-editor .desktop e-text-book add-module-button wrap, .e-text-book-editor .desktop e-text-book add-block-button wrap {
         float: left;
         width: 100%;
         padding: 0 0 0 0;
-        margin: -20px 0 0 0; }
-    .e-text-book-editor .desktop e-text-book add-block-button {
-      background-size: 30px auto;
-      margin: 0 0 20px; }
-      .e-text-book-editor .desktop e-text-book add-block-button a {
-        font-size: 12px;
-        margin: 0 5px 0 0;
-        padding: 0 0 0 15px; }
-    .e-text-book-editor .desktop e-text-book block add-block-button {
+        margin: -25px 0 0 0; }
+    .e-text-book-editor .desktop e-text-book add-block-button a {
+      font-size: 12px;
+      margin: 0 5px 0 0;
+      padding: 0 0 0 15px; }
+    .e-text-book-editor .desktop e-text-book block add-block-button, .e-text-book-editor .desktop e-text-book rule add-block-button {
       position: relative;
-      margin: -20px 0 0 0;
-      top: 40px; }
+      margin: -50px 0 0 0;
+      top: 80px; }
     .e-text-book-editor .desktop e-text-book control-panel {
       float: right;
       height: 20px;
@@ -148,11 +146,12 @@ body {
           width: 100%;
           border: solid 1px #eee;
           padding: 30px 15px 15px 15px;
-          margin: 0 0 30px 0; }
+          margin: 0 0 52px 0; }
           .e-text-book-editor .desktop e-text-book module blocks block block-headline, .e-text-book-editor .desktop e-text-book module blocks rule block-headline {
             float: left;
             width: 100%; }
             .e-text-book-editor .desktop e-text-book module blocks block block-headline block-index, .e-text-book-editor .desktop e-text-book module blocks rule block-headline block-index {
+              display: none;
               float: left; }
             .e-text-book-editor .desktop e-text-book module blocks block block-headline block-categories, .e-text-book-editor .desktop e-text-book module blocks rule block-headline block-categories {
               float: left; }
@@ -457,7 +456,7 @@ body {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   background: rgba(0, 0, 0, 0.3); }
@@ -574,6 +573,9 @@ body {
 .breadcrumb .glyphicon {
   color: #245269;
   text-shadow: 1px 1px 0 #fff; }
+
+.popover-text {
+  font-size: 12px; }
 
 e-text-book-editor .display e-text-book, .e-text-book-viewer e-text-book {
   float: left;
