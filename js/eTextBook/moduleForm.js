@@ -45,7 +45,7 @@ var moduleForm = function() {
                     $this.modal.find('.modal-footer .btn-primary').show();
                 } else {
                     $this.success('Модуль успешно создан');
-                    $('#addModuleBtn').parent().before('<li><a href="/editor.php?book=' + module.bookSlug + '&module=' + response.data.slug +'.html">' + module.title + '</a></li>');
+                    $('#addModuleBtn').parent().before('<li><a href="/editor.php?book=' + module.bookSlug + '.etb&module=' + response.data.slug +'.html">' + module.title + '</a></li>');
                 }
             });
         }

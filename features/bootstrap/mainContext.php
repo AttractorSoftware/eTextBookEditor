@@ -27,7 +27,7 @@ class FeatureContext extends eTextBookContext {
      * @AfterFeature
      */
     public static function closePage() {
-        eTextBookDriver::getInstance()->closeBrowser();
+        //eTextBookDriver::getInstance()->closeBrowser();
     }
 
     /**
@@ -51,5 +51,13 @@ class FeatureContext extends eTextBookContext {
      */
     public function wait($seconds) {
         sleep($seconds);
+    }
+
+    /**
+     * @Given /^Перезагружаем страницу$/
+     */
+    public function reload($seconds) {
+        eTextBookDriver::getInstance()->getDriver()->reload();
+        sleep(3);
     }
 }

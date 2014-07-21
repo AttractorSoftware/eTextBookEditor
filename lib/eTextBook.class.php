@@ -23,7 +23,9 @@
                 if($this->extractData()) {
                     $this->parseSlug();
                     $this->modulesPath = $this->tmpDir . $this->getSlug() .'/modules/';
-                    $this->content = $this->parseBookContent($this->tmpDir . $this->slug . '/index.html');
+                    if(is_file($this->tmpDir . $this->slug . '/index.html')) {
+                        $this->content = $this->parseBookContent($this->tmpDir . $this->slug . '/index.html');
+                    }
                     $this->parseTitle();
                     $this->parseImages();
                     $this->parseAudio();
@@ -90,10 +92,12 @@
         }
 
         public function parseTitle() {
-            $bookInfo = file_get_contents($this->tmpDir . $this->slug . '/book.info');
-            $bookInfo = explode('=+=', $bookInfo);
+            if(is_file($this->tmpDir . $this->slug . '/book.info')) {
+                $bookInfo = file_get_contents($this->tmpDir . $this->slug . '/book.info');
+                $bookInfo = explode('=+=', $bookInfo);
 
-            $this->title = trim($bookInfo[1]);
+                $this->title = trim($bookInfo[1]);
+            }
         }
 
         public function extractData() {
