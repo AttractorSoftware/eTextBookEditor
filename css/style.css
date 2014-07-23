@@ -7,7 +7,25 @@ body {
     padding: 0; }
 
 .container {
-  height: 100%; }
+  height: 100%;
+  position: relative; }
+  .container #charsBlock {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: none;
+    z-index: 9999;
+    background-color: #FFF;
+    border: 1px solid #ccc;
+    padding: 2px;
+    width: 71px; }
+    .container #charsBlock span {
+      border: 1px solid #CCC;
+      cursor: pointer;
+      display: block;
+      float: left;
+      margin: 2px;
+      padding: 0 4px; }
 
 .e-text-book-editor {
   float: left;
@@ -110,10 +128,10 @@ body {
           float: left;
           width: 100%;
           padding: 10px; }
-      .e-text-book-editor .desktop e-text-book module[editable="1"] view-element.module-element {
+      .e-text-book-editor .desktop e-text-book module[editable="1"] view-element.module-element,
+      .e-text-book-editor .desktop e-text-book module[editable="1"] .module-element label {
         display: none; }
-      .e-text-book-editor .desktop e-text-book module[editable="1"] edit-element.module-element {
-        display: block; }
+      .e-text-book-editor .desktop e-text-book module[editable="1"] edit-element.module-element,
       .e-text-book-editor .desktop e-text-book module[editable="1"] control-panel.module-panel {
         display: block; }
       .e-text-book-editor .desktop e-text-book module module-title {
@@ -393,6 +411,11 @@ body {
           position: absolute;
           top: 37px;
           left: 37px; }
+        .e-text-book-editor .desktop e-text-book image-description .add-image .help-text {
+          font-size: 12px;
+          text-align: center;
+          position: absolute;
+          top: 68px; }
     .e-text-book-editor .desktop e-text-book video-list {
       float: left;
       width: 100%; }
@@ -569,6 +592,13 @@ body {
   margin: 0 0 5px 0; }
 .book-list span {
   margin: 0 3px 0 0; }
+
+#bookFormModal .form-group label {
+  width: 100%; }
+  #bookFormModal .form-group label span {
+    float: none; }
+#bookFormModal .modal-footer {
+  margin-top: 0; }
 
 .breadcrumb .glyphicon {
   color: #245269;

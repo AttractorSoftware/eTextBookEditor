@@ -10,7 +10,7 @@ var eTextBookEditor = Backbone.Model.extend({
         this.updateDisplay();
         this.synchronizeScrolls();
 
-        $('.e-text-book-editor').css({ height: $('html').height() });
+        $('.e-text-book-editor').css({ height: $('html').height() *.75 });
     }
 
     ,synchronizeScrolls: function() {

@@ -1,67 +1,75 @@
 var eTextBookWidgetTest = eTextBookWidget.extend({
-    defaults: {
-        slug: "test",
-        title: "Тест",
-        templateName: 'testSolutionWidget'
-    }, activate: function () {
-        this.addQuestion(this.editCont.find('.test-widget'));
-        this.binds();
-    }, addQuestion: function (obj) {
-        obj.append(
-            '<div class="task">' +
-                '<edit-element class="add-question">' +
-                '<div class="question"><label>Вопрос: </label>' +
-                '<input type="text" placeholder="Вопрос">' +
-                '<div class="add glyphicon glyphicon-plus"></div>' +
-                '</div>' +
-                '<div class="choices"><label>Варианты ответов: </label></div>' +
-                '</edit-element>' +
-                '</div>'
-        );
-        this.addChoice(obj.find('.add-question .choices:last'));
-    }, addChoice: function (obj) {
-        obj.append(
-            '<edit-element class="add-choice">' +
-                '<input type="text" placeholder="Вариант ответа">' +
-                '<div class="add glyphicon glyphicon-plus"></div>' +
-                '</edit-element>'
-        );
-    }, binds: function () {
-        var $this = this;
-        const ENTER_KEY = 13;
+	 defaults: {
+		  slug: "test",
+		  title: "Тест",
+		  templateName: 'testSolutionWidget'
+	 },
+	 startEdit: function () {
+		  for (var i = 0; i < this.cont.find('.task').length; i++) {
+				var item = $(this.cont.find('.test-widget .task')[i]);
+				item.find('input').val(item.find('view-element').html());
+				item.find('select').val(item.attr('value'));
+		  }
+	 },
+	 activate: function () {
+		  this.cont = this.editCont.find('.test-widget');
+		  this.addQuestionWithChoice(this.cont);
+		  this.binds();
+	 },
+	 addQuestionWithChoice: function (obj) {
+		  obj.append(App.eTextBookTemplate.getTemplate('testWidgetTask'));
+		  this.addChoice(obj.find('.add-question .choices:last'));
+	 },
+	 addChoice: function (obj) {
+		  obj.append(App.eTextBookTemplate.getTemplate('addChoice'));
+//		  generateSelectFromChoices().call(obj);
+		  /*
+			function generateSelectFromChoices() {
+			var values = this.contentContainer.find('.choices-list').html().split(', ');
+			var options = '<option></option>';
+			for(var i = 0; i < values.length; i++) {
+			if(values[i] != '') {
+			options += '<option value="' + values[i] + '">' + values[i] + '</option>';
+			}
+			} return '<select class="not-saved">' + options + '</select>';
+			}
+			*/
+	 },
+	 binds: function () {
+		  var $this = this;
+		  const ENTER_KEY = 13;
 
+		  $('.test-widget')
+			  .on('click', '.question .add', function () {
+					addElement.call(this);
+			  })
+			  .on('click', '.add-choice .add', function () {
+					addElement.call(this);
+			  })
+			  .on('keyup', '.question input', function (e) {
+					if(e.which == ENTER_KEY) addElement.call(this);
+			  })
+			  .on('keyup', '.add-choice input', function (e) {
+					if(e.which == ENTER_KEY) addElement.call(this);
+			  })
+			  .on('click', '.glyphicon-remove', function () {
+					$(this).closest('edit-element').remove();
+			  });
 
-        $('.test-widget')
-            .on('click', '.question .add', function () {
-                addElement.call(this);
-            })
-            .on('click', '.add-choice .add', function () {
-                addElement.call(this);
-            })
-            .on('keyup', '.question input', function (e) {
-                if (e.which == ENTER_KEY) addElement.call(this);
-            })
-            .on('keyup', '.add-choice input', function (e) {
-                if (e.which == ENTER_KEY) addElement.call(this);
-            })
-            .on('click', '.glyphicon-remove', function () {
-                $(this).closest('edit-element').remove();
-            });
+		  function addElement() {
+				var closestEditElement = $(this).closest('edit-element');
+				var closestGlyphIcon = closestEditElement.find('.glyphicon').first();
 
-        function addElement() {
-            var closestEditElement = $(this).closest('edit-element');
-            var closestGlyphIcon = closestEditElement.find('.glyphicon').first();
+				if(closestGlyphIcon.hasClass("add")) {
+					 if(closestEditElement.hasClass("add-question"))
+						  $this.addQuestionWithChoice($(this).closest(".test-widget"));
+					 else if(closestEditElement.hasClass("add-choice"))
+						  $this.addChoice($(this).closest(".choices"));
+					 closestGlyphIcon.addClass('glyphicon-remove').removeClass('add glyphicon-plus');
+				}
+		  }
 
-            if (closestGlyphIcon.hasClass("add")) {
-                if (closestEditElement.hasClass("add-question"))
-                    $this.addQuestion($(this).closest(".test-widget"));
-                else if (closestEditElement.hasClass("add-choice"))
-                    $this.addChoice($(this).closest(".choices"));
-                closestGlyphIcon.addClass('glyphicon-remove').removeClass('add glyphicon-plus');
-            }
-        }
-
-    }
+	 }
 
 });
 

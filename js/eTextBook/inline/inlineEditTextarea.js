@@ -1,7 +1,8 @@
 var inlineEditTextarea = inlineEdit.extend({
 
     addWidget: function() {
-        this.editCont = $('<edit-element class="' + this.get('editElementClass') + '"><textarea class="widget"></textarea></edit-element>');
+        this.editCont = $('<edit-element class="' + this.get('editElementClass') + '">' +
+            '<textarea class="widget"></textarea></edit-element>');
         this.cont.append(this.editCont);
     }
 

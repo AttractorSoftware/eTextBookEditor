@@ -3,7 +3,9 @@ var inlineEditInput = inlineEdit.extend({
     addWidget: function() {
         this.editCont = $('<edit-element class="'
             + this.get('editElementClass')
-            + '"><label>Текст задания:</label><input type="text" class="widget"></edit-element>');
+            + '"><label>Заголовок задания:</label>' +
+			  '<input type="text" class="widget">' +
+			  '</edit-element>');
         this.cont.append(this.editCont);
     }
 

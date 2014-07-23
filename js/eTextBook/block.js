@@ -29,7 +29,6 @@ var eTextBookBlock = Backbone.Model.extend({
     }, startEdit: function () {
         this.get('cont').attr('editable', 1);
         this.editable = true;
-//        jQuery.each(this.editElements, this.startEdit());
         for (var i in this.editElements) {
             this.editElements[i].startEdit();
         }
@@ -59,7 +58,7 @@ var eTextBookBlock = Backbone.Model.extend({
 
         var $this = this;
         var selector = $('<select class="widget-selector"></select>');
-        var label = $('<label>Тип задания: </label>');
+        var label = $('<edit-element><label>Тип задания: </label></edit-element>');
         this.cont.find('widget').prepend(label, selector);
         selector.empty();
 

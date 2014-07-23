@@ -1,17 +1,17 @@
 <?php
-    require_once "lib/eTextBook.class.php";
+require_once "lib/eTextBook.class.php";
 
-    $bookContent = "";
-    $bookTitle = "";
-    if(isset($_GET['book'])) {
-        $viewBook = new eTextBook($_GET['book']);
-        if(isset($_GET['module'])) {
-            $currentModule = $_GET['module'];
-            $viewModuleContent = $viewBook->getModuleContent($currentModule);
-        } else {
-            $viewModuleContent = $viewBook->getFirstModuleContent();
-        }
+$bookContent = "";
+$bookTitle = "";
+if (isset($_GET['book'])) {
+    $viewBook = new eTextBook($_GET['book']);
+    if (isset($_GET['module'])) {
+        $currentModule = $_GET['module'];
+        $viewModuleContent = $viewBook->getModuleContent($currentModule);
+    } else {
+        $viewModuleContent = $viewBook->getFirstModuleContent();
     }
+}
 ?>
 
 <!Doctype html>
@@ -34,6 +34,11 @@
         </div>
     </nav>
     <div class="container">
+        <div id="charsBlock" class="kyrgyz-chars">
+            <span title="Ctrl+Alt+н">ң</span>
+            <span title="Ctrl+Alt+о">ө</span>
+            <span title="Ctrl+Alt+у">ү</span>
+        </div>
 
         <div class="page-header">
             <h1><?php echo $viewBook->getTitle(); ?></h1>
@@ -56,23 +61,24 @@
 
         <ol id="moduleList" class="breadcrumb">
             <?php
-                $modules = $viewBook->getModules();
-                foreach($modules as $module):
-                    $currentModule = isset($currentModule) ? $currentModule : $modules[0];
-            ?>
-                <?php if($module != $currentModule): ?>
-                    <li>
-                        <a href="/editor.php?book=<?php echo $viewBook->getSlug()?>.etb&module=<?php echo $module; ?>">
-                            <?php echo $module; ?>
-                        </a>
-                    </li>
-                <?php else: ?>
-                    <li class="active">
+            $modules = $viewBook->getModules();
+            foreach ($modules as $module):
+                $currentModule = isset($currentModule) ? $currentModule : $modules[0];
+                ?>
+                <?php if ($module != $currentModule): ?>
+                <li>
+                    <a href="/editor.php?book=<?php echo $viewBook->getSlug() ?>.etb&module=<?php echo $module; ?>">
                         <?php echo $module; ?>
-                    </li>
-                <?php endif; ?>
+                    </a>
+                </li>
+            <?php else: ?>
+                <li class="active">
+                    <?php echo $module; ?>
+                </li>
+            <?php endif; ?>
             <?php endforeach; ?>
-            <li><a href="#" id="addModuleBtn" data-toggle="modal" data-target="#moduleFormModal">Добавить модуль</a></li>
+            <li><a href="#" id="addModuleBtn" data-toggle="modal" data-target="#moduleFormModal">Добавить модуль</a>
+            </li>
         </ol>
 
         <div class="modal fade" id="moduleFormModal" role="dialog">
@@ -85,7 +91,8 @@
                         </button>
                         <h4 class="modal-title">Новый модуль</h4>
                     </div>
-                    <form ng-controller="App.moduleForm.controller" name="moduleForm" book-slug="<?php echo $viewBook->getSlug(); ?>">
+                    <form ng-controller="App.moduleForm.controller" name="moduleForm"
+                          book-slug="<?php echo $viewBook->getSlug(); ?>">
                         <div class="modal-body">
                             <div id="alertBox" style="display: none" class="alert alert-success" role="alert">QQQ</div>
                             <div class="form-group">
@@ -101,7 +108,7 @@
                                     type="text"
                                     name="title"
                                     ng-model="module.title"
-                                    required />
+                                    required/>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -115,7 +122,7 @@
                                 class="btn btn-primary"
                                 ng-click="submit(module)"
                                 ng-disabled="moduleForm.$invalid || isUnchanged(book)"
-                            >
+                                >
                                 <span class="glyphicon glyphicon-ok"></span>
                                 Добавить модуль
                             </button>
@@ -125,7 +132,8 @@
             </div>
         </div>
 
-        <div class="e-text-book-editor" book="<?php echo $viewBook->getSlug(); ?>" module="<?php echo $currentModule; ?>">
+        <div class="e-text-book-editor" book="<?php echo $viewBook->getSlug(); ?>"
+             module="<?php if (isset($currentModule)) echo $currentModule; ?>">
             <div class="desktop">
                 <?php echo isset($viewBook) ? $viewModuleContent : ''; ?>
             </div>
@@ -139,7 +147,7 @@
 <?php require_once 'fileManager.php'; ?>
 <?php require_once 'jsTemplates.php'; ?>
 
-<link rel="stylesheet" type="text/css" href="css/main-style.min.css" />
+<link rel="stylesheet" type="text/css" href="css/main-style.min.css"/>
 <script src="js/script.min.js"></script>
 <script src="js/lib/angular.min.js"></script>
 <script src="js/eTextBook/moduleForm.js"></script>
