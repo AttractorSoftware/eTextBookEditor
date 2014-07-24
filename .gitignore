@@ -13,7 +13,8 @@
 /node_modules
 /bower_components
 
-web/books
+web/books/*
+web/tmp/*
 
 web/css/main-style.css
 web/css/main-style.min.css
