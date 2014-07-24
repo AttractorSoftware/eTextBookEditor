@@ -1,0 +1,22 @@
+{
+  "name": "eTextBook",
+  "version": "0.0.0",
+  "authors": [
+    "Alex Shedrin <alex.shedrin.ne@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angularjs": "~1.2.*",
+    "backbone": "~1.1.2",
+    "underscore": "~1.6.0",
+    "bootstrap": "~3.2.0",
+    "jquery": "~2.1.1"
+  }
+}

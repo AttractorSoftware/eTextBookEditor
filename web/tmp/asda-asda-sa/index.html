@@ -1,0 +1,26 @@
+<!Doctype html>
+<html lang="ru">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, user-scalable=yes">
+        <meta charset="utf-8" />
+        <title>asda asda sa</title>
+    </head>
+    <body>
+        <div class="container e-text-book-viewer">
+            <e-text-book></e-text-book>
+        </div>
+        <link rel="stylesheet" type="text/css" href="css/main-style.min.css" />
+        <script src="js/script.min.js"></script>
+        <script>
+            $(function(){
+                for(var i = 0; i < $('body').find('widget').length; i++) {
+                    var widgetCont = $($('body').find('widget')[i]);
+                    var widget = App.eTextBookWidgetRepository.getWidgetBySlug(widgetCont.attr('widget-slug'));
+                    widget = new widget();
+                    widget.contentContainer = widgetCont.find('widget-content');
+                    widget.viewActivate();
+                }
+            });
+        </script>
+    </body>
+</html>

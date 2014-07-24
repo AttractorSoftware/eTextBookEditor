@@ -1,21 +1,22 @@
-.idea/
-books/*
-vendor/
+/web/bundles/
+/app/bootstrap.php.cache
+/app/cache/*
+/app/config/parameters.yml
+/app/logs/*
+!app/cache/.gitkeep
+!app/logs/.gitkeep
+/build/
+/vendor/
+/bin/
+/composer.phar
+/composer.lock
+/node_modules
+/bower_components
 
-content/css/*
-content/img/*
-content/js/*
+web/books
 
-tmp/*
+web/css/main-style.css
+web/css/main-style.min.css
 
-css/main-style.css
-css/main-style.min.css
-template/css/main-style.css
-template/css/main-style.min.css
-
-js/script.js
-js/script.min.js
-template/js/script.js
-template/js/script.min.js
-node_modules/
-.sass-cache/
+web/js/script.js
+web/js/script.min.js

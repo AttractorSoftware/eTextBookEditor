@@ -1,7 +1,7 @@
 Feature: Добавление нового блока
 
   Scenario: Создаем новый блок, проверяем результат и удаляем его
-    Given Открываем страницу "http://localhost/books.php"
+    Given Открываем страницу "http://localhost/books"
     And   Создаем новый учебник
     Then  Создаем новый модуль
     And   Создаем блок с заголовком "Block title"

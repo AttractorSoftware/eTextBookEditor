@@ -1,0 +1,10 @@
+e_text_book_lounge:
+    resource: "@eTextBookLoungeBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+e_text_book_spawn:
+    resource: "@eTextBookSpawnBundle/Controller/"
+    type:     annotation
+    prefix:   /
+

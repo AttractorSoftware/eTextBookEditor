@@ -3,63 +3,68 @@ module.exports = function (grunt) {
         concat: {
             main: {
                 src: [
-                    'js/lib/jquery-2.1.1.min.js'
-                    , 'js/lib/bootstrap.min.js'
-                    , 'js/lib/underscore-min.js'
-                    , 'js/lib/backbone-min.js'
-                    , 'js/app.js'
-                    , 'js/eTextBook/*.js'
-                    , 'js/eTextBook/inline/*.js'
-                    , 'js/eTextBook/widget/*.js'
+                    'bower_components/jquery/dist/jquery.min.js'
+                    , 'bower_components/bootstrap/dist/js/bootstrap.min.js'
+                    , 'bower_components/underscore/underscore.js'
+                    , 'bower_components/backbone/backbone.js'
+                    , 'bower_components/angularjs/angular.min.js'
+                    , 'web/js/app.js'
+                    , 'web/js/eTextBook/*.js'
+                    , 'web/js/eTextBook/inline/*.js'
+                    , 'web/js/eTextBook/widget/*.js'
                 ],
-                dest: 'js/script.js'
-            }, template: {
-                src: [
-                    'js/lib/jquery-2.1.1.min.js'
-                    , 'js/lib/underscore-min.js'
-                    , 'js/lib/backbone-min.js'
-                    , 'js/app.js'
-                    , 'js/eTextBook/utils.js'
-                    , 'js/eTextBook/widget.js'
-                    , 'js/eTextBook/widgetRepository.js'
-                    , 'js/eTextBook/widget/*.js'
-                    , 'js/html5Player.js'
-                ],
-                dest: 'template/js/script.js'
+                dest: 'web/js/script.js'
             }
+//            ,template: {
+//                src: [
+//                    'bower_components/jquery/dist/jquery.min.js'
+//                    , 'bower_components/underscore/underscore.js'
+//                    , 'bower_components/backbone/backbone.js'
+//                    , 'web/js/app.js'
+//                    , 'web/js/eTextBook/utils.js'
+//                    , 'web/js/eTextBook/widget.js'
+//                    , 'web/js/eTextBook/widgetRepository.js'
+//                    , 'web/js/eTextBook/widget/*.js'
+//                    , 'web/js/html5Player.js'
+//                ],
+//                dest: 'template/js/script.js'
+//            }
         }, concat_css: {
             main: {
                 src: [
-                    'css/bootstrap.min.css'
-                    , 'css/style.css'
-                ], dest: 'css/main-style.css'
-            }, template: {
-                src: [
-                    'css/bootstrap.min.css'
-                    , 'template/css/style.css'
-                    , 'css/html5Player.css'
-                ], dest: 'template/css/main-style.css'
+                    'bower_components/bootstrap/dist/css/bootstrap.min.css'
+                    , 'web/css/style.css'
+                ], dest: 'web/css/main-style.css'
             }
+//            ,template: {
+//                src: [
+//                    'bower_components/bootstrap/dist/css/bootstrap.min.css'
+//                    , '/css/style.css'
+//                    , 'css/html5Player.css'
+//                ], dest: 'template/css/main-style.css'
+//            }
         }, cssmin: {
             main: {
                 files: {
-                    'css/main-style.min.css': ['css/main-style.css']
-                }
-            }, template: {
-                files: {
-                    'template/css/main-style.min.css': ['template/css/main-style.css']
+                    'web/css/main-style.min.css': ['web/css/main-style.css']
                 }
             }
+//            ,template: {
+//                files: {
+//                    'template/css/main-style.min.css': ['template/css/main-style.css']
+//                }
+//            }
         }, uglify: {
             main: {
                 files: {
-                    'js/script.min.js': '<%= concat.main.dest %>'
-                }
-            }, template: {
-                files: {
-                    'template/js/script.min.js': '<%= concat.template.dest %>'
+                    'web/js/script.min.js': '<%= concat.main.dest %>'
                 }
             }
+//            ,template: {
+//                files: {
+//                    'template/js/script.min.js': '<%= concat.template.dest %>'
+//                }
+//            }
         }
     });
 

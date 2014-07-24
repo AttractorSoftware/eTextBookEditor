@@ -1,0 +1,8 @@
+<ol class="breadcrumb">
+    {% for item in items %}
+        <li>
+            <span class="glyphicon glyphicon-{{ item.ico }}"></span>
+            <a href="{{ item.link }}">{{ item.title }}</a>
+        </li>
+    {% endfor %}
+</ol>

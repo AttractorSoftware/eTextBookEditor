@@ -1,0 +1,40 @@
+{% extends '::lounge-template.html.twig' %}
+
+{% block pageHeader %} {{ book.title }} {% endblock %}
+
+{% block pageContent %}
+
+    <ol id="moduleList" class="breadcrumb">
+        {% for module in modules %}
+            {% if(module != currentModule) %}
+                <li>
+                    <a href="{{ path('book-edit', { 'slug': book.slug, 'module': module }) }}">
+                        {{ module }}
+                    </a>
+                </li>
+            {% else %}
+                <li class="active"> {{ module }} </li>
+            {% endif %}
+        {% endfor %}
+        <li>
+            <a href="#" id="addModuleBtn" data-toggle="modal" data-target="#moduleFormModal">
+                Добавить модуль
+            </a>
+        </li>
+    </ol>
+
+    {% include 'eTextBookLoungeBundle:Book:module-form.html.twig' with { 'book': book } %}
+
+    <div class="e-text-book-editor" book="{{ book.slug }}" module="{{ currentModule }}" update-action="{{ path('book-update-module') }}">
+        <div class="desktop">
+            {% set moduleContent = currentModule != ' ' ? book.getModuleContent(currentModule) : book.getFirstModuleContent() %}
+            {{ moduleContent|raw }}
+        </div>
+        <div class="display e-text-book-viewer"></div>
+    </div>
+
+    {% include 'eTextBookLoungeBundle:Book:js-templates.html.twig' %}
+    {% include 'eTextBookLoungeBundle:Default:file-manager.html.twig' with { 'book': book } %}
+
+{% endblock %}
+

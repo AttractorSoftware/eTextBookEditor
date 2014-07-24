@@ -1,0 +1,69 @@
+<!Doctype html>
+<html lang="ru">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, user-scalable=yes">
+        <meta charset="utf-8" />
+        <title></title>
+    </head>
+    <body>
+        <div class="container e-text-book-viewer">
+            <e-text-book>
+                <module moduleid="1">
+    
+
+                    <module-title>
+                        
+                        <view-element class="module-element">Модуль 1</view-element>
+                    </module-title>
+                    <module-background-image>&nbsp;</module-background-image>
+                    <module-questions>
+                        
+                        <view-element class="module-element"></view-element>
+                    </module-questions>
+                    <module-description>
+                        
+                        <view-element class="module-element"></view-element>
+                    </module-description>
+                    <blocks><block blockid="1" editable="0" uid="24062014145356">
+    
+
+        <block-headline>
+            <block-index>1.</block-index>
+            <block-categories></block-categories>
+            <block-title>
+                
+                <view-element class="module-element">Block title</view-element>
+            </block-title>
+        </block-headline>
+        <block-content>
+            <widget widget-slug="video">
+                <widget-content><video-list><video-item>
+        <video controls="">
+            <source src="content/video/fat-rabbit.mp4">
+        </video>
+        
+    </video-item></video-list>
+    <video-description>
+        <view-element>Текст для видео</view-element>
+    </video-description></widget-content>
+            </widget>
+        </block-content>
+    </block></blocks>
+                </module>
+            </e-text-book>
+        </div>
+        <link rel="stylesheet" type="text/css" href="css/main-style.min.css" />
+        <script src="js/script.min.js"></script>
+        <script>
+            $(function(){
+                for(var i = 0; i < $('body').find('widget').length; i++) {
+                    var widgetCont = $($('body').find('widget')[i]);
+                    var widget = App.eTextBookWidgetRepository.getWidgetBySlug(widgetCont.attr('widget-slug'));
+                    widget = new widget();
+                    widget.contentContainer = widgetCont.find('widget-content');
+                    widget.viewActivate();
+                }
+            });
+        </script>
+    </body>
+</html>

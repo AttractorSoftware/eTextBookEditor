@@ -1,0 +1,814 @@
+.e-text-book-editor {
+  float: left;
+  width: 100%;
+  height: 100%; }
+  .e-text-book-editor .properties {
+    float: left;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 50px;
+    background: #eee; }
+    .e-text-book-editor .properties .save .glyphicon {
+      margin: 0 5px 0 0; }
+    .e-text-book-editor .properties #book-list {
+      float: right;
+      margin: 10px 0 0 0; }
+  .e-text-book-editor .desktop, .e-text-book-editor .display {
+    float: left;
+    width: 50%;
+    height: 100%;
+    padding: 20px;
+    overflow-y: scroll; }
+  .e-text-book-editor .display {
+    overflow: hidden; }
+  .e-text-book-editor .desktop e-text-book {
+    float: left;
+    width: 100%; }
+    .e-text-book-editor .desktop e-text-book add-module-button, .e-text-book-editor .desktop e-text-book add-block-button {
+      float: left;
+      width: 100%;
+      height: 22px;
+      overflow: hidden;
+      text-align: center;
+      cursor: pointer;
+      transition: all 1s ease;
+      -webkit-transition: all 1s ease;
+      -moz-transition: all 1s ease; }
+      .e-text-book-editor .desktop e-text-book add-module-button.open, .e-text-book-editor .desktop e-text-book add-block-button.open {
+        overflow: visible; }
+        .e-text-book-editor .desktop e-text-book add-module-button.open wrap, .e-text-book-editor .desktop e-text-book add-block-button.open wrap {
+          transition: all 1s ease;
+          -webkit-transition: all 1s ease;
+          -moz-transition: all 1s ease;
+          margin: 0; }
+        .e-text-book-editor .desktop e-text-book add-module-button.open .trigger, .e-text-book-editor .desktop e-text-book add-block-button.open .trigger {
+          display: none; }
+      .e-text-book-editor .desktop e-text-book add-module-button wrap, .e-text-book-editor .desktop e-text-book add-block-button wrap {
+        float: left;
+        width: 100%;
+        padding: 0 0 0 0;
+        margin: -25px 0 0 0; }
+    .e-text-book-editor .desktop e-text-book add-block-button a {
+      font-size: 12px;
+      margin: 0 5px 0 0;
+      padding: 0 0 0 15px; }
+    .e-text-book-editor .desktop e-text-book block add-block-button, .e-text-book-editor .desktop e-text-book rule add-block-button {
+      position: relative;
+      margin: -50px 0 0 0;
+      top: 80px; }
+    .e-text-book-editor .desktop e-text-book control-panel {
+      float: right;
+      height: 20px;
+      margin: -30px -15px 0 0;
+      position: relative;
+      display: none; }
+      .e-text-book-editor .desktop e-text-book control-panel item {
+        float: left;
+        width: 20px;
+        height: 20px;
+        border: solid 1px #eee;
+        border-radius: 3px;
+        font-size: 13px;
+        margin: 5px 5px 0 0;
+        text-align: center;
+        cursor: pointer;
+        color: #999; }
+        .e-text-book-editor .desktop e-text-book control-panel item:hover {
+          color: #333; }
+        .e-text-book-editor .desktop e-text-book control-panel item span {
+          position: relative;
+          top: 2px; }
+        .e-text-book-editor .desktop e-text-book control-panel item.current {
+          background: #eee; }
+    .e-text-book-editor .desktop e-text-book module {
+      float: left;
+      width: 100%;
+      padding: 20px 0 0 0; }
+      .e-text-book-editor .desktop e-text-book module:hover control-panel.module-panel {
+        display: block; }
+      .e-text-book-editor .desktop e-text-book module edit-element {
+        display: none; }
+        .e-text-book-editor .desktop e-text-book module edit-element input[type=text] {
+          float: left;
+          width: 100%;
+          text-indent: 10px;
+          height: 30px; }
+        .e-text-book-editor .desktop e-text-book module edit-element textarea {
+          float: left;
+          width: 100%;
+          padding: 10px; }
+      .e-text-book-editor .desktop e-text-book module[editable="1"] view-element.module-element {
+        display: none; }
+      .e-text-book-editor .desktop e-text-book module[editable="1"] edit-element.module-element {
+        display: block; }
+      .e-text-book-editor .desktop e-text-book module[editable="1"] control-panel.module-panel {
+        display: block; }
+      .e-text-book-editor .desktop e-text-book module module-title {
+        float: left;
+        width: 100%;
+        margin: 0 0 10px; }
+      .e-text-book-editor .desktop e-text-book module module-questions {
+        float: left;
+        width: 100%;
+        margin: 0 0 10px; }
+      .e-text-book-editor .desktop e-text-book module module-description {
+        float: left;
+        width: 100%;
+        margin: 0 0 10px; }
+      .e-text-book-editor .desktop e-text-book module blocks {
+        float: left;
+        width: 100%;
+        padding: 20px 0 0 0; }
+        .e-text-book-editor .desktop e-text-book module blocks rule {
+          float: left;
+          width: 100%;
+          margin: 0 0 15px 0; }
+          .e-text-book-editor .desktop e-text-book module blocks rule rule-title {
+            float: left;
+            width: 100%;
+            padding: 30px;
+            background: #ccedcd; }
+        .e-text-book-editor .desktop e-text-book module blocks block, .e-text-book-editor .desktop e-text-book module blocks rule {
+          float: left;
+          width: 100%;
+          border: solid 1px #eee;
+          padding: 30px 15px 15px 15px;
+          margin: 0 0 52px 0; }
+          .e-text-book-editor .desktop e-text-book module blocks block block-headline, .e-text-book-editor .desktop e-text-book module blocks rule block-headline {
+            float: left;
+            width: 100%; }
+            .e-text-book-editor .desktop e-text-book module blocks block block-headline block-index, .e-text-book-editor .desktop e-text-book module blocks rule block-headline block-index {
+              display: none;
+              float: left; }
+            .e-text-book-editor .desktop e-text-book module blocks block block-headline block-categories, .e-text-book-editor .desktop e-text-book module blocks rule block-headline block-categories {
+              float: left; }
+            .e-text-book-editor .desktop e-text-book module blocks block block-headline block-title, .e-text-book-editor .desktop e-text-book module blocks rule block-headline block-title {
+              float: left;
+              width: 100%; }
+              .e-text-book-editor .desktop e-text-book module blocks block block-headline block-title input, .e-text-book-editor .desktop e-text-book module blocks rule block-headline block-title input {
+                float: left;
+                width: 100%; }
+          .e-text-book-editor .desktop e-text-book module blocks block block-content, .e-text-book-editor .desktop e-text-book module blocks rule block-content {
+            float: left;
+            width: 100%;
+            padding: 10px 0 0 0; }
+            .e-text-book-editor .desktop e-text-book module blocks block block-content widget, .e-text-book-editor .desktop e-text-book module blocks rule block-content widget {
+              float: left;
+              width: 100%;
+              margin: 10px 0 0 0; }
+              .e-text-book-editor .desktop e-text-book module blocks block block-content widget label, .e-text-book-editor .desktop e-text-book module blocks rule block-content widget label {
+                width: 100px;
+                float: left;
+                display: none; }
+              .e-text-book-editor .desktop e-text-book module blocks block block-content widget .widget-selector, .e-text-book-editor .desktop e-text-book module blocks rule block-content widget .widget-selector {
+                float: left;
+                display: none; }
+              .e-text-book-editor .desktop e-text-book module blocks block block-content widget widget-content, .e-text-book-editor .desktop e-text-book module blocks rule block-content widget widget-content {
+                float: left;
+                width: 100%;
+                margin: 10px 0 0 0; }
+          .e-text-book-editor .desktop e-text-book module blocks block[editable="1"] edit-element, .e-text-book-editor .desktop e-text-book module blocks block[editable="1"] control-panel, .e-text-book-editor .desktop e-text-book module blocks rule[editable="1"] edit-element, .e-text-book-editor .desktop e-text-book module blocks rule[editable="1"] control-panel {
+            display: block; }
+          .e-text-book-editor .desktop e-text-book module blocks block[editable="1"] view-element, .e-text-book-editor .desktop e-text-book module blocks rule[editable="1"] view-element {
+            display: none; }
+          .e-text-book-editor .desktop e-text-book module blocks block[editable="1"] block-content widget .widget-selector, .e-text-book-editor .desktop e-text-book module blocks block[editable="1"] block-content widget label, .e-text-book-editor .desktop e-text-book module blocks rule[editable="1"] block-content widget .widget-selector, .e-text-book-editor .desktop e-text-book module blocks rule[editable="1"] block-content widget label {
+            display: block; }
+          .e-text-book-editor .desktop e-text-book module blocks block edit-element, .e-text-book-editor .desktop e-text-book module blocks rule edit-element {
+            display: none; }
+          .e-text-book-editor .desktop e-text-book module blocks block:hover control-panel, .e-text-book-editor .desktop e-text-book module blocks rule:hover control-panel {
+            display: block; }
+    .e-text-book-editor .desktop e-text-book logic-statement {
+      float: left;
+      width: 100%; }
+      .e-text-book-editor .desktop e-text-book logic-statement item {
+        float: left;
+        width: 100%;
+        margin: 0 0 10px 0; }
+        .e-text-book-editor .desktop e-text-book logic-statement item .text {
+          float: left;
+          width: 70%; }
+        .e-text-book-editor .desktop e-text-book logic-statement item .value {
+          float: left;
+          width: 18%;
+          margin: 2px 0 0 2%; }
+          .e-text-book-editor .desktop e-text-book logic-statement item .value select {
+            float: left;
+            width: 100%; }
+        .e-text-book-editor .desktop e-text-book logic-statement item .remove {
+          float: left;
+          margin: 7px 0 0 2%;
+          cursor: pointer; }
+      .e-text-book-editor .desktop e-text-book logic-statement edit-element.new-statement {
+        float: left;
+        width: 100%; }
+        .e-text-book-editor .desktop e-text-book logic-statement edit-element.new-statement input {
+          float: left;
+          width: 70%; }
+        .e-text-book-editor .desktop e-text-book logic-statement edit-element.new-statement select {
+          float: left;
+          width: 18%;
+          margin: 2px 0 0 2%; }
+        .e-text-book-editor .desktop e-text-book logic-statement edit-element.new-statement add {
+          float: left;
+          margin: 7px 0 0 2%;
+          width: 2%;
+          cursor: pointer; }
+    .e-text-book-editor .desktop e-text-book block[editable='0'] .check-endings .words {
+      width: 100%; }
+      .e-text-book-editor .desktop e-text-book block[editable='0'] .check-endings .words .list .item {
+        width: 50%; }
+    .e-text-book-editor .desktop e-text-book .check-endings {
+      float: left;
+      width: 100%; }
+      .e-text-book-editor .desktop e-text-book .check-endings .endings-list {
+        display: none; }
+      .e-text-book-editor .desktop e-text-book .check-endings .words {
+        float: left;
+        width: 70%; }
+        .e-text-book-editor .desktop e-text-book .check-endings .words .item {
+          float: left;
+          width: 91%;
+          margin: 5px 0 5px 0; }
+          .e-text-book-editor .desktop e-text-book .check-endings .words .item .glyphicon-remove {
+            float: left;
+            width: 5%;
+            margin: 7px 0 0 0;
+            cursor: pointer; }
+          .e-text-book-editor .desktop e-text-book .check-endings .words .item edit-element {
+            float: left;
+            width: 95%; }
+            .e-text-book-editor .desktop e-text-book .check-endings .words .item edit-element input {
+              width: 70%; }
+            .e-text-book-editor .desktop e-text-book .check-endings .words .item edit-element select {
+              float: left;
+              width: 28%;
+              margin: 2px 0 0 0; }
+      .e-text-book-editor .desktop e-text-book .check-endings .endings {
+        float: left;
+        width: 30%; }
+        .e-text-book-editor .desktop e-text-book .check-endings .endings .item {
+          float: left;
+          width: 97%;
+          margin: 5px 0 5px 0; }
+          .e-text-book-editor .desktop e-text-book .check-endings .endings .item .glyphicon-remove {
+            float: left;
+            width: 5%;
+            margin: 7px 0 0 0;
+            cursor: pointer; }
+          .e-text-book-editor .desktop e-text-book .check-endings .endings .item edit-element {
+            float: left;
+            width: 90%; }
+            .e-text-book-editor .desktop e-text-book .check-endings .endings .item edit-element input {
+              width: 98%; }
+      .e-text-book-editor .desktop e-text-book .check-endings .add-word input, .e-text-book-editor .desktop e-text-book .check-endings .add-ending input {
+        width: 85%; }
+      .e-text-book-editor .desktop e-text-book .check-endings .add-word .add, .e-text-book-editor .desktop e-text-book .check-endings .add-ending .add {
+        cursor: pointer;
+        float: left;
+        margin: 7px 0 0 5px; }
+    .e-text-book-editor .desktop e-text-book .test-widget {
+      float: left;
+      width: 100%; }
+      .e-text-book-editor .desktop e-text-book .test-widget .glyphicon {
+        float: left;
+        width: 17px;
+        padding: 5px 2px;
+        height: inherit;
+        cursor: pointer; }
+      .e-text-book-editor .desktop e-text-book .test-widget edit-element input[type=text] {
+        float: left;
+        width: calc(100% - 20px); }
+      .e-text-book-editor .desktop e-text-book .test-widget .question {
+        float: none;
+        width: 100%;
+        height: 30px;
+        clear: both;
+        margin-bottom: 10px; }
+      .e-text-book-editor .desktop e-text-book .test-widget .choices {
+        width: 100%;
+        display: table; }
+        .e-text-book-editor .desktop e-text-book .test-widget .choices label {
+          width: 100% !important;
+          margin: 10px 0 2px; }
+        .e-text-book-editor .desktop e-text-book .test-widget .choices edit-element {
+          float: left;
+          max-width: 100%;
+          min-width: 240px;
+          margin-bottom: 10px; }
+          .e-text-book-editor .desktop e-text-book .test-widget .choices edit-element input[type="text"] {
+            width: calc(100% - 17px) !important; }
+    .e-text-book-editor .desktop e-text-book translate-comparative {
+      float: left;
+      width: 100%; }
+      .e-text-book-editor .desktop e-text-book translate-comparative .new-item {
+        float: left;
+        width: 100%; }
+        .e-text-book-editor .desktop e-text-book translate-comparative .new-item input {
+          float: left;
+          width: 40%;
+          margin: 10px 10px 0 0; }
+        .e-text-book-editor .desktop e-text-book translate-comparative .new-item add {
+          float: left;
+          width: 10px;
+          height: 10px;
+          cursor: pointer;
+          color: #2b542c;
+          margin: 14px 0 0 0; }
+      .e-text-book-editor .desktop e-text-book translate-comparative list {
+        float: left;
+        width: 50%; }
+        .e-text-book-editor .desktop e-text-book translate-comparative list item .remove {
+          font-size: 10px;
+          float: right;
+          width: 10px;
+          height: 10px;
+          margin: 4px 10px 0 0;
+          cursor: pointer;
+          color: #eee; }
+        .e-text-book-editor .desktop e-text-book translate-comparative list item:hover .remove {
+          color: #942a25; }
+      .e-text-book-editor .desktop e-text-book translate-comparative answers {
+        float: left;
+        width: 50%; }
+      .e-text-book-editor .desktop e-text-book translate-comparative list item, .e-text-book-editor .desktop e-text-book translate-comparative answers item {
+        float: left;
+        width: 100%;
+        padding: 5px; }
+    .e-text-book-editor .desktop e-text-book image-description {
+      float: left;
+      width: 100%; }
+      .e-text-book-editor .desktop e-text-book image-description descs {
+        float: left;
+        width: 100%;
+        padding: 10px 0 0 0; }
+        .e-text-book-editor .desktop e-text-book image-description descs item {
+          float: left;
+          width: 50%; }
+      .e-text-book-editor .desktop e-text-book image-description images {
+        float: left;
+        width: 100%; }
+        .e-text-book-editor .desktop e-text-book image-description images item {
+          float: left;
+          width: 100px;
+          margin: 0 1px 1px 0; }
+          .e-text-book-editor .desktop e-text-book image-description images item image-view {
+            float: left;
+            width: 100%;
+            height: 100px;
+            background: #ccc no-repeat center center;
+            background-size: 100% auto; }
+          .e-text-book-editor .desktop e-text-book image-description images item image-title {
+            font-size: 12px; }
+          .e-text-book-editor .desktop e-text-book image-description images item:hover .glyphicon-remove {
+            color: #777; }
+          .e-text-book-editor .desktop e-text-book image-description images item .glyphicon-remove {
+            float: right;
+            font-size: 12px;
+            color: #ccc;
+            margin: 5px 5px 0 0;
+            cursor: pointer; }
+      .e-text-book-editor .desktop e-text-book image-description .add-image {
+        position: relative;
+        cursor: pointer;
+        float: left;
+        width: 100px;
+        height: 100px;
+        background: #ccc;
+        text-shadow: 1px 1px 0 #fff;
+        font-size: 30px; }
+        .e-text-book-editor .desktop e-text-book image-description .add-image .glyphicon {
+          position: absolute;
+          top: 37px;
+          left: 37px; }
+    .e-text-book-editor .desktop e-text-book video-list {
+      float: left;
+      width: 100%; }
+      .e-text-book-editor .desktop e-text-book video-list .add-video {
+        float: left;
+        width: 100%;
+        padding: 10px;
+        text-align: center;
+        background: #ddd;
+        cursor: pointer; }
+      .e-text-book-editor .desktop e-text-book video-list video-item {
+        float: left;
+        width: 100%; }
+        .e-text-book-editor .desktop e-text-book video-list video-item video {
+          float: left;
+          width: 90%;
+          margin: 0 0 15px 0; }
+        .e-text-book-editor .desktop e-text-book video-list video-item .glyphicon-remove {
+          float: left;
+          width: 20px;
+          height: 20px;
+          margin: 5px 0 0 15px;
+          cursor: pointer; }
+    .e-text-book-editor .desktop e-text-book video-description {
+      float: left;
+      width: 100%; }
+      .e-text-book-editor .desktop e-text-book video-description edit-element {
+        margin: 10px 0 0 0; }
+    .e-text-book-editor .desktop e-text-book audio-description {
+      float: left;
+      width: 100%; }
+      .e-text-book-editor .desktop e-text-book audio-description edit-element {
+        margin: 10px 0 0 0; }
+    .e-text-book-editor .desktop e-text-book audio-list {
+      float: left;
+      width: 100%; }
+      .e-text-book-editor .desktop e-text-book audio-list audio-item {
+        float: left;
+        width: 100%; }
+        .e-text-book-editor .desktop e-text-book audio-list audio-item audio {
+          float: left;
+          width: 90%;
+          margin: 0 0 15px 0; }
+        .e-text-book-editor .desktop e-text-book audio-list audio-item .glyphicon-remove {
+          float: left;
+          width: 20px;
+          height: 20px;
+          margin: 5px 0 0 15px;
+          cursor: pointer; }
+      .e-text-book-editor .desktop e-text-book audio-list .add-audio {
+        float: left;
+        width: 100%;
+        padding: 10px;
+        text-align: center;
+        background: #ddd;
+        cursor: pointer; }
+
+.file-manager {
+  display: none;
+  float: left;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.3); }
+  .file-manager .nav {
+    float: left;
+    width: 100%; }
+    .file-manager .nav .form-group {
+      float: right;
+      margin: 10px 0 0 0; }
+      .file-manager .nav .form-group label {
+        float: left;
+        margin: 3px 10px 0 0;
+        cursor: pointer; }
+        .file-manager .nav .form-group label .glyphicon {
+          margin: 0 5px 0 0; }
+      .file-manager .nav .form-group input {
+        float: left; }
+  .file-manager .window {
+    float: left;
+    width: 800px;
+    height: 400px;
+    background: #fff;
+    overflow: hidden;
+    border-radius: 5px;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    margin: -150px 0 0 -400px;
+    padding: 30px; }
+    .file-manager .window .close {
+      float: right;
+      width: 10px;
+      height: 10px;
+      margin: -20px -10px 0 0;
+      cursor: pointer; }
+    .file-manager .window .list {
+      float: left;
+      width: 60%;
+      padding: 20px 0 0 0;
+      overflow-y: scroll;
+      height: 328px; }
+      .file-manager .window .list .item {
+        float: left;
+        width: 48%;
+        height: 35px;
+        line-height: 22px;
+        margin: 0 2% 10px 0;
+        font-size: 12px;
+        color: #555;
+        padding: 8px 0 7px 33px;
+        cursor: pointer;
+        overflow: hidden;
+        background-repeat: no-repeat;
+        background-position: left middle;
+        background-image: url("/img/file-ico/_blank.png"); }
+        .file-manager .window .list .item.png {
+          background-image: url("/img/file-ico/png.png"); }
+        .file-manager .window .list .item.jpg {
+          background-image: url("/img/file-ico/jpg.png"); }
+        .file-manager .window .list .item.gif {
+          background-image: url("/img/file-ico/gif.png"); }
+        .file-manager .window .list .item.mp3 {
+          background-image: url("/img/file-ico/mp3.png"); }
+        .file-manager .window .list .item.mp4 {
+          background-image: url("/img/file-ico/mp4.png"); }
+        .file-manager .window .list .item.selected {
+          font-weight: bold; }
+    .file-manager .window .player {
+      float: left;
+      width: 40%;
+      padding: 20px 0 0 0; }
+    .file-manager .window #images .player {
+      height: 200px; }
+      .file-manager .window #images .player .display {
+        float: left;
+        border: solid 1px #ddd;
+        width: 90%;
+        height: 100%;
+        margin: 0 0 0 10%;
+        background-size: 100% auto;
+        background: no-repeat center center; }
+      .file-manager .window #images .player .buttons {
+        float: left;
+        width: 100%;
+        padding: 10px 10% 0 10%; }
+    .file-manager .window #audios .player {
+      float: left; }
+      .file-manager .window #audios .player audio {
+        float: left;
+        width: 80%;
+        margin: 0 0 0 10%; }
+      .file-manager .window #audios .player .buttons {
+        float: left;
+        width: 100%;
+        padding: 10px 10% 0 10%; }
+    .file-manager .window #videos .player {
+      float: left; }
+      .file-manager .window #videos .player video {
+        float: left;
+        width: 80%;
+        margin: 0 0 0 10%; }
+      .file-manager .window #videos .player .buttons {
+        float: left;
+        width: 100%;
+        padding: 10px 10% 0 10%; }
+
+.book-list a {
+  color: #333; }
+.book-list li {
+  margin: 0 0 5px 0; }
+.book-list span {
+  margin: 0 3px 0 0; }
+
+.breadcrumb .glyphicon {
+  color: #245269;
+  text-shadow: 1px 1px 0 #fff; }
+
+.popover-text {
+  font-size: 12px; }
+
+.footer {
+  float: left;
+  width: 100%;
+  margin: 30px 0 0 0;
+  height: 50px;
+  background: #eee;
+  border-top: solid 1px #E7E7E7; }
+
+e-text-book-editor .display e-text-book, .e-text-book-viewer e-text-book {
+  float: left;
+  width: 100%; }
+  e-text-book-editor .display e-text-book module, .e-text-book-viewer e-text-book module {
+    float: left;
+    width: 100%; }
+    e-text-book-editor .display e-text-book module module-title, .e-text-book-viewer e-text-book module module-title {
+      float: left;
+      width: 28%;
+      height: 150px;
+      vertical-align: middle;
+      font-size: 25px;
+      background: #2b542c;
+      color: #fff; }
+      e-text-book-editor .display e-text-book module module-title view-element, .e-text-book-viewer e-text-book module module-title view-element {
+        display: table-cell;
+        vertical-align: middle;
+        height: 150px;
+        width: 100%;
+        padding: 0 0 0 20px; }
+    e-text-book-editor .display e-text-book module module-background-image, .e-text-book-viewer e-text-book module module-background-image {
+      float: left;
+      width: 72%;
+      height: 150px;
+      border: solid 1px #2b542c; }
+    e-text-book-editor .display e-text-book module module-questions, .e-text-book-viewer e-text-book module module-questions {
+      float: left;
+      clear: left;
+      width: 28%;
+      height: 130px;
+      border: solid 1px #2b542c;
+      border-width: 0 0 1px 1px; }
+      e-text-book-editor .display e-text-book module module-questions view-element, .e-text-book-viewer e-text-book module module-questions view-element {
+        display: table-cell;
+        height: 130px;
+        vertical-align: middle;
+        padding: 0 0 0 20px;
+        font-size: 12px; }
+    e-text-book-editor .display e-text-book module module-description, .e-text-book-viewer e-text-book module module-description {
+      float: left;
+      width: 72%;
+      height: 130px;
+      border: solid 1px #2b542c;
+      border-width: 0 1px 1px 1px; }
+      e-text-book-editor .display e-text-book module module-description view-element, .e-text-book-viewer e-text-book module module-description view-element {
+        display: table-cell;
+        height: 130px;
+        vertical-align: middle;
+        padding: 0 0 0 20px;
+        font-size: 12px; }
+  e-text-book-editor .display e-text-book blocks, .e-text-book-viewer e-text-book blocks {
+    float: left;
+    width: 100%;
+    padding: 20px 0 0 0; }
+    e-text-book-editor .display e-text-book blocks rule, .e-text-book-viewer e-text-book blocks rule {
+      float: left;
+      width: 100%;
+      margin: 0 0 15px 0; }
+      e-text-book-editor .display e-text-book blocks rule rule-title, .e-text-book-viewer e-text-book blocks rule rule-title {
+        float: left;
+        width: 100%;
+        padding: 30px;
+        background: #ccedcd; }
+    e-text-book-editor .display e-text-book blocks block, .e-text-book-viewer e-text-book blocks block {
+      float: left;
+      width: 100%;
+      padding: 0 0 20px 0 0;
+      margin: 0 0 20px 0; }
+      e-text-book-editor .display e-text-book blocks block block-index, .e-text-book-viewer e-text-book blocks block block-index {
+        float: left;
+        width: 3%;
+        height: 30px; }
+      e-text-book-editor .display e-text-book blocks block block-categories, .e-text-book-viewer e-text-book blocks block block-categories {
+        float: left;
+        width: 17%;
+        height: 30px; }
+        e-text-book-editor .display e-text-book blocks block block-categories block-category, .e-text-book-viewer e-text-book blocks block block-categories block-category {
+          float: left;
+          width: 30px;
+          height: 30px; }
+      e-text-book-editor .display e-text-book blocks block block-title, .e-text-book-viewer e-text-book blocks block block-title {
+        float: left;
+        font-weight: bold;
+        font-size: 13px;
+        width: 80%; }
+      e-text-book-editor .display e-text-book blocks block block-content, .e-text-book-viewer e-text-book blocks block block-content {
+        float: left;
+        width: 100%;
+        padding: 0 0 0 21%; }
+        e-text-book-editor .display e-text-book blocks block block-content widget, .e-text-book-viewer e-text-book blocks block block-content widget {
+          float: left;
+          width: 100%;
+          padding: 10px 0 0 0; }
+      e-text-book-editor .display e-text-book blocks block translate-comparative, .e-text-book-viewer e-text-book blocks block translate-comparative {
+        float: left;
+        width: 100%; }
+        e-text-book-editor .display e-text-book blocks block translate-comparative list, .e-text-book-viewer e-text-book blocks block translate-comparative list {
+          float: left;
+          width: 50%; }
+        e-text-book-editor .display e-text-book blocks block translate-comparative answers, .e-text-book-viewer e-text-book blocks block translate-comparative answers {
+          float: left;
+          width: 50%; }
+        e-text-book-editor .display e-text-book blocks block translate-comparative list item, e-text-book-editor .display e-text-book blocks block translate-comparative answers item, .e-text-book-viewer e-text-book blocks block translate-comparative list item, .e-text-book-viewer e-text-book blocks block translate-comparative answers item {
+          float: left;
+          clear: both;
+          margin: 0 0 5px -7px;
+          padding: 0 7px;
+          position: relative;
+          cursor: pointer; }
+          e-text-book-editor .display e-text-book blocks block translate-comparative list item.selected, e-text-book-editor .display e-text-book blocks block translate-comparative answers item.selected, .e-text-book-viewer e-text-book blocks block translate-comparative list item.selected, .e-text-book-viewer e-text-book blocks block translate-comparative answers item.selected {
+            background: #ddd; }
+          e-text-book-editor .display e-text-book blocks block translate-comparative list item.success, e-text-book-editor .display e-text-book blocks block translate-comparative answers item.success, .e-text-book-viewer e-text-book blocks block translate-comparative list item.success, .e-text-book-viewer e-text-book blocks block translate-comparative answers item.success {
+            background: #89d489; }
+          e-text-book-editor .display e-text-book blocks block translate-comparative list item.failed, e-text-book-editor .display e-text-book blocks block translate-comparative answers item.failed, .e-text-book-viewer e-text-book blocks block translate-comparative list item.failed, .e-text-book-viewer e-text-book blocks block translate-comparative answers item.failed {
+            background: #e47A75; }
+
+image-description {
+  float: left;
+  width: 100%; }
+  image-description images {
+    float: left;
+    width: 100%; }
+    image-description images item {
+      width: 100px;
+      float: left;
+      margin: 0 5px 0 0; }
+      image-description images item image-title {
+        float: left;
+        width: 100%; }
+      image-description images item image-view {
+        float: left;
+        width: 100px;
+        height: 100px;
+        background: no-repeat center center;
+        background-size: 100% auto; }
+        image-description images item image-view span {
+          border: solid 1px #398439;
+          padding: 2px 5px;
+          font-size: 12px; }
+
+.e-text-book-viewer image-description images item image-title {
+  display: none; }
+.e-text-book-viewer image-description descs {
+  float: left;
+  width: 100%;
+  padding: 10px 0 0 0; }
+  .e-text-book-viewer image-description descs item {
+    float: left;
+    width: 50%;
+    margin: 0 0 5px 0; }
+    .e-text-book-viewer image-description descs item select {
+      margin: 0 5px 0 0;
+      color: #000; }
+    .e-text-book-viewer image-description descs item.failed {
+      background: #942a25;
+      color: #fff; }
+    .e-text-book-viewer image-description descs item.success {
+      background: #398439;
+      color: #fff; }
+
+.e-text-book-viewer audio-list {
+  float: left;
+  width: 100%; }
+  .e-text-book-viewer audio-list audio-item {
+    float: left;
+    width: 100%;
+    margin: 0 0 15px; }
+.e-text-book-viewer audio-description {
+  float: left;
+  width: 100%; }
+
+.e-text-book-viewer video-list {
+  float: left;
+  width: 100%; }
+  .e-text-book-viewer video-list video-item {
+    float: left;
+    width: 100%;
+    margin: 0 0 15px; }
+    .e-text-book-viewer video-list video-item video {
+      float: left; }
+.e-text-book-viewer video-description {
+  float: left;
+  width: 100%; }
+
+.e-text-book-viewer logic-statement {
+  float: left;
+  width: 100%; }
+  .e-text-book-viewer logic-statement item {
+    float: left;
+    width: 100%;
+    margin: 0 0 10px 0; }
+    .e-text-book-viewer logic-statement item.failed {
+      background: #942a25;
+      color: #fff; }
+    .e-text-book-viewer logic-statement item.success {
+      background: #398439;
+      color: #fff; }
+    .e-text-book-viewer logic-statement item view-element {
+      float: left;
+      width: 80%;
+      padding: 4px 0 0 10px; }
+    .e-text-book-viewer logic-statement item select {
+      float: left;
+      width: 18%;
+      margin: 0 0 0 2%;
+      color: #000; }
+
+.e-text-book-viewer .check-endings {
+  float: left;
+  width: 100%; }
+  .e-text-book-viewer .check-endings .words .title {
+    display: none; }
+  .e-text-book-viewer .check-endings .words .list {
+    float: left;
+    width: 100%; }
+    .e-text-book-viewer .check-endings .words .list .item {
+      float: left;
+      width: 50%;
+      padding: 5px; }
+      .e-text-book-viewer .check-endings .words .list .item.failed {
+        background: #942a25;
+        color: #fff; }
+      .e-text-book-viewer .check-endings .words .list .item.success {
+        background: #398439;
+        color: #fff; }
+      .e-text-book-viewer .check-endings .words .list .item view-element {
+        float: left; }
+      .e-text-book-viewer .check-endings .words .list .item select {
+        float: left;
+        color: #000; }
+  .e-text-book-viewer .check-endings .endings-list {
+    display: none; }
+
+.image-tall {
+  background-size: auto 100% !important; }
+
+.image-wide {
+  background-size: 100% auto !important; }

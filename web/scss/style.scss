@@ -1,0 +1,720 @@
+.e-text-book-editor {
+  float: left;
+  width: 100%;
+  height: 100%;
+  .properties {
+    float: left;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 50px;
+    background: #eee;
+    .save {
+      .glyphicon {
+        margin: 0 5px 0 0;
+      }
+    }
+    #book-list {
+      float: right;
+      margin: 10px 0 0 0;
+    }
+  }
+  .desktop, .display {
+    float: left;
+    width: 50%;
+    height: 100%;
+    padding: 20px;
+    overflow-y: scroll;
+  }
+  .display {
+    overflow: hidden;
+  }
+  .desktop {
+    e-text-book {
+      float: left;
+      width: 100%;
+      add-module-button, add-block-button {
+        float: left;
+        width: 100%;
+        height: 22px;
+        overflow: hidden;
+        text-align: center;
+        cursor: pointer;
+        transition: all 1s ease; -webkit-transition: all 1s ease; -moz-transition: all 1s ease;
+        &.open {
+          overflow: visible;
+          wrap {
+            transition: all 1s ease; -webkit-transition: all 1s ease; -moz-transition: all 1s ease;
+            margin: 0;
+          }
+          .trigger { display: none; }
+        }
+        wrap {
+          float: left;
+          width: 100%;
+          padding: 0 0 0 0;
+          margin: -25px 0 0 0;
+        }
+      }
+      add-block-button {
+        a {
+          font-size: 12px;
+          margin: 0 5px 0 0;
+          padding: 0 0 0 15px;
+        }
+      }
+      block add-block-button, rule add-block-button {
+        position: relative;
+        margin: -50px 0 0 0;
+        top: 80px;
+      }
+      control-panel {
+        float: right;
+        height: 20px;
+        margin: -30px -15px 0 0;
+        position: relative;
+        display: none;
+        item {
+          float: left;
+          width: 20px;
+          height: 20px;
+          border: solid 1px #eee;
+          border-radius: 3px;
+          font-size: 13px;
+          margin: 5px 5px 0 0;
+          text-align: center;
+          cursor: pointer;
+          color: #999;
+          &:hover { color: #333; }
+          span {
+            position: relative;
+            top: 2px;
+          }
+          &.current {
+            background: #eee;
+          }
+        }
+      }
+      module {
+        float: left;
+        width: 100%;
+        padding: 20px 0 0 0;
+        &:hover {
+          control-panel.module-panel { display: block; }
+        }
+        edit-element {
+          display: none;
+          input[type=text] {
+            float: left;
+            width: 100%;
+            text-indent: 10px;
+            height: 30px;
+          }
+          textarea {
+            float: left;
+            width: 100%;
+            padding: 10px;
+          }
+        }
+        &[editable="1"] {
+          view-element.module-element { display: none; }
+          edit-element.module-element { display: block; }
+          control-panel.module-panel { display: block; }
+        }
+        module-title {
+          float: left;
+          width: 100%;
+          margin: 0 0 10px;
+        }
+        module-questions {
+          float: left;
+          width: 100%;
+          margin: 0 0 10px;
+        }
+        module-description {
+          float: left;
+          width: 100%;
+          margin: 0 0 10px;
+        }
+        blocks {
+          float: left;
+          width: 100%;
+          padding: 20px 0 0 0;
+          rule {
+            float: left;
+            width: 100%;
+            margin: 0 0 15px 0;
+            rule-title {
+              float: left;
+              width: 100%;
+              padding: 30px;
+              background: #ccedcd;
+            }
+          }
+          block, rule {
+            float: left;
+            width: 100%;
+            border: solid 1px #eee;
+            padding: 30px 15px 15px 15px;
+            margin: 0 0 52px 0;
+            block-headline {
+              float: left;
+              width: 100%;
+              block-index {
+                display: none;
+                float: left;
+              }
+              block-categories {
+                float: left;
+              }
+              block-title {
+                float: left;
+                width: 100%;
+                input {
+                  float: left;
+                  width: 100%;
+                }
+              }
+            }
+            block-content {
+              float: left;
+              width: 100%;
+              padding: 10px 0 0 0;
+              widget {
+                float: left;
+                width: 100%;
+                margin: 10px 0 0 0;
+                label{
+                  width: 100px;
+                  float: left;
+                  display: none;}
+                .widget-selector {
+                  float: left;
+                  display: none;
+                }
+                widget-content {
+                  float: left;
+                  width: 100%;
+                  margin: 10px 0 0 0;
+                }
+              }
+            }
+            &[editable="1"] {
+              edit-element ,control-panel { display: block; }
+              view-element { display: none; }
+              block-content {
+                widget {
+                  .widget-selector, label {
+                    display: block;
+                  }
+                }
+              }
+            }
+            edit-element { display: none; }
+            &:hover {
+              control-panel { display: block; }
+            }
+          }
+        }
+      }
+      logic-statement {
+        float: left;
+        width: 100%;
+        item {
+          float: left;
+          width: 100%;
+          margin: 0 0 10px 0;
+
+          .text {
+            float: left;
+            width: 70%;
+          }
+
+          .value {
+            float: left;
+            width: 18%;
+            margin: 2px 0 0 2%;
+            select {
+              float: left;
+              width: 100%;
+            }
+          }
+          .remove {
+            float: left;
+            margin: 7px 0 0 2%;
+            cursor: pointer;
+          }
+        }
+        edit-element.new-statement {
+          float: left;
+          width: 100%;
+          input {
+            float: left;
+            width: 70%;
+          }
+          select {
+            float: left;
+            width: 18%;
+            margin: 2px 0 0 2%;
+          }
+          add {
+            float: left;
+            margin: 7px 0 0 2%;
+            width: 2%;
+            cursor: pointer;
+          }
+        }
+      }
+      block[editable='0']{
+        .check-endings {
+          .words {
+            width: 100%;
+            .list {
+              .item {
+                width: 50%;
+              }
+            }
+          }
+        }
+      }
+      .check-endings {
+        float: left;
+        width: 100%;
+        .endings-list {
+          display: none;
+        }
+        .words {
+          float: left;
+          width: 70%;
+          .item {
+            float: left;
+            width: 91%;
+            margin: 5px 0 5px 0;
+            .glyphicon-remove {
+              float: left;
+              width: 5%;
+              margin: 7px 0 0 0;
+              cursor: pointer;
+            }
+            edit-element {
+              float: left;
+              width: 95%;
+              input { width: 70%; }
+              select {
+                float: left;
+                width: 28%;
+                margin: 2px 0 0 0;
+              }
+            }
+          }
+        }
+        .endings {
+          float: left;
+          width: 30%;
+          .item {
+            float: left;
+            width: 97%;
+            margin: 5px 0 5px 0;
+            .glyphicon-remove {
+              float: left;
+              width: 5%;
+              margin: 7px 0 0 0;
+              cursor: pointer;
+            }
+            edit-element {
+              float: left;
+              width: 90%;
+              input { width: 98%; }
+            }
+          }
+        }
+        .add-word, .add-ending {
+          input { width: 85%; }
+          .add {
+            cursor: pointer;
+            float: left;
+            margin: 7px 0 0 5px;
+          }
+        }
+      }
+
+      .test-widget {
+        float: left;
+        width: 100%;
+        .glyphicon {
+          float: left;
+          width: 17px;
+          padding: 5px 2px;
+          height: inherit;
+          cursor: pointer;
+        }
+        edit-element {
+          input[type=text] {
+            float: left;
+            width: calc(100% - 20px);
+          }
+        }
+        .question {
+          float: none;
+          width: 100%;
+          height: 30px;
+          clear: both;
+          margin-bottom: 10px;
+        }
+        .choices {
+          width: 100%;
+          display: table;
+          label{
+            width: 100% !important;
+            margin: 10px 0 2px;
+          }
+          edit-element {
+            float: left;
+            max-width: 100%;
+            min-width: 240px;
+            margin-bottom:10px;
+            input[type="text"] {
+              width: calc(100% - 17px) !important;
+            }
+          }
+        }
+      }
+      translate-comparative {
+        float: left;
+        width: 100%;
+        .new-item {
+          float: left;
+          width: 100%;
+          input {
+            float: left;
+            width: 40%;
+            margin: 10px 10px 0 0;
+          }
+          add {
+            float: left;
+            width: 10px;
+            height: 10px;
+            cursor: pointer;
+            color: #2b542c;
+            margin: 14px 0 0 0;
+          }
+        }
+        list {
+          float: left;
+          width: 50%;
+          item {
+            .remove {
+              font-size: 10px;
+              float: right;
+              width: 10px;
+              height: 10px;
+              margin: 4px 10px 0 0;
+              cursor: pointer;
+              color: #eee;
+            }
+            &:hover {
+              .remove {
+                color: #942a25;
+              }
+            }
+          }
+        }
+        answers {
+          float: left;
+          width: 50%;
+        }
+        list, answers {
+          item {
+            float: left;
+            width: 100%;
+            padding: 5px;
+          }
+        }
+      }
+      image-description {
+        float: left;
+        width: 100%;
+        descs {
+          float: left;
+          width: 100%;
+          padding: 10px 0 0 0;
+          item {
+            float: left;
+            width: 50%;
+          }
+        }
+        images {
+          float: left;
+          width: 100%;
+          item {
+            float: left;
+            width: 100px;
+            margin: 0 1px 1px 0;
+            image-view {
+              float: left;
+              width: 100%;
+              height: 100px;
+              background: #ccc no-repeat center center;
+              background-size: 100% auto;
+            }
+            image-title {
+              font-size: 12px;
+            }
+            &:hover {
+              .glyphicon-remove {
+                color: #777;
+              }
+            }
+            .glyphicon-remove {
+              float: right;
+              font-size: 12px;
+              color: #ccc;
+              margin: 5px 5px 0 0;
+              cursor: pointer;
+            }
+          }
+        }
+        .add-image {
+          position: relative;
+          cursor: pointer;
+          float: left;
+          width: 100px;
+          height: 100px;
+          background: #ccc;
+          text-shadow: 1px 1px 0 #fff;
+          font-size: 30px;
+          .glyphicon {
+            position: absolute;
+            top: 37px;
+            left: 37px;
+          }
+        }
+      }
+      video-list {
+        float: left;
+        width: 100%;
+        .add-video {
+          float: left;
+          width: 100%;
+          padding: 10px;
+          text-align: center;
+          background: #ddd;
+          cursor: pointer;
+        }
+        video-item {
+          float: left;
+          width: 100%;
+          video {
+            float: left;
+            width: 90%;
+            margin: 0 0 15px 0;
+          }
+          .glyphicon-remove {
+            float: left;
+            width: 20px;
+            height: 20px;
+            margin: 5px 0 0 15px;
+            cursor: pointer;
+          }
+        }
+      }
+      video-description {
+        float: left;
+        width: 100%;
+        edit-element {
+          margin: 10px 0 0 0;
+        }
+      }
+      audio-description {
+        float: left;
+        width: 100%;
+        edit-element {
+          margin: 10px 0 0 0;
+        }
+      }
+      audio-list {
+        float: left;
+        width: 100%;
+        audio-item {
+          float: left;
+          width: 100%;
+          audio {
+            float: left;
+            width: 90%;
+            margin: 0 0 15px 0;
+          }
+          .glyphicon-remove {
+            float: left;
+            width: 20px;
+            height: 20px;
+            margin: 5px 0 0 15px;
+            cursor: pointer;
+          }
+        }
+        .add-audio {
+          float: left;
+          width: 100%;
+          padding: 10px;
+          text-align: center;
+          background: #ddd;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+.file-manager {
+  display: none;
+  float: left;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: fixed;
+  top: 0; left : 0;
+  background: rgba(0, 0, 0 , 0.3);
+  .nav {
+    float: left;
+    width: 100%;
+    .form-group {
+      float: right;
+      margin: 10px 0 0 0;
+      label {
+        float: left;
+        margin: 3px 10px 0 0;
+        cursor: pointer;
+        .glyphicon {
+          margin: 0 5px 0 0;
+        }
+      }
+      input {
+        float: left;
+      }
+    }
+  }
+  .window {
+    float: left;
+    width: 800px;
+    height: 400px;
+    background: #fff;
+    overflow: hidden;
+    border-radius: 5px;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    margin: -150px 0 0 -400px;
+    padding: 30px;
+    .close {
+      float: right;
+      width: 10px;
+      height: 10px;
+      margin: -20px -10px 0 0;
+      cursor: pointer;
+    }
+    .list {
+      float: left;
+      width: 60%;
+      padding: 20px 0 0 0;
+      overflow-y: scroll;
+      height: 328px;
+      .item {
+        float: left;
+        width: 48%;
+        height: 35px;
+        line-height: 22px;
+        margin: 0 2% 10px 0;
+        font-size: 12px;
+        color: #555;
+        padding: 8px 0 7px 33px;
+        cursor: pointer;
+        overflow: hidden;
+        background-repeat: no-repeat;
+        background-position: left middle;
+        background-image: url('/img/file-ico/_blank.png');
+        &.png { background-image: url('/img/file-ico/png.png'); }
+        &.jpg { background-image: url('/img/file-ico/jpg.png'); }
+        &.gif { background-image: url('/img/file-ico/gif.png'); }
+        &.mp3 { background-image: url('/img/file-ico/mp3.png'); }
+        &.mp4 { background-image: url('/img/file-ico/mp4.png'); }
+        &.selected { font-weight: bold; }
+      }
+    }
+    .player {
+      float: left;
+      width: 40%;
+      padding: 20px 0 0 0;
+    }
+    #images .player {
+      height: 200px;
+      .display {
+        float: left;
+        border: solid 1px #ddd;
+        width: 90%;
+        height: 100%;
+        margin: 0 0 0 10%;
+        background-size: 100% auto;
+        background: no-repeat center center;
+      }
+      .buttons {
+        float: left;
+        width: 100%;
+        padding: 10px 10% 0 10%;
+      }
+    }
+    #audios .player {
+      float: left;
+      audio {
+        float: left;
+        width: 80%;
+        margin: 0 0 0 10%;
+      }
+      .buttons {
+        float: left;
+        width: 100%;
+        padding: 10px 10% 0 10%;
+      }
+    }
+    #videos .player {
+      float: left;
+      video {
+        float: left;
+        width: 80%;
+        margin: 0 0 0 10%;
+      }
+      .buttons {
+        float: left;
+        width: 100%;
+        padding: 10px 10% 0 10%;
+      }
+    }
+  }
+}
+
+.book-list {
+  a { color: #333; }
+  li { margin: 0 0 5px 0; }
+  span { margin: 0 3px 0 0; }
+}
+
+.breadcrumb {
+  .glyphicon {
+    color: #245269;
+    text-shadow: 1px 1px 0 #fff;
+  }
+}
+
+.popover-text {
+  font-size: 12px;
+}
+
+.footer {
+  float: left;
+  width :100%;
+  margin: 30px 0 0 0;
+  height: 50px;
+  background: #eee;
+  border-top: solid 1px #E7E7E7;
+}
+
+@import '../book-template/scss/style';

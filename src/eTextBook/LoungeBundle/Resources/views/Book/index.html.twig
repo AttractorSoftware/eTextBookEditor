@@ -1,0 +1,23 @@
+{% extends '::lounge-template.html.twig' %}
+
+{% block pageHeader %} Учебники {% endblock %}
+
+{% block pageContent %}
+    <ul class="list-unstyled book-list">
+        <li>
+            <span class="glyphicon glyphicon-file"></span>
+            <a id="addBookButton" href="#" data-toggle="modal" data-target="#bookFormModal"> Создать новый учебник </a>
+            {% include 'eTextBookLoungeBundle:Book:form.html.twig' %}
+        </li>
+        <li> &nbsp; </li>
+        {% for book in books %}
+            <li>
+                <a href="{{ path('book-edit', {'slug': book.slug, 'module': ' ' })  }}">
+                    <span class="glyphicon glyphicon-book"></span>
+                    {{ book.title }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
