@@ -288,6 +288,8 @@ class ModuleContext extends eTextBookContext {
         $editButton->click();
 
         $this->setVar('latestRuleUID', $rule->getAttribute('uid'));
+
+        sleep(1);
     }
 
     /**

@@ -36,7 +36,7 @@ class FeatureContext extends eTextBookContext {
     public function openPage($url) {
         eTextBookDriver::getInstance()->openPage($url);
         sleep(1);
-        $this->getDriver()->executeScript('window.resizeTo(1300, 1000)');
+        $this->getDriver()->resizeWindow(1200, 756);
     }
 
     /**
