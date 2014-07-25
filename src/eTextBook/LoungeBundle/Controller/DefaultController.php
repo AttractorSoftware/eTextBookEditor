@@ -14,4 +14,12 @@ class DefaultController extends Controller {
     public function indexAction() {
         return array();
     }
+
+    /**
+     * @Route("/readers", name="readers")
+     * @Template()
+     */
+    public function readersAction() {
+        return array();
+    }
 }

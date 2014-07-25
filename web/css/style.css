@@ -574,6 +574,15 @@
   background: #eee;
   border-top: solid 1px #E7E7E7; }
 
+.page-header h4 {
+  padding: 0 15px; }
+  .page-header h4 .book-download {
+    float: right;
+    font-weight: normal; }
+  .page-header h4 span {
+    color: #ccc;
+    margin: 0 0 0 10px; }
+
 e-text-book-editor .display e-text-book, .e-text-book-viewer e-text-book {
   float: left;
   width: 100%; }

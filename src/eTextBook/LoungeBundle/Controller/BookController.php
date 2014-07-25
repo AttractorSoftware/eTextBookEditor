@@ -80,7 +80,7 @@ class BookController extends Controller {
             $fileManager->copyFilesFromDirectory($templateDir . "/fonts", $fontsDir);
             $fileManager->copyFilesFromDirectory($templateDir . "/img", $imgDir);
 
-            file_put_contents($infoFilePath, "title =+= " . $bookData['title']);
+            file_put_contents($infoFilePath, json_encode($bookData));
 
             $indexContent = file_get_contents($templateDir . "/index.html");
 

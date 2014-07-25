@@ -7,6 +7,9 @@ class Book {
     private $filePath;
     private $slug;
     private $title;
+    private $authors;
+    private $editor;
+    private $isbn;
     private $tmpDir;
     private $images = array();
     private $videos = array();
@@ -21,7 +24,7 @@ class Book {
             $this->tmpDir = $kernel->getContainer()->getParameter('book_tmp_dir');
             $this->extractData();
             $this->parseSlug();
-            $this->parseTitle();
+            $this->parseInfo();
             $this->modulesPath = $this->tmpDir . '/' . $this->getSlug() .'/modules/';
             $this->parseImages();
             $this->parseAudio();
@@ -116,13 +119,13 @@ class Book {
 
     }
 
-    public function parseTitle() {
+    public function parseInfo() {
         if(is_file($this->tmpDir . $this->slug . '/book.info')) {
-            $bookInfo = file_get_contents($this->tmpDir . $this->slug . '/book.info');
-            $bookInfo = explode('=+=', $bookInfo);
-            $this->title = trim($bookInfo[1]);
-        } else {
-            die('info file "'. $this->tmpDir . $this->slug . '/book.info' .'" not found');
+            $bookInfo = json_decode(file_get_contents($this->tmpDir . $this->slug . '/book.info'));
+            $this->title = $bookInfo->title;
+            $this->authors = isset($bookInfo->authors) ? $bookInfo->authors : '';
+            $this->editor = isset($bookInfo->editor) ? $bookInfo->editor : '';
+            $this->isbn = isset($bookInfo->isbn) ? $bookInfo->isbn : '';
         }
     }
 
@@ -186,6 +189,18 @@ class Book {
 
     public function getAudios() {
         return $this->audios;
+    }
+
+    public function getAuthors() {
+        return $this->authors;
+    }
+
+    public function getEditor() {
+        return $this->editor;
+    }
+
+    public function getISBN() {
+        return $this->isbn;
     }
 
 }

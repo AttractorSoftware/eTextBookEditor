@@ -12,12 +12,17 @@
 /composer.lock
 /node_modules
 /bower_components
+/.idea
 
-web/books/*
-web/tmp/*
+/web/books/*
+/web/tmp/*
 
-web/css/main-style.css
-web/css/main-style.min.css
+/web/css/main-style.css
+/web/css/main-style.min.css
+/web/book-template/css/main-style.css
+/web/book-template/css/main-style.min.css
 
-web/js/script.js
-web/js/script.min.js
+/web/js/script.js
+/web/js/script.min.js
+/web/book-template/js/script.js
+/web/book-template/js/script.min.js

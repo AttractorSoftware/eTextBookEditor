@@ -15,20 +15,20 @@ module.exports = function (grunt) {
                 ],
                 dest: 'web/js/script.js'
             }
-//            ,template: {
-//                src: [
-//                    'bower_components/jquery/dist/jquery.min.js'
-//                    , 'bower_components/underscore/underscore.js'
-//                    , 'bower_components/backbone/backbone.js'
-//                    , 'web/js/app.js'
-//                    , 'web/js/eTextBook/utils.js'
-//                    , 'web/js/eTextBook/widget.js'
-//                    , 'web/js/eTextBook/widgetRepository.js'
-//                    , 'web/js/eTextBook/widget/*.js'
-//                    , 'web/js/html5Player.js'
-//                ],
-//                dest: 'template/js/script.js'
-//            }
+            ,template: {
+                src: [
+                    'bower_components/jquery/dist/jquery.min.js'
+                    , 'bower_components/underscore/underscore.js'
+                    , 'bower_components/backbone/backbone.js'
+                    , 'web/js/app.js'
+                    , 'web/js/eTextBook/utils.js'
+                    , 'web/js/eTextBook/widget.js'
+                    , 'web/js/eTextBook/widgetRepository.js'
+                    , 'web/js/eTextBook/widget/*.js'
+                    , 'web/js/html5Player.js'
+                ],
+                dest: 'book-template/js/script.js'
+            }
         }, concat_css: {
             main: {
                 src: [
@@ -36,35 +36,35 @@ module.exports = function (grunt) {
                     , 'web/css/style.css'
                 ], dest: 'web/css/main-style.css'
             }
-//            ,template: {
-//                src: [
-//                    'bower_components/bootstrap/dist/css/bootstrap.min.css'
-//                    , '/css/style.css'
-//                    , 'css/html5Player.css'
-//                ], dest: 'template/css/main-style.css'
-//            }
+            ,template: {
+                src: [
+                    'bower_components/bootstrap/dist/css/bootstrap.min.css'
+                    , '/css/style.css'
+                    , 'css/html5Player.css'
+                ], dest: 'book-template/css/main-style.css'
+            }
         }, cssmin: {
             main: {
                 files: {
                     'web/css/main-style.min.css': ['web/css/main-style.css']
                 }
             }
-//            ,template: {
-//                files: {
-//                    'template/css/main-style.min.css': ['template/css/main-style.css']
-//                }
-//            }
+            ,template: {
+                files: {
+                    'book-template/css/main-style.min.css': ['book-template/css/main-style.css']
+                }
+            }
         }, uglify: {
             main: {
                 files: {
                     'web/js/script.min.js': '<%= concat.main.dest %>'
                 }
             }
-//            ,template: {
-//                files: {
-//                    'template/js/script.min.js': '<%= concat.template.dest %>'
-//                }
-//            }
+            ,template: {
+                files: {
+                    'book-template/js/script.min.js': '<%= concat.template.dest %>'
+                }
+            }
         }
     });
 

@@ -717,4 +717,18 @@
   border-top: solid 1px #E7E7E7;
 }
 
+.page-header {
+  h4 {
+    padding: 0 15px;
+    .book-download {
+      float: right;
+      font-weight: normal;
+    }
+    span {
+      color: #ccc;
+      margin: 0 0 0 10px;
+    }
+  }
+}
+
 @import '../book-template/scss/style';

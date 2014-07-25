@@ -1,6 +1,13 @@
 {% extends '::lounge-template.html.twig' %}
 
-{% block pageHeader %} {{ book.title }} {% endblock %}
+{% block pageHeader %}
+    <h2>{{ book.title }}</h2>
+    <h4>
+        {{ book.authors }}
+        <span>ISBN: {{ book.ISBN }}</span>
+        <a href="/books/{{ book.slug }}.etb" class="label label-primary book-download">Скачать учебник</a>
+    </h4>
+{% endblock %}
 
 {% block pageContent %}
 
