@@ -70,3 +70,5 @@ services:
     class: eTextBook\LoungeBundle\Lib\Transliterate
   fileManager:
     class: eTextBook\LoungeBundle\Lib\FileManager
+  bookPacker:
+    class: eTextBook\LoungeBundle\Lib\BookPacker

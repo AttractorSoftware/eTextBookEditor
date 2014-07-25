@@ -46,8 +46,9 @@ var moduleForm = function() {
                     $this.modal.find('.modal-footer .btn-primary').show();
                 } else {
                     $this.success('Модуль успешно создан');
-                    var url = $this.newElementUrlTemplate.replace(':slug', module.bookSlug).replace(':module', response.data.slug) + '.html';
-                    $('#addModuleBtn').parent().before('<li><a href="'+ url +'">' + module.title + '</a></li>');
+                    var url = $this.newElementUrlTemplate.replace(':slug', module.bookSlug).replace(':module', response.data.slug);
+                    var link = $('<li><a href="'+ url +'">' + module.title + '</a></li>');
+                    $('#addModuleBtn').parent().before(link);
                 }
             });
         }

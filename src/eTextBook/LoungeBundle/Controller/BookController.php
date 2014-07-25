@@ -22,7 +22,11 @@ class BookController extends Controller {
         $books = array();
 
         foreach($fileManager->fileList($booksDir) as $fileName) {
-            $books[] = new Book($booksDir . $fileName);
+            $filePart = explode('.', $fileName);
+            $filePart = end($filePart);
+            if($filePart == 'etb') {
+                $books[] = new Book($booksDir . $fileName);
+            }
         }
 
         return array('books' => $books);
@@ -44,63 +48,13 @@ class BookController extends Controller {
                 ,'reason' => 'Учебник с таким названием уже существует'
             );
         } else {
-
-            $bookDir = $tempDir = $booksDir . $bookSlug;
-            mkdir($bookDir);
-            $bookDir .= "/" . $bookSlug;
-
-            $templateDir = $this->container->getParameter('book_template_dir');
-            $cssDir = $bookDir . '/css';
-            $fontsDir = $bookDir . '/fonts';
-            $jsDir = $bookDir . '/js';
-            $imgDir = $bookDir . '/img';
-            $modulesDir = $bookDir . '/modules';
-            $contentDir = $bookDir . '/content';
-            $videoContentDir = $contentDir . '/video';
-            $audioContentDir = $contentDir . '/audio';
-            $imgContentDir = $contentDir . '/img';
-            $infoFilePath = $bookDir . '/book.info';
-            $indexFilePath = $bookDir . '/index.html';
-
-            mkdir($bookDir);
-            mkdir($cssDir);
-            mkdir($jsDir);
-            mkdir($imgDir);
-            mkdir($fontsDir);
-            mkdir($contentDir);
-            mkdir($videoContentDir);
-            mkdir($audioContentDir);
-            mkdir($imgContentDir);
-            mkdir($modulesDir);
-
-            $fileManager = $this->get('fileManager');
-
-            $fileManager->copyFilesFromDirectory($templateDir . "/css", $cssDir);
-            $fileManager->copyFilesFromDirectory($templateDir . "/js", $jsDir);
-            $fileManager->copyFilesFromDirectory($templateDir . "/fonts", $fontsDir);
-            $fileManager->copyFilesFromDirectory($templateDir . "/img", $imgDir);
-
-            file_put_contents($infoFilePath, json_encode($bookData));
-
-            $indexContent = file_get_contents($templateDir . "/index.html");
-
-            $content = '<e-text-book></e-text-book>';
-
-            file_put_contents(
-                $indexFilePath,
-                str_replace(
-                    array("-- title --", "-- content --"),
-                    array($bookData['title'], $content),
-                    $indexContent
-                )
-            );
-
-            $fileManager->zip($bookDir . "/../", $bookDir . "/../../" . $bookSlug . ".etb");
-            $fileManager->removeDir($tempDir);
-
+            $packer = $this->get('bookPacker');
+            $packer->createBookPack($bookData);
             $response = array(
-                'status' => 'ok'
-                ,'data' => array('slug' => $bookSlug)
+                'status' => 'success'
+                ,'data' => array(
+                    'slug' => $bookSlug
+                )
             );
         }
 
@@ -113,10 +67,11 @@ class BookController extends Controller {
      */
     public function editAction($slug, $module) {
         $book = new Book($this->container->getParameter('books_dir') . $slug . '.etb');
+        $modules = $book->getModules();
         return array(
             'book' => $book
-            ,'modules' => $book->getModules()
-            ,'currentModule' => $module
+            ,'modules' => $modules
+            ,'currentModule' => $module == ' ' && count($modules) > 0 ? $modules[0]->slug : $module
         );
     }
 
@@ -126,7 +81,8 @@ class BookController extends Controller {
     public function createModuleAction(Request $request) {
         $moduleData = $request->get('module');
         $book = new Book($moduleData['bookSlug']);
-        $moduleSlug = $book->createModule($moduleData['title'], $this->container->getParameter('book_template_dir'));
+        $moduleSlug = $book->createModule($moduleData['title']);
+        $this->get('bookPacker')->repackBook($moduleData['bookSlug']);
         $response = array('status' => 'success', 'data' => array('slug' => $moduleSlug));
         return new JsonResponse($response);
     }
@@ -142,42 +98,15 @@ class BookController extends Controller {
 
         $rootDir = $tempDir = $this->container->getParameter('books_dir') . $slug;
         $templateDir = $this->container->getParameter('book_template_dir');
-        $tmpDir = $this->container->getParameter('book_tmp_dir') . $slug;
-        mkdir($rootDir);
         $rootDir .= "/" . $slug;
 
-        $cssDir = $rootDir . '/css';
-        $fontsDir = $rootDir . '/fonts';
-        $jsDir = $rootDir . '/js';
-        $imgDir = $rootDir . '/img';
-        $modulesDir = $rootDir . '/modules';
-        $contentDir = $rootDir . '/content';
-        $videoContentDir = $contentDir . '/video';
-        $audioContentDir = $contentDir . '/audio';
-        $imgContentDir = $contentDir . '/img';
-        $infoFilePath = $rootDir . '/book.info';
-        $moduleFilePath = $rootDir . '/modules/' . $request->get('module');
+        $moduleFilePath = $rootDir . '/modules/' . $request->get('module') . '.html';
 
-        mkdir($rootDir);
-        mkdir($cssDir);
-        mkdir($jsDir);
-        mkdir($fontsDir);
-        mkdir($contentDir);
-        mkdir($videoContentDir);
-        mkdir($audioContentDir);
-        mkdir($imgContentDir);
-        mkdir($modulesDir);
-
-        $fileManager->copyFilesFromDirectory($templateDir . "/css", $cssDir);
-        $fileManager->copyFilesFromDirectory($templateDir . "/js", $jsDir);
-        $fileManager->copyFilesFromDirectory($templateDir . "/fonts", $fontsDir);
-        $fileManager->copyFilesFromDirectory($templateDir . "/img", $imgDir);
-
-        if(is_dir($tmpDir)) {
-            $fileManager->copyFilesFromDirectory($tmpDir . '/content/img', $imgContentDir);
-            $fileManager->copyFilesFromDirectory($tmpDir . '/content/audio', $audioContentDir);
-            $fileManager->copyFilesFromDirectory($tmpDir . '/content/video', $videoContentDir);
-        }
+        $packer = $this->get('bookPacker');
+        $packer->setCurrentBookSlug($slug);
+        $packer->createDumpDirs();
+        $packer->copyTemplateFiles();
+        $packer->copyTmpFiles();
 
         $indexContent = file_get_contents($templateDir . "/index.html");
 

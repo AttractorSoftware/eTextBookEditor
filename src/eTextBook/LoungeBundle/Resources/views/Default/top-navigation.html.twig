@@ -7,7 +7,7 @@
             <li {% if app.request.attributes.get('_route') == 'books' %} class="active" {% endif %}>
                 <a href="{{ path('books') }}">Учебники</a>
             </li>
-            <li>
+            <li {% if app.request.attributes.get('_route') == 'readers' %} class="active" {% endif %}>
                 <a href="{{ path('readers') }}">Ридеры</a>
             </li>
             <li>

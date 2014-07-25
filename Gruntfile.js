@@ -27,7 +27,7 @@ module.exports = function (grunt) {
                     , 'web/js/eTextBook/widget/*.js'
                     , 'web/js/html5Player.js'
                 ],
-                dest: 'book-template/js/script.js'
+                dest: 'web/book-template/js/script.js'
             }
         }, concat_css: {
             main: {
@@ -39,9 +39,9 @@ module.exports = function (grunt) {
             ,template: {
                 src: [
                     'bower_components/bootstrap/dist/css/bootstrap.min.css'
-                    , '/css/style.css'
-                    , 'css/html5Player.css'
-                ], dest: 'book-template/css/main-style.css'
+                    , '/web/css/style.css'
+                    , '/web/css/html5Player.css'
+                ], dest: 'web/book-template/css/main-style.css'
             }
         }, cssmin: {
             main: {
@@ -51,7 +51,7 @@ module.exports = function (grunt) {
             }
             ,template: {
                 files: {
-                    'book-template/css/main-style.min.css': ['book-template/css/main-style.css']
+                    'web/book-template/css/main-style.min.css': ['web/book-template/css/main-style.css']
                 }
             }
         }, uglify: {
@@ -62,7 +62,7 @@ module.exports = function (grunt) {
             }
             ,template: {
                 files: {
-                    'book-template/js/script.min.js': '<%= concat.template.dest %>'
+                    'web/book-template/js/script.min.js': '<%= concat.template.dest %>'
                 }
             }
         }

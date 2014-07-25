@@ -13,19 +13,19 @@
 
     <ol id="moduleList" class="breadcrumb">
         {% for module in modules %}
-            {% if(module != currentModule) %}
+            {% if(module.slug != currentModule) %}
                 <li>
-                    <a href="{{ path('book-edit', { 'slug': book.slug, 'module': module }) }}">
-                        {{ module }}
+                    <a href="{{ path('book-edit', { 'slug': book.slug, 'module': module.slug }) }}">
+                        {{ module.title }}
                     </a>
                 </li>
             {% else %}
-                <li class="active"> {{ module }} </li>
+                <li class="active"> {{ module.title }} </li>
             {% endif %}
         {% endfor %}
         <li>
             <a href="#" id="addModuleBtn" data-toggle="modal" data-target="#moduleFormModal">
-                Добавить модуль
+                Добавить
             </a>
         </li>
     </ol>

@@ -6,10 +6,7 @@ class Book {
 
     private $filePath;
     private $slug;
-    private $title;
-    private $authors;
-    private $editor;
-    private $isbn;
+    private $info;
     private $tmpDir;
     private $images = array();
     private $videos = array();
@@ -25,7 +22,7 @@ class Book {
             $this->extractData();
             $this->parseSlug();
             $this->parseInfo();
-            $this->modulesPath = $this->tmpDir . '/' . $this->getSlug() .'/modules/';
+            $this->modulesPath = $this->tmpDir . $this->getSlug() .'/modules/';
             $this->parseImages();
             $this->parseAudio();
             $this->parseVideo();
@@ -44,24 +41,21 @@ class Book {
 
     public function getFirstModuleContent() {
 
-        $modules = $this->fileManager->fileList($this->modulesPath);
+        $modules = $this->info->modules;
 
         if(count($modules)) {
-            sort($modules);
-            $content = $this->getModuleContent($modules[0]);
+            $content = $this->getModuleContent($modules[0]->slug);
         } else { $content = ''; }
 
         return $content;
     }
 
-    public function getModuleContent($filePath) {
-        return $this->parseBookContent($this->modulesPath . $filePath);
+    public function getModuleContent($slug) {
+        return $this->parseBookContent($this->modulesPath . $slug . '.html');
     }
 
     public function getModules() {
-        $modules = $this->fileManager->fileList($this->tmpDir . '/' . $this->getSlug() . '/modules');
-        sort($modules);
-        return $modules;
+        return $this->info->modules;
     }
 
     public function extractData() {
@@ -98,7 +92,7 @@ class Book {
                 $audio = explode('.', $audio);
                 $this->audios[] = array(
                     'title' => $audio[0]
-                ,'extension' => $audio[1]
+                    ,'extension' => $audio[1]
                 );
             }
         }
@@ -112,7 +106,7 @@ class Book {
                 $video = explode('.', $video);
                 $this->videos[] = array(
                     'title' => $video[0]
-                ,'extension' => $video[1]
+                    ,'extension' => $video[1]
                 );
             }
         }
@@ -121,16 +115,16 @@ class Book {
 
     public function parseInfo() {
         if(is_file($this->tmpDir . $this->slug . '/book.info')) {
-            $bookInfo = json_decode(file_get_contents($this->tmpDir . $this->slug . '/book.info'));
-            $this->title = $bookInfo->title;
-            $this->authors = isset($bookInfo->authors) ? $bookInfo->authors : '';
-            $this->editor = isset($bookInfo->editor) ? $bookInfo->editor : '';
-            $this->isbn = isset($bookInfo->isbn) ? $bookInfo->isbn : '';
+            $this->info = json_decode(file_get_contents($this->tmpDir . $this->slug . '/book.info'));
         }
     }
 
+    public function updateInfo() {
+        file_put_contents($this->tmpDir . $this->slug . '/book.info', json_encode($this->info));
+    }
+
     public function getTitle() {
-        return $this->title;
+        return $this->info->title;
     }
 
     private function parseSlug() {
@@ -144,7 +138,9 @@ class Book {
         return $this->slug;
     }
 
-    public function createModule($title, $templateDir) {
+    public function createModule($title) {
+        global $kernel;
+        $templateDir = $kernel->getContainer()->getParameter('book_template_dir');
         $transliterate = new Transliterate();
         $slug = $transliterate->transliterate($title, 'ru');
 
@@ -169,6 +165,8 @@ class Book {
                 </module>
             </e-text-book>';
 
+        $slug = date('d-m-y-H-i-s');
+
         file_put_contents(
             $this->tmpDir . '/' . $this->getSlug() . '/modules/' . $slug . '.html',
             str_replace(
@@ -176,7 +174,16 @@ class Book {
                 array($title, $content),
                 $indexContent
             )
-        ); return $slug;
+        );
+
+        $this->info->modules[] = array(
+            'title' => $title
+            ,'slug' => $slug
+        );
+
+        $this->updateInfo();
+
+        return $slug;
     }
 
     public function getImages() {
@@ -192,15 +199,15 @@ class Book {
     }
 
     public function getAuthors() {
-        return $this->authors;
+        return isset($this->info->authors) ? $this->info->authors : '';
     }
 
     public function getEditor() {
-        return $this->editor;
+        return isset($this->info->editor) ? $this->info->editor : '';
     }
 
     public function getISBN() {
-        return $this->isbn;
+        return isset($this->info->isbn) ? $this->info->isbn : '';
     }
 
 }
