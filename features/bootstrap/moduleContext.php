@@ -89,7 +89,7 @@ class ModuleContext extends eTextBookContext {
      */
     public function checkTitleLatestBookOnEditPage() {
         $latestBook = $this->getVar('latestBook');
-        assertEquals(trim($this->findCss('.page-header h1')->getHTML()), $latestBook['title']);
+        assertEquals(trim($this->findCss('.page-header h2')->getHTML()), $latestBook['title']);
     }
 
     /**
@@ -127,6 +127,7 @@ class ModuleContext extends eTextBookContext {
         $module = array('title' => $form->find('css', '#moduleTitle')->getValue());
         $this->setVar('latestModule', $module);
         $form->find('css', '#moduleFormSubmit')->click();
+        sleep(1);
     }
 
     /**
