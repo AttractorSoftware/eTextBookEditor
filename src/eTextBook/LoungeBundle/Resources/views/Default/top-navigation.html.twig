@@ -2,22 +2,40 @@
     <div class="container">
         <ul class="nav navbar-nav">
             <li {% if app.request.attributes.get('_route') == 'home-page' %} class="active" {% endif %}>
-                <a href="{{ path('home-page') }}">О проекте</a>
+                <a href="{{ path('home-page') }}">
+                    <span class="glyphicon glyphicon-info-sign"></span>
+                    О проекте
+                </a>
             </li>
             <li {% if app.request.attributes.get('_route') == 'books' %} class="active" {% endif %}>
-                <a href="{{ path('books') }}">Учебники</a>
+                <a href="{{ path('books') }}">
+                    <span class="glyphicon glyphicon-book"></span>
+                    Учебники
+                </a>
             </li>
             <li {% if app.request.attributes.get('_route') == 'readers' %} class="active" {% endif %}>
-                <a href="{{ path('readers') }}">Ридеры</a>
+                <a href="{{ path('readers') }}">
+                    <span class="glyphicon glyphicon-phone"></span>
+                    Ридеры
+                </a>
             </li>
             <li>
-                <a href="">Редакторы</a>
+                <a href="#">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                    Редакторы
+                </a>
             </li>
             <li>
-                <a href="#">Авторам</a>
+                <a href="#">
+                    <span class="glyphicon glyphicon-user"></span>
+                    Авторам
+                </a>
             </li>
             <li>
-                <a href="#">Разработчикам</a>
+                <a href="#">
+                    <span class="glyphicon glyphicon-cog"></span>
+                    Разработчикам
+                </a>
             </li>
         </ul>
     </div>
