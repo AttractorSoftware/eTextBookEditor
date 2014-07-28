@@ -14,10 +14,11 @@
         <li> &nbsp; </li>
         {% for book in books %}
             <li>
-                <a href="{{ path('book-edit', {'slug': book.slug, 'module': ' ' })  }}">
-                    <span class="glyphicon glyphicon-book"></span>
+                <span class="glyphicon glyphicon-book"></span>
+                <a class="title" href="{{ path('book-edit', {'slug': book.slug, 'module': ' ' })  }}">
                     {{ book.title }}
-                </a>
+                </a> <br />
+                <span class="authors">{{ book.authors }}</span>
             </li>
         {% endfor %}
     </ul>
