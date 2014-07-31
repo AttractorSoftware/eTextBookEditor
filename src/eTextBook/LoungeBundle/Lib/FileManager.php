@@ -15,6 +15,8 @@ class FileManager {
 
     public function zip($source, $destination) {
 
+        $sourceParts = explode('/', $source);
+
         if (!extension_loaded('zip') || !file_exists($source)) {
             return false;
         }
@@ -40,12 +42,9 @@ class FileManager {
 
                 $file = realpath($file);
 
-                if (is_dir($file) === true)
-                {
+                if (is_dir($file) === true) {
                     $zip->addEmptyDir(str_replace($source . '/', '', $file . '/'));
-                }
-                else if (is_file($file) === true)
-                {
+                } else if (is_file($file) === true) {
                     $zip->addFromString(str_replace($source . '/', '', $file), file_get_contents($file));
                 }
             }

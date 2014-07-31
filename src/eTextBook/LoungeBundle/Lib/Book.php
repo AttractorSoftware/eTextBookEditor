@@ -18,11 +18,11 @@ class Book {
             global $kernel;
             $this->fileManager = new FileManager();
             $this->filePath = $filePath;
-            $this->tmpDir = $kernel->getContainer()->getParameter('book_tmp_dir');
-            $this->extractData();
             $this->parseSlug();
+            $this->tmpDir = $kernel->getContainer()->getParameter('book_tmp_dir') . $this->getSlug();
+            $this->extractData();
             $this->parseInfo();
-            $this->modulesPath = $this->tmpDir . $this->getSlug() .'/modules/';
+            $this->modulesPath = $this->tmpDir .'/modules/';
             $this->parseImages();
             $this->parseAudio();
             $this->parseVideo();
@@ -72,7 +72,7 @@ class Book {
     }
 
     public function parseImages() {
-        $images = $this->fileManager->fileList($this->tmpDir . '/' . $this->slug . '/content/img');
+        $images = $this->fileManager->fileList($this->tmpDir . '/content/img');
         if(count($images)) {
             foreach($images as $img) {
                 $img = explode('.', $img);
@@ -86,7 +86,7 @@ class Book {
     }
 
     public function parseAudio() {
-        $audios = $this->fileManager->fileList($this->tmpDir . '/' . $this->slug . '/content/audio');
+        $audios = $this->fileManager->fileList($this->tmpDir . '/content/audio');
         if(count($audios)) {
             foreach($audios as $audio) {
                 $audio = explode('.', $audio);
@@ -100,7 +100,7 @@ class Book {
     }
 
     public function parseVideo() {
-        $videos = $this->fileManager->fileList($this->tmpDir . '/' . $this->slug . '/content/video');
+        $videos = $this->fileManager->fileList($this->tmpDir . '/content/video');
         if(count($videos)) {
             foreach($videos as $video) {
                 $video = explode('.', $video);
@@ -114,16 +114,16 @@ class Book {
     }
 
     public function parseInfo() {
-        if(is_file($this->tmpDir . $this->slug . '/book.info')) {
-            $this->info = json_decode(file_get_contents($this->tmpDir . $this->slug . '/book.info'));
+        if(is_file($this->tmpDir . '/book.info')) {
+            $this->info = json_decode(file_get_contents($this->tmpDir . '/book.info'));
         }
     }
 
     public function updateInfo() {
-        file_put_contents($this->tmpDir . $this->slug . '/book.info', json_encode($this->info));
+        file_put_contents($this->tmpDir . '/book.info', json_encode($this->info));
     }
 
-    public function getTitle() {
+    public function getTitle() {;
         return $this->info->title;
     }
 
@@ -168,7 +168,7 @@ class Book {
         $slug = date('d-m-y-H-i-s');
 
         file_put_contents(
-            $this->tmpDir . '/' . $this->getSlug() . '/modules/' . $slug . '.html',
+            $this->tmpDir . '/modules/' . $slug . '.html',
             str_replace(
                 array("-- title --", "-- content --"),
                 array($title, $content),

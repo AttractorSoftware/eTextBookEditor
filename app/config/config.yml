@@ -72,3 +72,7 @@ services:
     class: eTextBook\LoungeBundle\Lib\FileManager
   bookPacker:
     class: eTextBook\LoungeBundle\Lib\BookPacker
+  createETBFile:
+    class: eTextBook\LoungeBundle\UseCases\Book\CreateETBFile
+  updateETBFile:
+    class: eTextBook\LoungeBundle\UseCases\Book\UpdateETBFile

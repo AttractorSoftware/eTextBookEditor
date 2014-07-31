@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Gedmo\Sluggable\Util as Sluggable;
 use eTextBook\LoungeBundle\Lib\Book;
-
+use eTextBook\LoungeBundle\Entity\Book as eBook;
 
 class BookController extends Controller {
     /**
@@ -38,18 +38,24 @@ class BookController extends Controller {
     public function createAction(Request $request) {
         $bookData = $request->get('book');
         $transliterate = $this->get('transliterate');
-
         $bookSlug = Sluggable\Urlizer::urlize($transliterate->transliterate($bookData['title'], 'ru'), '-');
-        $booksDir = $this->container->getParameter('books_dir');
 
-        if(is_file($booksDir . $bookSlug . 'etb')) {
+        $book = new eBook();
+        $book->setTitle(isset($bookData['title']) ? $bookData['title'] : '');
+        $book->setAuthors(isset($bookData['authors']) ? $bookData['authors'] : '');
+        $book->setEditor(isset($bookData['editor']) ? $bookData['editor'] : '');
+        $book->setIsbn(isset($bookData['isbn']) ? $bookData['isbn'] : '');
+        $book->setSlug($bookSlug);
+
+        $creator = $this->get('createETBFile');
+        $creator->setBook($book);
+
+        if(!$creator->execute()) {
             $response = array(
                 'status' => 'failed'
                 ,'reason' => 'Учебник с таким названием уже существует'
             );
         } else {
-            $packer = $this->get('bookPacker');
-            $packer->createBookPack($bookData);
             $response = array(
                 'status' => 'success'
                 ,'data' => array(
@@ -91,22 +97,16 @@ class BookController extends Controller {
      * @Route("/book/update/module", name="book-update-module")
      */
     public function updateModule(Request $request) {
+        $updater = $this->get('updateETBFile');
 
         $content = $request->get('content');
         $slug = $request->get('book');
         $fileManager = $this->get('fileManager');
 
-        $rootDir = $tempDir = $this->container->getParameter('books_dir') . $slug;
+        $rootDir = $tempDir = $this->container->getParameter('book_tmp_dir') . $slug;
         $templateDir = $this->container->getParameter('book_template_dir');
-        $rootDir .= "/" . $slug;
 
         $moduleFilePath = $rootDir . '/modules/' . $request->get('module') . '.html';
-
-        $packer = $this->get('bookPacker');
-        $packer->setCurrentBookSlug($slug);
-        $packer->createDumpDirs();
-        $packer->copyTemplateFiles();
-        $packer->copyTmpFiles();
 
         $indexContent = file_get_contents($templateDir . "/index.html");
 
@@ -121,12 +121,10 @@ class BookController extends Controller {
             )
         );
 
-        if(is_file($rootDir . "/../../" . $slug . ".etb")) {
-            unlink($rootDir . "/../../" . $slug . ".etb");
-        }
-
-        $fileManager->zip($rootDir . "/../", $rootDir . "/../../" . $slug . ".etb");
-        $fileManager->removeDir($tempDir);
+        $book = new eBook();
+        $book->setSlug($slug);
+        $updater->setBook($book);
+        $updater->pack();
 
         return new JsonResponse(array('status' => 'success'));
     }

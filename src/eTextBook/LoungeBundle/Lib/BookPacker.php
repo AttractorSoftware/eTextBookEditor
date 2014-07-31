@@ -3,6 +3,8 @@
 namespace eTextBook\LoungeBundle\Lib;
 
 use Gedmo\Sluggable\Util as Sluggable;
+use eTextBook\LoungeBundle\Lib\Transliterate;
+use eTextBook\LoungeBundle\Lib\FileManager;
 
 class BookPacker {
 
@@ -10,7 +12,7 @@ class BookPacker {
 
     public function createBookPack($bookData) {
         global $kernel;
-        $transliterate = $kernel->getContainer()->get('transliterate');
+        $transliterate = new Transliterate();
         $this->currentBookSlug = Sluggable\Urlizer::urlize($transliterate->transliterate($bookData['title'], 'ru'), '-');
 
         $this->createDumpDirs();
@@ -19,7 +21,7 @@ class BookPacker {
         $bookData['modules'] = array();
         file_put_contents($this->getDirPath('') . 'book.info', json_encode($bookData));
 
-        $this->packDump();
+        return $this->packDump();
     }
 
     public function repackBook($bookSlug) {
@@ -32,12 +34,13 @@ class BookPacker {
 
     public function packDump() {
         global $kernel;
+        $booksDir = $kernel->getContainer()->getParameter('books_dir');
         $fileManager = $kernel->getContainer()->get('fileManager');
-        if(is_file($this->getDirPath('') . "../../" . $this->currentBookSlug . ".etb")) {
-            unlink($this->getDirPath('') . "../../" . $this->currentBookSlug . ".etb");
-        }
-        $fileManager->zip($this->getDirPath('') . "../", $this->getDirPath('') . "../../" . $this->currentBookSlug . ".etb");
-        $fileManager->removeDir($kernel->getContainer()->getParameter('books_dir') . $this->currentBookSlug);
+        $archivePath = $booksDir . $this->currentBookSlug . ".etb";
+        if(is_file($archivePath)) { unlink($archivePath); }
+        $fileManager->zip($this->getDirPath(''), $archivePath);
+        $fileManager->removeDir($booksDir . $this->currentBookSlug);
+        return $archivePath;
     }
 
     public function copyTmpFiles() {
@@ -56,15 +59,13 @@ class BookPacker {
         $booksDir = $kernel->getContainer()->getParameter('books_dir');
         $bookDir = $booksDir . $this->currentBookSlug;
         if(!is_dir($bookDir)) { mkdir($bookDir); }
-        $bookDir .= "/" . $this->currentBookSlug;
-        if(!is_dir($bookDir)) { mkdir($bookDir); }
         return $bookDir . '/' . $dirName;
     }
 
     public function getContentPath($dirName) {
         global $kernel;
         $booksDir = $kernel->getContainer()->getParameter('books_dir');
-        $bookDir = $booksDir . $this->currentBookSlug . "/" . $this->currentBookSlug;
+        $bookDir = $booksDir . $this->currentBookSlug;
         if(!is_dir($bookDir)) { mkdir($bookDir); }
         $contentDir = $bookDir . '/content';
         if(!is_dir($contentDir)) { mkdir($contentDir); }

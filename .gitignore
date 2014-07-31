@@ -16,6 +16,7 @@
 
 /web/books/*
 /web/tmp/*
+/web/fonts
 
 /web/css/main-style.css
 /web/css/main-style.min.css
