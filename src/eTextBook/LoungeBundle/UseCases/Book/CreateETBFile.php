@@ -42,7 +42,7 @@ class CreateETBFile {
     }
 
     public function createStructure() {
-        mkdir($this->bookTmpDir, 0700, true);
+        mkdir($this->bookTmpDir, 0777, true);
         mkdir($this->bookTmpDir . 'css', 0700, true);
         mkdir($this->bookTmpDir . 'js', 0700, true);
         mkdir($this->bookTmpDir . 'img', 0700, true);
@@ -71,6 +71,5 @@ class CreateETBFile {
         $bookFile =  $booksDir . $this->book->getSlug() . '.etb';
         if(is_file($bookFile)) { unlink($bookFile); }
         $fileManager->zip($this->bookTmpDir, $bookFile);
-        $fileManager->removeDir($this->bookTmpDir);
     }
 }

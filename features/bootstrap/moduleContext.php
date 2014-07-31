@@ -31,10 +31,10 @@ class ModuleContext extends eTextBookContext {
      */
     public function randomFillBookForm() {
         $this->fillBookForm(
-            date('d-m-y-H-i-s'),
-            date('d-m-y-H-i-s'),
-            date('d-m-y-H-i-s'),
-            date('d-m-y-H-i-s')
+            'Title auto-generate by selenium - ' . date('d-m-y-H-i-s'),
+            'Author bot, Author bot2',
+            'Editor bot',
+            '12-3333-221-2221'
         );
     }
 
