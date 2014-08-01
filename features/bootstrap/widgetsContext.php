@@ -93,6 +93,8 @@ class WidgetsContext extends eTextBookContext {
         $editButton = $block->find('css', 'control-panel item.edit');
         $editButton->click();
 
+        sleep(1);
+
     }
 
     /**

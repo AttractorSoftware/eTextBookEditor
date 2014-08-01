@@ -86,9 +86,13 @@ class BookController extends Controller {
      */
     public function createModuleAction(Request $request) {
         $moduleData = $request->get('module');
-        $book = new Book($moduleData['bookSlug']);
-        $moduleSlug = $book->createModule($moduleData['title']);
-        $this->get('bookPacker')->repackBook($moduleData['bookSlug']);
+        $book = $this->get('bookLoader')->load($moduleData['bookSlug']);
+
+        $updater = $this->get('updateETBFile');
+        $updater->setBook($book);
+
+        $moduleSlug = $updater->addModule($moduleData['title']);
+
         $response = array('status' => 'success', 'data' => array('slug' => $moduleSlug));
         return new JsonResponse($response);
     }

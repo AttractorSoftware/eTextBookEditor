@@ -6,21 +6,50 @@ use eTextBook\LoungeBundle\Entity\Book;
 
 class UpdateETBFile {
     private $book;
+    private $tmpDir;
     private $bookTmpDir;
 
-    public function setBook(Book $book) {
+    public function __construct() {
         global $kernel;
-        $this->book = $book;
-        $this->bookTmpDir = $kernel->getContainer()->getParameter('book_tmp_dir')
-            . $this->book->getSlug(). '/';
+        $this->tmpDir = $kernel->getContainer()->getParameter('book_tmp_dir');
+        $this->templateDir = $kernel->getContainer()->getParameter('book_template_dir');
     }
 
-    public function setModuleContent($moduleId, $content) {
+    public function setBook(Book $book) {
+        $this->book = $book;
+        $this->bookTmpDir = $this->tmpDir . $this->book->getSlug(). '/';
+    }
+
+    public function updateModuleContent($moduleId, $content) {
 
     }
 
     public function addModule($moduleTitle) {
+        $moduleContent = file_get_contents($this->templateDir . "/moduleTemplate.html");
+        $moduleSlug = date('d-m-y-H-i-s');
 
+        $bookInfo = $this->getBookInfo();
+        $bookInfo->modules[] = array('title' => $moduleTitle ,'slug' => $moduleSlug);
+        $this->setBookInfo($bookInfo);
+
+        file_put_contents(
+            $this->tmpDir . $this->book->getSlug() . '/modules/' . $moduleSlug . '.html',
+            str_replace(
+                array("-- title --", "-- moduleTitle --"),
+                array($moduleTitle, $moduleTitle),
+                $moduleContent
+            )
+        ); $this->pack();
+
+        return $moduleSlug;
+    }
+
+    public function getBookInfo() {
+        return json_decode(file_get_contents($this->tmpDir . $this->book->getSlug() . '/book.info'));
+    }
+
+    public function setBookInfo($data) {
+        file_put_contents($this->tmpDir . $this->book->getSlug() . '/book.info', json_encode($data));
     }
 
     public function execute() {

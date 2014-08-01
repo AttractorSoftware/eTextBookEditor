@@ -76,3 +76,5 @@ services:
     class: eTextBook\LoungeBundle\UseCases\Book\CreateETBFile
   updateETBFile:
     class: eTextBook\LoungeBundle\UseCases\Book\UpdateETBFile
+  bookLoader:
+    class: eTextBook\LoungeBundle\UseCases\Book\Loader

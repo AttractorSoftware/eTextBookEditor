@@ -141,8 +141,6 @@ class Book {
     public function createModule($title) {
         global $kernel;
         $templateDir = $kernel->getContainer()->getParameter('book_template_dir');
-        $transliterate = new Transliterate();
-        $slug = $transliterate->transliterate($title, 'ru');
 
         $indexContent = file_get_contents($templateDir . "/index.html");
 

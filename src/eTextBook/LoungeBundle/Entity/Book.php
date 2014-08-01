@@ -55,6 +55,12 @@ class Book {
      */
     private $isbn;
 
+    private $modules;
+
+    public function __construct() {
+        $this->modules = array();
+    }
+
     /**
      * Get id
      *
@@ -178,5 +184,21 @@ class Book {
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getModules()
+    {
+        return $this->modules;
+    }
+
+    /**
+     * @param mixed $modules
+     */
+    public function setModules($modules)
+    {
+        $this->modules = $modules;
     }
 }
