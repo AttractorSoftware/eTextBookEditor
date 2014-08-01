@@ -5,16 +5,33 @@ var bufReplace = '';
 
 $(document).ready(function () {
 	 var $charsBlock = $('#charsBlock');
+
+	 $('.book').on('click', '#show-book-summary', function(){
+		  $('.book').toggleClass('with-summary');
+	 });
+
+/*
+	 $( "#book" ).load( "./modules/25-07-14-17-23-49.html", function( response, status, xhr ) {
+		  if ( status == "error" ) {
+				var msg = "Sorry but there was an error: ";
+				$( "#error" ).html( msg + xhr.status + " " + xhr.statusText );
+		  }
+	 } );
+*/
+
+
 	 $(document).click(function (e) {
-		  var $clicked = jQuery(e.target);
-		  if($clicked.attr('id') == 'charsBlock' || $clicked.closest('#charsBlock').size() > 0
-			  || $clicked.is('input') || $clicked.is('textarea')) {
-		  } else {
-				if($charsBlock.is(':visible')) $charsBlock.hide();
+		  var $clicked = $(e.target);
+		  if($clicked.attr('id') !== 'charsBlock'
+			  & $clicked.closest('#charsBlock').size() <= 0
+			  & $charsBlock.is(':visible')
+			  & $clicked.not('input')
+			  && $clicked.not('textarea')) {
+				$charsBlock.hide();
 		  }
 	 });
 
-	 $('span', $charsBlock).click(function (e) {
+	 $charsBlock.click(function (e) {
 		  var character = $(this).text();
 		  if(e.shiftKey) character = character.toUpperCase();
 		  setCharacter(character);
@@ -22,23 +39,22 @@ $(document).ready(function () {
 
 
 	 function getPressedChar(event) {
+		  var char = '';
 		  if(event.altKey && event.ctrlKey) {
 				switch (event.keyCode) {
 					 case 69:
-						  if(event.shiftKey) setCharacter('Ү');
-						  else setCharacter('ү');
+						  char = 'ү';
 						  break;
 					 case 89:
-						  if(event.shiftKey) setCharacter('Ң');
-						  else setCharacter('ң');
+						  char = 'ң';
 						  break;
 					 case 74:
-						  if(event.shiftKey) setCharacter('Ө');
-						  else setCharacter('ө');
+						  char = 'ө';
 						  break;
 				}
 		  }
-		  return false;
+		  if(event.shiftKey) char = char.toUpperCase();
+		  setCharacter(char);
 	 }
 
 	 function setCharacter(character) {

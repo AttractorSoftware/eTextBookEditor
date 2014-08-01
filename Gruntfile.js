@@ -72,6 +72,7 @@ module.exports = function (grunt) {
     require('time-grunt')(grunt);
 
     grunt.registerTask('default', ['newer:concat', 'newer:concat_css', 'newer:cssmin', 'newer:uglify']);
+    grunt.registerTask('dev', ['newer:concat', 'newer:concat_css', 'newer:cssmin']);
     grunt.registerTask('full', ['concat', 'concat_css', 'cssmin', 'uglify']);
 
 };

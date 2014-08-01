@@ -10,6 +10,12 @@
             {% block pageHeader %}{% endblock %}
         </div>
 
+        <div id="charsBlock" class="kyrgyz-chars">
+            <span title="Ctrl+Alt+н">ң</span>
+            <span title="Ctrl+Alt+о">ө</span>
+            <span title="Ctrl+Alt+у">ү</span>
+        </div>
+
         {% block breadcrumb %}{% endblock %}
 
         {% block pageContent %}{% endblock %}
@@ -17,11 +23,11 @@
 
     {% block footer %}
         <div class="footer"></div>
-    {% endblock  %}
+    {% endblock %}
 {% endblock %}
 
 {% block stylesheets %}
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/main-style.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/main-style.min.css') }}"/>
 {% endblock %}
 
 {% block javascripts %}
