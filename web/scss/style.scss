@@ -789,9 +789,12 @@
 .page-header {
   h4 {
     padding: 0 15px;
-    .book-download {
+    .control {
       float: right;
-      font-weight: normal;
+      span {
+        color: #fff;
+        margin: 0 3px 0 0;
+      }
     }
     span {
       color: #ccc;

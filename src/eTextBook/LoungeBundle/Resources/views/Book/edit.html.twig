@@ -5,7 +5,11 @@
     <h4>
         {{ book.authors }}
         <span>ISBN: {{ book.ISBN }}</span>
-        <a href="/books/{{ book.slug }}.etb" class="label label-primary book-download">Скачать учебник</a>
+        <div class="control">
+            <a href="/books/{{ book.slug }}.etb" class="btn btn-success btn-xs book-download"><span class="glyphicon glyphicon-save"></span>Скачать учебник</a>
+            /
+            <a href="{{ path('book-view', {'slug': book.slug, 'module': ' ' })  }}" class="edit-link btn btn-primary btn-xs"><span class="glyphicon glyphicon-eye-open"></span>Просмотр учебника</a>
+        </div>
     </h4>
 {% endblock %}
 

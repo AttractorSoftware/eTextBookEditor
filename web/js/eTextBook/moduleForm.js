@@ -3,7 +3,7 @@ var moduleForm = function() {
     var $this = this;
     this.modal = $('#moduleFormModal');
     this.alertBox = this.modal.find('#alertBox');
-    this.action = this.modal.find('form').attr('action');
+    this.action = this.modal.find('form').attr('create-action');
     this.newElementUrlTemplate = this.modal.attr('new-element-url-template');
 
     this.init = function() {
@@ -37,7 +37,7 @@ var moduleForm = function() {
 
         $this.scope = $scope;
 
-        $scope.submit = function(module) {
+        $scope.submit = function(module, $event) {
             $this.wait();
             module.bookSlug = $this.modal.find('form').attr('book-slug');
             $.post($this.action, { module: module }, function(response) {

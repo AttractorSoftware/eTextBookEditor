@@ -606,9 +606,11 @@
 
 .page-header h4 {
   padding: 0 15px; }
-  .page-header h4 .book-download {
-    float: right;
-    font-weight: normal; }
+  .page-header h4 .control {
+    float: right; }
+    .page-header h4 .control span {
+      color: #fff;
+      margin: 0 3px 0 0; }
   .page-header h4 span {
     color: #ccc;
     margin: 0 0 0 10px; }
