@@ -122,7 +122,6 @@ var FileManager = function(cont) {
 
     this.addFile = function(response) {
         response = JSON.parse(response);
-        console.debug(response);
         var file = response.data.name.split('.');
         this.cont.find('.tab-content .' + response.data.type + ' .list').append(
             '<div title="' + response.data.name + '" data-placement="bottom" data-toggle="tooltip" class="item ' + file[1] + '">' + file[0] + '</div>'

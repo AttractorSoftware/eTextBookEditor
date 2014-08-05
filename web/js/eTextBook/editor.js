@@ -93,7 +93,6 @@ var eTextBookEditor = Backbone.Model.extend({
     }
 
     ,activateDisplayWidgets: function() {
-        console.debug('act');
         for(var i = 0; i < this.display.find('widget').length; i++) {
             var widgetCont = $(this.display.find('widget')[i]);
             if(widgetCont.attr('widget-slug')) {

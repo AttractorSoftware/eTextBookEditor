@@ -43,6 +43,7 @@ var eTextBookUtils = function() {
     this.markBackgroundImage = function(target) {
         var imageSrc = $(target).css('backgroundImage');
         imageSrc = imageSrc.replace('url(','').replace(')','');
+        imageSrc = imageSrc.substr(1, imageSrc.length-2);
         var image = new Image();
         $(image).bind('load', function() {
             if($(this).prop('width') > $(this).prop('height')) {
