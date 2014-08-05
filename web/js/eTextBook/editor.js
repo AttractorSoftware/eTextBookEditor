@@ -11,6 +11,11 @@ var eTextBookEditor = Backbone.Model.extend({
         this.synchronizeScrolls();
 
         $('.e-text-book-editor').css({ height: $(window).height() *.75 });
+
+        if(this.get('cont').hasClass('view-mode')) {
+            this.display = $('.e-text-book-viewer');
+            this.activateDisplayWidgets();
+        }
     }
 
     ,synchronizeScrolls: function() {
@@ -80,7 +85,15 @@ var eTextBookEditor = Backbone.Model.extend({
 
         this.display.html('');
         this.display.append(book);
+        this.activateDisplayWidgets();
+        if(!missSave) {
+            this.save();
+        }
 
+    }
+
+    ,activateDisplayWidgets: function() {
+        console.debug('act');
         for(var i = 0; i < this.display.find('widget').length; i++) {
             var widgetCont = $(this.display.find('widget')[i]);
             if(widgetCont.attr('widget-slug')) {
@@ -90,10 +103,6 @@ var eTextBookEditor = Backbone.Model.extend({
                 widget.viewActivate();
             }
         }
-        if(!missSave) {
-            this.save();
-        }
-
     }
 
     ,save: function() {

@@ -74,11 +74,12 @@ class ModuleContext extends eTextBookContext {
      * @Given /^Кликаем по ссылке только что созданного учебника в списке$/
      */
     public function latestBookLinkClick() {
-        $links = $this->findAllCss('.book-list a');
+        $links = $this->findAllCss('.book-list li');
         $latestBook = $this->getVar('latestBook');
         foreach($links as $link) {
-            if(trim($link->getHTML()) == $latestBook['title']) {
-                $link->click();
+            $titleLink = $link->find('css', 'a.title');
+            if(is_object($titleLink) && trim($titleLink->getHTML()) == $latestBook['title']) {
+                $link->find('css', '.edit-link')->click();
                 sleep(2);
             }
         }

@@ -1,7 +1,8 @@
 Feature: Добавление нового блока
 
   Scenario: Создаем новый блок, проверяем результат и удаляем его
-    Given Открываем страницу "http://localhost/books"
+    Given Открываем страницу "http://staff:swordfish@localhost/login"
+    And   Кликаем по ссылке с классом "book-list-link"
     And   Создаем новый учебник
     Then  Создаем новый модуль
     And   Создаем блок с заголовком "Block title"

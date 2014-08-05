@@ -6,19 +6,27 @@
 
 {% block pageContent %}
     <ul class="list-unstyled book-list">
-        <li>
-            <span class="glyphicon glyphicon-file"></span>
-            <a id="addBookButton" href="#" data-toggle="modal" data-target="#bookFormModal"> Создать новый учебник </a>
-            {% include 'eTextBookLoungeBundle:Book:form.html.twig' %}
-        </li>
-        <li> &nbsp; </li>
-        {% for book in books %}
+        {% if app.user %}
             <li>
+                <span class="glyphicon glyphicon-file"></span>
+                <a id="addBookButton" href="#" data-toggle="modal" data-target="#bookFormModal"> Создать новый учебник </a>
+                {% include 'eTextBookLoungeBundle:Book:form.html.twig' %}
+            </li>
+            <li> &nbsp; </li>
+        {% endif %}
+        {% for book in books %}
+            <li id="{{ book.slug }}">
                 <span class="glyphicon glyphicon-book"></span>
-                <a class="title" href="{{ path('book-edit', {'slug': book.slug, 'module': ' ' })  }}">
+                <a class="title" href="{{ path('book-view', {'slug': book.slug, 'module': ' ' })  }}">
                     {{ book.title }}
-                </a> <br />
-                <span class="authors">{{ book.authors }}</span>
+                </a>
+                {% if app.user %}
+                    <a href="{{ path('book-edit', {'slug': book.slug, 'module': ' ' })  }}" class="edit-link btn btn-primary btn-xs">
+                        Редактировать
+                    </a>
+                {% endif %}
+                <br />
+                <span class="authors"> {{ book.authors }} </span>
             </li>
         {% endfor %}
     </ul>

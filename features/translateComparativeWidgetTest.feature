@@ -1,7 +1,8 @@
 Feature: Добавление блока с виджетом сравнения перевода слова с аналогом
 
   Scenario: Создаем новый учебник и модуль
-    Given Открываем страницу "http://localhost/books"
+    Given Открываем страницу "http://staff:swordfish@localhost/login"
+    And   Кликаем по ссылке с классом "book-list-link"
     And   Создаем новый учебник
     Then  Создаем новый модуль
 

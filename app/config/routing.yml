@@ -8,3 +8,6 @@ e_text_book_spawn:
     type:     annotation
     prefix:   /
 
+logout:
+    path:   /logout
+

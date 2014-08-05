@@ -18,6 +18,8 @@ security:
             anonymous:  ~
             http_basic:
               realm: "Staff Area"
+            logout: ~
 
     access_control:
-        - { path: ^/staff/, roles: ROLE_STAFF }
+        - { path: ^/book/edit/, roles: ROLE_STAFF }
+        - { path: ^/login, roles: ROLE_STAFF }

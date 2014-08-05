@@ -60,4 +60,11 @@ class FeatureContext extends eTextBookContext {
         eTextBookDriver::getInstance()->getDriver()->reload();
         sleep(3);
     }
+
+    /**
+     * @Given /^Кликаем по ссылке с классом "([^"]*)"$/
+     */
+    public function clickToLinkWithClass($class) {
+        $this->findCss('a.'.$class)->click();
+    }
 }

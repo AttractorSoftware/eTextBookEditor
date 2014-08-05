@@ -8,7 +8,7 @@
                 </a>
             </li>
             <li {% if app.request.attributes.get('_route') == 'books' %} class="active" {% endif %}>
-                <a href="{{ path('books') }}">
+                <a href="{{ path('books') }}" class="book-list-link">
                     <span class="glyphicon glyphicon-book"></span>
                     Учебники
                 </a>
@@ -36,6 +36,21 @@
                     <span class="glyphicon glyphicon-cog"></span>
                     Разработчикам
                 </a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                {% if not app.user %}
+                    <a href="{{ path('login') }}">
+                        <span class="glyphicon glyphicon-home"></span>
+                        Войти
+                    </a>
+                {% else %}
+                    <a href="{{ path('logout') }}">
+                        <span class="glyphicon glyphicon-home"></span>
+                        Выйти
+                    </a>
+                {% endif %}
             </li>
         </ul>
     </div>

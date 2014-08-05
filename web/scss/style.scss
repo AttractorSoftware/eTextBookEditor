@@ -26,6 +26,8 @@
   float: left;
   width: 100%;
   height: 100%;
+
+  &.view-mode { height: auto !important; }
   .properties {
     float: left;
     width: 100%;
@@ -683,27 +685,15 @@
         font-size: 12px;
         padding: 8px 0 7px 33px;
         color: #555;
+        background: url("/img/file-ico/_blank.png") no-repeat left center;
         cursor: pointer;
         overflow: hidden;
-        background: url("/img/file-ico/_blank.png") no-repeat left middle;
-        &.png {
-          background-image: url('/img/file-ico/png.png');
-        }
-        &.jpg {
-          background-image: url('/img/file-ico/jpg.png');
-        }
-        &.gif {
-          background-image: url('/img/file-ico/gif.png');
-        }
-        &.mp3 {
-          background-image: url('/img/file-ico/mp3.png');
-        }
-        &.mp4 {
-          background-image: url('/img/file-ico/mp4.png');
-        }
-        &.selected {
-          font-weight: bold;
-        }
+        &.png { background-image: url('/img/file-ico/png.png'); }
+        &.jpg { background-image: url('/img/file-ico/jpg.png'); }
+        &.gif { background-image: url('/img/file-ico/gif.png'); }
+        &.mp3 { background-image: url('/img/file-ico/mp3.png'); }
+        &.mp4 { background-image: url('/img/file-ico/mp4.png'); }
+        &.selected { font-weight: bold; }
       }
     }
     .player {
@@ -760,24 +750,19 @@
 .book-list {
   a {
     color: #333;
-<<<<<<< Updated upstream
     text-decoration: none;
   }
   li { margin: 0 0 5px 0; }
   span.glyphicon { margin: 0 3px 0 0; }
   .title { font-size: 16px; }
+  a.edit-link {
+    color: #fff;
+    margin: 0 0 0 5px;
+  }
   .authors {
     font-size: 12px;
     color: #555;
     margin: 0 0 0 30px;
-=======
-  }
-  li {
-    margin: 0 0 5px 0;
-  }
-  span {
-    margin: 0 3px 0 0;
->>>>>>> Stashed changes
   }
 }
 

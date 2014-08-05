@@ -47,7 +47,10 @@ var bookForm = function() {
                     $('.book-list').append(
                         '<li>' +
                             '<span class="glyphicon glyphicon-book"></span>' +
-                            '<a href="/book/edit/' + response.data.slug + '/%20"> ' + book.title + '</a>' +
+                            '<a class="title" href="/book/view/' + response.data.slug + '/%20"> ' + book.title + '</a>' +
+                            '<a class="edit-link btn btn-primary btn-xs" href="/book/edit/' + response.data.slug + '/%20">'+
+                                'Редактировать'+
+                            '</a>'+
                         '</li>'
                     );
                 }

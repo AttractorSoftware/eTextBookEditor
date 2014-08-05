@@ -2,7 +2,8 @@
 Feature: Добавление нового модуля
 
   Scenario: Создаем модуль и проверяем результат
-    Given Открываем страницу "http://localhost/books"
+    Given Открываем страницу "http://staff:swordfish@localhost/login"
+    And   Кликаем по ссылке с классом "book-list-link"
     And   Создаем новый учебник
     When  Кликаем по ссылке добавить модуль
     And   Заполняем форму модуля "Модуль 1"
