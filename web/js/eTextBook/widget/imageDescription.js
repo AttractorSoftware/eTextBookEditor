@@ -1,6 +1,9 @@
 var eTextBookWidgetImageDescription = eTextBookWidget.extend({
   defaults: {
-    slug: "image-description", title: "Описание картинки", templateName: 'imageDescription'
+    slug: "image-description",
+    title: "Описание картинки",
+    templateName: 'imageDescription'
+    ,ico: '<span class="glyphicon glyphicon-picture"></span>'
   },
 
   finishEdit: function () {

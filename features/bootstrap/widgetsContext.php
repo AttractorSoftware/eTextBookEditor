@@ -14,15 +14,13 @@ class WidgetsContext extends eTextBookContext {
     /**
      * @Given /^Выбираем виджет со значением "([^"]*)"$/
      */
-    public function selectWidget($widgetTitle) {
-
+    public function selectWidget($widgetSlug) {
         $desktop = $this->findCss('.desktop');
         $driver = $this->getDriver();
         $block = $desktop->find('css', 'block');
         $editButton = $block->find('css', 'control-panel item.edit');
         $editButton->click();
-        $driver->selectOption("//select[@class='widget-selector']", $widgetTitle);
-
+        $block->find('css', '.widget-type-list .item[value=' . $widgetSlug . ']')->click();
     }
 
     /**

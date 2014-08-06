@@ -40,7 +40,7 @@
             <block-categories></block-categories>
             <block-title>
                 <edit-element></edit-element>
-                <view-element class="module-element"></view-element>
+                <view-element></view-element>
             </block-title>
         </block-headline>
         <block-content>
@@ -67,14 +67,14 @@
                 Добавить задание
             </button>
             <button
-                    class="add-rule btn btn-primary btn-xs popover-dismiss"
-                    data-toggle="popover"
-                    title="Блок правило"
-                    data-content="<img src='/img/rule-sample.png'> <div class='popover-text'>Правило представляет из себя обычный текст, помещенный в зеленный прямоугольник. Используется для заострения внимания на вызказывание.</div>"
-                    data-trigger="hover"
-                    data-html="true"
-                    data-placement="top"
-                    >
+                class="add-rule btn btn-primary btn-xs popover-dismiss"
+                data-toggle="popover"
+                title="Блок правило"
+                data-content="<img src='/img/rule-sample.png'> <div class='popover-text'>Правило представляет из себя обычный текст, помещенный в зеленный прямоугольник. Используется для заострения внимания на вызказывание.</div>"
+                data-trigger="hover"
+                data-html="true"
+                data-placement="top"
+            >
                 <span class="glyphicon glyphicon-info-sign"></span>
                 Добавить правило
             </button>
@@ -100,7 +100,7 @@
 <div class="template" name="audioWidget">
     <audio-list></audio-list>
     <audio-description>
-        <view-element>Вопросы к аудио записи</view-element>
+        <view-element></view-element>
     </audio-description>
 </div>
 
@@ -153,7 +153,7 @@
 
 <div class="template" name="questionWidget">
     <question>
-        <view-element>Текст задания</view-element>
+        <view-element></view-element>
     </question>
 </div>
 
@@ -167,7 +167,7 @@
 <div class="template" name="videoWidget">
     <video-list></video-list>
     <video-description>
-        <view-element>Описание к видео</view-element>
+        <view-element></view-element>
     </video-description>
 </div>
 
@@ -183,7 +183,7 @@
 <div class="template" name="checkEndingsWidget">
     <div class="check-endings">
         <div class="words">
-            <div class="title">Слова</div>
+            <label class="title">Слова:</label>
             <div class="list"></div>
         </div>
         <div class="endings-list"></div>

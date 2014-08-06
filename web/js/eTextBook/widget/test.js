@@ -3,6 +3,7 @@ var eTextBookWidgetTest = eTextBookWidget.extend({
 		  slug: "test",
 		  title: "Тест",
 		  templateName: 'testSolutionWidget'
+         ,ico: '<span class="glyphicon glyphicon-ok"></span>'
 	 },
 	 startEdit: function () {
 		  for (var i = 0; i < this.cont.find('.task').length; i++) {

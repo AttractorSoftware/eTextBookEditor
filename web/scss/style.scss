@@ -200,6 +200,33 @@
             border: solid 1px #eee;
             padding: 30px 15px 15px 15px;
             margin: 0 0 52px 0;
+            .widget-type-list {
+              float: left;
+              width: 100%;
+              .item {
+                float: left;
+                width: 59px;
+                height: 59px;
+                border: solid 1px #eee;
+                border-radius: 3px;
+                margin: 0 1px 1px 0;
+                cursor: pointer;
+                font-size: 11px;
+                text-align: center;
+                line-height: 12px;
+                text-shadow: 1px 0 0 #fff;
+                &.selected {
+                  background: #eee;
+                  border-color: #ddd;
+                }
+                .glyphicon {
+                  float: left;
+                  width: 100%;
+                  margin: 9px 0 5px 0;
+                  font-size: 14px;
+                }
+              }
+            }
             block-headline {
               float: left;
               width: 100%;
@@ -228,7 +255,6 @@
                 width: 100%;
                 margin: 10px 0 0 0;
                 label {
-                  width: 100px;
                   float: left;
                   display: none;
                 }
@@ -322,6 +348,8 @@
           .words {
             width: 100%;
             .list {
+              float: left;
+              clear: left;
               .item {
                 width: 50%;
               }
@@ -338,6 +366,11 @@
         .words {
           float: left;
           width: 70%;
+          .list {
+            float: left;
+            clear: left;
+            width: 100%;
+          }
           .item {
             float: left;
             width: 91%;
@@ -540,12 +573,13 @@
           height: 100px;
           background: #ccc;
           text-shadow: 1px 1px 0 #fff;
+          text-align: center;
           font-size: 30px;
-          .glyphicon {
-            position: absolute;
-            top: 37px;
-            left: 37px;
+          .help-text {
+            font-size: 12px;
+            text-align: center;
           }
+          .glyphicon { margin: 15px 0 0 0; }
         }
       }
       video-list {
@@ -558,6 +592,11 @@
           text-align: center;
           background: #ddd;
           cursor: pointer;
+          font-size: 12px;
+          text-shadow: 1px 1px 0 #fff;
+          .glyphicon {
+            margin: 0 10px 0 0 0;
+          }
         }
         video-item {
           float: left;
@@ -593,29 +632,38 @@
       audio-list {
         float: left;
         width: 100%;
+        margin: 0 0 15px 0;
         audio-item {
           float: left;
           width: 100%;
-          audio {
+          clear: left;
+          margin: 0 0 15px 0;
+          video {
             float: left;
             width: 90%;
-            margin: 0 0 15px 0;
+            height: 35px;
           }
           .glyphicon-remove {
             float: left;
             width: 20px;
             height: 20px;
-            margin: 5px 0 0 15px;
+            margin: 12px 0 0 15px;
             cursor: pointer;
           }
         }
         .add-audio {
           float: left;
           width: 100%;
-          padding: 10px;
+          padding: 13px 10px 10px 10px;
+          margin: 15px 0 0 0;
           text-align: center;
           background: #ddd;
           cursor: pointer;
+          font-size: 12px;
+          text-shadow: 1px 1px 0 #fff;
+          .glyphicon {
+            margin: 0 10px 0 0 0;
+          }
         }
       }
     }

@@ -1,8 +1,9 @@
 var eTextBookWidgetLogicStatement = eTextBookWidget.extend({
 	 defaults: {
 		  slug: "logic-statement",
-		  title: "Логические утверждения",
+		  title: "Верно, не верно",
 		  templateName: 'logicStatementWidget'
+         ,ico: '<span class="glyphicon glyphicon-ok-sign"></span>'
 	 },
 
 	 finishEdit: function () {

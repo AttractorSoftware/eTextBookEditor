@@ -207,8 +207,14 @@ image-description {
     width: 100%;
     audio-item {
       float: left;
+      clear: left;
       width : 100%;
       margin: 0 0 15px;
+      video {
+        float: left;
+        width: 90%;
+        height: 70px;
+      }
     }
   }
   audio-description {

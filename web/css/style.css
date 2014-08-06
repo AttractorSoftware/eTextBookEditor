@@ -158,6 +158,29 @@
           border: solid 1px #eee;
           padding: 30px 15px 15px 15px;
           margin: 0 0 52px 0; }
+          .e-text-book-editor .desktop e-text-book module blocks block .widget-type-list, .e-text-book-editor .desktop e-text-book module blocks rule .widget-type-list {
+            float: left;
+            width: 100%; }
+            .e-text-book-editor .desktop e-text-book module blocks block .widget-type-list .item, .e-text-book-editor .desktop e-text-book module blocks rule .widget-type-list .item {
+              float: left;
+              width: 59px;
+              height: 59px;
+              border: solid 1px #eee;
+              border-radius: 3px;
+              margin: 0 1px 1px 0;
+              cursor: pointer;
+              font-size: 11px;
+              text-align: center;
+              line-height: 12px;
+              text-shadow: 1px 0 0 #fff; }
+              .e-text-book-editor .desktop e-text-book module blocks block .widget-type-list .item.selected, .e-text-book-editor .desktop e-text-book module blocks rule .widget-type-list .item.selected {
+                background: #eee;
+                border-color: #ddd; }
+              .e-text-book-editor .desktop e-text-book module blocks block .widget-type-list .item .glyphicon, .e-text-book-editor .desktop e-text-book module blocks rule .widget-type-list .item .glyphicon {
+                float: left;
+                width: 100%;
+                margin: 9px 0 5px 0;
+                font-size: 14px; }
           .e-text-book-editor .desktop e-text-book module blocks block block-headline, .e-text-book-editor .desktop e-text-book module blocks rule block-headline {
             float: left;
             width: 100%; }
@@ -181,7 +204,6 @@
               width: 100%;
               margin: 10px 0 0 0; }
               .e-text-book-editor .desktop e-text-book module blocks block block-content widget label, .e-text-book-editor .desktop e-text-book module blocks rule block-content widget label {
-                width: 100px;
                 float: left;
                 display: none; }
               .e-text-book-editor .desktop e-text-book module blocks block block-content widget .widget-selector, .e-text-book-editor .desktop e-text-book module blocks rule block-content widget .widget-selector {
@@ -239,8 +261,11 @@
           cursor: pointer; }
     .e-text-book-editor .desktop e-text-book block[editable='0'] .check-endings .words {
       width: 100%; }
-      .e-text-book-editor .desktop e-text-book block[editable='0'] .check-endings .words .list .item {
-        width: 50%; }
+      .e-text-book-editor .desktop e-text-book block[editable='0'] .check-endings .words .list {
+        float: left;
+        clear: left; }
+        .e-text-book-editor .desktop e-text-book block[editable='0'] .check-endings .words .list .item {
+          width: 50%; }
     .e-text-book-editor .desktop e-text-book .check-endings {
       float: left;
       width: 100%; }
@@ -249,6 +274,10 @@
       .e-text-book-editor .desktop e-text-book .check-endings .words {
         float: left;
         width: 70%; }
+        .e-text-book-editor .desktop e-text-book .check-endings .words .list {
+          float: left;
+          clear: left;
+          width: 100%; }
         .e-text-book-editor .desktop e-text-book .check-endings .words .item {
           float: left;
           width: 91%;
@@ -399,11 +428,13 @@
         height: 100px;
         background: #ccc;
         text-shadow: 1px 1px 0 #fff;
+        text-align: center;
         font-size: 30px; }
+        .e-text-book-editor .desktop e-text-book image-description .add-image .help-text {
+          font-size: 12px;
+          text-align: center; }
         .e-text-book-editor .desktop e-text-book image-description .add-image .glyphicon {
-          position: absolute;
-          top: 37px;
-          left: 37px; }
+          margin: 15px 0 0 0; }
     .e-text-book-editor .desktop e-text-book video-list {
       float: left;
       width: 100%; }
@@ -413,7 +444,11 @@
         padding: 10px;
         text-align: center;
         background: #ddd;
-        cursor: pointer; }
+        cursor: pointer;
+        font-size: 12px;
+        text-shadow: 1px 1px 0 #fff; }
+        .e-text-book-editor .desktop e-text-book video-list .add-video .glyphicon {
+          margin: 0 10px 0 0 0; }
       .e-text-book-editor .desktop e-text-book video-list video-item {
         float: left;
         width: 100%; }
@@ -439,27 +474,35 @@
         margin: 10px 0 0 0; }
     .e-text-book-editor .desktop e-text-book audio-list {
       float: left;
-      width: 100%; }
+      width: 100%;
+      margin: 0 0 15px 0; }
       .e-text-book-editor .desktop e-text-book audio-list audio-item {
         float: left;
-        width: 100%; }
-        .e-text-book-editor .desktop e-text-book audio-list audio-item audio {
+        width: 100%;
+        clear: left;
+        margin: 0 0 15px 0; }
+        .e-text-book-editor .desktop e-text-book audio-list audio-item video {
           float: left;
           width: 90%;
-          margin: 0 0 15px 0; }
+          height: 35px; }
         .e-text-book-editor .desktop e-text-book audio-list audio-item .glyphicon-remove {
           float: left;
           width: 20px;
           height: 20px;
-          margin: 5px 0 0 15px;
+          margin: 12px 0 0 15px;
           cursor: pointer; }
       .e-text-book-editor .desktop e-text-book audio-list .add-audio {
         float: left;
         width: 100%;
-        padding: 10px;
+        padding: 13px 10px 10px 10px;
+        margin: 15px 0 0 0;
         text-align: center;
         background: #ddd;
-        cursor: pointer; }
+        cursor: pointer;
+        font-size: 12px;
+        text-shadow: 1px 1px 0 #fff; }
+        .e-text-book-editor .desktop e-text-book audio-list .add-audio .glyphicon {
+          margin: 0 10px 0 0 0; }
 
 .file-manager {
   display: none;
@@ -780,8 +823,13 @@ image-description {
   width: 100%; }
   .e-text-book-viewer audio-list audio-item {
     float: left;
+    clear: left;
     width: 100%;
     margin: 0 0 15px; }
+    .e-text-book-viewer audio-list audio-item video {
+      float: left;
+      width: 90%;
+      height: 70px; }
 .e-text-book-viewer audio-description {
   float: left;
   width: 100%; }

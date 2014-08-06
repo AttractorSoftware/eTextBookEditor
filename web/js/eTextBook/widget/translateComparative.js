@@ -3,6 +3,7 @@ var eTextBookWidgetTranslateComparative = eTextBookWidget.extend({
         slug: "translate-comparative"
         ,title: "Сравнение перевода"
         ,templateName: 'translateComparativeWidget'
+        ,ico: '<span class="glyphicon glyphicon-random"></span>'
     }
 
     ,finishEdit: function() {
@@ -28,7 +29,7 @@ var eTextBookWidgetTranslateComparative = eTextBookWidget.extend({
 
         var $this = this;
 
-        this.editCont.find('translate-comparative').append('<edit-element class="new-item"><input class="word" /><input class="translate" /> <add class="glyphicon glyphicon-plus"></add></edit-element>');
+        this.editCont.find('translate-comparative').append('<edit-element class="new-item"><input class="word" placeholder="Слово" /><input class="translate" placeholder="Перевод" /> <add class="glyphicon glyphicon-plus"></add></edit-element>');
         this.editCont.find('list item').append('<edit-element class="remove glyphicon glyphicon-remove"></edit-element>');
         this.bindRemoveEvent();
 

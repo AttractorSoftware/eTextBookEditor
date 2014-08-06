@@ -3,6 +3,7 @@ var eTextBookWidgetCheckEndings = eTextBookWidget.extend({
         slug: "check-endings"
         ,title: "Проверка окончаний"
         ,templateName: 'checkEndingsWidget'
+        ,ico: '<span class="glyphicon glyphicon-compressed"></span>'
     }
 
     ,finishEdit: function() {
@@ -33,7 +34,7 @@ var eTextBookWidgetCheckEndings = eTextBookWidget.extend({
 
         this.cont.append(
             '<edit-element class="endings">' +
-                '<div class="title">Окончания</div>' +
+                '<label class="title">Окончания:</label>' +
                 '<div class="list">' +
                     '<edit-element class="add-ending">' +
                         '<input type="text">' +

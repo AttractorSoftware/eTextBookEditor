@@ -59,7 +59,8 @@ var eTextBookBlock = Backbone.Model.extend({
         var $this = this;
         var selector = $('<select class="widget-selector"></select>');
         var label = $('<edit-element><label>Тип задания: </label></edit-element>');
-        this.cont.find('widget').prepend(label, selector);
+        var widgetTypeList = $('<edit-element class="widget-type-list"></edit-element>');
+        this.cont.find('widget').prepend(label, widgetTypeList);
         selector.empty();
 
         var widgetSlug = this.cont.find('widget').attr('widget-slug');
@@ -68,13 +69,16 @@ var eTextBookBlock = Backbone.Model.extend({
             var widgetConstruct = App.eTextBookWidgetRepository.widgets[i];
             var widget = new widgetConstruct();
             var selected = widgetSlug == widget.get('slug') ? 'selected' : '';
-            selector.append('<option value="'
-                + widget.get('slug') + '" ' + selected + '>'
-                + widget.get('title') + '</option>');
+            widgetTypeList.append('<div value="'
+                + widget.get('slug') + '" class="item ' + selected + '">'
+                + widget.get('ico')
+                + widget.get('title') + '</div>');
         }
 
-        selector.bind('change', function () {
-            var widgetConstruct = App.eTextBookWidgetRepository.getWidgetBySlug($(this).val());
+        widgetTypeList.find('.item').bind('click', function () {
+            var widgetConstruct = App.eTextBookWidgetRepository.getWidgetBySlug($(this).attr('value'));
+            $(this).parent().find('.item').removeClass('selected');
+            $(this).addClass('selected');
             var widget = new widgetConstruct();
             var template = $(App.eTextBookTemplate.getTemplate(widget.get('templateName')));
             $this.cont.find('widget-content').empty();
@@ -85,6 +89,10 @@ var eTextBookBlock = Backbone.Model.extend({
             widget.startEdit();
             $this.cont.find('widget').attr('widget-slug', widget.get('slug'));
         });
+
+        if($this.cont.find('widget-content').html() == '') {
+            $($this.cont.find('.widget-type-list .item')[0]).trigger('click');
+        }
     }
 
 });
