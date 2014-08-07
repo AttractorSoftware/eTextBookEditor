@@ -21,7 +21,19 @@ DirectoryIndex app.php
     RewriteRule ^([\w\/-]+)(\?.*)?$ $1.php$2 [L,T=application/x-httpd-php]
     # Rewrite all other queries to the front controller.
     RewriteRule .? %{ENV:BASE}/app.php [L]
-    RewriteRule ^fonts/(.*)$ /book-template/fonts/$1 [R=301,NC,L]
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+        Options +FollowSymlinks
+        RewriteEngine On
+
+        # Explicitly disable rewriting for front controllers
+        RewriteRule ^app_dev.php - [L]
+        RewriteRule ^app.php - [L]
+
+        RewriteCond %{REQUEST_FILENAME} !-f
+
+        # Change below before deploying to production
+        #RewriteRule ^(.*)$ /app.php [QSA,L]
+        RewriteRule ^(.*)$ /app_dev.php [QSA,L]
 </IfModule>
 <IfModule !mod_rewrite.c>
     <IfModule mod_alias.c>

@@ -11,20 +11,22 @@ use Gedmo\Sluggable\Util as Sluggable;
 use eTextBook\LoungeBundle\Lib\Book;
 use eTextBook\LoungeBundle\Entity\Book as eBook;
 
-class BookController extends Controller {
+class BookController extends Controller
+{
     /**
      * @Route("/books", name="books")
      * @Template()
      */
-    public function indexAction() {
+    public function indexAction()
+    {
         $fileManager = $this->get('fileManager');
         $booksDir = $this->container->getParameter('books_dir');
         $books = array();
 
-        foreach($fileManager->fileList($booksDir) as $fileName) {
+        foreach ($fileManager->fileList($booksDir) as $fileName) {
             $filePart = explode('.', $fileName);
             $filePart = end($filePart);
-            if($filePart == 'etb') {
+            if ($filePart == 'etb') {
                 $books[] = new Book($booksDir . $fileName);
             }
         }
@@ -35,7 +37,8 @@ class BookController extends Controller {
     /**
      * @Route("/book/create", name="book-create")
      */
-    public function createAction(Request $request) {
+    public function createAction(Request $request)
+    {
         $bookData = $request->get('book');
         $transliterate = $this->get('transliterate');
         $bookSlug = Sluggable\Urlizer::urlize($transliterate->transliterate($bookData['title'], 'ru'), '-');
@@ -50,15 +53,15 @@ class BookController extends Controller {
         $creator = $this->get('createETBFile');
         $creator->setBook($book);
 
-        if(!$creator->execute()) {
+        if (!$creator->execute()) {
             $response = array(
                 'status' => 'failed'
-                ,'reason' => 'Учебник с таким названием уже существует'
+            , 'reason' => 'Учебник с таким названием уже существует'
             );
         } else {
             $response = array(
                 'status' => 'success'
-                ,'data' => array(
+            , 'data' => array(
                     'slug' => $bookSlug
                 )
             );
@@ -71,13 +74,14 @@ class BookController extends Controller {
      * @Route("/book/edit/{slug}/{module}", name="book-edit")
      * @Template()
      */
-    public function editAction($slug, $module) {
+    public function editAction($slug, $module)
+    {
         $book = new Book($this->container->getParameter('books_dir') . $slug . '.etb');
         $modules = $book->getModules();
         return array(
             'book' => $book
-            ,'modules' => $modules
-            ,'currentModule' => $module == ' ' && count($modules) > 0 ? $modules[0]->slug : $module
+        , 'modules' => $modules
+        , 'currentModule' => $module == ' ' && count($modules) > 0 ? $modules[0]->slug : $module
         );
     }
 
@@ -85,20 +89,22 @@ class BookController extends Controller {
      * @Route("/book/view/{slug}/{module}", name="book-view")
      * @Template()
      */
-    public function viewAction($slug, $module) {
+    public function viewAction($slug, $module)
+    {
         $book = new Book($this->container->getParameter('books_dir') . $slug . '.etb');
         $modules = $book->getModules();
         return array(
             'book' => $book
-            ,'modules' => $modules
-            ,'currentModule' => $module == ' ' && count($modules) > 0 ? $modules[0]->slug : $module
+        , 'modules' => $modules
+        , 'currentModule' => $module == ' ' && count($modules) > 0 ? $modules[0]->slug : $module
         );
     }
 
     /**
      * @Route("/book/create/module", name="book-create-module")
      */
-    public function createModuleAction(Request $request) {
+    public function createModuleAction(Request $request)
+    {
         $moduleData = $request->get('module');
         $book = $this->get('bookLoader')->load($moduleData['bookSlug']);
 
@@ -114,19 +120,19 @@ class BookController extends Controller {
     /**
      * @Route("/book/update/module", name="book-update-module")
      */
-    public function updateModule(Request $request) {
+    public function updateModule(Request $request)
+    {
         $updater = $this->get('updateETBFile');
 
         $content = $request->get('content');
         $slug = $request->get('book');
-        $fileManager = $this->get('fileManager');
 
         $rootDir = $tempDir = $this->container->getParameter('book_tmp_dir') . $slug;
         $templateDir = $this->container->getParameter('book_template_dir');
 
         $moduleFilePath = $rootDir . '/modules/' . $request->get('module') . '.html';
 
-        $indexContent = file_get_contents($templateDir . "/index.html");
+        $indexContent = file_get_contents($templateDir . "/moduleUpdateTemplate.html");
 
         $content = str_replace('/tmp/' . $slug . '/', '', $content);
 
@@ -134,7 +140,7 @@ class BookController extends Controller {
             $moduleFilePath,
             str_replace(
                 array("-- title --", "-- content --"),
-                array('', $content),
+                array($slug, $content),
                 $indexContent
             )
         );
@@ -150,7 +156,8 @@ class BookController extends Controller {
     /**
      * @Route("/book/file-upload", name="book-file-upload")
      */
-    public function fileUploadAction(Request $request) {
+    public function fileUploadAction(Request $request)
+    {
 
         $file = $request->files->get('upload-file');
         $bookSlug = $request->get('slug');
@@ -159,18 +166,21 @@ class BookController extends Controller {
         $tmpDir = $this->container->getParameter('book_tmp_dir');
         $fileName = $file->getClientOriginalName();
 
-        switch($fileType[0]) {
-            case 'image': {
+        switch ($fileType[0]) {
+            case 'image':
+            {
                 $uploadFilePath = $tmpDir . $bookSlug . '/content/img/';
                 $file->move($uploadFilePath, $fileName);
                 break;
             }
-            case 'audio': {
+            case 'audio':
+            {
                 $uploadFilePath = $tmpDir . $bookSlug . '/content/audio/';
                 $file->move($uploadFilePath, $fileName);
                 break;
             }
-            case 'video': {
+            case 'video':
+            {
                 $uploadFilePath = $tmpDir . $bookSlug . '/content/video/';
                 $file->move($uploadFilePath, $fileName);
                 break;
@@ -179,7 +189,7 @@ class BookController extends Controller {
 
         return new JsonResponse(array('status' => 'success', 'data' => array(
             'type' => $fileType[0]
-            ,'name' => $fileName
+        , 'name' => $fileName
         )));
     }
 }

@@ -1,26 +1,47 @@
 <!Doctype html>
 <html lang="ru">
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, user-scalable=yes">
-        <meta charset="utf-8" />
-        <title>-- title --</title>
-    </head>
-    <body>
-        <div class="container e-text-book-viewer">
-            -- content --
-        </div>
-        <link rel="stylesheet" type="text/css" href="css/main-style.min.css" />
-        <script src="js/script.min.js"></script>
-        <script>
-            $(function(){
-                for(var i = 0; i < $('body').find('widget').length; i++) {
-                    var widgetCont = $($('body').find('widget')[i]);
-                    var widget = App.eTextBookWidgetRepository.getWidgetBySlug(widgetCont.attr('widget-slug'));
-                    widget = new widget();
-                    widget.contentContainer = widgetCont.find('widget-content');
-                    widget.viewActivate();
-                }
-            });
-        </script>
-    </body>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, user-scalable=yes">
+    <meta charset="utf-8"/>
+    <title>-- title --</title>
+    <link rel="stylesheet" type="text/css" href="css/main-style.min.css"/>
+</head>
+<body>
+<div class="book">
+
+    <div class="page-header">
+        <span id="show-book-summary" class="btn left glyphicon glyphicon-th-list" title="Мазмуну"></span>
+
+        <h2><!-- book-name --></h2>
+    </div>
+
+    <div class="book-summary">
+
+        <ul id="moduleList" class="summary">
+            <!-- module-link -->
+        </ul>
+
+    </div>
+    <div id="book-body" class="book-body display e-text-book-viewer container">
+    </div>
+</div>
+
+<script src="js/script.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var $firstModuleLink = $('.chapter-link:first').attr('href'),
+                iframe = '<iframe id="book" src="' + $firstModuleLink + ' " frameborder="0" ' +
+                        'width="100%" height="100%"></iframe>';
+
+        $('.book-body').html(iframe);
+        $('.book').on('click', '#show-book-summary', function () {
+            $('.book').toggleClass('with-summary');
+        });
+        $('#moduleList').on('click', 'a', function () {
+            $('#book').attr('src', $(this).attr('href'));
+            return false;
+        })
+    });
+</script>
+</body>
 </html>

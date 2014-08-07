@@ -9,7 +9,7 @@
     background-color: #FFF;
     border: 1px solid #ccc;
     padding: 2px;
-    width: 71px;
+    width: 75px;
     span {
       border: 1px solid #CCC;
       cursor: pointer;
@@ -27,7 +27,9 @@
   width: 100%;
   height: 100%;
 
-  &.view-mode { height: auto !important; }
+  &.view-mode {
+    height: auto !important;
+  }
   .properties {
     float: left;
     width: 100%;
@@ -154,7 +156,7 @@
           }
         }
         &[editable="1"] {
-          view-element.module-element {
+          view-element.module-element, edit-element label {
             display: none;
           }
           edit-element.module-element {
@@ -736,12 +738,24 @@
         background: url("/img/file-ico/_blank.png") no-repeat left center;
         cursor: pointer;
         overflow: hidden;
-        &.png { background-image: url('/img/file-ico/png.png'); }
-        &.jpg { background-image: url('/img/file-ico/jpg.png'); }
-        &.gif { background-image: url('/img/file-ico/gif.png'); }
-        &.mp3 { background-image: url('/img/file-ico/mp3.png'); }
-        &.mp4 { background-image: url('/img/file-ico/mp4.png'); }
-        &.selected { font-weight: bold; }
+        &.png {
+          background-image: url('/img/file-ico/png.png');
+        }
+        &.jpg {
+          background-image: url('/img/file-ico/jpg.png');
+        }
+        &.gif {
+          background-image: url('/img/file-ico/gif.png');
+        }
+        &.mp3 {
+          background-image: url('/img/file-ico/mp3.png');
+        }
+        &.mp4 {
+          background-image: url('/img/file-ico/mp4.png');
+        }
+        &.selected {
+          font-weight: bold;
+        }
       }
     }
     .player {
@@ -800,9 +814,15 @@
     color: #333;
     text-decoration: none;
   }
-  li { margin: 0 0 5px 0; }
-  span.glyphicon { margin: 0 3px 0 0; }
-  .title { font-size: 16px; }
+  li {
+    margin: 0 0 5px 0;
+  }
+  span.glyphicon {
+    margin: 0 3px 0 0;
+  }
+  .title {
+    font-size: 16px;
+  }
   a.edit-link {
     color: #fff;
     margin: 0 0 0 5px;
@@ -852,149 +872,3 @@
 }
 
 @import '../book-template/scss/style';
-
-.book {
-  .page-header {
-    position: absolute;
-    overflow: visible;
-    top: 0;
-    right: 0;
-    left: 0;
-    height: 50px;
-    z-index: 2;
-    font-size: .85em;
-    color: #7e888b;
-    background: #fff;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.07);
-    margin: 0;
-    h1, h2 {
-      margin: 0;
-      font-size: 20px;
-      text-align: center;
-      line-height: 50px;
-      padding-left: 200px;
-      padding-right: 200px;
-      -webkit-transition: margin-left .5s ease;
-      transition: margin-left .5s ease;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-    .btn {
-      display: block;
-      height: 50px;
-      padding: 0 15px;
-      border-bottom: 0;
-      color: #7e888b;
-      text-transform: uppercase;
-      line-height: 50px;
-      position: relative;
-    }
-    .left {
-      float: left !important;
-    }
-  }
-  .book-summary {
-    position: absolute;
-    top: 50px;
-    left: -250px;
-    bottom: 0;
-    z-index: 1;
-    width: 250px;
-    color: #c4cdd4;
-    background: #fff;
-    border-right: 1px solid rgba(0, 0, 0, 0.07);
-    -webkit-transition: all .5s ease;
-    transition: all .5s ease;
-    .summary {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      overflow-y: auto;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      -webkit-transition: top .5s ease;
-      transition: top .5s ease;
-
-      li {
-        list-style: none;
-        a {
-          display: block;
-          padding: 10px 15px;
-          border-bottom: 0;
-          color: #364149;
-          background: transparent;
-          text-overflow: ellipsis;
-          overflow: hidden;
-          white-space: nowrap;
-          position: relative;
-        }
-        ul {
-          padding-left: 20px;
-        }
-        i.fa-check {
-          display: none;
-          position: absolute;
-          right: 9px;
-          top: 16px;
-          font-size: 9px;
-          color: #3c3;
-        }
-      }
-      li.done {
-        i.fa-check {
-          display: inline;
-        }
-      }
-
-      li.active a, li a:hover{
-        color: #008cff;
-        background: transparent;
-        text-decoration: none;
-      }
-    }
-  }
-  .book-body {
-    width: 90%;
-    position: absolute;
-    top: 50px;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    color: #000;
-    background: #fff;
-    -webkit-transition: all .5s ease;
-    transition: all .5s ease;
-    e-text-book {
-      max-width: 800px;
-      margin: 0 auto;
-      float: none;
-      clear: both;
-      display: block;
-      padding-top: 20px;
-    }
-  }
-}
-
-.book.with-summary {
-  .book-summary {
-    left: 0;
-  }
-}
-
-.fa {
-  display: inline-block;
-  font-family: 'Glyphicons Halflings';
-  font-style: normal;
-  font-weight: normal;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.fa-check:before {
-  content: "\e013";
-}

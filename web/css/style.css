@@ -9,7 +9,7 @@
     background-color: #FFF;
     border: 1px solid #ccc;
     padding: 2px;
-    width: 71px; }
+    width: 75px; }
     .container #charsBlock span {
       border: 1px solid #CCC;
       cursor: pointer;
@@ -121,7 +121,7 @@
           float: left;
           width: 100%;
           padding: 10px; }
-      .e-text-book-editor .desktop e-text-book module[editable="1"] view-element.module-element {
+      .e-text-book-editor .desktop e-text-book module[editable="1"] view-element.module-element, .e-text-book-editor .desktop e-text-book module[editable="1"] edit-element label {
         display: none; }
       .e-text-book-editor .desktop e-text-book module[editable="1"] edit-element.module-element {
         display: block; }
@@ -964,6 +964,16 @@ image-description {
     transition: top .5s ease; }
     .book .book-summary .summary li {
       list-style: none; }
+      .book .book-summary .summary li .fa {
+        display: inline-block;
+        font-family: 'Glyphicons Halflings';
+        font-style: normal;
+        font-weight: normal;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale; }
+      .book .book-summary .summary li .fa-check:before {
+        content: "\e013"; }
       .book .book-summary .summary li a {
         display: block;
         padding: 10px 15px;
@@ -1010,15 +1020,3 @@ image-description {
 
 .book.with-summary .book-summary {
   left: 0; }
-
-.fa {
-  display: inline-block;
-  font-family: 'Glyphicons Halflings';
-  font-style: normal;
-  font-weight: normal;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; }
-
-.fa-check:before {
-  content: "\e013"; }

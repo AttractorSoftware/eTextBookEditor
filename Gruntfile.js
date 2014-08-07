@@ -39,8 +39,7 @@ module.exports = function (grunt) {
             ,template: {
                 src: [
                     'bower_components/bootstrap/dist/css/bootstrap.min.css'
-                    , '/web/css/style.css'
-                    , '/web/css/html5Player.css'
+                    , 'web/css/style.css'
                 ], dest: 'web/book-template/css/main-style.css'
             }
         }, cssmin: {

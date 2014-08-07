@@ -142,7 +142,7 @@ class Book {
         global $kernel;
         $templateDir = $kernel->getContainer()->getParameter('book_template_dir');
 
-        $indexContent = file_get_contents($templateDir . "/index.html");
+        $indexContent = file_get_contents($templateDir . "/moduleTemplate.html");
 
         $content = '<e-text-book>
                 <module>
