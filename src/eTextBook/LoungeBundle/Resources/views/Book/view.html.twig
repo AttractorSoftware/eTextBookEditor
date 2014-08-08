@@ -6,7 +6,8 @@
         {{ book.authors }}
         <span>ISBN: {{ book.ISBN }}</span>
         <div class="control">
-            <a href="/books/{{ book.slug }}.etb" class="btn btn-success btn-xs book-download"><span class="glyphicon glyphicon-save"></span>Скачать учебник</a>
+            <a href="/books/{{ book.slug }}.etb" class="btn btn-success btn-xs book-download">
+                <span class="glyphicon glyphicon-save"></span>Скачать учебник</a>
             {% if app.user %}
                 / <a href="{{ path('book-edit', {'slug': book.slug, 'module': ' ' })  }}" class="edit-link btn btn-primary btn-xs"><span class="glyphicon glyphicon-edit"></span>Редактировать</a>
             {% endif %}
