@@ -7,7 +7,7 @@ use eTextBook\LoungeBundle\Entity\Book;
 class UpdateETBFile
 {
     private $book;
-    private $tmpDir;
+    private $tmpDir; 
     private $bookTmpDir;
 
     public function __construct()

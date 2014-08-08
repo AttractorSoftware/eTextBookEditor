@@ -1000,7 +1000,7 @@ image-description {
       background: transparent;
       text-decoration: none; }
 .book .book-body {
-  width: 90%;
+  width: 100%;
   position: absolute;
   top: 50px;
   right: 0;
