@@ -9,16 +9,16 @@ e-text-book-editor .display, .e-text-book-viewer {
         float: left;
         width: 28%;
         height: 150px;
-        background: #2b542c;
-        color: #fff;
         vertical-align: middle;
         font-size: 25px;
+        background: #2b542c;
+        color: #fff;
         view-element {
           display: table-cell;
-          padding: 0 0 0 20px;
-          width: 100%;
-          height: 150px;
           vertical-align: middle;
+          height: 150px;
+          width: 100%;
+          padding: 0 0 0 20px;
         }
       }
       module-background-image {
@@ -36,9 +36,9 @@ e-text-book-editor .display, .e-text-book-viewer {
         border-width: 0 0 1px 1px;
         view-element {
           display: table-cell;
-          padding: 0 0 0 20px;
           height: 130px;
           vertical-align: middle;
+          padding: 0 0 0 20px;
           font-size: 12px;
         }
       }
@@ -50,33 +50,33 @@ e-text-book-editor .display, .e-text-book-viewer {
         border-width: 0 1px 1px 1px;
         view-element {
           display: table-cell;
-          padding: 0 0 0 20px;
           height: 130px;
           vertical-align: middle;
+          padding: 0 0 0 20px;
           font-size: 12px;
         }
       }
     }
     blocks {
       float: left;
-      padding: 20px 0 0 0;
       width: 100%;
+      padding: 20px 0 0 0;
       rule {
         float: left;
-        margin: 0 0 15px 0;
         width: 100%;
+        margin: 0 0 15px 0;
         rule-title {
           float: left;
-          padding: 30px;
           width: 100%;
+          padding: 30px;
           background: #ccedcd;
         }
       }
       block {
         float: left;
-        margin: 0 0 20px 0;
-        padding: 0 0 20px 0 0;
         width: 100%;
+        padding: 0 0 20px 0 0;
+        margin: 0 0 20px 0;
         block-index {
           float: left;
           width: 3%;
@@ -94,18 +94,18 @@ e-text-book-editor .display, .e-text-book-viewer {
         }
         block-title {
           float: left;
-          width: 80%;
           font-weight: bold;
           font-size: 13px;
+          width: 80%;
         }
         block-content {
           float: left;
-          padding: 0 0 0 21%;
           width: 100%;
+          padding: 0 0 0 21%;
           widget {
             float: left;
-            padding: 10px 0 0 0;
             width: 100%;
+            padding: 10px 0 0 0;
           }
         }
         translate-comparative {
@@ -121,21 +121,15 @@ e-text-book-editor .display, .e-text-book-viewer {
           }
           list, answers {
             item {
-              position: relative;
               float: left;
               clear: both;
               margin: 0 0 5px -7px;
               padding: 0 7px;
+              position: relative;
               cursor: pointer;
-              &.selected {
-                background: #ddd;
-              }
-              &.success {
-                background: #89d489;
-              }
-              &.failed {
-                background: #e47A75;
-              }
+              &.selected { background: #ddd; }
+              &.success { background: #89d489; }
+              &.failed { background: #e47A75; }
             }
           }
         }
@@ -151,9 +145,9 @@ image-description {
     float: left;
     width: 100%;
     item {
+      width: 100px;
       float: left;
       margin: 0 5px 0 0;
-      width: 100px;
       image-title {
         float: left;
         width: 100%;
@@ -165,8 +159,8 @@ image-description {
         background: no-repeat center center;
         background-size: 100% auto;
         span {
-          padding: 2px 5px;
           border: solid 1px #398439;
+          padding: 2px 5px;
           font-size: 12px;
         }
       }
@@ -185,12 +179,12 @@ image-description {
     }
     descs {
       float: left;
-      padding: 10px 0 0 0;
       width: 100%;
+      padding: 10px 0 0 0;
       item {
         float: left;
-        margin: 0 0 5px 0;
         width: 50%;
+        margin: 0 0 5px 0;
         select {
           margin: 0 5px 0 0;
           color: #000;
@@ -207,7 +201,6 @@ image-description {
     }
   }
 }
-
 .e-text-book-viewer {
   audio-list {
     float: left;
@@ -215,8 +208,8 @@ image-description {
     audio-item {
       float: left;
       clear: left;
+      width : 100%;
       margin: 0 0 15px;
-      width: 100%;
       video {
         float: left;
         width: 90%;
@@ -229,15 +222,14 @@ image-description {
     width: 100%;
   }
 }
-
 .e-text-book-viewer {
   video-list {
     float: left;
     width: 100%;
     video-item {
       float: left;
+      width : 100%;
       margin: 0 0 15px;
-      width: 100%;
       video {
         float: left;
       }
@@ -248,15 +240,14 @@ image-description {
     width: 100%;
   }
 }
-
 .e-text-book-viewer {
   logic-statement {
     float: left;
     width: 100%;
     item {
       float: left;
-      margin: 0 0 10px 0;
       width: 100%;
+      margin: 0 0 10px 0;
       &.failed {
         background: #942a25;
         color: #fff;
@@ -267,13 +258,13 @@ image-description {
       }
       view-element {
         float: left;
-        padding: 4px 0 0 10px;
         width: 80%;
+        padding: 4px 0 0 10px;
       }
       select {
         float: left;
-        margin: 0 0 0 2%;
         width: 18%;
+        margin: 0 0 0 2%;
         color: #000;
       }
     }
@@ -285,16 +276,14 @@ image-description {
     float: left;
     width: 100%;
     .words {
-      .title {
-        display: none;
-      }
+      .title { display: none; }
       .list {
         float: left;
         width: 100%;
         .item {
           float: left;
-          padding: 5px;
           width: 50%;
+          padding: 5px;
           &.failed {
             background: #942a25;
             color: #fff;
@@ -319,83 +308,72 @@ image-description {
   }
 }
 
-.image-tall {
-  background-size: auto 100% !important;
-}
-
-.image-wide {
-  background-size: 100% auto !important;
-}
+.image-tall { background-size: auto 100% !important; }
+.image-wide { background-size: 100% auto !important; }
 
 .book {
   .page-header {
-    position: fixed;
+    position: absolute;
+    overflow: visible;
     top: 0;
     right: 0;
     left: 0;
-    z-index: 2;
-    overflow: visible;
-    margin: 0;
     height: 50px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.07);
-    background: #fff;
-    color: #7e888b;
+    z-index: 2;
     font-size: .85em;
+    color: #7e888b;
+    background: #fff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+    margin: 0;
     h1, h2 {
-      overflow: hidden;
       margin: 0;
-      padding-right: 200px;
-      padding-left: 200px;
-      text-align: center;
-      text-overflow: ellipsis;
-      white-space: nowrap;
       font-size: 20px;
+      text-align: center;
       line-height: 50px;
+      padding-left: 200px;
+      padding-right: 200px;
       -webkit-transition: margin-left .5s ease;
       transition: margin-left .5s ease;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
     .btn {
-      position: relative;
       display: block;
-      padding: 0 15px;
       height: 50px;
+      padding: 0 15px;
       border-bottom: 0;
       color: #7e888b;
       text-transform: uppercase;
       line-height: 50px;
+      position: relative;
     }
     .left {
       float: left !important;
     }
   }
-  iframe[seamless] {
-    overflow: hidden;
-    padding: 0px;
-    border: 0px none transparent;
-    background-color: transparent;
-  }
   .book-summary {
-    position: fixed;
+    position: absolute;
     top: 50px;
-    bottom: 0;
     left: -250px;
+    bottom: 0;
     z-index: 1;
     width: 250px;
-    border-right: 1px solid rgba(0, 0, 0, 0.07);
-    background: #fff;
     color: #c4cdd4;
+    background: #fff;
+    border-right: 1px solid rgba(0, 0, 0, 0.07);
     -webkit-transition: all .5s ease;
     transition: all .5s ease;
     .summary {
       position: absolute;
       top: 0;
+      left: 0;
       right: 0;
       bottom: 0;
-      left: 0;
       overflow-y: auto;
+      list-style: none;
       margin: 0;
       padding: 0;
-      list-style: none;
       -webkit-transition: top .5s ease;
       transition: top .5s ease;
 
@@ -403,9 +381,9 @@ image-description {
         list-style: none;
         .fa {
           display: inline-block;
-          font-weight: normal;
-          font-style: normal;
           font-family: 'Glyphicons Halflings';
+          font-style: normal;
+          font-weight: normal;
           line-height: 1;
           -webkit-font-smoothing: antialiased;
           -moz-osx-font-smoothing: grayscale;
@@ -416,26 +394,26 @@ image-description {
         }
 
         a {
-          position: relative;
           display: block;
-          overflow: hidden;
           padding: 10px 15px;
           border-bottom: 0;
-          background: transparent;
           color: #364149;
+          background: transparent;
           text-overflow: ellipsis;
+          overflow: hidden;
           white-space: nowrap;
+          position: relative;
         }
         ul {
           padding-left: 20px;
         }
         i.fa-check {
-          position: absolute;
-          top: 16px;
-          right: 9px;
           display: none;
-          color: #3c3;
+          position: absolute;
+          right: 9px;
+          top: 16px;
           font-size: 9px;
+          color: #3c3;
         }
       }
       li.done {
@@ -445,30 +423,30 @@ image-description {
       }
 
       li.active a, li a:hover {
-        background: transparent;
         color: #008cff;
+        background: transparent;
         text-decoration: none;
       }
     }
   }
   .book-body {
+    width: 90%;
     position: absolute;
     top: 50px;
     right: 0;
-    bottom: 0;
     left: 0;
-    width: 100%;
-    background: #fff;
+    bottom: 0;
     color: #000;
+    background: #fff;
     -webkit-transition: all .5s ease;
     transition: all .5s ease;
     e-text-book {
-      display: block;
+      max-width: 800px;
+      margin: 0 auto;
       float: none;
       clear: both;
-      margin: 0 auto;
+      display: block;
       padding-top: 20px;
-      max-width: 800px;
     }
   }
 }
