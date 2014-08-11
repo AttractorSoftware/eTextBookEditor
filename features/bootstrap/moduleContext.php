@@ -306,4 +306,43 @@ class ModuleContext extends eTextBookContext {
 
         assertEquals($ruleText->getHTML(), $text);
     }
+
+    /**
+     * @Given /^Открываем созданный учебник$/
+     */
+    public function latestBookLinkViewClick() {
+        $links = $this->findAllCss('.book-list li');
+        $latestBook = $this->getVar('latestBook');
+        foreach($links as $link) {
+            $titleLink = $link->find('css', 'a.title');
+            if(is_object($titleLink) && trim($titleLink->getHTML()) == $latestBook['title']) {
+                $link->find('css', '.view-link')->click();
+                sleep(2);
+            }
+        }
+    }
+
+    /**
+     * @Then /^Кликаем по кнопке содержания$/
+     */
+    public function openSummary() {
+        $this->findCss('#show-book-summary')->click();
+    }
+
+    /**
+     * @Given /^Проверяем заголовок "([^"]*)", ключевые вопросы "([^"]*)" и описание "([^"]*)"$/
+     */
+    public function checkModuleInEmulator($title, $questions, $description) {
+
+        $display = $this->findCss('.e-text-book-viewer');
+
+        assertEquals($display->find('css', 'module-title view-element')->getHTML(), $title);
+        assertEquals($display->find('css', 'module-questions view-element')->getHTML(), $questions);
+        assertEquals($display->find('css', 'module-description view-element')->getHTML(), $description);
+    }
+
+
+
+
+
 }
