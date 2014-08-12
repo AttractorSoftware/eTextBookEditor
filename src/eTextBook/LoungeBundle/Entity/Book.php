@@ -55,6 +55,13 @@ class Book {
      */
     private $isbn;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="cover", type="string")
+     */
+    private $cover;
+
     private $modules;
 
     public function __construct() {
@@ -200,5 +207,21 @@ class Book {
     public function setModules($modules)
     {
         $this->modules = $modules;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCover()
+    {
+        return $this->cover;
+    }
+
+    /**
+     * @param string $cover
+     */
+    public function setCover($cover)
+    {
+        $this->cover = $cover;
     }
 }

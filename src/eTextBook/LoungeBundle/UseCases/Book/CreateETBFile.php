@@ -8,12 +8,13 @@ class CreateETBFile
 {
     private $book;
     private $bookTmpDir;
+    private $tmpDir;
     private $booksDir;
 
     public function __construct()
     {
         global $kernel;
-        $this->bookTmpDir = $kernel->getContainer()->getParameter('book_tmp_dir');
+        $this->tmpDir = $kernel->getContainer()->getParameter('book_tmp_dir');
         $this->booksDir = $kernel->getContainer()->getParameter('books_dir');
         $this->templateDir = $kernel->getContainer()->getParameter('book_template_dir');
         $this->fileManager = $kernel->getContainer()->get('fileManager');
@@ -22,7 +23,7 @@ class CreateETBFile
     public function setBook(Book $book)
     {
         $this->book = $book;
-        $this->bookTmpDir = $this->bookTmpDir . $this->book->getSlug() . '/';
+        $this->bookTmpDir = $this->tmpDir . $this->book->getSlug() . '/';
     }
 
     public function execute()
@@ -30,6 +31,7 @@ class CreateETBFile
         if (!is_file($this->booksDir . $this->book->getSlug() . '.etb')) {
             $this->createStructure();
             $this->copyTemplateFiles();
+            $this->createCover();
             $this->createInfoFile();
             $this->createIndexFile();
             $this->pack();
@@ -39,17 +41,23 @@ class CreateETBFile
         }
     }
 
+    public function createCover()
+    {
+        if($this->book->getCover() != '') {
+            copy($this->tmpDir . 'cover/' . $this->book->getCover(), $this->bookTmpDir . '/content/cover.png');
+        }
+    }
+
     public function createInfoFile()
     {
         $info = array(
             'title' => $this->book->getTitle()
-        , 'authors' => $this->book->getAuthors()
-        , 'editor' => $this->book->getEditor()
-        , 'isbn' => $this->book->getIsbn()
-        , 'modules' => array()
+            , 'authors' => $this->book->getAuthors()
+            , 'editor' => $this->book->getEditor()
+            , 'isbn' => $this->book->getIsbn()
+            , 'modules' => array()
         );
         file_put_contents($this->bookTmpDir . 'book.info', json_encode($info));
-
     }
 
 

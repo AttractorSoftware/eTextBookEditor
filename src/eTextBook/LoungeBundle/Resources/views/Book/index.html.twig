@@ -1,25 +1,25 @@
 {% extends '::lounge-template.html.twig' %}
 
 {% block pageHeader %}
-    <h1>Учебники</h1>
+    <h1> Учебники </h1>
+    {% if app.user %}
+        <div class="addBookContainer">
+            <span class="glyphicon glyphicon-file"></span>
+            <a id="addBookButton" href="#" data-toggle="modal" data-target="#bookFormModal"> Создать новый учебник </a>
+            {% include 'eTextBookLoungeBundle:Book:form.html.twig' %}
+        </div>
+    {% endif %}
 {% endblock %}
 
 {% block pageContent %}
     <ul class="list-unstyled book-list">
-        {% if app.user %}
-            <li>
-                <span class="glyphicon glyphicon-file"></span>
-                <a id="addBookButton" href="#" data-toggle="modal" data-target="#bookFormModal"> Создать новый учебник </a>
-                {% include 'eTextBookLoungeBundle:Book:form.html.twig' %}
-            </li>
-            <li> &nbsp; </li>
-        {% endif %}
         {% for book in books %}
-            <li id="{{ book.slug }}">
-                <span class="glyphicon glyphicon-book"></span>
+            <li id="{{ book.slug }}" class="item">
+                <div class="cover" style="background-image: url(/tmp/{{ book.slug }}/content/cover.png)"></div>
                 <a class="title" href="{{ path('book-view', {'slug': book.slug, 'module': ' ' })  }}">
                     {{ book.title }}
                 </a>
+                <span class="authors"> {{ book.authors }} </span>
                 {% if app.user %}
                     <a href="{{ path('book-edit', {'slug': book.slug, 'module': ' ' })  }}" class="edit-link btn btn-primary btn-xs">
                         <span class="glyphicon glyphicon-edit"></span>
@@ -30,8 +30,6 @@
                         Эмулятор</a>
 
                 {% endif %}
-                <br />
-                <span class="authors"> {{ book.authors }} </span>
             </li>
         {% endfor %}
     </ul>

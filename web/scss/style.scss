@@ -817,20 +817,47 @@
   li {
     margin: 0 0 5px 0;
   }
+  .item {
+    float: left;
+    width: 125px;
+    margin: 0 15px 15px 0;
+    .cover {
+      float: left;
+      width: 125px;
+      height: 200px;
+      overflow: hidden;
+      background: no-repeat center center;
+      background-size: auto 100%;
+      border: solid 1px #eee;
+      border-radius: 5px 5px 0 0;
+      box-shadow: 0 0 5px #eee;
+    }
+    .title {
+      float: left;
+      width: 100%;
+      text-align: center;
+      font-size: 13px;
+      margin: 5px 0 0 0;
+      height: 40px;
+      overflow: hidden;
+    }
+    .authors {
+      float: left;
+      clear: left;
+      width: 100%;
+      font-size: 12px;
+      color: #999;
+      text-align: center;
+      margin: 0 0 5px 0;
+      height: 32px;
+    }
+  }
   span.glyphicon {
     margin: 0 3px 0 0;
-  }
-  .title {
-    font-size: 16px;
   }
   a.edit-link {
     color: #fff;
     margin: 0 0 0 5px;
-  }
-  .authors {
-    font-size: 12px;
-    color: #555;
-    margin: 0 0 0 30px;
   }
 }
 
@@ -867,6 +894,36 @@
     span {
       color: #ccc;
       margin: 0 0 0 10px;
+    }
+  }
+}
+
+.addBookContainer {
+  float: right;
+  margin: -33px 0 0 0;
+}
+
+#bookFormModal {
+  .book-info {
+    width: 355px;
+    margin: 0 0 0 210px;
+  }
+  .book-cover {
+    float: left;
+    width: 195px;
+    input {
+      width: 195px;
+      height: 260px;
+      opacity: 0;
+    }
+    .cover-view {
+      float: left;
+      clear: left;
+      height: 260px;
+      width: 195px;
+      border: solid 1px #eee;
+      background: no-repeat center center;
+      background-size: 100% auto;
     }
   }
 }

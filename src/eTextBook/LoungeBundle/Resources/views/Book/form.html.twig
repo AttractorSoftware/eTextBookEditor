@@ -12,52 +12,70 @@
             <form ng-controller="App.bookForm.controller" name="bookForm" action="{{ path('book-create') }}">
                 <div class="modal-body">
                     <div id="alertBox" style="display: none" class="alert alert-success" role="alert">QQQ</div>
-                    <div class="form-group">
-                        <label for="bookTitle">
-                            Название учебника:
+
+                    <div class="book-cover">
+                        <div class="form-group">
+                            <label for="bookCover">Обложка:</label>
+                            <div class="cover-view">
+                                <input
+                                    id="bookCover"
+                                    type="file"
+                                    name="cover"
+                                    accept="image/jpeg"
+                                    upload-action="{{ path('book-cover-upload') }}"
+                                    ng-model="book.cover" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="book-info">
+                        <div class="form-group">
+                            <label for="bookTitle">
+                                Название учебника:
                             <span class="label label-danger" ng-show="bookForm.title.$error.required">
                                 обязательно для заполнения
                             </span>
-                        </label>
-                        <input
-                            id="bookTitle"
-                            class="form-control"
-                            type="text"
-                            name="title"
-                            ng-model="book.title"
-                            required />
-                    </div>
+                            </label>
+                            <input
+                                id="bookTitle"
+                                class="form-control"
+                                type="text"
+                                name="title"
+                                ng-model="book.title"
+                                required />
+                        </div>
 
-                    <div class="form-group">
-                        <label for="bookAuthors">
-                            Авторы:
-                        </label>
-                        <input
-                            id="bookAuthors"
-                            class="form-control"
-                            type="text"
-                            ng-model="book.authors"
-                            name="authors" />
-                    </div>
+                        <div class="form-group">
+                            <label for="bookAuthors">
+                                Авторы:
+                            </label>
+                            <input
+                                id="bookAuthors"
+                                class="form-control"
+                                type="text"
+                                ng-model="book.authors"
+                                name="authors" />
+                        </div>
 
-                    <div class="form-group">
-                        <label for="bookEditor">Под редакцией:</label>
-                        <input
-                            id="bookEditor"
-                            class="form-control"
-                            type="text"
-                            name="editor"
-                            ng-model="book.editor" />
-                    </div>
+                        <div class="form-group">
+                            <label for="bookEditor">Под редакцией:</label>
+                            <input
+                                id="bookEditor"
+                                class="form-control"
+                                type="text"
+                                name="editor"
+                                ng-model="book.editor" />
+                        </div>
 
-                    <div class="form-group">
-                        <label for="bookISBN">ISBN:</label>
-                        <input
-                            id="bookISBN"
-                            class="form-control"
-                            type="text"
-                            name="isbn"
-                            ng-model="book.isbn" />
+                        <div class="form-group">
+                            <label for="bookISBN">ISBN:</label>
+                            <input
+                                id="bookISBN"
+                                class="form-control"
+                                type="text"
+                                name="isbn"
+                                ng-model="book.isbn" />
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">

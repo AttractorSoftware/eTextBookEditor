@@ -4,6 +4,8 @@ module.exports = function (grunt) {
             main: {
                 src: [
                     'bower_components/jquery/dist/jquery.min.js'
+                    , 'bower_components/jquery.fileapi/FileAPI/FileAPI.min.js'
+                    , 'bower_components/jquery.fileapi/jquery.fileapi.min.js'
                     , 'bower_components/bootstrap/dist/js/bootstrap.min.js'
                     , 'bower_components/underscore/underscore.js'
                     , 'bower_components/backbone/backbone.js'

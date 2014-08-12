@@ -48,6 +48,7 @@ class BookController extends Controller
         $book->setAuthors(isset($bookData['authors']) ? $bookData['authors'] : '');
         $book->setEditor(isset($bookData['editor']) ? $bookData['editor'] : '');
         $book->setIsbn(isset($bookData['isbn']) ? $bookData['isbn'] : '');
+        $book->setCover(isset($bookData['cover']) ? $bookData['cover'] : '');
         $book->setSlug($bookSlug);
 
         $creator = $this->get('createETBFile');
@@ -56,12 +57,12 @@ class BookController extends Controller
         if (!$creator->execute()) {
             $response = array(
                 'status' => 'failed'
-            , 'reason' => 'Учебник с таким названием уже существует'
+                , 'reason' => 'Учебник с таким названием уже существует'
             );
         } else {
             $response = array(
                 'status' => 'success'
-            , 'data' => array(
+                , 'data' => array(
                     'slug' => $bookSlug
                 )
             );
@@ -74,8 +75,7 @@ class BookController extends Controller
      * @Route("/book/edit/{slug}/{module}", name="book-edit")
      * @Template()
      */
-    public function editAction($slug, $module)
-    {
+    public function editAction($slug, $module) {
         $book = new Book($this->container->getParameter('books_dir') . $slug . '.etb');
         $modules = $book->getModules();
         return array(
@@ -103,8 +103,7 @@ class BookController extends Controller
     /**
      * @Route("/book/create/module", name="book-create-module")
      */
-    public function createModuleAction(Request $request)
-    {
+    public function createModuleAction(Request $request) {
         $moduleData = $request->get('module');
         $book = $this->get('bookLoader')->load($moduleData['bookSlug']);
 
@@ -191,5 +190,17 @@ class BookController extends Controller
             'type' => $fileType[0]
         , 'name' => $fileName
         )));
+    }
+
+    /**
+     * @Route("/book/cover-upload", name="book-cover-upload")
+     */
+    public function coverUpload(Request $request) {
+        $coverFile = $request->files->get('cover');
+        $tmpTitle = date('dmYHis') . '.' . $coverFile->guessExtension();
+        $coverTmpDir = $this->container->getParameter('book_tmp_dir') . 'cover';
+        if(!is_dir($coverTmpDir)) { mkdir($coverTmpDir); }
+        $coverFile->move($coverTmpDir, $tmpTitle);
+        return new JsonResponse(array('fileName' => $tmpTitle));
     }
 }

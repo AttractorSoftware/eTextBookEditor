@@ -42,27 +42,28 @@ var eTextBookWidgetLogicStatement = eTextBookWidget.extend({
 	 },
 
 	 appendEditElements: function () {
-		  for (var i = 0; i < this.cont.find('item').length; i++) {
-				var item = $(this.cont.find('item')[i]);
-				item.append(
-					'<edit-element class="text">' +
-						'<input type="text" value=""></edit-element>' +
-						'<edit-element class="value">' +
-						'<select>' +
-						'<option value="0">ката</option>' +
-						'<option value="1">туура</option>' +
-						'</select>' +
-						'</edit-element>' +
-						' <edit-element class="remove glyphicon glyphicon-remove"></edit-element> '
-				);
-		  }
-		  this.bindRemoveEvent();
+        for (var i = 0; i < this.cont.find('item').length; i++) {
+        var item = $(this.cont.find('item')[i]);
+        item.append(
+            '<edit-element class="text">' +
+                '<input type="text" value="">' +
+            '</edit-element>' +
+            '<edit-element class="value">' +
+                '<select>' +
+                    '<option value="0">ката</option>' +
+                    '<option value="1">туура</option>' +
+                '</select>' +
+            '</edit-element>' +
+            ' <edit-element class="remove glyphicon glyphicon-remove"></edit-element> '
+        );
+        }
+        this.bindRemoveEvent();
 	 },
 
 	 bindRemoveEvent: function () {
 		  this.cont.find('item .remove').unbind('click');
 		  this.cont.find('item .remove').bind('click', function () {
-				$(this).parent().remove();
+            $(this).parent().remove();
 		  });
 	 },
 

@@ -18,12 +18,14 @@ class ModuleContext extends eTextBookContext {
     /**
      * @Given /^Заполняем форму учебника "([^"]*)", "([^"]*)", "([^"]*)", "([^"]*)"$/
      */
-    public function fillBookForm($title, $authors, $editor, $ISBN) {
+    public function fillBookForm($title, $authors, $editor, $ISBN, $cover) {
         $form = $this->findCss('form[name=bookForm]');
         $form->find('css', '#bookTitle')->setValue($title);
         $form->find('css', '#bookAuthors')->setValue($authors);
         $form->find('css', '#bookEditor')->setValue($editor);
         $form->find('css', '#bookISBN')->setValue($ISBN);
+        $form->find('css', '#bookCover')->attachFile(dirname(__FILE__) . '/../../fixtures/' . $cover);
+        sleep(2);
     }
 
     /**
@@ -34,7 +36,8 @@ class ModuleContext extends eTextBookContext {
             'Title auto-generate by selenium - ' . date('d-m-y-H-i-s'),
             'Author bot, Author bot2',
             'Editor bot',
-            '12-3333-221-2221'
+            '12-3333-221-2221',
+            'cover.jpg'
         );
     }
 

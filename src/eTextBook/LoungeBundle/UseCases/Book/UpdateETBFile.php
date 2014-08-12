@@ -7,7 +7,7 @@ use eTextBook\LoungeBundle\Entity\Book;
 class UpdateETBFile
 {
     private $book;
-    private $tmpDir; 
+    private $tmpDir;
     private $bookTmpDir;
 
     public function __construct()
@@ -63,7 +63,6 @@ class UpdateETBFile
     {
         file_put_contents($this->tmpDir . $this->book->getSlug() . '/book.info', json_encode($data));
     }
-
 
     public function execute()
     {

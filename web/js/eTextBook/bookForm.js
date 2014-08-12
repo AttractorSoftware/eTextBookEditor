@@ -6,6 +6,18 @@ var bookForm = function() {
     this.action = $this.modal.find('form').attr('action');
 
     this.init = function() {
+        this.cover = new AjaxUploader({
+            fileInput: this.modal.find('#bookCover')
+            ,afterLoad: function () {
+                $this.modal.find('.book-cover .cover-view').css({
+                    backgroundImage: 'url(' + $this.cover.dataUrlResult + ')'
+                });}
+            ,afterUpload: function() {
+                var result = JSON.parse($this.cover.uploadResult);
+                $this.coverFileName = result.fileName;
+            }
+        });
+
         this.modal.on('hidden.bs.modal', function (e) {
             $this.scope.$apply(function() {
                 $this.scope.book = {};
@@ -38,6 +50,7 @@ var bookForm = function() {
 
         $scope.submit = function(book) {
             $this.wait();
+            book.cover = $this.coverFileName;
             $.post($this.action, { book: book }, function(response) {
                 if(response.status == 'failed') {
                     $this.failed(response.reason);
@@ -45,9 +58,10 @@ var bookForm = function() {
                 } else {
                     $this.success('Учебник успешно создан');
                     $('.book-list').append(
-                        '<li>' +
-                            '<span class="glyphicon glyphicon-book"></span>' +
+                        '<li id="' + response.data.slug + '" class="item">' +
+                            '<div class="cover" style="background-image: url(/tmp/' + response.data.slug + '/content/cover.png)"></div>' +
                             '<a class="title" href="/book/view/' + response.data.slug + '/%20"> ' + book.title + '</a>' +
+                            '<span class="authors"></span>' +
                             '<a class="edit-link btn btn-primary btn-xs" href="/book/edit/' + response.data.slug + '/%20">'+
                                 'Редактировать'+
                             '</a>'+
@@ -62,7 +76,7 @@ var bookForm = function() {
         }
     }
 
-    this.init();
+    if(this.modal.length) { this.init(); }
 }
 
 
