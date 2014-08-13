@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new eTextBook\SpawnBundle\eTextBookSpawnBundle(),
             new eTextBook\LoungeBundle\eTextBookLoungeBundle(),
+            new eTextBook\APIBundle\eTextBookAPIBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

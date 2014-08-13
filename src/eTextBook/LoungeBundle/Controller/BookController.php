@@ -95,8 +95,8 @@ class BookController extends Controller
         $modules = $book->getModules();
         return array(
             'book' => $book
-        , 'modules' => $modules
-        , 'currentModule' => $module == ' ' && count($modules) > 0 ? $modules[0]->slug : $module
+            , 'modules' => $modules
+            , 'currentModule' => $module == ' ' && count($modules) > 0 ? $modules[0]->slug : $module
         );
     }
 
@@ -155,9 +155,7 @@ class BookController extends Controller
     /**
      * @Route("/book/file-upload", name="book-file-upload")
      */
-    public function fileUploadAction(Request $request)
-    {
-
+    public function fileUploadAction(Request $request) {
         $file = $request->files->get('upload-file');
         $bookSlug = $request->get('slug');
 

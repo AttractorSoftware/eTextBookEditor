@@ -4,21 +4,18 @@ namespace eTextBook\LoungeBundle\UseCases\Book;
 
 use eTextBook\LoungeBundle\Entity\Book;
 
-class UpdateETBFile
-{
+class UpdateETBFile {
     private $book;
     private $tmpDir;
     private $bookTmpDir;
 
-    public function __construct()
-    {
+    public function __construct() {
         global $kernel;
         $this->tmpDir = $kernel->getContainer()->getParameter('book_tmp_dir');
         $this->templateDir = $kernel->getContainer()->getParameter('book_template_dir');
     }
 
-    public function setBook(Book $book)
-    {
+    public function setBook(Book $book) {
         $this->book = $book;
         $this->bookTmpDir = $this->tmpDir . $this->book->getSlug() . '/';
     }
@@ -28,8 +25,8 @@ class UpdateETBFile
 
     }
 
-    public function addModule($moduleTitle)
-    {
+    public function addModule($moduleTitle) {
+
         $moduleContent = file_get_contents($this->templateDir . "/moduleTemplate.html");
         $moduleSlug = date('d-m-y-H-i-s');
 
@@ -46,6 +43,7 @@ class UpdateETBFile
             )
         );
 
+        chmod($this->tmpDir . $this->book->getSlug() . '/modules/' . $moduleSlug . '.html', 0777);
 
         $this->updateBookSummary($moduleTitle, $moduleSlug);
 

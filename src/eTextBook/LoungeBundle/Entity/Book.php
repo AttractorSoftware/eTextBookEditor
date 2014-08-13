@@ -64,6 +64,18 @@ class Book {
 
     private $modules;
 
+    public function toArray() {
+        return array(
+            'title' => $this->title
+            ,'cover' => '/tmp/' . $this->slug . '/content/cover.png'
+            ,'slug' => $this->slug
+            ,'authors' => $this->authors
+            ,'editor' => $this->editor
+            ,'isbn' => $this->isbn
+            ,'modules' => $this->modules
+        );
+    }
+
     public function __construct() {
         $this->modules = array();
     }

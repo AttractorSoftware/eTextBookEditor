@@ -61,10 +61,4 @@ class Loader {
         return $book;
     }
 
-    public function setModules($book, $modules) {
-        foreach($modules as $module) {
-
-        }
-        return $book;
-    }
 }

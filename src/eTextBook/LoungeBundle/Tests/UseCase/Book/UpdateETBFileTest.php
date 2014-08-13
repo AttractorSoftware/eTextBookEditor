@@ -29,9 +29,11 @@ class UpdateETBFileTest extends eTextBookTestCase {
         $createETBFile->execute();
 
         $book->setAuthors('Author, Author');
+        $book->setTitle('With module');
 
         $updateETBFile = new UpdateETBFile();
         $updateETBFile->setBook($book);
+        $updateETBFile->addModule('New module');
         $updateETBFile->execute();
     }
 }
