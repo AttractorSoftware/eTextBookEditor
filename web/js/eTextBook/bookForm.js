@@ -24,6 +24,7 @@ var bookForm = function() {
             });
             $this.alertHide();
             $this.modal.find('.modal-footer .btn-primary').show();
+            $this.modal.find('.cover-view').attr({ style: '' });
         });
     }
 

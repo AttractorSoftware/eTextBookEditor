@@ -622,8 +622,8 @@
   margin: 0 0 5px 0; }
 .book-list .item {
   float: left;
-  width: 125px;
-  margin: 0 15px 15px 0; }
+  width: 265px;
+  margin: 0 15px 25px 0; }
   .book-list .item .cover {
     float: left;
     width: 125px;
@@ -633,7 +633,8 @@
     background-size: auto 100%;
     border: solid 1px #eee;
     border-radius: 5px 5px 0 0;
-    box-shadow: 0 0 5px #eee; }
+    box-shadow: 0 0 5px #eee;
+    margin: 0 0 0 62px; }
   .book-list .item .title {
     float: left;
     width: 100%;
@@ -649,13 +650,16 @@
     font-size: 12px;
     color: #999;
     text-align: center;
-    margin: 0 0 5px 0;
-    height: 32px; }
+    margin: 0 0 10px 0;
+    height: 32px;
+    overflow: hidden; }
 .book-list span.glyphicon {
   margin: 0 3px 0 0; }
 .book-list a.edit-link {
   color: #fff;
-  margin: 0 0 0 5px; }
+  margin: 0 0 0 23px; }
+.book-list a.view-link {
+  color: #fff; }
 
 .breadcrumb .glyphicon {
   color: #245269;
@@ -703,8 +707,9 @@
     height: 260px;
     width: 195px;
     border: solid 1px #eee;
-    background: no-repeat center center;
-    background-size: 100% auto; }
+    background: url("/img/select-file-bg.png") no-repeat center center;
+    background-size: 100% auto;
+    cursor: pointer; }
 
 e-text-book-editor .display e-text-book, .e-text-book-viewer e-text-book {
   float: left;
@@ -1048,7 +1053,7 @@ image-description {
       background: transparent;
       text-decoration: none; }
 .book .book-body {
-  width: 90%;
+  width: 100%;
   position: absolute;
   top: 50px;
   right: 0;
