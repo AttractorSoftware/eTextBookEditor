@@ -3,6 +3,7 @@
 namespace eTextBook\LoungeBundle\UseCases\Book;
 
 use eTextBook\LoungeBundle\Entity\Book;
+use eTextBook\LoungeBundle\Lib\SummaryDom;
 
 class UpdateETBFile {
     private $book;
@@ -25,28 +26,15 @@ class UpdateETBFile {
 
     }
 
-    public function addModule($moduleTitle) {
-
-        $moduleContent = file_get_contents($this->templateDir . "/moduleTemplate.html");
+    public function addModule($moduleTitle)
+    {
         $moduleSlug = date('d-m-y-H-i-s');
-
         $bookInfo = $this->getBookInfo();
         $bookInfo->modules[] = array('title' => $moduleTitle, 'slug' => $moduleSlug);
         $this->setBookInfo($bookInfo);
 
-        file_put_contents(
-            $this->tmpDir . $this->book->getSlug() . '/modules/' . $moduleSlug . '.html',
-            str_replace(
-                array("-- title --", "-- moduleTitle --"),
-                array($moduleTitle, $moduleTitle),
-                $moduleContent
-            )
-        );
-
-        chmod($this->tmpDir . $this->book->getSlug() . '/modules/' . $moduleSlug . '.html', 0777);
-
+        $this->createModuleFile($moduleTitle, $moduleSlug);
         $this->updateBookSummary($moduleTitle, $moduleSlug);
-
         $this->pack();
 
         return $moduleSlug;
@@ -61,6 +49,85 @@ class UpdateETBFile {
     {
         file_put_contents($this->tmpDir . $this->book->getSlug() . '/book.info', json_encode($data));
     }
+
+    /**
+     * @param $moduleTitle
+     * @param $moduleSlug
+     */
+    private function createModuleFile($moduleTitle, $moduleSlug)
+    {
+        $moduleFilePath = $this->tmpDir . $this->book->getSlug() . '/modules/' . $moduleSlug . '.html';
+        $moduleContent = new SummaryDom();
+        $moduleContent->loadWithBreaks($this->templateDir . "/moduleTemplate.html");
+        $moduleContent->setTitle($moduleTitle);
+        $moduleContent->setModuleTitle($moduleTitle);
+        $moduleContent->save($moduleFilePath);
+        $moduleContent->destroy();
+    }
+
+    /**
+     * @param $moduleTitle
+     * @param $moduleSlug
+     */
+    private function updateBookSummary($moduleTitle, $moduleSlug)
+    {
+        $indexPath = $this->tmpDir . $this->book->getSlug() . '/index.html';
+        $summaryTemplate = file_get_contents($this->templateDir . "/summaryLinkTemplate.html");
+
+        if (file_exists($indexPath)) {
+            $summaryContent = $this->createSummary($moduleTitle, $moduleSlug, $summaryTemplate);
+            $indexTemplate = file_get_contents($this->tmpDir . $this->book->getSlug() . '/index.html');
+        } else {
+            $indexTemplate = file_get_contents($this->templateDir . "/index.html");
+            $summaryContent = $this->oldBookWithoutSummary($summaryTemplate);
+        }
+
+        $this->fillIndexFile($indexTemplate, $summaryContent, $indexPath);
+    }
+
+    /**
+     * @param $summaryTemplate
+     * @return mixed|string
+     */
+    private function oldBookWithoutSummary($summaryTemplate)
+    {
+        $info = json_decode(file_get_contents($this->bookTmpDir . 'book.info'), true);
+        $summaryContent = $summaryTemplate;
+        foreach ($info['modules'] as $module) {
+            $summaryContent = $this->createSummary($module['title'], $module['slug'], $summaryContent);
+            if ($module != end($info['modules'])) {
+                $summaryContent .= $summaryTemplate;
+            }
+        }
+
+        return $summaryContent;
+    }
+
+    private function createSummary($moduleTitle, $moduleSlug, $summaryTemplate)
+    {
+        $summaryContent = new SummaryDom();
+        $summaryContent->loadWithBreaks($summaryTemplate);
+        $summaryContent->setChapterAttributes($moduleSlug, $moduleTitle);
+        $result = $summaryContent->outertext;
+        $summaryContent->destroy();
+        return $result;
+    }
+
+    /**
+     * @param $indexTemplate
+     * @param $summaryContent
+     * @param $indexPath
+     */
+    private function fillIndexFile($indexTemplate, $summaryContent, $indexPath)
+    {
+        $indexContent = new SummaryDom();
+        $indexContent->loadWithBreaks($indexTemplate);
+        $indexContent->setBookAttributes($this->book->getTitle());
+        $indexContent->setSummaryList($summaryContent);
+        $indexContent->save($indexPath);
+        $indexContent->destroy();
+    }
+
 
     public function execute()
     {
@@ -90,52 +157,4 @@ class UpdateETBFile {
         $fileManager->zip($this->bookTmpDir, $bookFile);
     }
 
-    /**
-     * @param $moduleTitle
-     * @param $moduleSlug
-     */
-    private function updateBookSummary($moduleTitle, $moduleSlug)
-    {
-        $indexPath = $this->tmpDir . $this->book->getSlug() . '/index.html';
-        $summaryTemplate = file_get_contents($this->templateDir . "/summaryLinkTemplate.html");
-        if (file_exists($indexPath)) {
-            $summaryContent = $this->createSummary($moduleTitle, $moduleSlug, $summaryTemplate);
-            $indexContent = file_get_contents($this->tmpDir . $this->book->getSlug() . '/index.html');
-        } else {
-            $indexContent = file_get_contents($this->templateDir . "/index.html");
-            $summaryContent = $this->oldBookWithoutSummary($summaryTemplate);
-        }
-        file_put_contents(
-            $indexPath,
-            str_replace(
-                array('-- title --', '<!-- book-name -->', "<!-- module-link -->"),
-                array($this->book->getTitle(), $this->book->getTitle(), $summaryContent . "<!-- module-link -->"),
-                $indexContent
-            ));
-
-    }
-
-    /**
-     * @param $summaryTemplate
-     * @return mixed|string
-     */
-    private function oldBookWithoutSummary($summaryTemplate)
-    {
-        $info = json_decode(file_get_contents($this->bookTmpDir . 'book.info'), TRUE);
-        $summaryContent = $summaryTemplate;
-        foreach ($info['modules'] as $module) {
-            $summaryContent = $this->createSummary($module['title'], $module['slug'], $summaryContent);
-            if ($module != end($info['modules'])) $summaryContent .= $summaryTemplate;
-        }
-        return $summaryContent;
-    }
-
-    private function createSummary($moduleTitle, $moduleSlug, $summaryTemplate)
-    {
-        $summaryContent = str_replace(
-            array("<!-- moduleTitle -->", "<!-- moduleSlug -->"),
-            array($moduleTitle, $moduleSlug),
-            $summaryTemplate);
-        return $summaryContent;
-    }
 }

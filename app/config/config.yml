@@ -78,3 +78,10 @@ services:
     class: eTextBook\LoungeBundle\UseCases\Book\UpdateETBFile
   bookLoader:
     class: eTextBook\LoungeBundle\UseCases\Book\Loader
+
+
+
+parameters:
+      books_dir: %kernel.root_dir%/../web/books/
+      book_tmp_dir: %kernel.root_dir%/../web/tmp/
+      book_template_dir: %kernel.root_dir%/../web/book-template/

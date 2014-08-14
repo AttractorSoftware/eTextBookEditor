@@ -64,7 +64,7 @@ var eTextBookEditor = Backbone.Model.extend({
 
     ,addModule: function(button) {
         var template = $(App.eTextBookTemplate.getTemplate('module'));
-        template.attr('uid', App.eTextBookUtils.generateUID());
+        template.attr('id', App.eTextBookUtils.generateUID());
 
         if(button.parent().prop('tagName') == 'MODULE') {
             button.parent().after(template);

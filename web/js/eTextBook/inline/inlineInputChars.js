@@ -1,12 +1,5 @@
 $(document).ready(function () {
-	 var $charsBlock = $('#charsBlock');
 	 var activeInputElement = false;
-
-	 $('#charsBlock span').click(function (e) {
-		  var character = $(this).text();
-		  if(e.shiftKey) character = character.toUpperCase();
-		  setCharacter(character);
-	 });
 
 	 function getPressedChar(event) {
 		  var char = '';
@@ -31,28 +24,8 @@ $(document).ready(function () {
 	 $('.container')
 		 .on('focus', ':text, textarea', function () {
 			  activeInputElement = this;
-			  var cur_offset = $(this).offset();
-			  var pos = {left: '40%', top: cur_offset.top - 110};
-			  $charsBlock.hide();
-			  $charsBlock.css(pos).show();
 		 })
 		 .on('keyup', ':text, textarea', getPressedChar);
-
-	 $(document).click(function (e) {
-		  var $clicked = $(e.target),
-			  hideCharsBlock = !(
-				  $clicked.attr('id') == 'charsBlock'
-					  || $clicked.closest('#charsBlock').size() > 0
-					  || $clicked.is('input')
-					  || $clicked.is('textarea')
-				  );
-
-		  if(hideCharsBlock) {
-				$charsBlock.hide();
-		  }
-	 });
-
-	 $('.desktop').on('scroll', function () {$charsBlock.hide();});
 
 });
 

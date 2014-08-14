@@ -127,7 +127,7 @@ var eTextBookModule = Backbone.Model.extend({
             '</rule-title>' +
         '</rule>');
 
-        template.attr('uid', App.eTextBookUtils.generateUID());
+        template.attr('id', App.eTextBookUtils.generateUID());
 
         if(button.parent().prop('tagName') == 'BLOCK' || button.parent().prop('tagName') == 'RULE') {
             button.parent().after(template);
@@ -142,7 +142,7 @@ var eTextBookModule = Backbone.Model.extend({
     ,addBlock: function(button) {
         var template = $(App.eTextBookTemplate.getTemplate('block'));
 
-        template.attr('uid', App.eTextBookUtils.generateUID());
+        template.attr('id', App.eTextBookUtils.generateUID());
 
         if(button.parent().prop('tagName') == 'BLOCK' || button.parent().prop('tagName') == 'RULE') {
             button.parent().after(template);

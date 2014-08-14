@@ -32,6 +32,7 @@ class CreateETBFile {
             $this->createIndexFile();
             $this->pack();
 
+
             $fileIterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($this->bookTmpDir));
             foreach($fileIterator as $item) {
                 if(!is_dir($item->getPathname())) {
@@ -52,26 +53,25 @@ class CreateETBFile {
     public function createInfoFile() {
         $info = array(
             'title' => $this->book->getTitle()
-            , 'authors' => $this->book->getAuthors()
-            , 'slug' => $this->book->getSlug()
-            , 'editor' => $this->book->getEditor()
-            , 'isbn' => $this->book->getIsbn()
-            , 'modules' => array()
+        , 'authors' => $this->book->getAuthors()
+        , 'slug' => $this->book->getSlug()
+        , 'editor' => $this->book->getEditor()
+        , 'isbn' => $this->book->getIsbn()
+        , 'modules' => array()
         );
         file_put_contents($this->bookTmpDir . 'book.info', json_encode($info));
     }
 
 
-    public function createIndexFile() {
-        $indexContent = file_get_contents($this->templateDir . 'index.html');
+    public function createIndexFile()
+    {
         $title = $this->book->getTitle();
-        file_put_contents($this->bookTmpDir . 'index.html',
-            str_replace(
-                array("-- title --", "<!-- book-name -->"),
-                array($title, $title),
-                $indexContent
-            )
-        );
+        $templatePath = $this->templateDir . 'index.html';
+        $indexContent = new SummaryDom();
+        $indexContent->loadWithBreaks($templatePath);
+        $indexContent->setBookAttributes($title);
+        $indexContent->save($this->bookTmpDir . 'index.html');
+        $indexContent ->destroy();
     }
 
     public function createStructure() {

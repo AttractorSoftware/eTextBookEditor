@@ -71,7 +71,7 @@ class FeatureContext extends eTextBookContext
     /**
      * @Given /^Перезагружаем страницу$/
      */
-    public function reload($seconds)
+    public function reload()
     {
         eTextBookDriver::getInstance()->getDriver()->reload();
         sleep(3);
