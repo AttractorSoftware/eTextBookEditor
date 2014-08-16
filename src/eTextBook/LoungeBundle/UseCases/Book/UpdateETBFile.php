@@ -5,25 +5,49 @@ namespace eTextBook\LoungeBundle\UseCases\Book;
 use eTextBook\LoungeBundle\Entity\Book;
 use eTextBook\LoungeBundle\Lib\SummaryDom;
 
-class UpdateETBFile {
+class UpdateETBFile
+{
     private $book;
     private $tmpDir;
     private $bookTmpDir;
 
-    public function __construct() {
+    public function __construct()
+    {
         global $kernel;
         $this->tmpDir = $kernel->getContainer()->getParameter('book_tmp_dir');
         $this->templateDir = $kernel->getContainer()->getParameter('book_template_dir');
     }
 
-    public function setBook(Book $book) {
+    public function setBook(Book $book)
+    {
         $this->book = $book;
         $this->bookTmpDir = $this->tmpDir . $this->book->getSlug() . '/';
     }
 
-    public function updateModuleContent($moduleId, $content)
+    public function updateModuleContent($bookName, $moduleSlug, $content)
     {
+        $moduleFilePath = $this->tmpDir . $bookName . '/modules/' . $moduleSlug . '.html';
+        $moduleContent = new SummaryDom();
+        $moduleContent->loadWithBreaks($moduleFilePath);
+        $moduleContent->find('.e-text-book-viewer', 0)->innertext = $content;
+//        $content = $moduleContent->find('.e-text-book-viewer', 0)->innertext;
+        $exercisesIDList = $moduleContent->getExercisesList();
+        $moduleContent->save($moduleFilePath);
 
+        $indexFilePath = $this->tmpDir . $bookName . '/index.html';
+        $indexContent = new SummaryDom();
+        $indexContent->loadWithBreaks($indexFilePath);
+        $indexContent->getChapter($moduleSlug)->insertExercisesIntoChapter($exercisesIDList);
+        $indexContent->tidySave($indexFilePath);
+        $indexContent->destroy();
+
+        $moduleContent->destroy();
+//        $this->addExercisesToSummary($bookName, $moduleSlug, $exercisesIDList);
+
+    }
+
+    public function addExercisesToSummary($bookName, $moduleSlug, $exercisesIDList)
+    {
     }
 
     public function addModule($moduleTitle)
@@ -50,10 +74,6 @@ class UpdateETBFile {
         file_put_contents($this->tmpDir . $this->book->getSlug() . '/book.info', json_encode($data));
     }
 
-    /**
-     * @param $moduleTitle
-     * @param $moduleSlug
-     */
     private function createModuleFile($moduleTitle, $moduleSlug)
     {
         $moduleFilePath = $this->tmpDir . $this->book->getSlug() . '/modules/' . $moduleSlug . '.html';
@@ -65,31 +85,23 @@ class UpdateETBFile {
         $moduleContent->destroy();
     }
 
-    /**
-     * @param $moduleTitle
-     * @param $moduleSlug
-     */
     private function updateBookSummary($moduleTitle, $moduleSlug)
     {
-        $indexPath = $this->tmpDir . $this->book->getSlug() . '/index.html';
+        $indexFilePath = $this->tmpDir . $this->book->getSlug() . '/index.html';
         $summaryTemplate = file_get_contents($this->templateDir . "/summaryLinkTemplate.html");
 
-        if (file_exists($indexPath)) {
+        if (file_exists($indexFilePath)) {
             $summaryContent = $this->createSummary($moduleTitle, $moduleSlug, $summaryTemplate);
             $indexTemplate = file_get_contents($this->tmpDir . $this->book->getSlug() . '/index.html');
         } else {
             $indexTemplate = file_get_contents($this->templateDir . "/index.html");
-            $summaryContent = $this->oldBookWithoutSummary($summaryTemplate);
+            $summaryContent = $this->getBookSummaryFromInfo($summaryTemplate);
         }
 
-        $this->fillIndexFile($indexTemplate, $summaryContent, $indexPath);
+        $this->fillIndexFile($indexTemplate, $summaryContent, $indexFilePath);
     }
 
-    /**
-     * @param $summaryTemplate
-     * @return mixed|string
-     */
-    private function oldBookWithoutSummary($summaryTemplate)
+    private function getBookSummaryFromInfo($summaryTemplate)
     {
         $info = json_decode(file_get_contents($this->bookTmpDir . 'book.info'), true);
         $summaryContent = $summaryTemplate;
@@ -110,14 +122,10 @@ class UpdateETBFile {
         $summaryContent->setChapterAttributes($moduleSlug, $moduleTitle);
         $result = $summaryContent->outertext;
         $summaryContent->destroy();
+
         return $result;
     }
 
-    /**
-     * @param $indexTemplate
-     * @param $summaryContent
-     * @param $indexPath
-     */
     private function fillIndexFile($indexTemplate, $summaryContent, $indexPath)
     {
         $indexContent = new SummaryDom();
@@ -127,7 +135,6 @@ class UpdateETBFile {
         $indexContent->save($indexPath);
         $indexContent->destroy();
     }
-
 
     public function execute()
     {

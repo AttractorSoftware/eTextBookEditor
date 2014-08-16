@@ -353,7 +353,7 @@ image-description {
     }
   }
   .book-summary {
-    position: absolute;
+    position: fixed;
     top: 50px;
     left: -250px;
     bottom: 0;
@@ -378,7 +378,7 @@ image-description {
       transition: top .5s ease;
 
       li {
-        list-style: none;
+        list-style: decimal inside;
         .fa {
           display: inline-block;
           font-family: 'Glyphicons Halflings';

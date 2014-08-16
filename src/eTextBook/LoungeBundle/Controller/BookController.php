@@ -57,12 +57,14 @@ class BookController extends Controller
         if (!$creator->execute()) {
             $response = array(
                 'status' => 'failed'
-                , 'reason' => 'Учебник с таким названием уже существует'
+            ,
+                'reason' => 'Учебник с таким названием уже существует'
             );
         } else {
             $response = array(
                 'status' => 'success'
-                , 'data' => array(
+            ,
+                'data' => array(
                     'slug' => $bookSlug
                 )
             );
@@ -75,13 +77,17 @@ class BookController extends Controller
      * @Route("/book/edit/{slug}/{module}", name="book-edit")
      * @Template()
      */
-    public function editAction($slug, $module) {
+    public function editAction($slug, $module)
+    {
         $book = new Book($this->container->getParameter('books_dir') . $slug . '.etb');
         $modules = $book->getModules();
+
         return array(
             'book' => $book
-        , 'modules' => $modules
-        , 'currentModule' => $module == ' ' && count($modules) > 0 ? $modules[0]->slug : $module
+        ,
+            'modules' => $modules
+        ,
+            'currentModule' => $module == ' ' && count($modules) > 0 ? $modules[0]->slug : $module
         );
     }
 
@@ -93,26 +99,30 @@ class BookController extends Controller
     {
         $book = new Book($this->container->getParameter('books_dir') . $slug . '.etb');
         $modules = $book->getModules();
+
         return array(
             'book' => $book
-            , 'modules' => $modules
-            , 'currentModule' => $module == ' ' && count($modules) > 0 ? $modules[0]->slug : $module
+        ,
+            'modules' => $modules
+        ,
+            'currentModule' => $module == ' ' && count($modules) > 0 ? $modules[0]->slug : $module
         );
     }
 
     /**
      * @Route("/book/create/module", name="book-create-module")
      */
-    public function createModuleAction(Request $request) {
+    public function createModuleAction(Request $request)
+    {
         $moduleData = $request->get('module');
         $book = $this->get('bookLoader')->load($moduleData['bookSlug']);
 
         $updater = $this->get('updateETBFile');
         $updater->setBook($book);
-
         $moduleSlug = $updater->addModule($moduleData['title']);
 
         $response = array('status' => 'success', 'data' => array('slug' => $moduleSlug));
+
         return new JsonResponse($response);
     }
 
@@ -124,28 +134,13 @@ class BookController extends Controller
         $updater = $this->get('updateETBFile');
 
         $content = $request->get('content');
-        $slug = $request->get('book');
+        $bookName = $request->get('book');
+        $moduleSlug = $request->get('module');
 
-        $rootDir = $tempDir = $this->container->getParameter('book_tmp_dir') . $slug;
-        $templateDir = $this->container->getParameter('book_template_dir');
-
-        $moduleFilePath = $rootDir . '/modules/' . $request->get('module') . '.html';
-
-        $indexContent = file_get_contents($templateDir . "/moduleUpdateTemplate.html");
-
-        $content = str_replace('/tmp/' . $slug . '/', '', $content);
-
-        file_put_contents(
-            $moduleFilePath,
-            str_replace(
-                array("-- title --", "-- content --"),
-                array($slug, $content),
-                $indexContent
-            )
-        );
+        $updater->updateModuleContent($bookName, $moduleSlug, $content);
 
         $book = new eBook();
-        $book->setSlug($slug);
+        $book->setSlug($bookName);
         $updater->setBook($book);
         $updater->pack();
 
@@ -155,7 +150,8 @@ class BookController extends Controller
     /**
      * @Route("/book/file-upload", name="book-file-upload")
      */
-    public function fileUploadAction(Request $request) {
+    public function fileUploadAction(Request $request)
+    {
         $file = $request->files->get('upload-file');
         $bookSlug = $request->get('slug');
 
@@ -184,21 +180,31 @@ class BookController extends Controller
             }
         }
 
-        return new JsonResponse(array('status' => 'success', 'data' => array(
-            'type' => $fileType[0]
-        , 'name' => $fileName
-        )));
+        return new JsonResponse(
+            array(
+                'status' => 'success',
+                'data' => array(
+                    'type' => $fileType[0]
+                ,
+                    'name' => $fileName
+                )
+            )
+        );
     }
 
     /**
      * @Route("/book/cover-upload", name="book-cover-upload")
      */
-    public function coverUpload(Request $request) {
+    public function coverUpload(Request $request)
+    {
         $coverFile = $request->files->get('cover');
         $tmpTitle = date('dmYHis') . '.' . $coverFile->guessExtension();
         $coverTmpDir = $this->container->getParameter('book_tmp_dir') . 'cover';
-        if(!is_dir($coverTmpDir)) { mkdir($coverTmpDir); }
+        if (!is_dir($coverTmpDir)) {
+            mkdir($coverTmpDir);
+        }
         $coverFile->move($coverTmpDir, $tmpTitle);
+
         return new JsonResponse(array('fileName' => $tmpTitle));
     }
 }

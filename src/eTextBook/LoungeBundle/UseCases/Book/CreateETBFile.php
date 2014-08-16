@@ -3,6 +3,7 @@
 namespace eTextBook\LoungeBundle\UseCases\Book;
 
 use eTextBook\LoungeBundle\Entity\Book;
+use eTextBook\LoungeBundle\Lib\SummaryDom;
 
 class CreateETBFile {
     private $book;

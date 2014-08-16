@@ -4,6 +4,21 @@ namespace eTextBook\LoungeBundle\Lib;
 
 class SummaryDom extends SimpleHtmlDom
 {
+    function tidySave($filepath = '')
+    {
+        $ret = $this->root->innertext();
+        $config = array(
+            'indent' => true,
+            'wrap' => 200
+        );
+        $tidy = tidy_parse_string($ret, $config, 'UTF8');
+        $tidy->cleanRepair();
+        $test = $tidy->value;
+        if ($filepath !== '') {
+            file_put_contents($filepath, $tidy->value, LOCK_EX);
+        }
+        return $test;
+    }
 
     protected function prepare(
         $str,
@@ -349,6 +364,23 @@ class SummaryDom extends SimpleHtmlDom
         return $modules;
     }
 
+    public function getChapter($moduleSlug)
+    {
+        return $this->find('.chapter-link[href=modules/' . $moduleSlug . '.html]', 0)->parent;
+    }
+
+    public function getExercisesList()
+    {
+        $exercises = array();
+        foreach ($this->find('block') as $exercise) {
+            $id = $exercise->id;
+            $title = $exercise->find('block-title view-element', 0)->innertext;
+            $exercises[$id] = $title;
+        }
+
+        return $exercises;
+    }
+
     public function inputModules($code)
     {
         $this->find('#moduleList', 0)->innertext = $code;
@@ -400,6 +432,17 @@ class SummaryDomElement extends simple_html_dom_node
     public function wrap($start, $end)
     {
         $this->innertext = $start . $this->innertext . $end;
+    }
+
+    public function insertExercisesIntoChapter($exercises)
+    {
+        $temp = $this->first_child()->outertext . '<ol class="exercises-list">';
+        foreach ($exercises as $link => $title) {
+            $temp .= '<li class="exercise"><a class="exercise-link" href="' . $link . '">
+             ' . $title . '</a></li>';
+        }
+        $temp .= '</ol>';
+        $this->innertext = $temp;
     }
 
 }

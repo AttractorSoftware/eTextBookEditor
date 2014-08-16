@@ -972,7 +972,7 @@ image-description {
   .book .page-header .left {
     float: left !important; }
 .book .book-summary {
-  position: absolute;
+  position: fixed;
   top: 50px;
   left: -250px;
   bottom: 0;
@@ -996,7 +996,7 @@ image-description {
     -webkit-transition: top .5s ease;
     transition: top .5s ease; }
     .book .book-summary .summary li {
-      list-style: none; }
+      list-style: decimal inside; }
       .book .book-summary .summary li .fa {
         display: inline-block;
         font-family: 'Glyphicons Halflings';
