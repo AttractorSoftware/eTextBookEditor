@@ -825,7 +825,7 @@ image-description {
         width: 100px;
         height: 100px;
         background: no-repeat center center;
-        background-size: 100% auto; }
+        background-size: contain; }
         image-description images item image-view span {
           border: solid 1px #398439;
           padding: 2px 5px;

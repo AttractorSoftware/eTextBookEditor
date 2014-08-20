@@ -83,10 +83,8 @@ class BookController extends Controller
         $modules = $book->getModules();
 
         return array(
-            'book' => $book
-        ,
-            'modules' => $modules
-        ,
+            'book' => $book,
+            'modules' => $modules,
             'currentModule' => $module == ' ' && count($modules) > 0 ? $modules[0]->slug : $module
         );
     }
@@ -101,10 +99,8 @@ class BookController extends Controller
         $modules = $book->getModules();
 
         return array(
-            'book' => $book
-        ,
-            'modules' => $modules
-        ,
+            'book' => $book,
+            'modules' => $modules,
             'currentModule' => $module == ' ' && count($modules) > 0 ? $modules[0]->slug : $module
         );
     }
