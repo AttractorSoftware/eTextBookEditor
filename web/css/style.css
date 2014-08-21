@@ -251,6 +251,12 @@
       width: 100%; }
       .e-text-book-editor .desktop e-text-book .check-endings .endings-list {
         display: none; }
+      .e-text-book-editor .desktop e-text-book .check-endings.times .words {
+        width: 55%; }
+        .e-text-book-editor .desktop e-text-book .check-endings.times .words .item edit-element input {
+          width: 55%; }
+        .e-text-book-editor .desktop e-text-book .check-endings.times .words .item edit-element select {
+          width: 15%; }
       .e-text-book-editor .desktop e-text-book .check-endings .words {
         float: left;
         width: 70%; }
@@ -276,6 +282,14 @@
               float: left;
               width: 28%;
               margin: 2px 0 0 0; }
+      .e-text-book-editor .desktop e-text-book .check-endings.times .endings {
+        float: left;
+        width: 15%; }
+        .e-text-book-editor .desktop e-text-book .check-endings.times .endings .item edit-element {
+          width: 60%; }
+          .e-text-book-editor .desktop e-text-book .check-endings.times .endings .item edit-element.glyphicon {
+            width: auto;
+            margin: 7px 0 0 5px; }
       .e-text-book-editor .desktop e-text-book .check-endings .endings {
         float: left;
         width: 30%; }
@@ -299,6 +313,8 @@
         cursor: pointer;
         float: left;
         margin: 7px 0 0 5px; }
+      .e-text-book-editor .desktop e-text-book .check-endings .add-ending input {
+        width: 60%; }
     .e-text-book-editor .desktop e-text-book .test-widget {
       float: left;
       width: 100%; }
@@ -610,10 +626,7 @@
     height: 200px;
     overflow: hidden;
     background: no-repeat center center;
-    background-size: auto 100%;
-    border: solid 1px #eee;
-    border-radius: 5px 5px 0 0;
-    box-shadow: 0 0 5px #eee;
+    background-size: contain;
     margin: 0 0 0 70px; }
   .book-list .item .title {
     float: left;
@@ -688,7 +701,7 @@
     width: 195px;
     border: solid 1px #eee;
     background: url("/img/select-file-bg.png") no-repeat center center;
-    background-size: 100% auto;
+    background-size: contain;
     cursor: pointer; }
 
 e-text-book-editor .display e-text-book, .e-text-book-viewer e-text-book {
@@ -915,6 +928,10 @@ image-description {
       float: left;
       width: 50%;
       padding: 5px; }
+      .e-text-book-viewer .check-endings .words .list .item select.success {
+        color: #12a920; }
+      .e-text-book-viewer .check-endings .words .list .item select.failed {
+        color: #c50000; }
       .e-text-book-viewer .check-endings .words .list .item.failed {
         background: #942a25;
         color: #fff; }

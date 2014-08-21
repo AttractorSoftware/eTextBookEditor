@@ -341,6 +341,17 @@
         .endings-list {
           display: none;
         }
+        &.times {
+          .words {
+            width: 55%;
+            .item {
+              edit-element {
+                input { width: 55%; }
+                select { width: 15%; }
+              }
+            }
+          }
+        }
         .words {
           float: left;
           width: 70%;
@@ -369,6 +380,19 @@
                 float: left;
                 width: 28%;
                 margin: 2px 0 0 0;
+              }
+            }
+          }
+        }
+        &.times .endings {
+          float: left;
+          width: 15%;
+          .item {
+            edit-element {
+              width: 60%;
+              &.glyphicon {
+                width: auto;
+                margin: 7px 0 0 5px;
               }
             }
           }
@@ -404,6 +428,9 @@
             float: left;
             margin: 7px 0 0 5px;
           }
+        }
+        .add-ending {
+          input { width: 60%; }
         }
       }
 
@@ -803,10 +830,7 @@
       height: 200px;
       overflow: hidden;
       background: no-repeat center center;
-      background-size: auto 100%;
-      border: solid 1px #eee;
-      border-radius: 5px 5px 0 0;
-      box-shadow: 0 0 5px #eee;
+      background-size: contain;
       margin: 0 0 0 70px;
     }
     .title {
@@ -902,7 +926,7 @@
       width: 195px;
       border: solid 1px #eee;
       background: url('/img/select-file-bg.png') no-repeat center center;
-      background-size: 100% auto;
+      background-size: contain;
       cursor: pointer;
     }
   }

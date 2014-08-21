@@ -284,6 +284,8 @@ image-description {
           float: left;
           width: 50%;
           padding: 5px;
+          select.success { color: #12a920; }
+          select.failed { color: #c50000; }
           &.failed {
             background: #942a25;
             color: #fff;
