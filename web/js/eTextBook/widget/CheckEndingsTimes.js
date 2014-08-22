@@ -182,7 +182,7 @@ var eTextBookWidgetCheckEndingsTimes = eTextBookWidget.extend({
             item.append('<select type="real" class="not-saved">' + html.real + '</select>');
             item.append('<select type="past" class="not-saved">' + html.past + '</select>');
         }
-        item.find('select').bind('change', function() {
+        items.find('select').bind('change', function() {
             var value = $(this).parent().attr($(this).attr('type'));
             if(value == $(this).val()) {
                 $(this).addClass('success');

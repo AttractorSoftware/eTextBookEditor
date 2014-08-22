@@ -118,6 +118,39 @@ class WidgetsContext extends eTextBookContext {
     }
 
     /**
+     * @Then /^Добавляем окончание будущего времени "([^"]*)"$/
+     */
+    public function addFutureEnding($ending) {
+        $desktop = $this->findCss('.desktop');
+        $checkEndings = $desktop->find('css', '.check-endings.times');
+        $addEnding = $checkEndings->find('css', '.endings.future .add-ending');
+        $addEnding->find('css', 'input')->setValue($ending);
+        $addEnding->find('css', '.add')->click();
+    }
+
+    /**
+     * @Then /^Добавляем окончание настоящего времени "([^"]*)"$/
+     */
+    public function addRealEnding($ending) {
+        $desktop = $this->findCss('.desktop');
+        $checkEndings = $desktop->find('css', '.check-endings.times');
+        $addEnding = $checkEndings->find('css', '.endings.real .add-ending');
+        $addEnding->find('css', 'input')->setValue($ending);
+        $addEnding->find('css', '.add')->click();
+    }
+
+    /**
+     * @Then /^Добавляем окончание прошлого времени "([^"]*)"$/
+     */
+    public function addPastEnding($ending) {
+        $desktop = $this->findCss('.desktop');
+        $checkEndings = $desktop->find('css', '.check-endings.times');
+        $addEnding = $checkEndings->find('css', '.endings.past .add-ending');
+        $addEnding->find('css', 'input')->setValue($ending);
+        $addEnding->find('css', '.add')->click();
+    }
+
+    /**
      * @Given /^Добавляем окончания "([^"]*)"$/
      */
     public function addEndings($endingsStr){
@@ -145,11 +178,30 @@ class WidgetsContext extends eTextBookContext {
     }
 
     /**
+     * @Given /^Добавляем слово "([^"]*)" с окончанием будущего времени "([^"]*)" настоящего времени "([^"]*)" и прошлого времени "([^"]*)"$/
+     */
+    public function addTimesWord($word, $futureEnding, $realEnding, $pastEnding) {
+        $desktop = $this->findCss('.desktop');
+        $checkEndings = $desktop->find('css', '.check-endings.times');
+        $addWord = $checkEndings->find('css', '.words .add-word');
+        $addWord->find('css', 'input')->setValue($word);
+        $addWord->find('css', '.add')->click();
+        $words = $checkEndings->findAll('css', '.words .list .item');
+        foreach($words as $w) {
+            if($w->find('css', 'input')->getValue() == $word) {
+                $w->find('css', 'select.futureList')->setValue($futureEnding);
+                $w->find('css', 'select.realList')->setValue($realEnding);
+                $w->find('css', 'select.pastList')->setValue($pastEnding);
+            }
+        }
+    }
+
+    /**
      * @Given /^Завершаем редактирование блока$/
      */
     public function blockEditOver() {
         $this->findCss('.desktop block control-panel .edit')->click();
-        sleep(1);
+        sleep(2);
     }
 
     /**
@@ -169,6 +221,32 @@ class WidgetsContext extends eTextBookContext {
 
         assertEquals($findItem->find('css', 'view-element')->getHTML(), $word);
         assertEquals(true, in_array('success', explode(' ', $findItem->getAttribute('class'))));
+    }
+
+    /**
+     * @Given /^Проверяем слово "([^"]*)" с окончаниями "([^"]*)", "([^"]*)", "([^"]*)"$/
+     */
+    public function checkWordWithTimesEnding($word, $futureEnding, $realEnding, $pastEnding) {
+        $display = $this->findCss('.display');
+        $items = $display->findAll('css', '.check-endings.times .words .list .item');
+        $findItem = '';
+        foreach($items as $item) {
+            if($item->find('css', 'view-element')->getHTML() == $word) {
+                $findItem = $item;
+                $futureSelect = $item->find('css', 'select[type="future"]');
+                $futureSelect->setValue($futureEnding);
+                $realSelect = $item->find('css', 'select[type="real"]');
+                $realSelect->setValue($realEnding);
+                $pastSelect = $item->find('css', 'select[type="past"]');
+                $pastSelect->setValue($pastEnding);
+                break;
+            }
+        }
+
+        assertEquals($findItem->find('css', 'view-element')->getHTML(), $word);
+        assertEquals(true, in_array('success', explode(' ', $futureSelect->getAttribute('class'))));
+        assertEquals(true, in_array('success', explode(' ', $realSelect->getAttribute('class'))));
+        assertEquals(true, in_array('success', explode(' ', $pastSelect->getAttribute('class'))));
     }
 
     /**
