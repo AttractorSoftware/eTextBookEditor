@@ -39,7 +39,7 @@ class UpdateETBFile
         $indexContent = new SummaryDom();
         $indexContent->loadWithBreaks($indexFilePath);
         $indexContent->getChapter($moduleSlug)->insertExercisesIntoChapter($exercisesIDList);
-        $indexContent->tidySave($indexFilePath);
+        $indexContent->save($indexFilePath);
         $indexContent->destroy();
 
         $moduleContent->destroy();

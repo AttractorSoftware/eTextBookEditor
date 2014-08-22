@@ -31,7 +31,7 @@ class FeatureContext extends eTextBookContext
      */
     public static function deleteBooks()
     {
-        //eTextBookDriver::getInstance()->deleteAutoCreatedBooks();
+        eTextBookDriver::getInstance()->deleteAutoCreatedBooks();
     }
 
     /**

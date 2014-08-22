@@ -37,7 +37,7 @@ class ModuleContext extends eTextBookContext {
             'Author bot, Author bot2',
             'Editor bot',
             '12-3333-221-2221',
-            'cover.jpg'
+            'cover.png'
         );
     }
 
