@@ -155,7 +155,16 @@ var eTextBookWidgetCheckEndingsTimes = eTextBookWidget.extend({
     }
 
     ,updateEndingSelects: function() {
-        var html = this.generateEndingsOptions(JSON.parse(this.cont.find('.endings-list').html()));
+        if(this.cont.find('.endings-list').html().length) {
+            var html = this.generateEndingsOptions(JSON.parse(this.cont.find('.endings-list').html()));
+        } else {
+            var html = {
+                future: ''
+                ,real: ''
+                ,past: ''
+            }
+        }
+
         this.cont.find('.words .item select.futureList').html(html.future);
         this.cont.find('.words .item select.realList').html(html.real);
         this.cont.find('.words .item select.pastList').html(html.past);
