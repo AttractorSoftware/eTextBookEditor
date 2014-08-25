@@ -246,6 +246,33 @@
         clear: left; }
         .e-text-book-editor .desktop e-text-book block[editable='0'] .check-endings .words .list .item {
           width: 50%; }
+    .e-text-book-editor .desktop e-text-book .checkbox-list {
+      float: left;
+      width: 100%; }
+      .e-text-book-editor .desktop e-text-book .checkbox-list .add-checkbox {
+        float: left;
+        width: 100%; }
+        .e-text-book-editor .desktop e-text-book .checkbox-list .add-checkbox label {
+          float: left;
+          width: 100%; }
+        .e-text-book-editor .desktop e-text-book .checkbox-list .add-checkbox input {
+          float: left;
+          width: 90%; }
+        .e-text-book-editor .desktop e-text-book .checkbox-list .add-checkbox .add {
+          float: left;
+          margin: 7px 0 0 7px;
+          cursor: pointer; }
+      .e-text-book-editor .desktop e-text-book .checkbox-list .checkboxes {
+        float: left;
+        width: 100%; }
+        .e-text-book-editor .desktop e-text-book .checkbox-list .checkboxes .item {
+          float: left;
+          width: 50%;
+          margin: 10px 0 0 0; }
+          .e-text-book-editor .desktop e-text-book .checkbox-list .checkboxes .item input[type=checkbox] {
+            margin: 0 5px 0 0 0;
+            position: relative;
+            top: 2px; }
     .e-text-book-editor .desktop e-text-book .check-endings {
       float: left;
       width: 100%; }
@@ -915,6 +942,25 @@ image-description {
       width: 18%;
       margin: 0 0 0 2%;
       color: #000; }
+
+.e-text-book-viewer .checkbox-list {
+  float: left;
+  width: 100%; }
+  .e-text-book-viewer .checkbox-list .checkboxes {
+    float: left;
+    width: 100%; }
+    .e-text-book-viewer .checkbox-list .checkboxes .item {
+      float: left;
+      width: 50%;
+      margin: 10px 0 0 0; }
+      .e-text-book-viewer .checkbox-list .checkboxes .item.success {
+        background-color: #12a920; }
+      .e-text-book-viewer .checkbox-list .checkboxes .item.failed {
+        background-color: #c50000; }
+      .e-text-book-viewer .checkbox-list .checkboxes .item input[type=checkbox] {
+        margin: 0 5px 0 0 0;
+        position: relative;
+        top: 2px; }
 
 .e-text-book-viewer .check-endings {
   float: left;

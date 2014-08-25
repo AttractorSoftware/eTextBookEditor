@@ -335,6 +335,41 @@
           }
         }
       }
+      .checkbox-list {
+        float: left;
+        width: 100%;
+        .add-checkbox {
+          float: left;
+          width: 100%;
+          label {
+            float: left;
+            width: 100%;
+          }
+          input {
+            float: left;
+            width: 90%;
+          }
+          .add {
+            float: left;
+            margin: 7px 0 0 7px;
+            cursor: pointer;
+          }
+        }
+        .checkboxes {
+          float: left;
+          width: 100%;
+          .item {
+            float: left;
+            width: 50%;
+            margin: 10px 0 0 0;
+            input[type=checkbox] {
+              margin: 0 5px 0 0 0;
+              position: relative;
+              top: 2px;
+            }
+          }
+        }
+      }
       .check-endings {
         float: left;
         width: 100%;
