@@ -281,4 +281,43 @@ class WidgetsContext extends eTextBookContext {
         $desktop->find('css', 'audio-description textarea')->setValue($text);
     }
 
+    /**
+     * @Then /^Добавляем слово "([^"]*)" в виджет вхождения в множество$/
+     */
+    public function addWordInCheckBoxList($word) {
+        $word = explode('=', $word);
+        $this->findCss('.desktop .checkbox-list .add-checkbox input')->setValue($word[0]);
+        $this->findCss('.desktop .checkbox-list .add-checkbox .add')->click();
+        if($word[1] == '1') {
+            end($this->findAllCss('.checkbox-list .checkboxes .item input'))->click();
+        }
+    }
+
+    /**
+     * @Given /^Добавляем слова "([^"]*)" в виджет вхождения в множество$/
+     */
+    public function addWordsInCheckBoxList($words) {
+        foreach(explode(',', $words) as $word) {
+            $this->addWordInCheckBoxList($word);
+        }
+    }
+
+    /**
+     * @Given /^Проверяем слово "([^"]*)" в виджете вхождения в множество$/
+     */
+    public function checkWordInCheckboxList($word) {
+        $items = $this->findAllCss('.display .checkbox-list .checkboxes .item');
+        $word = explode('=', $word);
+        foreach($items as $item) {
+            if($item->find('css', '.title')->getHTML() == $word[0]) {
+                $item->find('css', 'input')->click();
+                if($word[1] == '1') {
+                    assertEquals(true, in_array('success', explode(' ', $item->getAttribute('class'))));
+                } else {
+                    assertEquals(true, in_array('failed', explode(' ', $item->getAttribute('class'))));
+                }
+            }
+        }
+
+    }
 }

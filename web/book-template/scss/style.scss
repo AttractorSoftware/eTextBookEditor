@@ -279,6 +279,28 @@ image-description {
     }
   }
 }
+.e-text-book-viewer {
+  .checkbox-list {
+    float: left;
+    width: 100%;
+    .checkboxes {
+      float: left;
+      width: 100%;
+      .item {
+        float: left;
+        width: 50%;
+        margin: 10px 0 0 0;
+        &.success { background-color: #12a920; }
+        &.failed { background-color: #c50000; }
+        input[type=checkbox] {
+          margin: 0 5px 0 0 0;
+          position: relative;
+          top: 2px;
+        }
+      }
+    }
+  }
+}
 
 .e-text-book-viewer {
   .check-endings {
