@@ -16,7 +16,7 @@ var eTextBookBuilder = function() {
                 location.href = "/?book=" + $(this).val();
             }
         });
-    }
+    };
 
     this.save = function() {
         $.post('/pack.php', {
@@ -25,9 +25,9 @@ var eTextBookBuilder = function() {
         }, function(response) {
             location.href = "/?book=" + response;
         });
-    }
+    };
 
     this.init();
-}
+};
 
 App.eTextBookBuilder = new eTextBookBuilder();
