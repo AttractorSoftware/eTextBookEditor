@@ -2,7 +2,6 @@ var AjaxUploader = function(config) {
     var $this = this;
     this.config = config;
     this.fileInput = config.fileInput;
-    this.files = this.fileInput[0].files;
     this.uploadAction = this.fileInput.attr('upload-action');
     this.reader = new FileReader();
     this.afterLoad = config.afterLoad;
@@ -14,6 +13,7 @@ var AjaxUploader = function(config) {
     }
 
     this.select = function() {
+        $this.files = $this.fileInput[0].files;
         $this.loadContent();
         $this.upload();
     }
