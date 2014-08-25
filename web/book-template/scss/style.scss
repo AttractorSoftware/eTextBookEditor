@@ -127,9 +127,15 @@ e-text-book-editor .display, .e-text-book-viewer {
               padding: 0 7px;
               position: relative;
               cursor: pointer;
-              &.selected { background: #ddd; }
-              &.success { background: #89d489; }
-              &.failed { background: #e47A75; }
+              &.selected {
+                background: #ddd;
+              }
+              &.success {
+                background: #89d489;
+              }
+              &.failed {
+                background: #e47A75;
+              }
             }
           }
         }
@@ -201,6 +207,7 @@ image-description {
     }
   }
 }
+
 .e-text-book-viewer {
   audio-list {
     float: left;
@@ -208,7 +215,7 @@ image-description {
     audio-item {
       float: left;
       clear: left;
-      width : 100%;
+      width: 100%;
       margin: 0 0 15px;
       video {
         float: left;
@@ -222,13 +229,14 @@ image-description {
     width: 100%;
   }
 }
+
 .e-text-book-viewer {
   video-list {
     float: left;
     width: 100%;
     video-item {
       float: left;
-      width : 100%;
+      width: 100%;
       margin: 0 0 15px;
       video {
         float: left;
@@ -240,6 +248,7 @@ image-description {
     width: 100%;
   }
 }
+
 .e-text-book-viewer {
   logic-statement {
     float: left;
@@ -276,7 +285,9 @@ image-description {
     float: left;
     width: 100%;
     .words {
-      .title { display: none; }
+      .title {
+        display: none;
+      }
       .list {
         float: left;
         width: 100%;
@@ -310,12 +321,17 @@ image-description {
   }
 }
 
-.image-tall { background-size: auto 100% !important; }
-.image-wide { background-size: 100% auto !important; }
+.image-tall {
+  background-size: auto 100% !important;
+}
+
+.image-wide {
+  background-size: 100% auto !important;
+}
 
 .book {
   .page-header {
-    position: absolute;
+    position: fixed;
     overflow: visible;
     top: 0;
     right: 0;
@@ -379,7 +395,7 @@ image-description {
       -webkit-transition: top .5s ease;
       transition: top .5s ease;
 
-      li {
+      .chapter {
         list-style: decimal inside;
         .fa {
           display: inline-block;
@@ -395,7 +411,7 @@ image-description {
           content: "\e013";
         }
 
-        a {
+        .chapter-link, .exercise-link {
           display: block;
           padding: 10px 15px;
           border-bottom: 0;
@@ -406,8 +422,13 @@ image-description {
           white-space: nowrap;
           position: relative;
         }
-        ul {
+        .exercises-list {
           padding-left: 20px;
+          max-height: 0;
+          overflow: hidden;
+          -webkit-transition: max-height 0.8s;
+          -moz-transition: max-height 0.8s;
+          transition: max-height 0.8s;
         }
         i.fa-check {
           display: none;
@@ -424,10 +445,15 @@ image-description {
         }
       }
 
-      li.active a, li a:hover {
+      .chapter.active .chapter-link, .chapter-link a:hover {
         color: #008cff;
         background: transparent;
         text-decoration: none;
+      }
+      .chapter.active, .chapter:hover {
+        .exercises-list {
+          max-height: 300px;
+        }
       }
     }
   }

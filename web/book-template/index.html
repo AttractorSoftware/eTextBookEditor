@@ -29,32 +29,13 @@
     </div>
 
     <div id="book-body" class="book-body display container">
+        <iframe id="book" name="book" src="" frameborder="0" width="100%" onload="resizeIframe(this);"
+                scrolling="no"></iframe>
+
     </div>
 
 </div>
 
 <script src="js/script.min.js"></script>
-<script>
-    $(document).ready(function () {
-        var $firstModuleLink = $('.chapter-link:first').attr('href'),
-                iframe = '<iframe id="book" name ="book" src="' + $firstModuleLink + ' " frameborder="0" ' +
-                        'width="100%" height="100%" seamless="seamless" ' +
-                        'onload="resizeIframe(this);" scrolling="no"></iframe>';
-
-        $('.book-body').html(iframe);
-        $('.book').on('click', '#show-book-summary', function () {
-            $('.book').toggleClass('with-summary');
-        });
-        $('#moduleList')
-                .on('click', '.chapter-link', function () {
-                    $('#book').attr('src', $(this).attr('href'));
-                    return false;
-                })
-                .on('click', '.exercise-link', function () {
-                    document.getElementById("book").contentWindow.location.hash = $(this).attr('href');
-                    return false;
-                })
-        });
-</script>
 </body>
 </html>

@@ -33,28 +33,22 @@ class UpdateETBFile
 
         $exercisesIDList = $moduleContent->getExercisesList();
         $moduleContent->save($moduleFilePath);
-//        $this->addExercisesToSummary($bookName, $moduleSlug, $exercisesIDList);
-
-        $indexFilePath = $this->tmpDir . $bookName . '/index.html';
-        $indexContent = new SummaryDom();
-        $indexContent->loadWithBreaks($indexFilePath);
-        $indexContent->getChapter($moduleSlug)->insertExercisesIntoChapter($exercisesIDList);
-        $indexContent->save($indexFilePath);
-        $indexContent->destroy();
-
+        if (sizeof($exercisesIDList) != 0) {
+            $this->addExercisesToSummary($bookName, $moduleSlug, $exercisesIDList);
+        }
         $moduleContent->destroy();
-
     }
-/*
+
     public function addExercisesToSummary($bookName, $moduleSlug, $exercisesIDList)
     {
         $indexFilePath = $this->tmpDir . $bookName . '/index.html';
         $indexContent = new SummaryDom();
         $indexContent->loadWithBreaks($indexFilePath);
-        $indexContent->getChapter($moduleSlug)->insertExercisesIntoChapter($exercisesIDList);
-        $indexContent->tidySave($indexFilePath);
+        $indexContent->insertExercisesIntoChapter($moduleSlug, $exercisesIDList);
+        $indexContent->save($indexFilePath);
         $indexContent->destroy();
-    }*/
+    }
+
 
     public function addModule($moduleTitle)
     {
@@ -114,7 +108,6 @@ class UpdateETBFile
         foreach ($info['modules'] as $module) {
             $summaryContent .= $this->createSummary($module['title'], $module['slug'], $summaryTemplate);
         }
-
         return $summaryContent;
     }
 
@@ -125,7 +118,6 @@ class UpdateETBFile
         $summaryContent->setChapterAttributes($moduleSlug, $moduleTitle);
         $result = $summaryContent->outertext;
         $summaryContent->destroy();
-
         return $result;
     }
 

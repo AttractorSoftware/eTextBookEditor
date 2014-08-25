@@ -37,9 +37,7 @@ class Book
         $bookContent = explode('<e-text-book>', $bookContent);
         $bookContent = explode('</e-text-book>', $bookContent[1]);
         $bookContent = $bookContent[0];
-//        $bookContent = str_replace('content/', '/tmp/' . $this->slug . '/content/', $bookContent);
         $bookContent = "<e-text-book>" . $bookContent . "</e-text-book>";
-
         return $bookContent;
     }
 

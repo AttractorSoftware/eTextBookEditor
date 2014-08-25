@@ -1,3 +1,4 @@
+#noinspection CucumberUndefinedStep
 Feature: Создание нового правила
 
   Scenario: Создаем правило

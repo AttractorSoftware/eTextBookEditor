@@ -5,12 +5,14 @@ use Features\Bootstrap\eTextBookContext;
 /**
  * Features context.
  */
-class ModuleContext extends eTextBookContext {
+class ModuleContext extends eTextBookContext
+{
 
     /**
      * @When /^Кликаем по ссылке добавить учебник$/
      */
-    public function clickAddBookButton() {
+    public function clickAddBookButton()
+    {
         $this->findCss('#addBookButton')->click();
         sleep(1);
     }
@@ -18,7 +20,8 @@ class ModuleContext extends eTextBookContext {
     /**
      * @Given /^Заполняем форму учебника "([^"]*)", "([^"]*)", "([^"]*)", "([^"]*)"$/
      */
-    public function fillBookForm($title, $authors, $editor, $ISBN, $cover) {
+    public function fillBookForm($title, $authors, $editor, $ISBN, $cover)
+    {
         $form = $this->findCss('form[name=bookForm]');
         $form->find('css', '#bookTitle')->setValue($title);
         $form->find('css', '#bookAuthors')->setValue($authors);
@@ -31,7 +34,8 @@ class ModuleContext extends eTextBookContext {
     /**
      * @Given /^Заполняем форму учебника случайными значениями$/
      */
-    public function randomFillBookForm() {
+    public function randomFillBookForm()
+    {
         $this->fillBookForm(
             'Title auto-generate by selenium - ' . date('d-m-y-H-i-s'),
             'Author bot, Author bot2',
@@ -44,13 +48,17 @@ class ModuleContext extends eTextBookContext {
     /**
      * @Given /^Сохраняем учебник$/
      */
-    public function saveETextBook() {
+    public function saveETextBook()
+    {
         $form = $this->findCss('form[name=bookForm]');
         $book = array(
             'title' => $form->find('css', '#bookTitle')->getValue()
-            ,'authors' => $form->find('css', '#bookAuthors')->getValue()
-            ,'editor' => $form->find('css', '#bookEditor')->getValue()
-            ,'isbn' => $form->find('css', '#bookISBN')->getValue()
+        ,
+            'authors' => $form->find('css', '#bookAuthors')->getValue()
+        ,
+            'editor' => $form->find('css', '#bookEditor')->getValue()
+        ,
+            'isbn' => $form->find('css', '#bookISBN')->getValue()
         );
         $this->setVar('latestBook', $book);
         $form->find('css', '#bookFormSubmit')->click();
@@ -60,7 +68,8 @@ class ModuleContext extends eTextBookContext {
     /**
      * @Given /^Проверяем успешное сохранение учебника$/
      */
-    public function checkSuccessBookSave() {
+    public function checkSuccessBookSave()
+    {
         $form = $this->findCss('form[name=bookForm]');
         $alertBox = $form->find('css', '#alertBox');
         assertEquals($this->hasClass($alertBox, 'alert-success'), true);
@@ -69,19 +78,21 @@ class ModuleContext extends eTextBookContext {
     /**
      * @Then /^Закрываем форму учебника$/
      */
-    public function closeBookForm() {
+    public function closeBookForm()
+    {
         $this->findCss('form[name=bookForm] #bookFormClose')->click();
     }
 
     /**
      * @Given /^Кликаем по ссылке только что созданного учебника в списке$/
      */
-    public function latestBookLinkClick() {
+    public function latestBookLinkClick()
+    {
         $links = $this->findAllCss('.book-list li');
         $latestBook = $this->getVar('latestBook');
-        foreach($links as $link) {
+        foreach ($links as $link) {
             $titleLink = $link->find('css', 'a.title');
-            if(is_object($titleLink) && trim($titleLink->getHTML()) == $latestBook['title']) {
+            if (is_object($titleLink) && trim($titleLink->getHTML()) == $latestBook['title']) {
                 $link->find('css', '.edit-link')->click();
                 sleep(2);
             }
@@ -91,7 +102,8 @@ class ModuleContext extends eTextBookContext {
     /**
      * @Given /^Проверяем на странице редактирования соответствие заголовка последней добавленной книги$/
      */
-    public function checkTitleLatestBookOnEditPage() {
+    public function checkTitleLatestBookOnEditPage()
+    {
         $latestBook = $this->getVar('latestBook');
         assertEquals(trim($this->findCss('.page-header h2')->getHTML()), $latestBook['title']);
     }
@@ -99,7 +111,8 @@ class ModuleContext extends eTextBookContext {
     /**
      * @Given /^Создаем новый учебник$/
      */
-    public function createETextBook() {
+    public function createETextBook()
+    {
         $this->clickAddBookButton();
         $this->randomFillBookForm();
         $this->saveETextBook();
@@ -110,7 +123,8 @@ class ModuleContext extends eTextBookContext {
     /**
      * @When /^Кликаем по ссылке добавить модуль$/
      */
-    public function addModuleLinkClick() {
+    public function addModuleLinkClick()
+    {
         $this->findCss('#addModuleBtn')->click();
         sleep(1);
     }
@@ -118,7 +132,8 @@ class ModuleContext extends eTextBookContext {
     /**
      * @Given /^Заполняем форму модуля "([^"]*)"$/
      */
-    public function fillModuleForm($title) {
+    public function fillModuleForm($title)
+    {
         $form = $this->findCss('form[name=moduleForm]');
         $form->find('css', '#moduleTitle')->setValue($title);
     }
@@ -126,7 +141,8 @@ class ModuleContext extends eTextBookContext {
     /**
      * @Given /^Сохраняем модуль$/
      */
-    public function saveModule() {
+    public function saveModule()
+    {
         $form = $this->findCss('form[name=moduleForm]');
         $module = array('title' => $form->find('css', '#moduleTitle')->getValue());
         $this->setVar('latestModule', $module);
@@ -137,7 +153,8 @@ class ModuleContext extends eTextBookContext {
     /**
      * @Given /^Проверяем успешное сохранение модуля$/
      */
-    public function checkSuccessSaveModule() {
+    public function checkSuccessSaveModule()
+    {
         $form = $this->findCss('form[name=moduleForm]');
         $alertBox = $form->find('css', '#alertBox');
         assertEquals($this->hasClass($alertBox, 'alert-success'), true);
@@ -146,7 +163,8 @@ class ModuleContext extends eTextBookContext {
     /**
      * @Then /^Закрываем форму модуля$/
      */
-    public function moduleFormClose() {
+    public function moduleFormClose()
+    {
         $this->findCss('form[name=moduleForm] #moduleFormClose')->click();
         sleep(2);
     }
@@ -154,20 +172,24 @@ class ModuleContext extends eTextBookContext {
     /**
      * @Given /^Кликаем по ссылке только что созданного модуля в списке$/
      */
-    public function latestModuleLinkClick() {
+    public function latestModuleLinkClick()
+    {
         $links = $this->findAllCss('#moduleList li a');
         $latestModule = $this->getVar('latestModule');
-        foreach($links as $key => $link) {
-            if(trim($link->getHTML()) == $latestModule['title']) {
-                $link->click(); break;
+        foreach ($links as $key => $link) {
+            if (trim($link->getHTML()) == $latestModule['title']) {
+                $link->click();
+                break;
             }
-        } sleep(2);
+        }
+        sleep(2);
     }
 
     /**
      * @Given /^Начинаем редактировать текущий модуль$/
      */
-    public function startEditCurrentModule() {
+    public function startEditCurrentModule()
+    {
         $this->elementSetAttribute('module', 'editable', 1);
         $this->findCss('control-panel.module-panel item.edit')->click();
     }
@@ -175,7 +197,8 @@ class ModuleContext extends eTextBookContext {
     /**
      * @Given /^Указываем для модуля заголовок "([^"]*)", ключевые вопросы "([^"]*)" и описание "([^"]*)"$/
      */
-    public function setDataForModule($title, $keyQuestions, $description) {
+    public function setDataForModule($title, $keyQuestions, $description)
+    {
         $this->findCss('module-title input')->setValue($title);
         $this->findCss('module-questions textarea')->setValue($keyQuestions);
         $this->findCss('module-description textarea')->setValue($description);
@@ -184,7 +207,8 @@ class ModuleContext extends eTextBookContext {
     /**
      * @When /^Заканчиваем редактирование текущего модуля$/
      */
-    public function finishEditCurrentModule() {
+    public function finishEditCurrentModule()
+    {
         $this->findCss('control-panel.module-panel item.edit')->click();
         sleep(2);
     }
@@ -192,7 +216,8 @@ class ModuleContext extends eTextBookContext {
     /**
      * @Given /^Проверяем поля модуля заголовок "([^"]*)", ключевые вопросы "([^"]*)" и описание "([^"]*)"$/
      */
-    public function checkLatestModule($title, $questions, $description) {
+    public function checkLatestModule($title, $questions, $description)
+    {
 
         $display = $this->findCss('.display');
 
@@ -204,7 +229,8 @@ class ModuleContext extends eTextBookContext {
     /**
      * @When /^Создаем новый модуль$/
      */
-    public function createModule() {
+    public function createModule()
+    {
         $this->addModuleLinkClick();
         $this->fillModuleForm('Модуль 1');
         $this->saveModule();
@@ -215,48 +241,38 @@ class ModuleContext extends eTextBookContext {
     /**
      * @Given /^Создаем блок с заголовком "([^"]*)"$/
      */
-    public function createBlock($title) {
-
+    public function createBlock($title)
+    {
         $desktop = $this->findCss('.desktop');
-
         $addBlockButton = $desktop->find('css', 'add-block-button');
         $addBlockButton->click();
         sleep(1);
         $addBlockLink = $addBlockButton->find('css', '.add-block');
         $addBlockLink->click();
-        $block = $desktop->find('css', 'block');
-
-        $blockTitleInput = $block->find('css', 'block-title input');
+        $lastBlock = $desktop->find('css', 'block');
+        $blockTitleInput = $lastBlock->find('css', 'block-title edit-element input');
         $blockTitleInput->setValue($title);
-
-        $editButton = $block->find('css', 'control-panel item.edit');
-
+        $editButton = $lastBlock->find('css', 'control-panel item.edit');
         $editButton->click();
-
-        $this->setVar('latestBlockUID', $block->getAttribute('uid'));
-
-        sleep(2);
-
+        $this->setVar('latestBlockID', $lastBlock->getAttribute('id'));
     }
 
     /**
      * @Then /^Проверяем блок с заголовком "([^"]*)"$/
      */
-    public function checkBlock($title) {
-
+    public function checkBlock($title)
+    {
         $display = $this->findCss('.display');
         $block = $display->find('css', 'block');
-
         $blockTitle = $block->find('css', 'block-headline block-title view-element');
-
         assertEquals($blockTitle->getHTML(), $title);
-
     }
 
     /**
      * @Then /^Удаляем блок$/
      */
-    public function removeBlock() {
+    public function removeBlock()
+    {
         $desktop = $this->findCss('.desktop');
         $removeButton = $desktop->find('css', 'block control-panel .remove');
         $this->elementSetAttribute('block control-panel', 'style', 'display: block');
@@ -266,7 +282,8 @@ class ModuleContext extends eTextBookContext {
     /**
      * @Then /^Проверяем удаленный блок$/
      */
-    public function checkRemovedBlock() {
+    public function checkRemovedBlock()
+    {
         $display = $this->findCss('.display');
         $block = $display->find('css', 'block');
         assertEquals(false, is_object($block));
@@ -275,7 +292,8 @@ class ModuleContext extends eTextBookContext {
     /**
      * @When /^Создаем правило с текстом "([^"]*)"$/
      */
-    public function createRule($text) {
+    public function createRule($text)
+    {
         $desktop = $this->findCss('.desktop');
 
         $addBlockButton = $desktop->find('css', 'add-block-button');
@@ -284,26 +302,22 @@ class ModuleContext extends eTextBookContext {
         $addRuleLink = $addBlockButton->find('css', '.add-rule');
         $addRuleLink->click();
         $rule = $desktop->find('css', 'rule');
-
         $ruleTextInput = $rule->find('css', 'rule-title textarea');
         $ruleTextInput->setValue($text);
-
         $editButton = $rule->find('css', 'control-panel item.edit');
-
         $editButton->click();
-
-        $this->setVar('latestRuleUID', $rule->getAttribute('uid'));
-
+        $this->setVar('latestRuleID', $rule->getAttribute('id'));
         sleep(1);
     }
 
     /**
      * @Then /^Проверяем последнее созданное правило с текстом "([^"]*)"$/
      */
-    public function checkRule($text) {
+    public function checkRule($text)
+    {
 
         $display = $this->findCss('.display');
-        $rule = $display->find('css', 'rule[uid='. $this->getVar('latestRuleUID') .']');
+        $rule = $display->find('css', 'rule[id=' . $this->getVar('latestRuleID') . ']');
 
         $ruleText = $rule->find('css', 'rule-title view-element');
 
@@ -313,12 +327,13 @@ class ModuleContext extends eTextBookContext {
     /**
      * @Given /^Открываем созданный учебник$/
      */
-    public function latestBookLinkViewClick() {
+    public function latestBookLinkViewClick()
+    {
         $links = $this->findAllCss('.book-list li');
         $latestBook = $this->getVar('latestBook');
-        foreach($links as $link) {
+        foreach ($links as $link) {
             $titleLink = $link->find('css', 'a.title');
-            if(is_object($titleLink) && trim($titleLink->getHTML()) == $latestBook['title']) {
+            if (is_object($titleLink) && trim($titleLink->getHTML()) == $latestBook['title']) {
                 $link->find('css', '.view-link')->click();
                 sleep(2);
             }
@@ -328,14 +343,16 @@ class ModuleContext extends eTextBookContext {
     /**
      * @Then /^Кликаем по кнопке содержания$/
      */
-    public function openSummary() {
+    public function openSummary()
+    {
         $this->findCss('#show-book-summary')->click();
     }
 
     /**
      * @Given /^Проверяем заголовок "([^"]*)", ключевые вопросы "([^"]*)" и описание "([^"]*)"$/
      */
-    public function checkModuleInEmulator($title, $questions, $description) {
+    public function checkModuleInEmulator($title, $questions, $description)
+    {
 
         $display = $this->findCss('.e-text-book-viewer');
 
@@ -343,9 +360,6 @@ class ModuleContext extends eTextBookContext {
         assertEquals($display->find('css', 'module-questions view-element')->getHTML(), $questions);
         assertEquals($display->find('css', 'module-description view-element')->getHTML(), $description);
     }
-
-
-
 
 
 }

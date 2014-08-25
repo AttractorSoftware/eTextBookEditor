@@ -4,29 +4,14 @@ namespace eTextBook\LoungeBundle\Lib;
 
 class SummaryDom extends SimpleHtmlDom
 {
-    function tidySave($filepath = '')
-    {
-        $ret = $this->root->innertext();
-        $config = array(
-            'indent' => true,
-            'wrap' => 200
-        );
-        $tidy = tidy_parse_string($ret, $config, 'UTF8');
-        $tidy->cleanRepair();
-        $test = $tidy->value;
-        if ($filepath !== '') {
-            file_put_contents($filepath, $tidy->value, LOCK_EX);
-        }
-        return $test;
-    }
-
     protected function prepare(
         $str,
         $lowercase = true,
         $stripRN = true,
         $defaultBRText = DEFAULT_BR_TEXT,
         $defaultSpanText = DEFAULT_SPAN_TEXT
-    ) {
+    )
+    {
         $this->clear();
 
         // set the length of content before we do anything to it.
@@ -351,7 +336,7 @@ class SummaryDom extends SimpleHtmlDom
 
     public function setSummaryList($content)
     {
-        $this->find('.summary', 0)->innertext = $content;
+        $this->find('.summary', 0)->innertext .= $content;
     }
 
     public function getModulesList()
@@ -407,6 +392,18 @@ class SummaryDom extends SimpleHtmlDom
         $this->setChapterTitle($moduleTitle);
     }
 
+    public function insertExercisesIntoChapter($chapter, $exercises)
+    {
+        $temp = $this->find('.chapter-link[href=modules/' . $chapter . '.html]', 0)->outertext;
+        $temp .= '<ol class="exercises-list">';
+        foreach ($exercises as $link => $title) {
+            $temp .= '<li class="exercise"><a class="exercise-link" href="' . $link . '">
+             ' . $title . '</a></li>';
+        }
+        $temp .= '</ol>';
+        $this->find('.chapter-link[href=modules/' . $chapter . '.html]', 0)->parent->innertext = $temp;
+    }
+
     public function destroy()
     {
         $this->clear();
@@ -432,17 +429,6 @@ class SummaryDomElement extends simple_html_dom_node
     public function wrap($start, $end)
     {
         $this->innertext = $start . $this->innertext . $end;
-    }
-
-    public function insertExercisesIntoChapter($exercises)
-    {
-        $temp = $this->first_child()->outertext . '<ol class="exercises-list">';
-        foreach ($exercises as $link => $title) {
-            $temp .= '<li class="exercise"><a class="exercise-link" href="' . $link . '">
-             ' . $title . '</a></li>';
-        }
-        $temp .= '</ol>';
-        $this->innertext = $temp;
     }
 
 }

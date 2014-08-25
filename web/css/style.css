@@ -953,7 +953,7 @@ image-description {
   background-size: 100% auto !important; }
 
 .book .page-header {
-  position: absolute;
+  position: fixed;
   overflow: visible;
   top: 0;
   right: 0;
@@ -1012,9 +1012,9 @@ image-description {
     padding: 0;
     -webkit-transition: top .5s ease;
     transition: top .5s ease; }
-    .book .book-summary .summary li {
+    .book .book-summary .summary .chapter {
       list-style: decimal inside; }
-      .book .book-summary .summary li .fa {
+      .book .book-summary .summary .chapter .fa {
         display: inline-block;
         font-family: 'Glyphicons Halflings';
         font-style: normal;
@@ -1022,9 +1022,9 @@ image-description {
         line-height: 1;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale; }
-      .book .book-summary .summary li .fa-check:before {
+      .book .book-summary .summary .chapter .fa-check:before {
         content: "\e013"; }
-      .book .book-summary .summary li a {
+      .book .book-summary .summary .chapter .chapter-link, .book .book-summary .summary .chapter .exercise-link {
         display: block;
         padding: 10px 15px;
         border-bottom: 0;
@@ -1034,9 +1034,14 @@ image-description {
         overflow: hidden;
         white-space: nowrap;
         position: relative; }
-      .book .book-summary .summary li ul {
-        padding-left: 20px; }
-      .book .book-summary .summary li i.fa-check {
+      .book .book-summary .summary .chapter .exercises-list {
+        padding-left: 20px;
+        max-height: 0;
+        overflow: hidden;
+        -webkit-transition: max-height 0.8s;
+        -moz-transition: max-height 0.8s;
+        transition: max-height 0.8s; }
+      .book .book-summary .summary .chapter i.fa-check {
         display: none;
         position: absolute;
         right: 9px;
@@ -1045,10 +1050,12 @@ image-description {
         color: #3c3; }
     .book .book-summary .summary li.done i.fa-check {
       display: inline; }
-    .book .book-summary .summary li.active a, .book .book-summary .summary li a:hover {
+    .book .book-summary .summary .chapter.active .chapter-link, .book .book-summary .summary .chapter-link a:hover {
       color: #008cff;
       background: transparent;
       text-decoration: none; }
+    .book .book-summary .summary .chapter.active .exercises-list, .book .book-summary .summary .chapter:hover .exercises-list {
+      max-height: 300px; }
 .book .book-body {
   width: 100%;
   position: absolute;
@@ -1070,3 +1077,5 @@ image-description {
 
 .book.with-summary .book-summary {
   left: 0; }
+
+/*# sourceMappingURL=style.css.map */

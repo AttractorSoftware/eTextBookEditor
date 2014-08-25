@@ -23,6 +23,7 @@ module.exports = function (grunt) {
                     , 'bower_components/underscore/underscore.js'
                     , 'bower_components/backbone/backbone.js'
                     , 'web/js/app.js'
+                    , 'web/js/eTextBook/bookNavigation.js'
                     , 'web/js/eTextBook/utils.js'
                     , 'web/js/eTextBook/widget.js'
                     , 'web/js/eTextBook/widgetRepository.js'

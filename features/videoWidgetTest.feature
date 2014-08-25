@@ -1,3 +1,4 @@
+#noinspection CucumberUndefinedStep
 Feature: Добавление блока с виджетом видео
 
   Scenario: Создаем новый учебник и модуль
