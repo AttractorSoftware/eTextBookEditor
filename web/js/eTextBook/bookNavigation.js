@@ -1,39 +1,54 @@
-$(document).ready(function () {
-    var $iframe = $('#book');
-    this.loadIframe = function () {
-        var $firstChapter = $('.chapter-link:first');
-        var $firstChapterLink = $firstChapter.attr('href');
-        $firstChapter.closest('.chapter').addClass('active');
-        $iframe.attr('src', $firstChapterLink);
+var NavigationController = function () {
+    this.$iframe = $('#book');
+    this.bookName = $('.book-name').html();
+
+    var $this = this, activeChapter, activeChapterIndex, scrollPos,
+        storage = new ObjectStorage(this.bookName);
+
+    this.setLocalStorage = function () {
+        storage.local = {
+            activeChapter: 0,
+            chapters: [],
+            scrollPositions: []
+        };
+        $('.chapter-link').each(function () {
+            storage.local.chapters.push($(this).attr('href'));
+        });
     };
 
-    this.loadIframe();
-    var bookName = $('.book-name').html(),
-        activeChapter = $('.chapter.active a').attr('href'),
-        scrollPos = getScrollTop(),
-        storage = new ObjectStorage(bookName);
-    if (!storage.local.chapter) {
-        storage.local = {
-            chapter: activeChapter,
-            scroll: scrollPos
-        };
-    }
-    else console.log(storage.local);
+    this.openLastReadingPlace = function () {
+        this.$iframe.attr('src', storage.local.chapters[storage.local.activeChapter]);
+    };
+
+    this.resizeIframeByContent = function (iframe) {
+        iframe.style.height = iframe.contentWindow.document.body.offsetHeight + 'px';
+        console.log(iframe.style.height);
+    };
+
+    this.$iframe.on('load', function () {
+        activeChapter = $this.$iframe.attr('src');
+        activeChapterIndex = storage.local.chapters.indexOf(activeChapter);
+        storage.local.activeChapter = activeChapterIndex;
+
+        $this.resizeIframeByContent(this);
+        $('.active').removeClass('active');
+        $('a[href="' + activeChapter + '"]').closest('.chapter').addClass('active');
+        window.scrollTo(0, storage.local.scrollPositions[activeChapterIndex]);
+    });
 
     $(window).scroll(function () {
         scrollPos = getScrollTop();
-        storage.local.scroll = scrollPos;
+        storage.local.scrollPositions[activeChapterIndex] = scrollPos;
     });
 
     $('#show-book-summary').click(function () {
         $('.book').toggleClass('with-summary');
     });
     $('.exercise-link').click(function () {
-        var $this = $(this);
-        var link = $this.closest('.chapter').children('.chapter-link').attr('href');
-        if ($iframe.attr('src') !== link) {
-            toggleChapterToActive.call(this);
-            $iframe.attr('src', link);
+        var self = $(this);
+        var link = self.closest('.chapter').children('.chapter-link').attr('href');
+        if ($this.$iframe.attr('src') !== link) {
+            $this.$iframe.attr('src', link);
             document.getElementsByTagName('iframe')[0].onload = function () {
                 scrollToExercise();
             };
@@ -42,28 +57,19 @@ $(document).ready(function () {
         }
 
         function scrollToExercise() {
-            var $tr = $iframe.contents().find("#" + $this.attr('href'));
-            if (typeof ($tr.offset()) != 'undefined') $(window).scrollTop($tr.offset().top);
+            var $tr = $this.$iframe.contents().find("#" + self.attr('href'));
+            if (typeof ($tr.offset()) != 'undefined') window.scrollTo(0, $tr.offset().top);
         }
 
         return false;
     });
     $('.chapter-link').click(function () {
         var link = $(this).attr('href');
-        if ($iframe.attr('src') !== link) {
-            toggleChapterToActive.call(this);
-            $iframe.attr('src', link);
-            $(window).scrollTop(0);
+        if ($this.$iframe.attr('src') !== link) {
+            $this.$iframe.attr('src', link);
         }
         return false;
     });
-
-    function toggleChapterToActive() {
-        $('.active').removeClass('active');
-        $(this).closest('.chapter').addClass('active');
-        activeChapter = $('.chapter.active a').attr('href');
-        storage.local.chapter = activeChapter;
-    }
 
     function getScrollTop() {
         if (typeof pageYOffset != 'undefined') {
@@ -76,58 +82,15 @@ $(document).ready(function () {
             return D.scrollTop;
         }
     }
-});
-var ObjectStorage = function ObjectStorage(name, duration) {
-    var self,
-        name = name || '_objectStorage',
-        defaultDuration = 5000;
 
-    if (ObjectStorage.instances[ name ]) {
-        self = ObjectStorage.instances[ name ];
-        self.duration = duration || self.duration;
-    } else {
-        self = this;
-        self._name = name;
-        self.duration = duration || defaultDuration;
-        self._init();
-        ObjectStorage.instances[ name ] = self;
+    if (!storage.local.chapters) {
+        $this.setLocalStorage();
+        $this.openLastReadingPlace();
+    }
+    else {
+        $this.openLastReadingPlace();
     }
 
-    return self;
+
 };
-ObjectStorage.instances = {};
-ObjectStorage.prototype = {
-    // type == local || session
-    _save: function (type) {
-        var stringified = JSON.stringify(this[ type ]),
-            storage = window[ type + 'Storage' ];
-        if (storage.getItem(this._name) !== stringified) {
-            storage.setItem(this._name, stringified);
-        }
-    },
-
-    _get: function (type) {
-        this[ type ] = JSON.parse(window[ type + 'Storage' ].getItem(this._name)) || {};
-    },
-
-    _init: function () {
-        var self = this;
-        self._get('local');
-        self._get('session');
-
-        (function callee() {
-            self.timeoutId = setTimeout(function () {
-                self._save('local');
-                callee();
-            }, self._duration);
-        })();
-
-        window.addEventListener('beforeunload', function () {
-            self._save('local');
-            self._save('session');
-        });
-    },
-    timeoutId: null,
-    local: {},
-    session: {}
-};
+App.NavigationController = new NavigationController();
