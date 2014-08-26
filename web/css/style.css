@@ -56,7 +56,7 @@
       font-size: 12px;
       margin: 0 5px 0 0;
       padding: 0 0 0 15px; }
-    .e-text-book-editor .desktop e-text-book block add-block-button, .e-text-book-editor .desktop e-text-book rule add-block-button {
+    .e-text-book-editor .desktop e-text-book block add-block-button, .e-text-book-editor .desktop e-text-book rule add-block-button, .e-text-book-editor .desktop e-text-book .header add-block-button {
       position: relative;
       margin: -50px 0 0 0;
       top: 80px; }
@@ -132,16 +132,16 @@
             width: 100%;
             padding: 30px;
             background: #ccedcd; }
-        .e-text-book-editor .desktop e-text-book module blocks block, .e-text-book-editor .desktop e-text-book module blocks rule {
+        .e-text-book-editor .desktop e-text-book module blocks block, .e-text-book-editor .desktop e-text-book module blocks rule, .e-text-book-editor .desktop e-text-book module blocks .header {
           float: left;
           width: 100%;
           border: solid 1px #eee;
           padding: 30px 15px 15px 15px;
           margin: 0 0 52px 0; }
-          .e-text-book-editor .desktop e-text-book module blocks block .widget-type-list, .e-text-book-editor .desktop e-text-book module blocks rule .widget-type-list {
+          .e-text-book-editor .desktop e-text-book module blocks block .widget-type-list, .e-text-book-editor .desktop e-text-book module blocks rule .widget-type-list, .e-text-book-editor .desktop e-text-book module blocks .header .widget-type-list {
             float: left;
             width: 100%; }
-            .e-text-book-editor .desktop e-text-book module blocks block .widget-type-list .item, .e-text-book-editor .desktop e-text-book module blocks rule .widget-type-list .item {
+            .e-text-book-editor .desktop e-text-book module blocks block .widget-type-list .item, .e-text-book-editor .desktop e-text-book module blocks rule .widget-type-list .item, .e-text-book-editor .desktop e-text-book module blocks .header .widget-type-list .item {
               float: left;
               width: 59px;
               height: 59px;
@@ -153,55 +153,55 @@
               text-align: center;
               line-height: 12px;
               text-shadow: 1px 0 0 #fff; }
-              .e-text-book-editor .desktop e-text-book module blocks block .widget-type-list .item.selected, .e-text-book-editor .desktop e-text-book module blocks rule .widget-type-list .item.selected {
+              .e-text-book-editor .desktop e-text-book module blocks block .widget-type-list .item.selected, .e-text-book-editor .desktop e-text-book module blocks rule .widget-type-list .item.selected, .e-text-book-editor .desktop e-text-book module blocks .header .widget-type-list .item.selected {
                 background: #eee;
                 border-color: #ddd; }
-              .e-text-book-editor .desktop e-text-book module blocks block .widget-type-list .item .glyphicon, .e-text-book-editor .desktop e-text-book module blocks rule .widget-type-list .item .glyphicon {
+              .e-text-book-editor .desktop e-text-book module blocks block .widget-type-list .item .glyphicon, .e-text-book-editor .desktop e-text-book module blocks rule .widget-type-list .item .glyphicon, .e-text-book-editor .desktop e-text-book module blocks .header .widget-type-list .item .glyphicon {
                 float: left;
                 width: 100%;
                 margin: 9px 0 5px 0;
                 font-size: 14px; }
-          .e-text-book-editor .desktop e-text-book module blocks block block-headline, .e-text-book-editor .desktop e-text-book module blocks rule block-headline {
+          .e-text-book-editor .desktop e-text-book module blocks block block-headline, .e-text-book-editor .desktop e-text-book module blocks rule block-headline, .e-text-book-editor .desktop e-text-book module blocks .header block-headline {
             float: left;
             width: 100%; }
-            .e-text-book-editor .desktop e-text-book module blocks block block-headline block-index, .e-text-book-editor .desktop e-text-book module blocks rule block-headline block-index {
+            .e-text-book-editor .desktop e-text-book module blocks block block-headline block-index, .e-text-book-editor .desktop e-text-book module blocks rule block-headline block-index, .e-text-book-editor .desktop e-text-book module blocks .header block-headline block-index {
               display: none;
               float: left; }
-            .e-text-book-editor .desktop e-text-book module blocks block block-headline block-categories, .e-text-book-editor .desktop e-text-book module blocks rule block-headline block-categories {
+            .e-text-book-editor .desktop e-text-book module blocks block block-headline block-categories, .e-text-book-editor .desktop e-text-book module blocks rule block-headline block-categories, .e-text-book-editor .desktop e-text-book module blocks .header block-headline block-categories {
               float: left; }
-            .e-text-book-editor .desktop e-text-book module blocks block block-headline block-title, .e-text-book-editor .desktop e-text-book module blocks rule block-headline block-title {
+            .e-text-book-editor .desktop e-text-book module blocks block block-headline block-title, .e-text-book-editor .desktop e-text-book module blocks rule block-headline block-title, .e-text-book-editor .desktop e-text-book module blocks .header block-headline block-title {
               float: left;
               width: 100%; }
-              .e-text-book-editor .desktop e-text-book module blocks block block-headline block-title input, .e-text-book-editor .desktop e-text-book module blocks rule block-headline block-title input {
+              .e-text-book-editor .desktop e-text-book module blocks block block-headline block-title input, .e-text-book-editor .desktop e-text-book module blocks rule block-headline block-title input, .e-text-book-editor .desktop e-text-book module blocks .header block-headline block-title input {
                 float: left;
                 width: 100%; }
-          .e-text-book-editor .desktop e-text-book module blocks block block-content, .e-text-book-editor .desktop e-text-book module blocks rule block-content {
+          .e-text-book-editor .desktop e-text-book module blocks block block-content, .e-text-book-editor .desktop e-text-book module blocks rule block-content, .e-text-book-editor .desktop e-text-book module blocks .header block-content {
             float: left;
             width: 100%;
             padding: 10px 0 0 0; }
-            .e-text-book-editor .desktop e-text-book module blocks block block-content widget, .e-text-book-editor .desktop e-text-book module blocks rule block-content widget {
+            .e-text-book-editor .desktop e-text-book module blocks block block-content widget, .e-text-book-editor .desktop e-text-book module blocks rule block-content widget, .e-text-book-editor .desktop e-text-book module blocks .header block-content widget {
               float: left;
               width: 100%;
               margin: 10px 0 0 0; }
-              .e-text-book-editor .desktop e-text-book module blocks block block-content widget label, .e-text-book-editor .desktop e-text-book module blocks rule block-content widget label {
+              .e-text-book-editor .desktop e-text-book module blocks block block-content widget label, .e-text-book-editor .desktop e-text-book module blocks rule block-content widget label, .e-text-book-editor .desktop e-text-book module blocks .header block-content widget label {
                 float: left;
                 display: none; }
-              .e-text-book-editor .desktop e-text-book module blocks block block-content widget .widget-selector, .e-text-book-editor .desktop e-text-book module blocks rule block-content widget .widget-selector {
+              .e-text-book-editor .desktop e-text-book module blocks block block-content widget .widget-selector, .e-text-book-editor .desktop e-text-book module blocks rule block-content widget .widget-selector, .e-text-book-editor .desktop e-text-book module blocks .header block-content widget .widget-selector {
                 float: left;
                 display: none; }
-              .e-text-book-editor .desktop e-text-book module blocks block block-content widget widget-content, .e-text-book-editor .desktop e-text-book module blocks rule block-content widget widget-content {
+              .e-text-book-editor .desktop e-text-book module blocks block block-content widget widget-content, .e-text-book-editor .desktop e-text-book module blocks rule block-content widget widget-content, .e-text-book-editor .desktop e-text-book module blocks .header block-content widget widget-content {
                 float: left;
                 width: 100%;
                 margin: 10px 0 0 0; }
-          .e-text-book-editor .desktop e-text-book module blocks block[editable="1"] edit-element, .e-text-book-editor .desktop e-text-book module blocks block[editable="1"] control-panel, .e-text-book-editor .desktop e-text-book module blocks rule[editable="1"] edit-element, .e-text-book-editor .desktop e-text-book module blocks rule[editable="1"] control-panel {
+          .e-text-book-editor .desktop e-text-book module blocks block[editable="1"] edit-element, .e-text-book-editor .desktop e-text-book module blocks block[editable="1"] control-panel, .e-text-book-editor .desktop e-text-book module blocks rule[editable="1"] edit-element, .e-text-book-editor .desktop e-text-book module blocks rule[editable="1"] control-panel, .e-text-book-editor .desktop e-text-book module blocks .header[editable="1"] edit-element, .e-text-book-editor .desktop e-text-book module blocks .header[editable="1"] control-panel {
             display: block; }
-          .e-text-book-editor .desktop e-text-book module blocks block[editable="1"] view-element, .e-text-book-editor .desktop e-text-book module blocks rule[editable="1"] view-element {
+          .e-text-book-editor .desktop e-text-book module blocks block[editable="1"] view-element, .e-text-book-editor .desktop e-text-book module blocks rule[editable="1"] view-element, .e-text-book-editor .desktop e-text-book module blocks .header[editable="1"] view-element {
             display: none; }
-          .e-text-book-editor .desktop e-text-book module blocks block[editable="1"] block-content widget .widget-selector, .e-text-book-editor .desktop e-text-book module blocks block[editable="1"] block-content widget label, .e-text-book-editor .desktop e-text-book module blocks rule[editable="1"] block-content widget .widget-selector, .e-text-book-editor .desktop e-text-book module blocks rule[editable="1"] block-content widget label {
+          .e-text-book-editor .desktop e-text-book module blocks block[editable="1"] block-content widget .widget-selector, .e-text-book-editor .desktop e-text-book module blocks block[editable="1"] block-content widget label, .e-text-book-editor .desktop e-text-book module blocks rule[editable="1"] block-content widget .widget-selector, .e-text-book-editor .desktop e-text-book module blocks rule[editable="1"] block-content widget label, .e-text-book-editor .desktop e-text-book module blocks .header[editable="1"] block-content widget .widget-selector, .e-text-book-editor .desktop e-text-book module blocks .header[editable="1"] block-content widget label {
             display: block; }
-          .e-text-book-editor .desktop e-text-book module blocks block edit-element, .e-text-book-editor .desktop e-text-book module blocks rule edit-element {
+          .e-text-book-editor .desktop e-text-book module blocks block edit-element, .e-text-book-editor .desktop e-text-book module blocks rule edit-element, .e-text-book-editor .desktop e-text-book module blocks .header edit-element {
             display: none; }
-          .e-text-book-editor .desktop e-text-book module blocks block:hover control-panel, .e-text-book-editor .desktop e-text-book module blocks rule:hover control-panel {
+          .e-text-book-editor .desktop e-text-book module blocks block:hover control-panel, .e-text-book-editor .desktop e-text-book module blocks rule:hover control-panel, .e-text-book-editor .desktop e-text-book module blocks .header:hover control-panel {
             display: block; }
     .e-text-book-editor .desktop e-text-book logic-statement {
       float: left;
@@ -1124,4 +1124,11 @@ image-description {
 .book.with-summary .book-summary {
   left: 0; }
 
-/*# sourceMappingURL=style.css.map */
+.e-text-book-viewer .block.header {
+  float: left;
+  width: 100%;
+  margin: 0 0 20px;
+  font-size: 20px;
+  text-align: center;
+  font-weight: bold;
+  color: #555; }

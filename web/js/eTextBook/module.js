@@ -23,6 +23,13 @@ var eTextBookModule = Backbone.Model.extend({
                 ,module: this
             }));
         }
+
+        for(i = 0; i < this.get('cont').find('blocks .block.header').length; i++) {
+            this.blocks.push(new eTextBookHeader({
+                cont: $(this.get('cont').find('blocks .block.header')[i])
+                ,module: this
+            }));
+        }
     }
 
     ,addControlPanel: function() {
@@ -117,7 +124,32 @@ var eTextBookModule = Backbone.Model.extend({
             return false;
         });
 
+        button.find('.add-header').bind('click', function() {
+            $this.addHeader(button);
+            $(this).parent().parent().removeClass('open');
+            return false;
+        });
+
         return button;
+    }
+
+    ,addHeader: function(button) {
+        var template = $('<div class="header block">' +
+            '<div class="header-title">' +
+                '<view-element></view-element>' +
+            '</div>' +
+        '</div>');
+
+        template.attr('id', App.eTextBookUtils.generateUID());
+
+        if(button.parent().prop('tagName') == 'BLOCK' || button.parent().prop('tagName') == 'RULE' || button.parent().prop('tagName') == 'HEADER') {
+            button.parent().after(template);
+        } else {
+            $(button).parent().find('blocks').prepend(template);
+        }
+
+        var header = new eTextBookHeader({ cont: template, module: this });
+        header.startEdit();
     }
 
     ,addRule: function(button) {
@@ -129,7 +161,7 @@ var eTextBookModule = Backbone.Model.extend({
 
         template.attr('id', App.eTextBookUtils.generateUID());
 
-        if(button.parent().prop('tagName') == 'BLOCK' || button.parent().prop('tagName') == 'RULE') {
+        if(button.parent().prop('tagName') == 'BLOCK' || button.parent().prop('tagName') == 'RULE' || button.parent().prop('tagName') == 'HEADER') {
             button.parent().after(template);
         } else {
             $(button).parent().find('blocks').prepend(template);
@@ -144,7 +176,7 @@ var eTextBookModule = Backbone.Model.extend({
 
         template.attr('id', App.eTextBookUtils.generateUID());
 
-        if(button.parent().prop('tagName') == 'BLOCK' || button.parent().prop('tagName') == 'RULE') {
+        if(button.parent().prop('tagName') == 'BLOCK' || button.parent().prop('tagName') == 'RULE' || button.parent().prop('tagName') == 'HEADER') {
             button.parent().after(template);
         } else {
             $(button).parent().find('blocks').prepend(template);

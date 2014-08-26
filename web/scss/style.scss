@@ -74,7 +74,7 @@
           padding: 0 0 0 15px;
         }
       }
-      block add-block-button, rule add-block-button {
+      block add-block-button, rule add-block-button, .header add-block-button {
         position: relative;
         margin: -50px 0 0 0;
         top: 80px;
@@ -172,7 +172,7 @@
               background: #ccedcd;
             }
           }
-          block, rule {
+          block, rule, .header {
             float: left;
             width: 100%;
             border: solid 1px #eee;
