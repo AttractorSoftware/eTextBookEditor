@@ -278,7 +278,7 @@ class WidgetsContext extends eTextBookContext {
      */
     public function setTextForAudio($text) {
         $desktop = $this->findCss('.desktop');
-        $desktop->find('css', 'audio-description textarea')->setValue($text);
+        $desktop->find('css', 'edit-element.description textarea')->setValue($text);
     }
 
     /**
