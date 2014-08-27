@@ -17,14 +17,16 @@ public class Player {
         this.loadBooksFromArchive();
     }
 
-    public String[] getBookList() {
-        String[] result = new String[this.bookList.size()];
+    public String getBookList() {
+        String result = "";
         int pos = 0;
         for(ETextBook book: this.bookList) {
-            result[pos] = book.getTitle();
+            String sep = ",";
+            if(pos == this.bookList.size()) { sep = ""; }
+            result += "{ slug: '" + book.getSlug() + "', title: '" + book.getTitle() + "'}" + sep;
             pos++;
         }
-        return result;
+        return "[" + result + "]";
     }
 
     public void loadBooksFromArchive() {

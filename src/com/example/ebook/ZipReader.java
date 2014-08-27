@@ -21,7 +21,7 @@ public class ZipReader {
         this.cacheDir = cache;
     }
 
-    public String extract() throws IOException {
+    public void extract() throws IOException {
         InputStream fileStream = this.getFileStream();
         ZipInputStream fileZipStream = this.getZipStream(fileStream);
 
@@ -33,8 +33,6 @@ public class ZipReader {
         while((entry = fileZipStream.getNextEntry()) != null) {
 
             String entryPath = this.cacheDir.getPath() + "/" + entry.getName();
-
-            if(isRootFolder) { rootFolderPath = entryPath; isRootFolder = false; }
 
             File entryFile = new File(entryPath);
             if(entry.isDirectory()) {
@@ -64,7 +62,7 @@ public class ZipReader {
                 }
 
             }
-        } return rootFolderPath;
+        }
     }
 
     public ZipInputStream getZipStream(InputStream fileStream) {

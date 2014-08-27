@@ -1,5 +1,8 @@
 package com.example.ebook;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.*;
 
 /**
@@ -9,17 +12,17 @@ public class ETextBook {
 
     private File sourcesFile;
     private File sourcesFolder;
-    private String title;
+    private String title = "default title";
     private String slug;
 
     public ETextBook(File file) {
         this.sourcesFile = file;
-        ZipReader zipReader = new ZipReader(sourcesFile.getPath(), new File(Config.getInstance().getParameter("cacheDir")));
+        String[] filePathParts = this.sourcesFile.getName().split("\\.");
+        this.slug = filePathParts[0];
+        this.sourcesFolder = new File(Config.getInstance().getParameter("cacheDir") + "/" + this.slug);
+        ZipReader zipReader = new ZipReader(sourcesFile.getPath(), new File(Config.getInstance().getParameter("cacheDir") + "/" + this.slug));
         try {
-            sourcesFolder = new File(zipReader.extract());
-            String sourcesFolderPath = sourcesFolder.getPath();
-            String[] sourcesFolderPathParts = sourcesFolderPath.split("/");
-            slug = sourcesFolderPathParts[sourcesFolderPathParts.length-1];
+            zipReader.extract();
         } catch(IOException e) {
             System.out.println("File not found");
         }
@@ -27,36 +30,21 @@ public class ETextBook {
     }
 
     private void loadBookInfo() {
-        File infoFile = this.getInfoFile();
+        File infoFile = new File(this.sourcesFolder.getPath() + "/book.info");
         try{
             BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(infoFile)));
-
+            StringBuilder stringBuilder = new StringBuilder();
             String readLine;
             while((readLine = reader.readLine()) != null) {
-                String[] lineParts = readLine.split("=\\+=");
-                String propertyName = lineParts[0].replaceAll("\\s", "");
-                if(propertyName.equals("title")) { this.title =  lineParts[1]; }
+                stringBuilder.append(readLine + "\n");
             }
-
+            try {
+                JSONObject infoJson = new JSONObject(stringBuilder.toString());
+                this.title = infoJson.getString("title");
+            } catch(JSONException e) {
+                System.out.println("Bad json info");
+            }
         } catch(IOException e) { System.out.println("Configuration file not found!"); }
-    }
-
-    public File getInfoFile() {
-        FilenameFilter bookInfoFilter = new FilenameFilter() {
-            @Override
-            public boolean accept(File file, String s) {
-                if(s.endsWith(".info")) {
-                    return true;
-                } else { return false; }
-            }
-        };
-
-        File[] bookInfoFiles = sourcesFolder.listFiles(bookInfoFilter);
-        try {
-            return bookInfoFiles[0];
-        } catch(Exception e) {
-            System.out.println("Info file is missing");
-        } return null;
     }
 
     public String getTitle() {
