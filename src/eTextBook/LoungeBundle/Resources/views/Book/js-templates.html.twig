@@ -106,17 +106,19 @@
 
     <div class="template" name="audioWidget">
         <audio-list></audio-list>
-        <audio-description>
-            <view-element></view-element>
-        </audio-description>
     </div>
 
     <div class="template" name="audioItem">
         <audio-item>
-            <video controls preload="none">
+            <audio controls preload="none">
                 <source src="<%= path %>" type="audio/mpeg">
-            </video>
+            </audio>
             <edit-element class="glyphicon glyphicon-remove"></edit-element>
+            <view-element class="description"></view-element>
+            <edit-element class="description">
+                <label>Описание аудио файла</label>
+                <textarea></textarea>
+            </edit-element>
         </audio-item>
     </div>
 

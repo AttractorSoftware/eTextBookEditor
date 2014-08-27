@@ -1,4 +1,4 @@
-var eTextBookWidgetAudio = eTextBookWidget.extend({
+    var eTextBookWidgetAudio = eTextBookWidget.extend({
     defaults: {
         slug: "audio"
         ,title: "Аудио записи"
@@ -7,26 +7,37 @@ var eTextBookWidgetAudio = eTextBookWidget.extend({
     }
 
     ,finishEdit: function() {
-        this.editCont.find('audio-description view-element').html(
-            App.eTextBookUtils.parseTextBlockToHtml(this.editCont.find('audio-description edit-element textarea').val())
-        );
+        for(var i = 0; i < this.editCont.find('audio-list audio-item').length; i++) {
+            var item = $(this.editCont.find('audio-list audio-item')[i]);
+            item.find('view-element.description').html(
+                App.eTextBookUtils.parseTextBlockToHtml(item.find('edit-element.description textarea').val())
+            );
+        }
     }
 
     ,startEdit: function() {
-        this.editCont.find('audio-description edit-element textarea').val(
-            App.eTextBookUtils.parseTextBlockFromHtml(this.editCont.find('audio-description view-element').html())
-        );
+        for(var i = 0; i < this.editCont.find('audio-list audio-item').length; i++) {
+            var item = $(this.editCont.find('audio-list audio-item')[i]);
+            item.find('edit-element.description textarea').val(
+                App.eTextBookUtils.parseTextBlockFromHtml(item.find('view-element.description').html())
+            );
+        }
     }
 
     ,activate: function() {
         var $this = this;
         this.editCont.find('audio-list').append('<edit-element class="add-audio"><span class="glyphicon glyphicon-music"></span>Добавить аудио запись</edit-element>');
-        this.editCont.find('audio-list audio-item').append('<edit-element class="glyphicon glyphicon-remove"></edit-element>');
-        this.editCont.find('audio-description').append('<edit-element><label>Вопросы или описание к аудио записям:</label><textarea></textarea></edit-element>');
+        this.editCont.find('audio-list audio-item').append(
+            '<edit-element class="glyphicon glyphicon-remove"></edit-element>' +
+            '<edit-element class="description">' +
+                '<label>Описание аудио файла</label>' +
+                '<textarea></textarea>' +
+            '</edit-element>'
+        );
         this.bindRemoveEvent();
         this.editCont.find('.add-audio').bind('click', function() {
             App.fileManager.pickFile(function(path) {
-                $this.editCont.find('audio-list').prepend(
+                $this.editCont.find('audio-list .add-audio').before(
                     App.eTextBookTemplate.getTemplateWithParams('audioItem')({ path: path })
                 );
                 $this.bindRemoveEvent();

@@ -678,7 +678,25 @@
           width: 100%;
           clear: left;
           margin: 0 0 15px 0;
-          video {
+          view-element.description {
+            float: left;
+            width: 100%;
+            margin: 10px 0 0 0;
+          }
+          edit-element.description {
+            float: left;
+            width: 100%;
+            margin: 10px 0 0 0;
+            label {
+              float: left;
+              width: 100%;
+            }
+            textarea {
+              float: left;
+              width: 100%;
+            }
+          }
+          audio {
             float: left;
             width: 90%;
             height: 35px;

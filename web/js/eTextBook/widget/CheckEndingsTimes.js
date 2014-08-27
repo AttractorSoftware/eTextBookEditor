@@ -185,6 +185,11 @@ var eTextBookWidgetCheckEndingsTimes = eTextBookWidget.extend({
     ,viewActivate: function() {
         var html = this.generateEndingsOptions(JSON.parse(this.contentContainer.find('.endings-list').html()));
         var items = this.contentContainer.find('.words .item');
+        this.contentContainer.find('.title').html(
+            '<div class="e-title">өткөн <br /> чак</div>' +
+            '<div class="e-title">учур <br /> чак</div>' +
+            '<div class="e-title">келер <br /> чак</div>'
+        );
         for(var i = 0; i < items.length; i++) {
             var item = $(items[i]);
             item.append('<select type="future" class="not-saved">' + html.future + '</select>');

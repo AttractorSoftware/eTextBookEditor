@@ -142,7 +142,7 @@ var eTextBookModule = Backbone.Model.extend({
 
         template.attr('id', App.eTextBookUtils.generateUID());
 
-        if(button.parent().prop('tagName') == 'BLOCK' || button.parent().prop('tagName') == 'RULE' || button.parent().prop('tagName') == 'HEADER') {
+        if(button.parent().prop('tagName') == 'BLOCK' || button.parent().prop('tagName') == 'RULE' || button.parent().hasClass('header')) {
             button.parent().after(template);
         } else {
             $(button).parent().find('blocks').prepend(template);
@@ -161,7 +161,7 @@ var eTextBookModule = Backbone.Model.extend({
 
         template.attr('id', App.eTextBookUtils.generateUID());
 
-        if(button.parent().prop('tagName') == 'BLOCK' || button.parent().prop('tagName') == 'RULE' || button.parent().prop('tagName') == 'HEADER') {
+        if(button.parent().prop('tagName') == 'BLOCK' || button.parent().prop('tagName') == 'RULE' || button.parent().hasClass('header')) {
             button.parent().after(template);
         } else {
             $(button).parent().find('blocks').prepend(template);
@@ -176,7 +176,7 @@ var eTextBookModule = Backbone.Model.extend({
 
         template.attr('id', App.eTextBookUtils.generateUID());
 
-        if(button.parent().prop('tagName') == 'BLOCK' || button.parent().prop('tagName') == 'RULE' || button.parent().prop('tagName') == 'HEADER') {
+        if(button.parent().prop('tagName') == 'BLOCK' || button.parent().prop('tagName') == 'RULE' || button.parent().hasClass('header')) {
             button.parent().after(template);
         } else {
             $(button).parent().find('blocks').prepend(template);
