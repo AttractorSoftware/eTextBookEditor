@@ -83,14 +83,15 @@ var NavigationController = function () {
         }
     }
 
-    if (!storage.local.chapters) {
-        $this.setLocalStorage();
-        $this.openLastReadingPlace();
-    }
-    else {
-        $this.openLastReadingPlace();
-    }
+//    if (!storage.local.chapters) {
+//        $this.setLocalStorage();
+//        $this.openLastReadingPlace();
+//    }
+//    else {
+//        $this.openLastReadingPlace();
+//    }
 
 
 };
+    
 App.NavigationController = new NavigationController();

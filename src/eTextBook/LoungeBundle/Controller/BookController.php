@@ -150,7 +150,6 @@ class BookController extends Controller
     {
         $file = $request->files->get('upload-file');
         $bookSlug = $request->get('slug');
-
         $fileType = explode('/', $file->getMimeType());
         $tmpDir = $this->container->getParameter('book_tmp_dir');
         $fileName = $file->getClientOriginalName();

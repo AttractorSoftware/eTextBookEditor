@@ -34,7 +34,6 @@ ObjectStorage.prototype = {
     _init: function () {
         var self = this;
         self._get('local');
-        self._get('session');
 
         (function callee() {
             self.timeoutId = setTimeout(function () {
@@ -45,10 +44,8 @@ ObjectStorage.prototype = {
 
         window.addEventListener('beforeunload', function () {
             self._save('local');
-            self._save('session');
         });
     },
     timeoutId: null,
-    local: {},
-    session: {}
+    local: {}
 };
