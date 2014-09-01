@@ -6,6 +6,15 @@ var eTextBookEditor = Backbone.Model.extend({
         this.display = this.get('cont').find('.display');
         this.root = this.getRoot();
         this.modules = [];
+        this.toolbarConfig = {
+            height: 300
+            ,toolbar: [
+                ['style', ['style', 'bold', 'italic', 'underline', 'strikethrough']]
+                ,['layout', ['ol', 'ul', 'paragraph', 'heihgt']]
+                ,['insert', ['table']]
+                ,['misc', ['fullscreen', 'undo', 'redo', 'codeview']]
+            ]
+        };
         this.clearViewElements(this.desktop);
         this.updateDisplay(true);
         this.synchronizeScrolls();

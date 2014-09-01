@@ -196,6 +196,8 @@ html, body {
                 float: left;
                 width: 100%;
                 margin: 10px 0 0 0; }
+                .e-text-book-editor .desktop e-text-book module blocks block block-content widget widget-content label, .e-text-book-editor .desktop e-text-book module blocks rule block-content widget widget-content label, .e-text-book-editor .desktop e-text-book module blocks .header block-content widget widget-content label {
+                  float: left; }
           .e-text-book-editor .desktop e-text-book module blocks block[editable="1"] edit-element, .e-text-book-editor .desktop e-text-book module blocks block[editable="1"] control-panel, .e-text-book-editor .desktop e-text-book module blocks rule[editable="1"] edit-element, .e-text-book-editor .desktop e-text-book module blocks rule[editable="1"] control-panel, .e-text-book-editor .desktop e-text-book module blocks .header[editable="1"] edit-element, .e-text-book-editor .desktop e-text-book module blocks .header[editable="1"] control-panel {
             display: block; }
           .e-text-book-editor .desktop e-text-book module blocks block[editable="1"] view-element, .e-text-book-editor .desktop e-text-book module blocks rule[editable="1"] view-element, .e-text-book-editor .desktop e-text-book module blocks .header[editable="1"] view-element {
@@ -748,6 +750,10 @@ html, body {
     background-size: contain;
     cursor: pointer; }
 
+.note-editor {
+  float: left;
+  width: 100%; }
+
 e-text-book-editor .display e-text-book, .e-text-book-viewer e-text-book {
   float: left;
   width: 100%; }
@@ -922,8 +928,7 @@ image-description {
       margin: 10px 0 0 0; }
     .e-text-book-viewer audio-list audio-item audio {
       float: left;
-      width: 90%;
-      height: 70px; }
+      width: 90%; }
 
 .e-text-book-viewer video-list {
   float: left;
@@ -1239,5 +1244,3 @@ image-description {
       text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5); }
       .html5-controls .full-screen .glyphicon:hover {
         color: #fff; }
-
-/*# sourceMappingURL=style.css.map */

@@ -44,7 +44,6 @@ var NavigationController = function () {
         $('.book').toggleClass('with-summary');
     });
 
-
     $('.exercise-link').click(function () {
         var self = $(this);
         var link = self.closest('.chapter').children('.chapter-link').attr('href');
@@ -90,4 +89,5 @@ var NavigationController = function () {
     $this.openLastReadingPlace();
 
 };
+
 App.NavigationController = new NavigationController();

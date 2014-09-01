@@ -10,9 +10,10 @@ $(document).ready(function () {
 		  };
 		  if(event.altKey && event.ctrlKey) {
 				char = charTable[event.keyCode];
+                if(event.shiftKey) char = char.toUpperCase();
+                setCharacter(char);
 		  }
-		  if(event.shiftKey) char = char.toUpperCase();
-		  setCharacter(char);
+
 	 }
 
 	 function setCharacter(character) {

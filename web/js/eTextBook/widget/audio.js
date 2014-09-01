@@ -10,7 +10,7 @@
         for(var i = 0; i < this.editCont.find('audio-list audio-item').length; i++) {
             var item = $(this.editCont.find('audio-list audio-item')[i]);
             item.find('view-element.description').html(
-                App.eTextBookUtils.parseTextBlockToHtml(item.find('edit-element.description textarea').val())
+                item.find('edit-element.description textarea').code(                )
             );
         }
     }
@@ -18,8 +18,8 @@
     ,startEdit: function() {
         for(var i = 0; i < this.editCont.find('audio-list audio-item').length; i++) {
             var item = $(this.editCont.find('audio-list audio-item')[i]);
-            item.find('edit-element.description textarea').val(
-                App.eTextBookUtils.parseTextBlockFromHtml(item.find('view-element.description').html())
+            item.find('edit-element.description textarea').code(
+                item.find('view-element.description').html()
             );
         }
     }
@@ -34,6 +34,7 @@
                 '<textarea></textarea>' +
             '</edit-element>'
         );
+        this.editCont.find('textarea').summernote(App.eTextBookEditor.toolbarConfig);
         this.bindRemoveEvent();
         this.editCont.find('.add-audio').bind('click', function() {
             App.fileManager.pickFile(function(path) {

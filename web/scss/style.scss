@@ -248,6 +248,9 @@ html, body {
                   float: left;
                   width: 100%;
                   margin: 10px 0 0 0;
+                  label {
+                    float: left;
+                  }
                 }
               }
             }
@@ -997,6 +1000,11 @@ html, body {
       cursor: pointer;
     }
   }
+}
+
+.note-editor {
+  float: left;
+  width: 100%;
 }
 
 @import '../book-template/scss/style';
