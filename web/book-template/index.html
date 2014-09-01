@@ -5,11 +5,6 @@
     <meta charset="utf-8"/>
     <title>-- title --</title>
     <link rel="stylesheet" type="text/css" href="css/main-style.min.css"/>
-    <script>
-        function resizeIframe(obj) {
-            obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
-        }
-    </script>
 </head>
 <body>
 <div class="book">
@@ -29,9 +24,7 @@
     </div>
 
     <div id="book-body" class="book-body display container">
-        <iframe id="book" name="book" src="" frameborder="0" width="100%" onload="resizeIframe(this);"
-                scrolling="no"></iframe>
-
+        <iframe id="book" name="book" src="" frameborder="0" width="100%" scrolling="no"></iframe>
     </div>
 
 </div>

@@ -57,22 +57,10 @@ class UpdateETBFile
         $bookInfo = $this->getBookInfo();
         $bookInfo->modules[] = array('title' => $moduleTitle, 'slug' => $moduleSlug);
         $this->setBookInfo($bookInfo);
-
         $this->createModuleFile($moduleTitle, $moduleSlug);
         $this->updateBookSummary($moduleTitle, $moduleSlug);
         $this->pack();
-
         return $moduleSlug;
-    }
-
-    public function getBookInfo()
-    {
-        return json_decode(file_get_contents($this->tmpDir . $this->book->getSlug() . '/book.info'));
-    }
-
-    public function setBookInfo($data)
-    {
-        file_put_contents($this->tmpDir . $this->book->getSlug() . '/book.info', json_encode($data));
     }
 
     private function createModuleFile($moduleTitle, $moduleSlug)
@@ -84,6 +72,17 @@ class UpdateETBFile
         $moduleContent->setModuleTitle($moduleTitle);
         $moduleContent->save($moduleFilePath);
         $moduleContent->destroy();
+    }
+
+
+    public function getBookInfo()
+    {
+        return json_decode(file_get_contents($this->tmpDir . $this->book->getSlug() . '/book.info'));
+    }
+
+    public function setBookInfo($data)
+    {
+        file_put_contents($this->tmpDir . $this->book->getSlug() . '/book.info', json_encode($data));
     }
 
     private function updateBookSummary($moduleTitle, $moduleSlug)
@@ -147,6 +146,16 @@ class UpdateETBFile
         $info->isbn = $this->book->getIsbn();
         file_put_contents($this->bookTmpDir . 'book.info', json_encode($info));
     }
+
+
+    public function copyTemplateFiles()
+    {
+        copy($this->templateDir . "/css/main-style.min.css", $this->bookTmpDir . 'css/main-style.min.css');
+        copy($this->templateDir . "/js/script.min.js", $this->bookTmpDir . 'js/script.min.js');
+        $this->fileManager->copyFilesFromDirectory($this->templateDir . "/fonts", $this->bookTmpDir . 'fonts');
+        $this->fileManager->copyFilesFromDirectory($this->templateDir . "/img", $this->bookTmpDir . 'img');
+    }
+
 
     public function pack()
     {

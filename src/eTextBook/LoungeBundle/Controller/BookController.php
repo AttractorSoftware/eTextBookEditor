@@ -138,6 +138,7 @@ class BookController extends Controller
         $book = new eBook();
         $book->setSlug($bookName);
         $updater->setBook($book);
+        $updater->copyTemplateFiles();
         $updater->pack();
 
         return new JsonResponse(array('status' => 'success'));

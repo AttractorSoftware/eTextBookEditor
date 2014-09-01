@@ -1,3 +1,7 @@
+html, body {
+  min-height: 100%
+}
+
 .e-text-book-editor {
   float: left;
   width: 100%;
@@ -381,8 +385,12 @@
             width: 55%;
             .item {
               edit-element {
-                input { width: 55%; }
-                select { width: 15%; }
+                input {
+                  width: 55%;
+                }
+                select {
+                  width: 15%;
+                }
               }
             }
           }
@@ -465,7 +473,9 @@
           }
         }
         .add-ending {
-          input { width: 60%; }
+          input {
+            width: 60%;
+          }
         }
       }
 
@@ -619,7 +629,9 @@
             font-size: 12px;
             text-align: center;
           }
-          .glyphicon { margin: 15px 0 0 0; }
+          .glyphicon {
+            margin: 15px 0 0 0;
+          }
         }
       }
       video-list {
@@ -914,7 +926,9 @@
     color: #fff;
     margin: 0 0 0 23px;
   }
-  a.view-link { color: #fff; }
+  a.view-link {
+    color: #fff;
+  }
 }
 
 .breadcrumb {
