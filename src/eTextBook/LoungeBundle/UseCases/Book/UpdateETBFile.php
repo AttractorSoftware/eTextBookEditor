@@ -14,8 +14,10 @@ class UpdateETBFile
     public function __construct()
     {
         global $kernel;
+        $this->booksDir = $kernel->getContainer()->getParameter('books_dir');
         $this->tmpDir = $kernel->getContainer()->getParameter('book_tmp_dir');
         $this->templateDir = $kernel->getContainer()->getParameter('book_template_dir');
+        $this->fileManager = $kernel->getContainer()->get('fileManager');
     }
 
     public function setBook(Book $book)
@@ -159,14 +161,11 @@ class UpdateETBFile
 
     public function pack()
     {
-        global $kernel;
-        $booksDir = $kernel->getContainer()->getParameter('books_dir');
-        $fileManager = $kernel->getContainer()->get('fileManager');
-        $bookFile = $booksDir . $this->book->getSlug() . '.etb';
+        $bookFile = $this->booksDir . $this->book->getSlug() . '.etb';
         if (is_file($bookFile)) {
             unlink($bookFile);
         }
-        $fileManager->zip($this->bookTmpDir, $bookFile);
+        $this->fileManager->zip($this->bookTmpDir, $bookFile);
     }
 
 }
