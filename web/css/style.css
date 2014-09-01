@@ -1,5 +1,6 @@
 html, body {
-  min-height: 100%; }
+  min-height: 100%;
+  overflow-x: hidden; }
 
 .e-text-book-editor {
   float: left;
@@ -1156,6 +1157,9 @@ image-description {
 
 .book.with-summary .book-summary {
   left: 0; }
+.book.with-summary .book-body {
+  left: 250px;
+  width: calc(100% - 250px); }
 
 .e-text-book-viewer .block.header {
   float: left;

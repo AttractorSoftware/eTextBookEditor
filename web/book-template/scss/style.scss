@@ -542,6 +542,10 @@ image-description {
   .book-summary {
     left: 0;
   }
+  .book-body {
+    left: 250px;
+    width: calc(100% - 250px);
+  }
 }
 
 .e-text-book-viewer {
