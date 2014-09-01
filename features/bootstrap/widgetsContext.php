@@ -289,7 +289,8 @@ class WidgetsContext extends eTextBookContext {
         $this->findCss('.desktop .checkbox-list .add-checkbox input')->setValue($word[0]);
         $this->findCss('.desktop .checkbox-list .add-checkbox .add')->click();
         if($word[1] == '1') {
-            end($this->findAllCss('.checkbox-list .checkboxes .item input'))->click();
+            $inputs = $this->findAllCss('.checkbox-list .checkboxes .item input');
+            end($inputs)->click();
         }
     }
 
