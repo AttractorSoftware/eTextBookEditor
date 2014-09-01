@@ -54,6 +54,7 @@ var App = function() {
         }
         $('.storageList .book').click(function() {
             Android.readBook($(this).attr('href'));
+            return false;
         });
     }
 
@@ -102,9 +103,9 @@ var App = function() {
         for(var i in this.screens) {
             this.screens[i].hide();
         }
-    }
+    };
 
     this.init();
-}
+};
 
 $(function(){ app = new App(); });

@@ -26,6 +26,7 @@ public class WebAppInterface {
 
     public void readBook(String bookSlug) {
         webView.loadUrl("file:///sdcard/eTextBook/cache/" + bookSlug + "/index.html");
+        webView.getSettings().setDomStorageEnabled(true);
     }
 
 }
