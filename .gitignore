@@ -17,7 +17,6 @@
 /web/books/*
 /web/tmp/*
 !/web/tmp/script/.gitkeep
-/web/fonts
 
 /web/css/main-style.css
 /web/css/main-style.min.css
