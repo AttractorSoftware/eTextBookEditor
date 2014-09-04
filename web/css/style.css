@@ -366,6 +366,12 @@ html, body {
         height: 30px;
         clear: both;
         margin-bottom: 10px; }
+        .e-text-book-editor .desktop e-text-book .test-widget .question h5 {
+          clear: both;
+          float: left;
+          padding: 0;
+          margin: 6px 10px 6px 0;
+          display: none; }
       .e-text-book-editor .desktop e-text-book .test-widget .choices {
         width: 100%;
         display: table; }
@@ -1163,8 +1169,7 @@ image-description {
 .book.with-summary .book-summary {
   left: 0; }
 .book.with-summary .book-body {
-  left: 250px;
-  width: calc(100% - 250px); }
+  left: 250px; }
 
 .e-text-book-viewer .block.header {
   float: left;

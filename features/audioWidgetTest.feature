@@ -1,3 +1,4 @@
+#noinspection CucumberUndefinedStep
 Feature: Добавление блока с виджетом аудио
 
   Scenario: Создаем новый учебник и модуль

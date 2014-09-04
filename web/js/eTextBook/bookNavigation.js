@@ -1,5 +1,5 @@
 var NavigationController = function () {
-    this.iframe = $('#book');
+    this.bookBody = $("#book-body");
     this.bookName = $('.book-name').html();
 
     var $this = this, activeChapter, activeChapterIndex, scrollPos,
@@ -17,23 +17,21 @@ var NavigationController = function () {
     };
 
     this.openLastReadingPlace = function () {
-        $this.iframe.attr('src', storage.local.chapters[storage.local.activeChapter]);
+        var link = storage.local.chapters[storage.local.activeChapter];
+        this.bookBody.attr('data-url', link);
+        this.bookBody.load(link + ' e-text-book', this.onAjaxLoadComplete());
     };
 
-    this.resizeIframeByContent = function (iframe) {
-        iframe.style.height = iframe.contentWindow.document.body.offsetHeight + 'px';
-    };
-
-    this.iframe.on('load', function () {
-        activeChapter = $this.iframe.attr('src');
+    this.onAjaxLoadComplete = function () {
+        activeChapter = $this.bookBody.attr('data-url');
+        console.log(activeChapter);
         activeChapterIndex = storage.local.chapters.indexOf(activeChapter);
         storage.local.activeChapter = activeChapterIndex;
 
-        $this.resizeIframeByContent(this);
         $('.active').removeClass('active');
         $('a[href="' + activeChapter + '"]').closest('.chapter').addClass('active');
         window.scrollTo(0, storage.local.scrollPositions[activeChapterIndex]);
-    });
+    };
 
     $(window).scroll(function () {
         scrollPos = getScrollTop();
@@ -46,27 +44,23 @@ var NavigationController = function () {
 
     $('.exercise-link').click(function () {
         var self = $(this);
+        var hash = self.attr('href');
         var link = self.closest('.chapter').children('.chapter-link').attr('href');
-        if ($this.iframe.attr('src') !== link) {
-            $this.iframe.attr('src', link);
-            document.getElementsByTagName('iframe')[0].onload = function () {
-                scrollToExercise();
-            };
-        } else {
-            scrollToExercise();
+        if ($this.bookBody.attr('data-url') !== link) {
+            $this.bookBody.attr('data-url', link);
+            $this.bookBody.load(link + ' e-text-book', function () {
+                $this.onAjaxLoadComplete();
+                window.location.hash = '#' + hash;
+            });
         }
-
-        function scrollToExercise() {
-            var $tr = $this.iframe.contents().find("#" + self.attr('href'));
-            if (typeof ($tr.offset()) != 'undefined') window.scrollTo(0, $tr.offset().top);
-        }
-
+        window.location.hash = '#' + hash;
         return false;
     });
     $('.chapter-link').click(function () {
         var link = $(this).attr('href');
-        if ($this.iframe.attr('src') !== link) {
-            $this.iframe.attr('src', link);
+        if ($this.bookBody.attr('data-url') !== link) {
+            $this.bookBody.attr('data-url', link);
+            $this.bookBody.load(link + ' e-text-book', $this.onAjaxLoadComplete());
         }
         return false;
     });

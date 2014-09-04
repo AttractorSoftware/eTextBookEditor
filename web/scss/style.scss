@@ -505,6 +505,13 @@ html, body {
           height: 30px;
           clear: both;
           margin-bottom: 10px;
+          h5 {
+            clear: both;
+            float: left;
+            padding: 0;
+            margin: 6px 10px 6px 0;
+            display:none;
+          }
         }
         .choices {
           width: 100%;

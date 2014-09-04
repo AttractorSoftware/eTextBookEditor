@@ -1,3 +1,4 @@
+#noinspection CucumberUndefinedStep
 Feature: Добавление нового блока
 
   Scenario: Создаем новый блок, проверяем результат и удаляем его
