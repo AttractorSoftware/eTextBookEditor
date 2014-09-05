@@ -1158,6 +1158,10 @@ image-description {
   background: #fff;
   -webkit-transition: all .5s ease;
   transition: all .5s ease; }
+  .book .book-body iframe {
+    float: left;
+    width: 100%;
+    height: 100% !important; }
   .book .book-body e-text-book {
     max-width: 800px;
     margin: 0 auto;
@@ -1253,5 +1257,3 @@ image-description {
       text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5); }
       .html5-controls .full-screen .glyphicon:hover {
         color: #fff; }
-
-/*# sourceMappingURL=style.css.map */

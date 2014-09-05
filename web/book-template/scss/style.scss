@@ -526,6 +526,12 @@ image-description {
     -webkit-transition: all .5s ease;
     transition: all .5s ease;
 
+    iframe {
+      float: left;
+      width: 100%;
+      height: 100% !important;
+    }
+
     e-text-book {
       max-width: 800px;
       margin: 0 auto;

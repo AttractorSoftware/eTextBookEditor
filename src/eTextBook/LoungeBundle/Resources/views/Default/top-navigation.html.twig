@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default main-menu" role="navigation">
+<nav class="navbar navbar-default main-menu" role="navigation" data-anijs="if: load, on: window, do: rollIn animated, before: scrollReveal, after: removeAnim">
     <div class="container">
         <ul class="nav navbar-nav">
             <li {% if app.request.attributes.get('_route') == 'home-page' %} class="active" {% endif %}>

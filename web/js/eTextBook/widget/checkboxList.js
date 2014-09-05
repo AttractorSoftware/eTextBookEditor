@@ -66,15 +66,18 @@ var eTextBookWidgetCheckboxList = eTextBookWidget.extend({
     }
 
     ,viewActivate: function() {
+        this.contentContainer.find('.checkboxes .item input').prop('checked', false);
         this.contentContainer.find('.checkboxes .item input').bind('click', function(){
-           must = $(this).parent().hasClass('checked');
+           var must = $(this).parent().hasClass('checked');
            if($(this).prop('checked') && must){
                $(this).parent().addClass('success');
+               App.animate($(this).parent(), 'pulse');
            } else {
                if($(this).prop('checked') && !must) {
                    $(this).parent().addClass('failed');
+                   App.animate($(this).parent(), 'tada');
                } else {
-                   $(this).parent().removeClass('failed, success');
+                   $(this).parent().removeClass('success').removeClass('failed');
                }
            }
         });

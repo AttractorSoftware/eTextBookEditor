@@ -71,9 +71,13 @@ var eTextBookWidgetTranslateComparative = eTextBookWidget.extend({
                 if(selected.attr('answer-id') == $(this).attr('answer-id')) {
                     selected.addClass('success').removeClass('selected');
                     $(this).addClass('success');
+                    App.animate(selected, 'pulse');
+                    App.animate(this, 'pulse');
                 } else {
                     selected.addClass('failed').removeClass('selected');
                     $(this).addClass('failed');
+                    App.animate(selected, 'tada');
+                    App.animate(this, 'tada');
                 }
             }
         });

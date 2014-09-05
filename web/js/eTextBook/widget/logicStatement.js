@@ -75,13 +75,14 @@ var eTextBookWidgetLogicStatement = eTextBookWidget.extend({
 				  '<option value="1">туура</option>' +
 				  '</select>');
 		  this.contentContainer.find('item select').bind('change', function () {
-
+                var $this = this;
 				var selectedValue = $(this).val();
 				var currentValue = $(this).parent().attr('value');
 
 				if(selectedValue != '' && selectedValue != currentValue) {
 					 $(this).parent().addClass('failed');
 					 $(this).parent().removeClass('success');
+                    App.animate($(this).parent(), 'tada');
 				} else {
 					 if(selectedValue == '') {
 						  $(this).parent().removeClass('failed');
@@ -89,6 +90,7 @@ var eTextBookWidgetLogicStatement = eTextBookWidget.extend({
 					 } else {
 						  $(this).parent().removeClass('failed');
 						  $(this).parent().addClass('success');
+                         App.animate($(this).parent(), 'pulse');
 					 }
 				}
 		  });

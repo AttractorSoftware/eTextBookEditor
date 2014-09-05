@@ -15,7 +15,7 @@
     <ul class="list-unstyled book-list">
         {% for book in books %}
             <li id="{{ book.slug }}" class="item">
-                <div class="cover" style="background-image: url(/tmp/{{ book.slug }}/content/cover.png)"></div>
+                <div class="cover" style="background-image: url(/tmp/{{ book.slug }}/content/cover.png)" data-anijs="if: scroll, on: window, do: flipInY animated, before: scrollReveal, after: removeAnim"></div>
                 <a class="title" href="{{ path('book-view', {'slug': book.slug, 'module': ' ' })  }}">
                     {{ book.title }}
                 </a>

@@ -91,6 +91,7 @@ var eTextBookEditor = Backbone.Model.extend({
 
         book = this.clearEditElements(book);
         book = this.setIndexes(book);
+        book = this.setAnimation(book);
 
         this.display.html('');
         this.display.append(book);
@@ -160,6 +161,27 @@ var eTextBookEditor = Backbone.Model.extend({
             }
         }
         return html;
+    }
+
+    ,setAnimation: function(html) {
+        var blocks = html.find('rule, block, div.header.block');
+        for(var i = 0; i < blocks.length; i++) {
+            var block = $(blocks[i]);
+            switch(block.prop('localName')) {
+                case "block":  {
+                    block.attr('data-anijs', "if: scroll, on: window, do: flipInX animated, before: scrollReveal");
+                    break;
+                }
+                case "rule": {
+                    block.attr('data-anijs', "if: scroll, on: window, do: rollIn animated, before: scrollReveal");
+                    break;
+                }
+                default: {
+                    block.attr('data-anijs', "if: scroll, on: window, do: bounceInLeft animated, before: scrollReveal");
+                    break;
+                }
+            }
+        } return html;
     }
 
 });
