@@ -19,19 +19,31 @@ var NavigationController = function () {
     this.openLastReadingPlace = function () {
         var link = storage.local.chapters[storage.local.activeChapter];
         this.bookBody.attr('data-url', link);
-        this.bookBody.load(link + ' e-text-book', this.onAjaxLoadComplete());
+        this.bookBody.load(link + ' e-text-book', this.onAjaxLoadComplete);
     };
 
     this.onAjaxLoadComplete = function () {
         activeChapter = $this.bookBody.attr('data-url');
-        console.log(activeChapter);
         activeChapterIndex = storage.local.chapters.indexOf(activeChapter);
         storage.local.activeChapter = activeChapterIndex;
 
         $('.active').removeClass('active');
         $('a[href="' + activeChapter + '"]').closest('.chapter').addClass('active');
         window.scrollTo(0, storage.local.scrollPositions[activeChapterIndex]);
+        $this.activateWidgets();
+        console.debug('aa');
+        AniJS.run();
     };
+
+    this.activateWidgets = function() {
+        for(var i = 0; i < $('body').find('widget').length; i++) {
+            var widgetCont = $($('body').find('widget')[i]);
+            var widget = App.eTextBookWidgetRepository.getWidgetBySlug(widgetCont.attr('widget-slug'));
+            widget = new widget();
+            widget.contentContainer = widgetCont.find('widget-content');
+            widget.viewActivate();
+        }
+    }
 
     $(window).scroll(function () {
         scrollPos = getScrollTop();
@@ -60,7 +72,7 @@ var NavigationController = function () {
         var link = $(this).attr('href');
         if ($this.bookBody.attr('data-url') !== link) {
             $this.bookBody.attr('data-url', link);
-            $this.bookBody.load(link + ' e-text-book', $this.onAjaxLoadComplete());
+            $this.bookBody.load(link + ' e-text-book', $this.onAjaxLoadComplete);
         }
         return false;
     });
