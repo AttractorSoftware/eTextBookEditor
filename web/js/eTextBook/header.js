@@ -31,17 +31,13 @@ var eTextBookHeader = Backbone.Model.extend({
     ,startEdit: function() {
         this.get('cont').attr('editable', 1);
         this.editable = true;
-        for(var i in this.editElements) {
-            this.editElements[i].startEdit();
-        }
+        this.cont.find('.header-title textarea').code(this.get('cont').find('view-element').html());
     }
 
     ,finishEdit: function() {
         this.get('cont').attr('editable', 0);
         this.editable = false;
-        for(var i = 0 in this.editElements) {
-            this.editElements[i].finishEdit();
-        }
+        this.get('cont').find('view-element').html(this.cont.find('.header-title textarea').code());
         App.eTextBookEditor.updateDisplay();
     }
 
@@ -49,6 +45,7 @@ var eTextBookHeader = Backbone.Model.extend({
         this.appendEditElement('title', new inlineEditTextarea({
             cont: this.cont.find('.header-title')
         }));
+        this.cont.find('.header-title textarea').summernote(App.eTextBookEditor.toolbarConfig);
     }
 
     ,appendEditElement: function(title, element) {

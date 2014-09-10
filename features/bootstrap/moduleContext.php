@@ -302,7 +302,7 @@ class ModuleContext extends eTextBookContext
         $addRuleLink = $addBlockButton->find('css', '.add-rule');
         $addRuleLink->click();
         $rule = $desktop->find('css', 'rule');
-        $ruleTextInput = $rule->find('css', 'rule-title textarea');
+        $ruleTextInput = $rule->find('css', 'rule-title .note-editable');
         $ruleTextInput->setValue($text);
         $editButton = $rule->find('css', 'control-panel item.edit');
         $editButton->click();
@@ -321,7 +321,7 @@ class ModuleContext extends eTextBookContext
 
         $ruleText = $rule->find('css', 'rule-title view-element');
 
-        assertEquals($ruleText->getHTML(), $text);
+        assertEquals($ruleText->getText(), $text);
     }
 
     /**

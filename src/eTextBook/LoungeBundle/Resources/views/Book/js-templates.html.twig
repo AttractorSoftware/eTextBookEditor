@@ -271,7 +271,7 @@
 <div class="template" name="testChoicesList" ng-app="" ng-init="answers = []">
     <label ng-repeat="answer in answers"
            ng-class="{'invalid': answer.checked && !answer.correct, 'valid': answer.checked && answer.correct}">
-        <input type="radio" ng-model="answer.checked" name="test-widget">{{ answer.title }}
+        <input type="radio" ng-model="answer.checked" name="test-widget">
         <br>
     </label>
 </div>

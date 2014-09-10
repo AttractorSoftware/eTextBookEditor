@@ -5,7 +5,6 @@
 /app/logs/*
 !app/cache/.gitkeep
 !app/logs/.gitkeep
-/build/
 /vendor/
 /bin/
 /composer.phar
@@ -16,7 +15,6 @@
 
 /web/books/*
 /web/tmp/*
-!/web/tmp/script/.gitkeep
 
 /web/css/main-style.css
 /web/css/main-style.min.css
@@ -27,3 +25,5 @@
 /web/js/script.min.js
 /web/book-template/js/script.js
 /web/book-template/js/script.min.js
+
+/web/version.html

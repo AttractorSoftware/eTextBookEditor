@@ -552,13 +552,13 @@ image-description {
 
 .e-text-book-viewer {
   .block.header {
-    float: left;
-    width: 100%;
-    margin: 0 0 20px;
-    font-size: 20px;
-    text-align: center;
-    font-weight: bold;
-    color: #555;
+    h1 {
+      margin: 0 0 20px;
+      font-size: 20px;
+      text-align: center;
+      font-weight: bold;
+      color: #555;
+    }
   }
 }
 
