@@ -354,43 +354,6 @@ html, body {
         margin: 7px 0 0 5px; }
       .e-text-book-editor .desktop e-text-book .check-endings .add-ending input {
         width: 60%; }
-    .e-text-book-editor .desktop e-text-book .test-widget {
-      float: left;
-      width: 100%; }
-      .e-text-book-editor .desktop e-text-book .test-widget .glyphicon {
-        float: left;
-        width: 17px;
-        padding: 5px 2px;
-        height: inherit;
-        cursor: pointer; }
-      .e-text-book-editor .desktop e-text-book .test-widget edit-element input[type=text] {
-        float: left;
-        width: calc(100% - 20px); }
-      .e-text-book-editor .desktop e-text-book .test-widget .question {
-        float: none;
-        width: 100%;
-        height: 30px;
-        clear: both;
-        margin-bottom: 10px; }
-        .e-text-book-editor .desktop e-text-book .test-widget .question h5 {
-          clear: both;
-          float: left;
-          padding: 0;
-          margin: 6px 10px 6px 0;
-          display: none; }
-      .e-text-book-editor .desktop e-text-book .test-widget .choices {
-        width: 100%;
-        display: table; }
-        .e-text-book-editor .desktop e-text-book .test-widget .choices label {
-          width: 100% !important;
-          margin: 10px 0 2px; }
-        .e-text-book-editor .desktop e-text-book .test-widget .choices edit-element {
-          float: left;
-          max-width: 100%;
-          min-width: 240px;
-          margin-bottom: 10px; }
-          .e-text-book-editor .desktop e-text-book .test-widget .choices edit-element input[type="text"] {
-            width: calc(100% - 17px) !important; }
     .e-text-book-editor .desktop e-text-book translate-comparative {
       float: left;
       width: 100%; }
@@ -669,6 +632,70 @@ html, body {
         float: left;
         width: 100%;
         padding: 10px 10% 0 10%; }
+
+.test-widget {
+  float: left;
+  width: 100%; }
+  .test-widget .glyphicon {
+    float: left;
+    width: 17px;
+    padding: 5px;
+    height: inherit;
+    cursor: pointer; }
+  .test-widget edit-element input[type=text] {
+    float: left;
+    width: calc(100% - 25px) !important; }
+  .test-widget .question {
+    float: none;
+    width: 100%;
+    height: 30px;
+    clear: both;
+    margin-bottom: 10px; }
+    .test-widget .question h5 {
+      clear: both;
+      float: left;
+      padding: 0;
+      margin: 6px 10px 6px 0;
+      display: none; }
+  .test-widget .choices {
+    width: 100%;
+    display: table; }
+    .test-widget .choices label {
+      width: 100%;
+      margin: 10px 0 2px; }
+    .test-widget .choices edit-element {
+      float: left;
+      max-width: 100%;
+      min-width: 240px;
+      margin-bottom: 10px; }
+      .test-widget .choices edit-element input[type="text"] {
+        width: calc(100% - 17px) !important; }
+  .test-widget .choice {
+    min-width: 50%;
+    float: left;
+    min-height: 30px; }
+    .test-widget .choice label {
+      width: initial;
+      float: left;
+      display: inline-block !important;
+      margin: 0 0 0 5px;
+      padding: 3px 1px;
+      font-weight: normal; }
+    .test-widget .choice input[type=radio] {
+      float: left;
+      margin: 7px 0; }
+  .test-widget .choices-list {
+    width: 100%;
+    display: table; }
+  .test-widget view-element {
+    display: table;
+    padding: 5px 10px; }
+    .test-widget view-element .glyphicon {
+      display: none; }
+    .test-widget view-element.success {
+      background: #89d489; }
+    .test-widget view-element.failed {
+      background: #e47A75; }
 
 .book-list a {
   color: #333;
@@ -1259,3 +1286,5 @@ image-description {
       text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5); }
       .html5-controls .full-screen .glyphicon:hover {
         color: #fff; }
+
+/*# sourceMappingURL=style.css.map */

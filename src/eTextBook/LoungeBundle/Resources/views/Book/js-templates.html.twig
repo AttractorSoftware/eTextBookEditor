@@ -234,55 +234,43 @@
 </div>
 
 <div class="template" name="testWidgetTask">
-    <div class="task">
-        <edit-element class="add-question">
-            <div class="question">
-                <label>Вопрос: </label>
-                <input placeholder="Вопрос" type="text">
-                <div class="add glyphicon glyphicon-plus"></div>
-            </div>
-            <div class="choices">
-                <label>Варианты ответов: </label>
-            </div>
-        </edit-element>
+    <div class="task delete-point">
+        <view-element data-right-answer-ID="">
+            <h5></h5>
+        </view-element>
     </div>
 </div>
 
-<div class="template" name="addChoice">
-    <edit-element class="add-choice">
-        <input placeholder="Вариант ответа" type="text">
+<div class="template" name="testWidgetEditElement">
+    <edit-element class="add-question">
+        <div class="question">
+            <label>Вопрос: </label>
+            <input placeholder="Вопрос" type="text">
 
-        <div class="add glyphicon glyphicon-plus"></div>
+            <div class="add glyphicon glyphicon-plus"></div>
+        </div>
+        <div class="choices">
+            <label>Варианты ответов: </label>
+
+            <form action="" class="choices-list">
+            </form>
+            <div class="add-choice">
+                <input placeholder="Вариант ответа" type="text">
+
+                <div class="add glyphicon glyphicon-plus"></div>
+            </div>
+        </div>
     </edit-element>
 </div>
 
-<div class="template" name="emptyQuestion">
-        <label>Вопрос: </label>
-        <input placeholder="Вопрос" type="text">
-        <div class="add glyphicon glyphicon-plus"></div>
-</div>
+<div class="template" name="choiceRadioButton">
+    <div class="choice delete-point">
+        <input type="radio" class="choiceRadioButton" name="answer"><label for="choice"></label>
 
-<div class="template" name="editedQuestion">
-        <label>Вопрос: </label>
-        <h5></h5>
-        <div class="glyphicon add-question glyphicon-remove"></div>
-</div>
-
-<div class="template" name="testChoicesList" ng-app="" ng-init="answers = []">
-    <label ng-repeat="answer in answers"
-           ng-class="{'invalid': answer.checked && !answer.correct, 'valid': answer.checked && answer.correct}">
-        <input type="radio" ng-model="answer.checked" name="test-widget">
-        <br>
-    </label>
-</div>
-
-<div class="template" name="addKyrgyzChars">
-    <div class="kyrgyz-chars">
-        <span title="Ctrl+Alt+н">ң</span>
-        <span title="Ctrl+Alt+о">ө</span>
-        <span title="Ctrl+Alt+у">ү</span>
+        <div class="glyphicon glyphicon-remove"></div>
     </div>
 </div>
+
 
 <div class="template" name="checkEndingsTimesWidget">
     <div class="check-endings times">

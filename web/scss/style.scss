@@ -491,54 +491,6 @@ html, body {
         }
       }
 
-      .test-widget {
-        float: left;
-        width: 100%;
-        .glyphicon {
-          float: left;
-          width: 17px;
-          padding: 5px 2px;
-          height: inherit;
-          cursor: pointer;
-        }
-        edit-element {
-          input[type=text] {
-            float: left;
-            width: calc(100% - 20px);
-          }
-        }
-        .question {
-          float: none;
-          width: 100%;
-          height: 30px;
-          clear: both;
-          margin-bottom: 10px;
-          h5 {
-            clear: both;
-            float: left;
-            padding: 0;
-            margin: 6px 10px 6px 0;
-            display:none;
-          }
-        }
-        .choices {
-          width: 100%;
-          display: table;
-          label {
-            width: 100% !important;
-            margin: 10px 0 2px;
-          }
-          edit-element {
-            float: left;
-            max-width: 100%;
-            min-width: 240px;
-            margin-bottom: 10px;
-            input[type="text"] {
-              width: calc(100% - 17px) !important;
-            }
-          }
-        }
-      }
       translate-comparative {
         float: left;
         width: 100%;
@@ -894,6 +846,94 @@ html, body {
       }
     }
   }
+}
+
+.test-widget {
+  float: left;
+  width: 100%;
+  .glyphicon {
+    float: left;
+    width: 17px;
+    padding: 5px;
+    height: inherit;
+    cursor: pointer;
+  }
+  edit-element {
+    input[type=text] {
+      float: left;
+      width: calc(100% - 25px) !important;
+    }
+  }
+  .question {
+    float: none;
+    width: 100%;
+    height: 30px;
+    clear: both;
+    margin-bottom: 10px;
+    h5 {
+      clear: both;
+      float: left;
+      padding: 0;
+      margin: 6px 10px 6px 0;
+      display: none;
+    }
+  }
+  .choices {
+    width: 100%;
+    display: table;
+    label {
+      width: 100%;
+      margin: 10px 0 2px;
+    }
+
+    edit-element {
+      float: left;
+      max-width: 100%;
+      min-width: 240px;
+      margin-bottom: 10px;
+      input[type="text"] {
+        width: calc(100% - 17px) !important;
+      }
+    }
+
+  }
+
+  .choice {
+    min-width: 50%;
+    float: left;
+    min-height: 30px;
+    label {
+      width: initial;
+      float: left;
+      display: inline-block !important;
+      margin: 0 0 0 5px;
+      padding: 3px 1px;
+      font-weight: normal;
+    }
+    input[type=radio] {
+      float: left;
+      margin: 7px 0;
+    }
+  }
+  .choices-list {
+    width: 100%;
+    display: table;
+  }
+  view-element {
+    display: table;
+    padding: 5px 10px;
+    .glyphicon {
+      display: none
+    }
+    &.success {
+      background: #89d489;
+    }
+
+    &.failed {
+      background: #e47A75;
+    }
+  }
+
 }
 
 .book-list {
