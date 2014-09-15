@@ -1,20 +1,20 @@
 var ObjectStorage = function ObjectStorage(name, duration) {
-    var self,
+    var _this,
         name = name || '_objectStorage',
         defaultDuration = 5000;
 
     if (ObjectStorage.instances[ name ]) {
-        self = ObjectStorage.instances[ name ];
-        self.duration = duration || self.duration;
+        _this = ObjectStorage.instances[ name ];
+        _this.duration = duration || _this.duration;
     } else {
-        self = this;
-        self._name = name;
-        self.duration = duration || defaultDuration;
-        self._init();
-        ObjectStorage.instances[ name ] = self;
+        _this = this;
+        _this._name = name;
+        _this.duration = duration || defaultDuration;
+        _this._init();
+        ObjectStorage.instances[ name ] = _this;
     }
 
-    return self;
+    return _this;
 };
 ObjectStorage.instances = {};
 ObjectStorage.prototype = {

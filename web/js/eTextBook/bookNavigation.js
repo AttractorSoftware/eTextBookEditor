@@ -2,7 +2,7 @@ var NavigationController = function () {
     this.bookBody = $("#book-body");
     this.bookName = $('.book-name').html();
 
-    var $this = this, activeChapter, activeChapterIndex, scrollPos,
+    var _this = this, activeChapter, activeChapterIndex, scrollPos,
         storage = new ObjectStorage(this.bookName);
 
     this.setLocalStorage = function () {
@@ -23,14 +23,14 @@ var NavigationController = function () {
     };
 
     this.onAjaxLoadComplete = function () {
-        activeChapter = $this.bookBody.attr('data-url');
+        activeChapter = _this.bookBody.attr('data-url');
         activeChapterIndex = storage.local.chapters.indexOf(activeChapter);
         storage.local.activeChapter = activeChapterIndex;
 
         $('.active').removeClass('active');
         $('a[href="' + activeChapter + '"]').closest('.chapter').addClass('active');
         window.scrollTo(0, storage.local.scrollPositions[activeChapterIndex]);
-        $this.activateWidgets();
+        _this.activateWidgets();
         console.debug('aa');
         AniJS.run();
     };
@@ -43,7 +43,7 @@ var NavigationController = function () {
             widget.contentContainer = widgetCont.find('widget-content');
             widget.viewActivate();
         }
-    }
+    };
 
     $(window).scroll(function () {
         scrollPos = getScrollTop();
@@ -58,10 +58,10 @@ var NavigationController = function () {
         var self = $(this);
         var hash = self.attr('href');
         var link = self.closest('.chapter').children('.chapter-link').attr('href');
-        if ($this.bookBody.attr('data-url') !== link) {
-            $this.bookBody.attr('data-url', link);
-            $this.bookBody.load(link + ' e-text-book', function () {
-                $this.onAjaxLoadComplete();
+        if (_this.bookBody.attr('data-url') !== link) {
+            _this.bookBody.attr('data-url', link);
+            _this.bookBody.load(link + ' e-text-book', function () {
+                _this.onAjaxLoadComplete();
                 window.location.hash = '#' + hash;
             });
         }
@@ -70,15 +70,15 @@ var NavigationController = function () {
     });
     $('.chapter-link').click(function () {
         var link = $(this).attr('href');
-        if ($this.bookBody.attr('data-url') !== link) {
-            $this.bookBody.attr('data-url', link);
-            $this.bookBody.load(link + ' e-text-book', $this.onAjaxLoadComplete);
+        if (_this.bookBody.attr('data-url') !== link) {
+            _this.bookBody.attr('data-url', link);
+            _this.bookBody.load(link + ' e-text-book', _this.onAjaxLoadComplete);
         }
         return false;
     });
 
     function getScrollTop() {
-        if (typeof pageYOffset != 'undefined') {
+        if (typeof pageYOffset !== 'undefined') {
             return pageYOffset;
         }
         else {
@@ -90,9 +90,9 @@ var NavigationController = function () {
     }
 
     if (!storage.local.chapters) {
-        $this.setLocalStorage();
+        _this.setLocalStorage();
     }
-    $this.openLastReadingPlace();
+    _this.openLastReadingPlace();
 
 };
 

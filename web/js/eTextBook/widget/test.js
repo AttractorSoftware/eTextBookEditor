@@ -10,7 +10,8 @@ var eTextBookWidgetTest = eTextBookWidget.extend({
         for (var i = 0; i < items.length; i++) {
             var item = $(items[i]);
             item.find('.question input').val(item.find('view-element h5').text());
-            item.find('.choices-list').html(item.find('view-element .choices-list').html());
+            item.find('edit-element .choices-list')
+                .html(item.find('view-element .choices-list').html());
         }
     },
 
@@ -19,9 +20,11 @@ var eTextBookWidgetTest = eTextBookWidget.extend({
         for (var i = 0; i < items.length; i++) {
             var item = $(items[i]);
             item.find('view-element')
-                .attr('data-right-answer-ID', item.find('.choices-list input:checked').attr('id'))
-                .append(item.find('.choices-list').clone());
-            item.find('view-element h5').html(item.find('.question input').val())
+                    .attr('data-right-answer-ID', item.find('.choices-list input:checked').attr('id'))
+                .find('.choices-list')
+                    .html(item.find('.choices .choices-list').html());
+            item.find('view-element h5')
+                    .html(item.find('.question input').val())
         }
     },
 
@@ -35,8 +38,11 @@ var eTextBookWidgetTest = eTextBookWidget.extend({
         var $tasks = this.cont.find('.task');
         for (var i = 0; i < $tasks.length; i++) {
             var $task = $($tasks[i]);
-            if (!$task.find('edit-element').length)
+            if (!$task.find('edit-element').length) {
+                this.cont.find('.question .glyphicon').last().addClass('glyphicon-remove')
+                    .removeClass('add glyphicon-plus');
                 $task.append(App.eTextBookTemplate.getTemplate('testWidgetEditElement'));
+            }
         }
     },
 
@@ -45,8 +51,6 @@ var eTextBookWidgetTest = eTextBookWidget.extend({
         var input = this.cont.find('.question input').last(),
             inputIsNotEmpty = input.val() !== '';
         if (inputIsNotEmpty) {
-            this.cont.find('.question .glyphicon').last().addClass('glyphicon-remove')
-                .removeClass('add glyphicon-plus');
             this.cont.append(App.eTextBookTemplate.getTemplate('testWidgetTask'));
             this.addEditElements();
         }
@@ -64,7 +68,9 @@ var eTextBookWidgetTest = eTextBookWidget.extend({
         if (inputIsNotEmpty) {
             var uid = App.eTextBookUtils.generateUID();
             $choices.find('.choices-list').append(App.eTextBookTemplate.getTemplate('choiceRadioButton'));
-            $choices.find('.choiceRadioButton:last').attr('id', uid).attr('class', uid);
+            $choices.find('.choiceRadioButton:last')
+                .attr('id', uid)
+                .attr('class', uid);
             $choices.find('label:last').attr('for', uid).html(value);
             $input.val('');
         }
@@ -75,23 +81,23 @@ var eTextBookWidgetTest = eTextBookWidget.extend({
     },
 
     binds: function () {
-        var $this = this;
+        var _this = this;
         const ENTER_KEY = 13;
 
         $('.test-widget')
             .on('click', '.question .add', function () {
-                $this.addTask();
+                _this.addTask();
             })
             .on('click', '.add-choice .add', function () {
-                $this.parseChoice($(this));
+                _this.parseChoice($(this));
             })
             .on('keyup', '.question input', function (e) {
                 if (e.which === ENTER_KEY) {
-                    $this.addTask();
+                    _this.addTask();
                 }
             })
             .on('keyup', '.add-choice input', function (e) {
-                if (e.which === ENTER_KEY) $this.parseChoice($(this));
+                if (e.which === ENTER_KEY) _this.parseChoice($(this));
             })
             .on('click', '.glyphicon-remove', function () {
                 $(this).closest('.delete-point').remove();
