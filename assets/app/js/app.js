@@ -6,6 +6,7 @@ var App = function() {
 
     this.screens.loading = new Screen($('#loading.screen'));
     this.screens.shelf = new Screen($('#shelf.screen'));
+    this.screens.uploading = new Screen($('#uploading.screen'));
 
     this.storageBooks = [];
     this.remoteBooks = [];
@@ -29,10 +30,14 @@ var App = function() {
 
         setTimeout(function(){
             Android.getStorageBookList();
-            $this.drawShelfs();
-            $this.hideAllScreens();
-            $this.screens.shelf.show();
-        }, 3000);
+            Android.getRepositoryBookList();
+            $this.switchScreen('shelf');
+        }, 2000);
+    }
+
+    this.switchScreen = function(screen) {
+        this.hideAllScreens();
+        this.screens[screen].show();
     }
 
     this.drawShelfs = function() {
@@ -50,7 +55,7 @@ var App = function() {
                 $('.storageList').append(shelf);
                 j = 0;
             }
-            shelf.find('.book-list').append(this.createBook(this.storageBooks[i]));
+            shelf.find('.book-list').append(this.createStorageBook(this.storageBooks[i]));
         }
         $('.storageList .book').click(function() {
             Android.readBook($(this).attr('href'));
@@ -68,12 +73,24 @@ var App = function() {
                 $('.remoteList').append(shelf);
                 j = 0;
             }
-            shelf.find('.book-list').append(this.createBook(this.remoteBooks[i]));
+            shelf.find('.book-list').append(this.createRemoteBook(this.remoteBooks[i]));
         }
+        $('.remoteList .book').click(function() {
+            var book = $(this);
+            $this.switchScreen('uploading');
+            setTimeout(function(){
+                Android.downloadBook(book.attr('href'));
+            }, 500)
+            return false;
+        });
     }
 
-    this.createBook = function(book) {
+    this.createStorageBook = function(book) {
         return $('<a href="'+ book.slug +'" class="book" style="background-image: url(file:///sdcard/eTextBook/cache/'+ book.slug +'/content/cover.png)"></a>');
+    }
+
+    this.createRemoteBook = function(book) {
+        return $('<a href="'+ book.slug +'" class="book" style="background-image: url(http://192.168.0.144/tmp/'+ book.slug +'/content/cover.png)"></a>');
     }
 
     this.createShelf= function() {
@@ -89,6 +106,12 @@ var App = function() {
                 '</div>' +
             '</div>'
         );
+    }
+
+    this.updateProgress = function(currentSize, allSize) {
+        if(currentSize == allSize) {
+            this.drawShelfs();
+        }
     }
 
     this.setRemoteBooks = function(books) {

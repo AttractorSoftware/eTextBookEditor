@@ -27,7 +27,7 @@ public class Config {
 
             String readLine;
             while((readLine = reader.readLine()) != null) {
-                String[] lineParts = readLine.split(":");
+                String[] lineParts = readLine.split("~");
                 if(lineParts[0].equals(parameterName)) {
                     return lineParts[1].replaceAll("\\s", "");
                 }

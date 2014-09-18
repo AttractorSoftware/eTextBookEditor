@@ -17,12 +17,12 @@ html, body {
   top: 0;
   border: none; }
 
-#loading.screen {
+#loading.screen, #uploading.screen {
   background: #008800 url("../img/emblem-library.png") no-repeat center 40%;
   color: #fff;
   font-family: Myriad Pro;
   text-align: center; }
-  #loading.screen span {
+  #loading.screen span, #uploading.screen span {
     display: block;
     position: relative;
     top: 40%;
