@@ -1,0 +1,31 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <h1>Push me</h1>
+    <svg id="snap" style="width: 300px; height: 300px;"></svg>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="http://snapsvg.io//assets/js/snap.svg-min.js"></script>
+    <script>
+        var snap = Snap('#snap');
+        var bigCircle = snap.circle(150, 150, 100);
+
+        var min = function(callback) {
+            bigCircle.animate({r: 50}, 500, function() {
+                callback();
+            });
+        }
+
+        var max = function() {
+            bigCircle.animate({r: 150}, 500, function() {
+            });
+        }
+
+        setInterval(function(){
+            min(max);
+        }, 1000);
+
+    </script>
+{% endblock %}

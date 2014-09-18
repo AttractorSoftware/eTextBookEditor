@@ -13,6 +13,7 @@ var eTextBookEditor = Backbone.Model.extend({
                 ,['layout', ['ol', 'ul', 'paragraph', 'heihgt']]
                 ,['insert', ['table']]
                 ,['misc', ['fullscreen', 'undo', 'redo', 'codeview']]
+                ,['insert', ['picture']]
             ]
         };
         this.clearViewElements(this.desktop);

@@ -794,6 +794,10 @@ html, body {
   float: left;
   width: 100%; }
 
+html.display-page {
+  width: 100%;
+  overflow-x: hidden; }
+
 e-text-book-editor .display e-text-book, .e-text-book-viewer e-text-book {
   float: left;
   width: 100%; }
@@ -1286,5 +1290,3 @@ image-description {
       text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5); }
       .html5-controls .full-screen .glyphicon:hover {
         color: #fff; }
-
-/*# sourceMappingURL=style.css.map */

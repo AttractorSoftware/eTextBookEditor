@@ -18,4 +18,12 @@ class DefaultController extends Controller
     public function indexAction() {
         return array();
     }
+
+    /**
+     * @Route("/snap")
+     * @Template()
+     */
+    public function snapAction() {
+        return array();
+    }
 }
