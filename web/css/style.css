@@ -773,6 +773,8 @@ html, body {
 #bookFormModal .book-info {
   width: 355px;
   margin: 0 0 0 210px; }
+  #bookFormModal .book-info input[type="file"] {
+    width: 100%; }
 #bookFormModal .book-cover {
   float: left;
   width: 195px; }

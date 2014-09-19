@@ -33,6 +33,7 @@ class CreateETBFile
             $this->createStructure();
             $this->copyTemplateFiles();
             $this->createCover();
+            $this->createSourceFile();
             $this->createInfoFile();
             $this->createIndexFile();
             $this->pack();
@@ -58,15 +59,23 @@ class CreateETBFile
         }
     }
 
+    public function createSourceFile()
+    {
+        if ($this->book->getFile() != '') {
+            copy($this->tmpDir . 'book/' . $this->book->getFile(), $this->bookTmpDir . '/' . $this->book->getFile());
+        }
+    }
+
     public function createInfoFile()
     {
         $info = array(
             'title' => $this->book->getTitle()
-        , 'authors' => $this->book->getAuthors()
-        , 'slug' => $this->book->getSlug()
-        , 'editor' => $this->book->getEditor()
-        , 'isbn' => $this->book->getIsbn()
-        , 'modules' => array()
+            , 'authors' => $this->book->getAuthors()
+            , 'slug' => $this->book->getSlug()
+            , 'editor' => $this->book->getEditor()
+            , 'isbn' => $this->book->getIsbn()
+            , 'modules' => array()
+            , 'source' => $this->book->getFile()
         );
         file_put_contents($this->bookTmpDir . 'book.info', json_encode($info));
     }

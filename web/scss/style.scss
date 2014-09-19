@@ -1036,6 +1036,7 @@ html, body {
   .book-info {
     width: 355px;
     margin: 0 0 0 210px;
+    input[type="file"] { width: 100%; }
   }
   .book-cover {
     float: left;

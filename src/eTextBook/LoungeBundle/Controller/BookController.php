@@ -49,6 +49,7 @@ class BookController extends Controller
         $book->setEditor(isset($bookData['editor']) ? $bookData['editor'] : '');
         $book->setIsbn(isset($bookData['isbn']) ? $bookData['isbn'] : '');
         $book->setCover(isset($bookData['cover']) ? $bookData['cover'] : '');
+        $book->setFile(isset($bookData['file']) ? $bookData['file'] : '');
         $book->setSlug($bookSlug);
 
         $creator = $this->get('createETBFile');
@@ -57,20 +58,16 @@ class BookController extends Controller
         if (!$creator->execute()) {
             $response = array(
                 'status' => 'failed'
-            ,
-                'reason' => 'Учебник с таким названием уже существует'
+                ,'reason' => 'Учебник с таким названием уже существует'
             );
         } else {
             $response = array(
                 'status' => 'success'
-            ,
-                'data' => array(
+                ,'data' => array(
                     'slug' => $bookSlug
                 )
             );
-        }
-
-        return new JsonResponse($response);
+        } return new JsonResponse($response);
     }
 
     /**
@@ -200,6 +197,22 @@ class BookController extends Controller
             mkdir($coverTmpDir);
         }
         $coverFile->move($coverTmpDir, $tmpTitle);
+
+        return new JsonResponse(array('fileName' => $tmpTitle));
+    }
+
+    /**
+     * @Route("/book/upload", name="book-upload")
+     */
+    public function bookUpload(Request $request) {
+        $bookFile = $request->files->get('book-file');
+        $extension = explode(".", $bookFile->getClientOriginalName());
+        $tmpTitle = date('dmYHis') . '.' . end($extension);
+        $coverTmpDir = $this->container->getParameter('book_tmp_dir') . 'book';
+        if (!is_dir($coverTmpDir)) {
+            mkdir($coverTmpDir);
+        }
+        $bookFile->move($coverTmpDir, $tmpTitle);
 
         return new JsonResponse(array('fileName' => $tmpTitle));
     }

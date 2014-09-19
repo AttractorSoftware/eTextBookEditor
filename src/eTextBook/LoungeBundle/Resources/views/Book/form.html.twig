@@ -76,6 +76,18 @@
                                 name="isbn"
                                 ng-model="book.isbn" />
                         </div>
+                        <div class="form-group">
+                            <label for="">
+                                Файл книги (PDF, mobi, fb2, ...)
+                                <span class="loading"></span>
+                            </label>
+                            <input
+                                type="file"
+                                id="bookFile"
+                                name="book-file"
+                                upload-action="{{ path('book-upload') }}"
+                            />
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">

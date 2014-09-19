@@ -1,68 +1,49 @@
 var AjaxUploader = function(config) {
     var $this = this;
-    this.config = config;
-    this.fileInput = config.fileInput;
-    this.uploadAction = this.fileInput.attr('upload-action');
-    this.reader = new FileReader();
-    this.afterLoad = config.afterLoad;
-    this.uploadAction = this.fileInput.attr('upload-action');
-    this.afterUpload = config.afterUpload;
+    this.percentLoaded = 0;
 
     this.init = function() {
-        this.fileInput.bind('change', this.select);
-    }
+        if(config.autoUpload) {
+            this.bindChange();
+        }
+    };
 
-    this.select = function() {
-        $this.files = $this.fileInput[0].files;
-        $this.loadContent();
-        $this.upload();
-    }
-
-    this.loadContent = function() {
-        $this.getAsDataUrl(function() {
-            $this.getAsText(function(){
-                $this.getAsArrayBuffer($this.afterLoad);
-            });
+    this.bindChange = function() {
+        config.input.bind('change', function(e) {
+            $this.read();
+            $this.upload();
         });
-    }
+    };
 
-    this.getAsText = function(callback) {
-        this.reader.readAsText($this.files[0]);
-        this.reader.onload = function(e) {
-            $this.textResult = e.target.result;
-            callback();
-        }
-    }
-
-    this.getAsDataUrl = function(callback) {
-        this.reader.readAsDataURL($this.files[0]);
-        this.reader.onload = function(e) {
-            $this.dataUrlResult = e.target.result;
-            callback();
-        }
-    }
-
-    this.getAsArrayBuffer = function(callback) {
-        this.reader.readAsArrayBuffer($this.files[0]);
-        this.reader.onload = function (e) {
-            $this.arrayBufferResult = e.target.result;
-            callback();
-        }
-    }
+    this.read = function() {
+        $this.fileReader = new FileReader();
+        $this.fileReader.onload = function(event) {
+            $this.fileDataUrlContent = event.target.result;
+            $.isFunction(config.afterRead) ? config.afterRead() : false;
+        };
+        $this.fileReader.readAsDataURL($(config.input).prop('files')[0]);
+    };
 
     this.upload = function() {
-        xhr = new XMLHttpRequest();
-        xhr.open("post", this.uploadAction, true);
-        var data = new FormData();
-        data.append($this.fileInput.attr('name'), this.files[0]);
-        xhr.send(data);
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState==4 && xhr.status==200) {
-                $this.uploadResult = xhr.responseText;
-                $this.afterUpload();
+        var http = new XMLHttpRequest();
+        http.upload.addEventListener('progress', function(e) {
+            $this.percentLoaded = Math.floor(e.loaded * 100 / e.total) + '%';
+            $.isFunction(config.onProgress) ? config.onProgress() : false;
+        }, false);
+
+        http.onreadystatechange = function()  {
+            if (http.readyState == 4 && http.status == 200) {
+                $this.uploadResult = http.responseText;
+                $.isFunction(config.afterUpload) ? config.afterUpload() : false;
             }
-        }
-    }
+        };
+
+        var form = new FormData();
+        form.append('path', '/');
+        form.append(config.input.attr('name'), $(config.input).prop('files')[0]);
+        http.open('POST', config.uploadPath);
+        http.send(form);
+    };
 
     this.init();
 }

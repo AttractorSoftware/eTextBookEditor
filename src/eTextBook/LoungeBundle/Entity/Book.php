@@ -62,6 +62,13 @@ class Book {
      */
     private $cover;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="file", type="string")
+     */
+    private $file;
+
     private $modules;
 
     public function toArray() {
@@ -235,5 +242,28 @@ class Book {
     public function setCover($cover)
     {
         $this->cover = $cover;
+    }
+
+    /**
+     * Set file
+     *
+     * @param string $file
+     * @return Book
+     */
+    public function setFile($file)
+    {
+        $this->file = $file;
+
+        return $this;
+    }
+
+    /**
+     * Get file
+     *
+     * @return string 
+     */
+    public function getFile()
+    {
+        return $this->file;
     }
 }

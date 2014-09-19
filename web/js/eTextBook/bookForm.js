@@ -7,14 +7,33 @@ var bookForm = function() {
 
     this.init = function() {
         this.cover = new AjaxUploader({
-            fileInput: this.modal.find('#bookCover')
-            ,afterLoad: function () {
+            input: this.modal.find('#bookCover')
+            ,autoUpload: true
+            ,uploadPath: this.modal.find('#bookCover').attr('upload-action')
+            ,afterRead: function () {
                 $this.modal.find('.book-cover .cover-view').css({
-                    backgroundImage: 'url(' + $this.cover.dataUrlResult + ')'
+                    backgroundImage: 'url(' + $this.cover.fileDataUrlContent + ')'
                 });}
             ,afterUpload: function() {
                 var result = JSON.parse($this.cover.uploadResult);
                 $this.coverFileName = result.fileName;
+            }
+        });
+
+        this.bookFile = new AjaxUploader({
+            input: this.modal.find('#bookFile')
+            ,autoUpload: true
+            ,uploadPath: this.modal.find('#bookFile').attr('upload-action')
+            ,onProgress: function() {
+                App.animate($this.modal.find('.loading'), 'pulse');
+                $this.modal.find('.loading').html($this.bookFile.percentLoaded);
+                if($this.bookFile.percentLoaded == "100%") {
+                    $this.modal.find('.loading').fadeOut();
+                }
+            }
+            ,afterUpload: function() {
+                var result = JSON.parse($this.bookFile.uploadResult);
+                $this.bookFileName = result.fileName;
             }
         });
 
@@ -52,6 +71,7 @@ var bookForm = function() {
         $scope.submit = function(book) {
             $this.wait();
             book.cover = $this.coverFileName;
+            book.file = $this.bookFileName;
             $.post($this.action, { book: book }, function(response) {
                 if(response.status == 'failed') {
                     $this.failed(response.reason);
@@ -66,6 +86,10 @@ var bookForm = function() {
                             '<a class="edit-link btn btn-primary btn-xs" href="/book/edit/' + response.data.slug + '/%20">'+
                                 'Редактировать'+
                             '</a>'+
+                            '<a class="view-link btn btn-success btn-xs" href="/tmp/' + response.data.slug + '/index.html">' +
+                                '<span class="glyphicon glyphicon-eye-open"></span>' +
+                                'Эмулятор' +
+                            '</a>' +
                         '</li>'
                     );
                 }
