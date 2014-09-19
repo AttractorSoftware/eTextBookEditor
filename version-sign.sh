@@ -1,2 +1,2 @@
 #!/bin/sh
-git tag > ./web/version.html
+git describe --abbrev=0 --tags > ./web/version.html
