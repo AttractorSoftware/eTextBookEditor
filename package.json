@@ -1,0 +1,21 @@
+{
+    "name": "EBookReader",
+    "main": "app://ebook/app/app.html",
+    "description": "demo app of node-webkit",
+    "version": "0.1.0",
+    "keywords": [ "demo", "node-webkit" ],
+    "window": {
+        "title": "Электронные учебники",
+        "icon": "./icon.png",
+        "toolbar": false,
+        "frame": true,
+        "width": 800,
+        "height": 500,
+        "position": "mouse",
+        "min_width": 400,
+        "min_height": 200
+    },
+    "webkit": {
+        "plugin": true
+    }
+}
