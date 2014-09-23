@@ -36,7 +36,7 @@ class Book
         $bookContent = file_get_contents($filePath);
         $bookContent = explode('<e-text-book>', $bookContent);
         $bookContent = explode('</e-text-book>', $bookContent[1]);
-        $bookContent = str_replace("../content/", "/tmp/". $this->getSlug() ."/content/", $bookContent[0]);
+        $bookContent = str_replace("content/", "/tmp/". $this->getSlug() ."/content/", $bookContent[0]);
         $bookContent = "<e-text-book>" . $bookContent . "</e-text-book>";
         return $bookContent;
     }

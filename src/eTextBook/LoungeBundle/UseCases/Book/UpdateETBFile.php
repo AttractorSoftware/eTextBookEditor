@@ -31,7 +31,7 @@ class UpdateETBFile
         $moduleFilePath = $this->tmpDir . $bookName . '/modules/' . $moduleSlug . '.html';
         $moduleContent = new SummaryDom();
         $moduleContent->loadWithBreaks($moduleFilePath);
-        $content = str_replace('/tmp/' . $bookName . '/', '../', $content);
+        $content = str_replace('/tmp/' . $bookName . '/', '', $content);
         $moduleContent->find('.e-text-book-viewer', 0)->innertext = $content;
 
         $exercisesIDList = $moduleContent->getExercisesList();
