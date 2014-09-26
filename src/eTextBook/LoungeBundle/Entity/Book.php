@@ -65,6 +65,13 @@ class Book {
     /**
      * @var string
      *
+     * @ORM\Column(name="source", type="string")
+     */
+    private $source;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="file", type="string")
      */
     private $file;
@@ -80,6 +87,7 @@ class Book {
             ,'editor' => $this->editor
             ,'isbn' => $this->isbn
             ,'modules' => $this->modules
+            ,'source' => $this->source
         );
     }
 
@@ -265,5 +273,28 @@ class Book {
     public function getFile()
     {
         return $this->file;
+    }
+
+    /**
+     * Set source
+     *
+     * @param string $source
+     * @return Book
+     */
+    public function setSource($source)
+    {
+        $this->source = $source;
+
+        return $this;
+    }
+
+    /**
+     * Get source
+     *
+     * @return string 
+     */
+    public function getSource()
+    {
+        return $this->source;
     }
 }

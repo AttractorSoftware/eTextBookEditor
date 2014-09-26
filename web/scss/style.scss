@@ -956,6 +956,16 @@ html, body {
       background: no-repeat center center;
       background-size: contain;
       margin: 0 0 0 70px;
+      .source-type {
+        float: right;
+        width: 30px;
+        height: 30px;
+        background-size: contain;
+        margin: 150px -3px 0 0;
+        &.pdf { background-image: url('/img/file-ico/pdf.png'); }
+        &.etb { background-image: url('/img/file-ico/etb.png'); }
+        &.mobi { background-image: url('/img/file-ico/mobi.png'); }
+      }
     }
     .title {
       float: left;

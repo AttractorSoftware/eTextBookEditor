@@ -714,6 +714,18 @@ html, body {
     background: no-repeat center center;
     background-size: contain;
     margin: 0 0 0 70px; }
+    .book-list .item .cover .source-type {
+      float: right;
+      width: 30px;
+      height: 30px;
+      background-size: contain;
+      margin: 150px -3px 0 0; }
+      .book-list .item .cover .source-type.pdf {
+        background-image: url("/img/file-ico/pdf.png"); }
+      .book-list .item .cover .source-type.etb {
+        background-image: url("/img/file-ico/etb.png"); }
+      .book-list .item .cover .source-type.mobi {
+        background-image: url("/img/file-ico/mobi.png"); }
   .book-list .item .title {
     float: left;
     width: 100%;

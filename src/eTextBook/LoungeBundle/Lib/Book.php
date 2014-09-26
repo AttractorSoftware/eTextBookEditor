@@ -136,10 +136,7 @@ class Book
         file_put_contents($this->tmpDir . '/book.info', json_encode($this->info));
     }
 
-    public function getTitle()
-    {
-        ;
-
+    public function getTitle() {
         return $this->info->title;
     }
 
@@ -185,6 +182,19 @@ class Book
     public function getISBN()
     {
         return isset($this->info->isbn) ? $this->info->isbn : '';
+    }
+
+    public function getSource() {
+        return isset($this->info->source) ? $this->info->source : '';
+    }
+
+    public function getSourceExtension() {
+        if($this->getSource() != '') {
+            $sourceExtension = explode(".", $this->info->source);
+            $sourceExtension = end($sourceExtension);
+        } else { $sourceExtension = 'etb'; }
+
+        return $sourceExtension;
     }
 
 }
