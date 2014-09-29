@@ -15,6 +15,21 @@ var eTextBookEditor = Backbone.Model.extend({
                 ,['misc', ['fullscreen', 'undo', 'redo', 'codeview']]
                 ,['insert', ['picture']]
             ]
+            ,onpaste: function(e) {
+                var thisNote = $(this);
+                var updatePastedText = function(someNote){
+                    var original = someNote.code();
+                    var cleaned = $this.CleanPastedHTML(original); //this is where to call whatever clean function you want. I have mine in a different file, called CleanPastedHTML.
+                    someNote.code('').html(cleaned); //this sets the displayed content editor to the cleaned pasted code.
+                };
+                setTimeout(function () {
+                    //this kinda sucks, but if you don't do a setTimeout,
+                    //the function is called before the text is really pasted.
+                    updatePastedText(thisNote);
+                }, 10);
+
+
+            }
         };
         this.clearViewElements(this.desktop);
         this.updateDisplay(true);
@@ -183,6 +198,27 @@ var eTextBookEditor = Backbone.Model.extend({
                 }
             }
         } return html;
+    }
+
+    ,CleanPastedHTML: function(input) {
+        var stringStripper = /(\n|\r| class=(")?Mso[a-zA-Z]+(")?)/g;
+        var output = input.replace(stringStripper, ' ');
+        var commentSripper = new RegExp('<!--(.*?)-->','g');
+        var output = output.replace(commentSripper, '');
+        var tagStripper = new RegExp('<(/)*(meta|link|span|\\?xml:|st1:|o:|font)(.*?)>','gi');
+        output = output.replace(tagStripper, '');
+        var badTags = ['style', 'script','applet','embed','noframes','noscript'];
+
+        for (var i=0; i< badTags.length; i++) {
+            tagStripper = new RegExp('<'+badTags[i]+'.*?'+badTags[i]+'(.*?)>', 'gi');
+            output = output.replace(tagStripper, '');
+        }
+        var badAttributes = ['style', 'start'];
+        for (var i=0; i< badAttributes.length; i++) {
+            var attributeStripper = new RegExp(' ' + badAttributes[i] + '="(.*?)"','gi');
+            output = output.replace(attributeStripper, '');
+        }
+        return output;
     }
 
 });

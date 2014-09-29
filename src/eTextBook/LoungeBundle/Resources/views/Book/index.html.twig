@@ -1,14 +1,20 @@
 {% extends '::lounge-template.html.twig' %}
 
 {% block pageHeader %}
-    <h1> Учебники </h1>
-    {% if app.user %}
-        <div class="addBookContainer">
-            <span class="glyphicon glyphicon-file"></span>
-            <a id="addBookButton" href="#" data-toggle="modal" data-target="#bookFormModal"> Создать новый учебник </a>
-            {% include 'eTextBookLoungeBundle:Book:form.html.twig' %}
+    <div class="row">
+        <div class="col-sm-6">
+            <h1> Учебники </h1>
         </div>
-    {% endif %}
+        <div class="col-sm-6">
+            {% if app.user %}
+                <div class="addBookContainer">
+                    <span class="glyphicon glyphicon-file"></span>
+                    <a id="addBookButton" href="#" data-toggle="modal" data-target="#bookFormModal"> Создать новый учебник </a>
+                    {% include 'eTextBookLoungeBundle:Book:form.html.twig' %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}
 
 {% block pageContent %}
@@ -33,10 +39,12 @@
                     </a>
                     <a href="tmp/{{ book.slug }}/index.html" class="view-link btn btn-success btn-xs">
                         <span class="glyphicon glyphicon-eye-open"></span>
-                        Эмулятор</a>
+                        Эмулятор
+                    </a>
                 {% endif %}
             </li>
         {% endfor %}
     </ul>
 {% endblock %}
+
 

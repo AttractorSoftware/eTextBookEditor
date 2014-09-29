@@ -2,9 +2,7 @@
 
 namespace eTextBook\LoungeBundle\Lib;
 
-class Book
-{
-
+class Book {
     private $filePath;
     private $slug;
     private $info;
