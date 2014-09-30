@@ -1021,18 +1021,18 @@ html, body {
 }
 
 .page-header {
+  .control {
+    float: right;
+    margin: 10px 0 0 0;
+    span {
+      color: #fff;
+      margin: 0 3px 0 0;
+    }
+  }
   h4 {
     padding: 0 15px;
-    .control {
-      float: right;
-      span {
-        color: #fff;
-        margin: 0 3px 0 0;
-      }
-    }
     span {
-      color: #ccc;
-      margin: 0 0 0 10px;
+      margin: 0 10px 0 0;
     }
   }
 }
@@ -1072,6 +1072,10 @@ html, body {
 .note-editor {
   float: left;
   width: 100%;
+}
+
+#advance-control-panel {
+  li { cursor: pointer; }
 }
 
 @import '../book-template/scss/style';

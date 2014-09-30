@@ -135,7 +135,6 @@ class BookController extends Controller
 
         $updater->setBook($book);
         $updater->updateModuleContent($bookName, $moduleSlug, $content);
-
         $updater->copyTemplateFiles();
         $updater->pack();
 

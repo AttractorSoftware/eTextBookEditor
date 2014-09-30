@@ -34,12 +34,30 @@ var eTextBookEditor = Backbone.Model.extend({
         this.clearViewElements(this.desktop);
         this.updateDisplay(true);
         this.synchronizeScrolls();
+        this.advanceControlActivate();
 
         $('.e-text-book-editor').css({ height: $(window).height() *.75 });
 
         if(this.get('cont').hasClass('view-mode')) {
             this.display = $('.e-text-book-viewer');
             this.activateDisplayWidgets();
+        }
+    }
+
+    ,advanceControlActivate: function() {
+        var $this = this;
+        var panel = $('#advance-control-panel');
+        if(panel.length) {
+            $('#clearMSEntities').bind('click', function(){
+                $this.clearMSEntities();
+            });
+        }
+    }
+
+    ,clearMSEntities: function() {
+        for(var i = 0; i < $('rule view-element, question view-element').length; i++) {
+            var element = $($('rule-title view-element, question view-element')[i]);
+            element.html(this.CleanPastedHTML(element.html()));
         }
     }
 
