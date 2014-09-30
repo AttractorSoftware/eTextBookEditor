@@ -45,6 +45,14 @@ class UpdateETBFile
     public function addExercisesToSummary($bookName, $moduleSlug, $exercisesIDList)
     {
         $indexFilePath = $this->tmpDir . $bookName . '/index.html';
+        $summaryTemplate = file_get_contents($this->templateDir . "/summaryLinkTemplate.html");
+
+        if (!file_exists($indexFilePath)) {
+            $indexTemplate = file_get_contents($this->templateDir . "/index.html");
+            $summaryContent = $this->getBookSummaryFromInfo($summaryTemplate);
+            $this->fillIndexFile($indexTemplate, $summaryContent, $indexFilePath);
+        }
+
         $indexContent = new SummaryDom();
         $indexContent->loadWithBreaks($indexFilePath);
         $indexContent->insertExercisesIntoChapter($moduleSlug, $exercisesIDList);
