@@ -47,11 +47,9 @@ class UpdateETBFile
         $indexFilePath = $this->tmpDir . $bookName . '/index.html';
         $summaryTemplate = file_get_contents($this->templateDir . "/summaryLinkTemplate.html");
 
-        if (!file_exists($indexFilePath)) {
-            $indexTemplate = file_get_contents($this->templateDir . "/index.html");
-            $summaryContent = $this->getBookSummaryFromInfo($summaryTemplate);
-            $this->fillIndexFile($indexTemplate, $summaryContent, $indexFilePath);
-        }
+        $indexTemplate = file_get_contents($this->templateDir . "/index.html");
+        $summaryContent = $this->getBookSummaryFromInfo($summaryTemplate);
+        $this->fillIndexFile($indexTemplate, $summaryContent, $indexFilePath);
 
         $indexContent = new SummaryDom();
         $indexContent->loadWithBreaks($indexFilePath);

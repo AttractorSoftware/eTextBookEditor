@@ -130,11 +130,12 @@ class BookController extends Controller
         $bookName = $request->get('book');
         $moduleSlug = $request->get('module');
 
-        $updater->updateModuleContent($bookName, $moduleSlug, $content);
-
         $book = new eBook();
         $book->setSlug($bookName);
+
         $updater->setBook($book);
+        $updater->updateModuleContent($bookName, $moduleSlug, $content);
+
         $updater->copyTemplateFiles();
         $updater->pack();
 
