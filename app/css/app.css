@@ -1,37 +1,49 @@
 html, body {
-  float: left;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  margin: 0;
-  padding: 0; }
+    float: left;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+.remoteList, .storageList {
+    display: table;
+    width: inherit;
+}
 
 .screen {
-  display: none;
-  float: left;
-  width: 100%;
-  height: 100%;
-  overflow-y: scroll;
-  position: absolute;
-  left: 0;
-  top: 0;
-  border: none; }
+    display: none;
+    float: left;
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border: none;
+}
 
-#loading.screen {
-  background: #008800 url("../img/emblem-library.png") no-repeat center 40%;
-  color: #fff;
-  font-family: Myriad Pro,serif;
-  text-align: center; }
-  #loading.screen span {
+#loading.screen, #uploading.screen {
+    background: #008800 url("../img/emblem-library.png") no-repeat center 40%;
+    color: #fff;
+    font-family: Myriad Pro, serif;
+    text-align: center;
+}
+
+#loading.screen span, #uploading.screen span {
     display: block;
     position: relative;
     top: 40%;
     margin: 85px 0 0 0;
-    font-size: 18px; }
+    font-size: 18px;
+}
 
 #shelf.screen {
-  background: url("../img/bg.png"); }
-  #shelf.screen .soros {
+    background: url("../img/bg.png");
+}
+
+#shelf.screen .soros {
     float: left;
     width: 79px;
     height: 54px;
@@ -39,64 +51,85 @@ html, body {
     position: fixed;
     left: 50%;
     top: 50%;
-    margin: -27px 0 0 -40px; }
+    margin: -27px 0 0 -40px;
+}
 
 .shelf {
-  position: relative;
-  float: left;
-  width: 100%;
-  height: 83px;
-  margin: 50px 0 0 0; }
-  .shelf .left-side {
+    position: relative;
+    float: left;
+    width: inherit;
+    height: 83px;
+    margin: 50px 0 0 0;
+    padding: 0 20px;
+}
+
+
+.shelf .middle-side {
+    width: calc(100% - 108px);
+    position: relative;
+    height: 87px;
+    margin: auto;
+    background: url("../img/shelf-middle.png") repeat-x left 47px;
+}
+
+.middle-side:before, .middle-side:after {
+    position: absolute;
+    content: '';
+    float: left;
+    width: 54px;
+    height: 87px;
+    background: url("../img/shelf-left.png") no-repeat left top;
+}
+.middle-side:before{
+    left: -54px;
+}
+.middle-side:after {
+    right: -54px;
+    background: url("../img/shelf-right.png") no-repeat right top;
+}
+
+.shelf .book-list {
     float: left;
     width: 100%;
-    height: 87px;
-    padding: 0 0 0 54px;
-    background: url("../img/shelf-left.png") no-repeat left top; }
-  .shelf .right-side {
-    float: left;
-    width: 100%;
-    height: 87px;
-    padding: 0 54px 0 0;
-    background: url("../img/shelf-right.png") no-repeat right top; }
-  .shelf .middle-side {
-    float: left;
-    width: 100%;
-    height: 87px;
-    background: url("../img/shelf-middle.png") repeat-x left 47px; }
-  .shelf .book-list {
-    float: left;
-    width: 110%;
     height: 110px;
     margin: -25px 0 0 0;
-    overflow: hidden; }
-  .shelf .book {
+    overflow: hidden;
+}
+
+::-webkit-scrollbar { width: 0 !important }
+
+.book {
     float: left;
     width: 58px;
     height: 95px;
-    background: no-repeat center center;
-    background-size: 100% auto;
     margin: 0 7px 150px 0;
     padding: 10px 5px 0 10px;
-    background-image: url(../img/empty-book.png);
+    background: no-repeat center center;
+    background-size: contain;
     font-size: 10px;
     font-weight: bold;
     color: #fff;
-    text-decoration: none; }
-    .shelf .book.last {
-      margin-right: 0; }
+    text-decoration: none;
+}
+
+.shelf .book.last {
+    margin-right: 0;
+}
 
 .shelf-title {
-  float: left;
-  width: 100%;
-  font-size: 17px;
-  padding: 20px 20px 0 20px;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: #bbb;
-  text-shadow: 1px 1px 0 #fff;
-  letter-spacing: -1px; }
+    float: left;
+    width: 100%;
+    font-size: 17px;
+    padding: 20px 20px 0 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #bbb;
+    text-shadow: 1px 1px 0 #fff;
+    letter-spacing: -1px;
+}
 
 @media (min-width: 310px) {
-  .book {
-    margin-right: 10px; } }
+    .book {
+        margin-right: 10px;
+    }
+}

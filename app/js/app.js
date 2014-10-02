@@ -1,51 +1,118 @@
-var fs = require('fs'),
-    path = require('path'),
-    dirName = process.cwd() + '/app/',
-    cachePath = "app:///ebook/app/books/cache/";
-
-
+"use strict";
+var app;
 var App = function () {
-
-        var $this = this;
+        var
+            fs = require('fs'),
+            path = require('path'),
+            request = require("request"),
+            appDir = process.cwd() + '/app/',
+            booksDir = appDir + 'books/cache/',
+            cacheDir = "app://ebook/app/books/cache/",
+            url = "http://textbooks-demo.it-attractor.net/",
+            $this = this;
 
         this.screens = {};
+        this.modal = $('#modal');
+        this.bookTitle = $('.book-title');
+        this.bookAuthors = $('.book-authors');
+        this.bookISBN = $('.book-isbn');
+        this.bookDownload = $('.download');
 
         this.screens.loading = new Screen($('#loading.screen'));
         this.screens.shelf = new Screen($('#shelf.screen'));
+        this.screens.uploading = new Screen($('#uploading.screen'));
 
         this.storageList = $('.storageList');
         this.remoteList = $('.remoteList');
-
-        this.openShelfPage = function () {
-            try {
-                window.location = "app://ebook/app.html";
-                console.log('hey');
-            } catch (e) {
-                console.log('clicked, not relocated');
-                return false;
-            }
-        };
 
         this.storageBooks = [];
         this.remoteBooks = [];
 
         this.getStorageBookList = function () {
             var filterFn = require('unzip.js');
-            var bookList;
 
-            filterFn(dirName, function (err, list) {
+            filterFn(appDir, function (err, list) {
                 if (!err) {
-                    bookList = list;
-                    app.setStorageBooks(bookList);
-                    app.drawShelfs();
+                    $this.setStorageBooks(list);
+                    $this.drawShelfs();
                 }
                 else console.log('error: ' + err)
             });
         };
 
         this.readBook = function (bookSlug) {
-//        $('body').load(cachePath + bookSlug + "/index.html");
-            window.location.assign(cachePath + bookSlug + "/index.html");
+            var dirPath = cacheDir + bookSlug;
+            var filePath = booksDir + bookSlug + '/index.html';
+            var dirHasIndexHtml = fs.existsSync(filePath);
+
+            if (dirHasIndexHtml) window.location.assign(dirPath + "/index.html");
+            else readAnotherFormat(booksDir + bookSlug);
+
+            function readAnotherFormat(dirPath) {
+                var os = require('os'),
+                    exec = require('child_process').exec,
+                    runOnWindows = 'start ' + path.normalize(process.cwd() + '/viewer/STDUViewerApp.exe'),
+                    runOnLinux = 'xdg-open',
+                    runOnOSx = 'open';
+
+                dirPath = path.normalize(dirPath);
+                console.log(dirPath);
+
+                var OSAppsTable = {
+                    'win32': runOnWindows,
+                    'win64': runOnWindows,
+                    'linux': runOnLinux,
+                    'linux2': runOnLinux,
+                    'darwin': runOnOSx
+                };
+
+                fs.readdir(dirPath, function (err, files) {
+                    files
+                        .map(function (file) {return path.join(dirPath, file);})
+                        .filter(function (file) {return fs.statSync(file).isFile() & path.basename(file) != 'book.info';})
+                        .forEach(function (file) {
+                                     readAnotherFormat(file);
+                                     console.log(file)
+                                 });
+                });
+
+                function readAnotherFormat(file) {
+                    console.log(file);
+                    exec(OSAppsTable[os.platform()] + ' ' + file,
+                         function (error, stdout, stderr) {
+                             console.log('stdout: ' + stdout);
+                             console.log('stderr: ' + stderr);
+                             if (error !== null) {
+                                 console.log('exec error: ' + error);
+                             }
+                         });
+                }
+            }
+        };
+
+        this.getRepositoryBookList = function () {
+            request({url: url + 'api/books', json: true}, function (error, response, body) {
+                if (!error && response.statusCode === 200) {
+                    body = JSON.stringify(body);
+                    var book = JSON.parse(body).books;
+                    $this.setRemoteBooks(book);
+                    $this.drawShelfs();
+                }
+                else console.log('connection error')
+            });
+        };
+
+        this.downloadBook = function (bookHref) {
+            var fileUrl = url + 'books/' + bookHref + '.etb',
+                savingDir = path.normalize(appDir + 'books/');
+            console.log('download started');
+
+            require('download.js')(fileUrl, savingDir, function (err) {
+                if (!err) $this.getStorageBookList();
+            });
+
+            $this.drawShelfs();
+            $this.switchScreen('shelf');
         };
 
         this.init = function () {
@@ -64,18 +131,25 @@ var App = function () {
                     }, 500);
                 }
             });
-            $this.getStorageBookList();
 
-            $this.getStorageBookList();
-            $this.drawShelfs();
-            $this.hideAllScreens();
-            $this.screens.shelf.show();
+            setTimeout(function () {
+                $this.getStorageBookList();
+                $this.getRepositoryBookList();
+                $this.switchScreen('shelf');
+            }, 2000);
+
         };
 
         this.drawShelfs = function () {
             $this.renderStorageBooks();
             $this.renderRemoteBooks();
         };
+
+        this.switchScreen = function (screen) {
+            this.hideAllScreens();
+            this.screens[screen].show();
+        };
+
 
         this.renderStorageBooks = function () {
             this.storageList.html('');
@@ -87,7 +161,7 @@ var App = function () {
                     $('.storageList').append(shelf);
                     j = 0;
                 }
-                shelf.find('.book-list').append(this.createBook(this.storageBooks[i]));
+                shelf.find('.book-list').append(this.createStorageBook((this.storageBooks[i])));
             }
             $('.storageList .book').click(function () {
                 $this.readBook($(this).attr('href'));
@@ -96,40 +170,86 @@ var App = function () {
         };
 
         this.renderRemoteBooks = function () {
-            this.remoteList.html('');
+            var $remoteList = $('.remoteList');
+            $remoteList.html('');
             var shelf = this.createShelf();
-            this.remoteList.append(shelf);
+            $remoteList.append(shelf);
             for (var i = 0, j = 0; i < this.remoteBooks.length; i++, j++) {
                 if (j == Math.round((this.screens.shelf.width - 126) / 65)) {
                     shelf = this.createShelf();
-                    $('.remoteList').append(shelf);
+                    $remoteList.append(shelf);
                     j = 0;
                 }
-                shelf.find('.book-list').append(this.createBook(this.remoteBooks[i]));
+                this.createRemoteBook(this.remoteBooks[i], i, function (response) {
+                    shelf.find('.book-list').append(response);
+                });
             }
         };
+        $this.remoteList.on('click', '.book', function () {
+            var book = $this.remoteBooks[$(this).attr('data-book-id')];
+            $('#modal').modal('show');
+            $('.book-title').html('<strong>Название: </strong>' + book.title);
+            $this.bookAuthors.html('<strong>Авторы: </strong>' + book.authors);
+            $this.bookISBN.html('<strong>ISBN: </strong>' + book.ISBN);
+            $this.bookDownload.attr('href', book.slug);
+            return false;
+        });
+        $this.modal.on('click', '.download', function () {
+            var link = $(this).attr('href');
+            $this.switchScreen('uploading');
+            setTimeout(function () {
+                console.log('yeah');
+                $this.downloadBook(link);
+            }, 500);
+        });
 
-        this.createBook = function (book) {
+        this.createStorageBook = function (book) {
             book.slug = path.basename(book);
-            return $('<a href="' + path.basename(book) +
+            return $('<a title="Открыть книгу" href="' + path.basename(book) +
                          '" class="book" style="background-image: url(' +
-                         cachePath + path.basename(book) + '/content/cover.png)"></a>');
+                         cacheDir + path.basename(book) + '/content/cover.png)"></a>');
         };
+
+        this.createRemoteBook = function (book, id, callback) {
+            var filePath = url + 'tmp/' + book.slug + '/content/cover.png';
+            var defaultFilePath = 'app://reader/app/img/empty-book.png';
+
+            function createBookLink(path) {
+                callback($('<a title="Скачать книгу" href="#"' +
+                               'class="book remote-book" ' +
+                               'data-book-id="' + id + '" style="background-image: url('
+                               + path + ')"></a>'));
+            }
+
+            request(filePath, function (error, response) {
+                var fileDoesntExist = response.statusCode == 404;
+                if (fileDoesntExist) {
+                    createBookLink(defaultFilePath);
+                }
+                else {
+                    createBookLink(filePath);
+                }
+            });
+        };
+
 
         this.createShelf = function () {
             var id = Math.ceil(Math.random() * 100000);
             return $(
                     '<div class="shelf" id="' + id + '">' +
-                    '<div class="left-side">' +
-                    '<div class="right-side">' +
                     '<div class="middle-side">' +
                     '<div class="book-list"></div>' +
                     '</div>' +
-                    '</div>' +
-                    '</div>' +
                     '</div>'
             );
+        }
+        ;
+        this.updateProgress = function (currentSize, allSize) {
+            if (currentSize == allSize) {
+                this.drawShelfs();
+            }
         };
+
 
         this.setRemoteBooks = function (books) {
             this.remoteBooks = books;

@@ -1,10 +1,10 @@
-#define MyAppName "Электронные учебники"
-#define MyAppVersion "0.2.0-beta"
+п»ї#define MyAppName "Р­Р»РµРєС‚СЂРѕРЅРЅС‹Рµ СѓС‡РµР±РЅРёРєРё"
+#define MyAppVersion "0.3.1-beta"
 #define MyAppPublisher "IT-Attractor"
 #define MyAppURL "http://www.it-attractor.com"
-#define LaunchProgram "Запустить приложение после установки"
-#define DesktopIcon "Создать ярлык на рабочем столе?"
-#define CreateDesktopIcon "Создать ярлык"
+#define LaunchProgram "Р—Р°РїСѓСЃС‚РёС‚СЊ РїСЂРёР»РѕР¶РµРЅРёРµ"
+#define DesktopIcon "РЎРѕР·РґР°С‚СЊ СЏСЂР»С‹Рє РЅР° СЂР°Р±РѕС‡РµРј СЃС‚РѕР»Рµ?"
+#define CreateDesktopIcon "РЎРѕР·РґР°С‚СЊ СЏСЂР»С‹Рє"
 
 
 
@@ -27,7 +27,7 @@ OutputBaseFilename=ebook-setup-{#MyAppVersion}
 Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
 
 [Files]
-Source: "F:\node-webkit-win32-v0.10.4\*"; Excludes: "libEGL.dll,libGLESv2.dll" ; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
+Source: "F:\node-webkit-win32-v0.10.4\*"; Excludes: "createSetup.iss, README.md, libEGL.dll, libGLESv2.dll, locales, app\img\Thumbs.db, app\img\Thumbs.db:encryptable, .gitignore" ; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
 Source: "F:\node-webkit-win32-v0.10.4\icon.ico"; DestDir: "{app}"; DestName: "icon.ico"; Flags: ignoreversion
 
 [Tasks]
@@ -36,6 +36,8 @@ Name: "desktopicon"; Description: "{#CreateDesktopIcon}"; GroupDescription: "{#D
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\ebook.exe"; WorkingDir: "{app}"; IconFilename: "{app}/icon.ico"
 Name: "{userstartup}\{#MyAppName}"; Filename: "{app}\ebook.exe"; WorkingDir: "{app}"; IconFilename: "{app}/icon.ico"
+Name: "{userstartup}\РЈРґР°Р»РёС‚СЊ РїСЂРёР»РѕР¶РµРЅРёРµ"; Filename: "{app}\unins000.exe"; WorkingDir: "{app}"
+Name: "{group}\РЈРґР°Р»РёС‚СЊ РїСЂРёР»РѕР¶РµРЅРёРµ"; Filename: "{app}\unins000.exe"; WorkingDir: "{app}"
 Name: "{userdesktop}\{#MyAppName}"; Filename: "{app}\ebook.exe"; WorkingDir: "{app}"; IconFilename: "{app}/icon.ico"; Tasks: desktopicon
 
 [Run]

@@ -4,14 +4,17 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>Электронные учебники</title>
-    <link rel="icon" type="image/x-icon" href="icon.ico" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="css/app.css"/>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/screen.js"></script>
-    <script src="js/app.js"></script>
+    <script defer src="js/jquery.min.js"></script>
+    <script defer src="js/screen.js"></script>
+    <script defer src="js/app.js"></script>
+    <script defer src="js/modal.js"></script>
 </head>
 <body>
+<div id="uploading" class="screen">
+    <span>Загрузка учебника...</span>
+</div>
 <div id="loading" class="screen" style="display: block">
     <span>Электронные учебники</span>
 </div>
@@ -22,6 +25,27 @@
     <div class="shelf-title">Доступные для скачивания</div>
     <div class="remoteList"></div>
 </div>
-<iframe id="bookViewer" class="screen"></iframe>
+<div id="modal" class="modal fade bs-example-modal-md" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myLargeModalLabel">Информация о книге</h4>
+            </div>
+            <div class="modal-body">
+                <h4 class="book-title">Название: </h4>
+                <h4 class="book-authors">Авторы: </h4>
+                <h4 class="book-isbn">ISBN: </h4>
+                <a href="#" class="btn btn-primary download" data-toggle="modal"
+                   data-target=".bs-example-modal-sm">Скачать книгу</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

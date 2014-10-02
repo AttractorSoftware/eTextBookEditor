@@ -1,2 +1,5 @@
 /.idea
 /app/books
+/locales
+/app/img/Thumbs.db
+/app/img/Thumbs.db:encryptable
