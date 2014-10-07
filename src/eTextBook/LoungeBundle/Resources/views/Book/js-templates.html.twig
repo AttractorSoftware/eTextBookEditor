@@ -110,8 +110,8 @@
 
 <div class="template" name="audioItem">
     <audio-item>
-        <audio controls preload="none">
-            <source src="<%= path %>" type="audio/mpeg">
+        <audio controls>
+            <source src='{{ "<%= path %>" | raw  }}' type="audio/mpeg">
         </audio>
         <edit-element class="glyphicon glyphicon-remove"></edit-element>
         <view-element class="description"></view-element>
