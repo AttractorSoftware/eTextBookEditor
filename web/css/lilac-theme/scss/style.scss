@@ -1,5 +1,16 @@
-body {
+html, body {
   font-family: Tahoma;
+  background: url('../img/body-bg.png');
+}
+
+.book {
+  .page-header {
+    background: url('../img/body-bg.png');
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  }
+}
+
+#book-body {
   background: url('../img/body-bg.png');
 }
 
@@ -37,6 +48,9 @@ body {
   }
   .block {
     margin-bottom: 20px;
+    overflow: hidden;
+    float: left;
+    width: 100%;
     .position {
       font-size: 20px;
       font-weight: bold;
@@ -51,6 +65,7 @@ body {
 
     .block-content {
       h1 {
+        text-align: left;
         font-size: 20px;
         font-weight: bold;
         color: #000;
@@ -65,6 +80,7 @@ body {
       border-left: solid 5px #e9b4ea;
       border-radius: 3px 0 0 3px;
       box-shadow: 1px 1px 0 #f1e4ee;
+      overflow: hidden;
     }
 
     .task-content {

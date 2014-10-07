@@ -38,9 +38,8 @@
         this.bindRemoveEvent();
         this.editCont.find('.add-audio').bind('click', function() {
             App.fileManager.pickFile(function(path) {
-                console.debug(App.eTextBookTemplate.getTemplate('audioItem').replace("&lt;%= path %&gt;", path));
                 $this.editCont.find('audio-list .add-audio').before(
-                    App.eTextBookTemplate.getTemplate('audioItem').replace("&lt;%= path %&gt;", path)
+                    App.eTextBookTemplate.getTemplate('audioItem').replace("&lt;%= path %&gt;", path).replace("<%= path %>", path)
                 );
                 $this.bindRemoveEvent();
             });

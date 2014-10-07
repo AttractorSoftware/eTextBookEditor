@@ -1,5 +1,12 @@
-body {
+html, body {
   font-family: Tahoma;
+  background: url("../img/body-bg.png"); }
+
+.book .page-header {
+  background: url("../img/body-bg.png");
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1); }
+
+#book-body {
   background: url("../img/body-bg.png"); }
 
 .module .title .wrap {
@@ -24,7 +31,10 @@ body {
 .module .blocks {
   padding: 50px 0 0 0; }
 .module .block {
-  margin-bottom: 20px; }
+  margin-bottom: 20px;
+  overflow: hidden;
+  float: left;
+  width: 100%; }
   .module .block .position {
     font-size: 20px;
     font-weight: bold;
@@ -34,6 +44,7 @@ body {
     border-left: solid 5px #e9b4ea;
     padding: 5px 0 5px 20px; }
   .module .block .block-content h1 {
+    text-align: left;
     font-size: 20px;
     font-weight: bold;
     color: #000;
@@ -44,7 +55,8 @@ body {
     border: solid 1px #eae2e8;
     border-left: solid 5px #e9b4ea;
     border-radius: 3px 0 0 3px;
-    box-shadow: 1px 1px 0 #f1e4ee; }
+    box-shadow: 1px 1px 0 #f1e4ee;
+    overflow: hidden; }
   .module .block .task-content {
     background: #fff;
     padding: 10px 20px 20px 20px;

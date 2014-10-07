@@ -36,6 +36,7 @@ module.exports = function (grunt) {
                     , 'web/js/eTextBook/widgetRepository.js'
                     , 'web/js/eTextBook/widget/*.js'
                     , 'web/js/html5Player.js'
+                    , 'web/js/eTextBook/templateFormat.js'
                 ],
                 dest: 'web/book-template/js/script.js'
             }
@@ -53,7 +54,8 @@ module.exports = function (grunt) {
                 src: [
                     'bower_components/bootstrap/dist/css/bootstrap.min.css'
                     ,'bower_components/animate.css/animate.min.css'
-                    , 'web/css/style.css'
+                    ,'web/css/style.css'
+                    ,'web/css/lilac-theme/css/style.css'
                 ], dest: 'web/book-template/css/main-style.css'
             }
         }, cssmin: {

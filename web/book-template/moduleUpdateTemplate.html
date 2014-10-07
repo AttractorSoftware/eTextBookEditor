@@ -10,17 +10,5 @@
 <div class="container e-text-book-viewer">
     -- content --
 </div>
-<script src="../js/script.min.js"></script>
-<script>
-    $(function(){
-        for(var i = 0; i < $('body').find('widget').length; i++) {
-            var widgetCont = $($('body').find('widget')[i]);
-            var widget = App.eTextBookWidgetRepository.getWidgetBySlug(widgetCont.attr('widget-slug'));
-            widget = new widget();
-            widget.contentContainer = widgetCont.find('widget-content');
-            widget.viewActivate();
-        }
-    });
-</script>
 </body>
 </html>
