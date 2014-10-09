@@ -28,7 +28,7 @@ html, body {
   padding: 20px 0 0 50px; }
 .module .description {
   padding: 20px 0 0 50px; }
-.module .blocks {
+.module blocks {
   padding: 50px 0 0 0; }
 .module .block {
   margin-bottom: 20px;
@@ -38,7 +38,8 @@ html, body {
   .module .block .position {
     font-size: 20px;
     font-weight: bold;
-    color: #000; }
+    color: #000;
+    overflow: hidden; }
   .module .block blockquote {
     font-size: 14px;
     border-left: solid 5px #e9b4ea;
@@ -49,6 +50,8 @@ html, body {
     font-weight: bold;
     color: #000;
     margin: 0; }
+  .module .block .block-content img {
+    margin: 0 10px 0 0; }
   .module .block .rule-content {
     background: #fff;
     padding: 10px 20px 20px 20px;
@@ -62,6 +65,8 @@ html, body {
     padding: 10px 20px 20px 20px;
     border: solid 1px #eae2e8;
     box-shadow: 1px 1px 0 #f1e4ee; }
+    .module .block .task-content img {
+      max-width: 100% !important; }
     .module .block .task-content .task-title {
       font-size: 14px;
       font-weight: bold;
@@ -72,11 +77,19 @@ html, body {
       overflow: hidden; }
       .module .block .task-content .simple-text img {
         margin: 0 15px 0 0; }
-  .module .block .task-types .item {
-    float: left;
-    clear: left;
-    width: 40px;
-    height: 40px;
-    border-radius: 20px;
-    background: #cdc8cc;
-    margin: 10px 0 0 0; }
+  .module .block .task-types {
+    overflow: hidden; }
+    .module .block .task-types.inline {
+      float: right;
+      margin: 0 0 5px 0; }
+      .module .block .task-types.inline .item {
+        clear: none;
+        margin: 0 10px 0 0; }
+    .module .block .task-types .item {
+      float: left;
+      clear: left;
+      width: 40px;
+      height: 40px;
+      border-radius: 20px;
+      background: #cdc8cc;
+      margin: 10px 0 0 0; }

@@ -207,7 +207,7 @@ var eTextBookEditor = Backbone.Model.extend({
             var block = $(blocks[i]);
             switch(block.prop('localName')) {
                 case "block":  {
-                    block.attr('data-anijs', "if: scroll, on: window, do: flipInX animated, before: scrollReveal");
+                    block.attr('data-anijs', "");
                     break;
                 }
                 case "rule": {
@@ -215,7 +215,7 @@ var eTextBookEditor = Backbone.Model.extend({
                     break;
                 }
                 default: {
-                    block.attr('data-anijs', "if: scroll, on: window, do: bounceInLeft animated, before: scrollReveal");
+                    block.attr('data-anijs', "");
                     break;
                 }
             }

@@ -43,7 +43,7 @@ html, body {
   .description {
     padding: 20px 0 0 50px;
   }
-  .blocks {
+  blocks {
     padding: 50px 0 0 0;
   }
   .block {
@@ -55,6 +55,7 @@ html, body {
       font-size: 20px;
       font-weight: bold;
       color: #000;
+      overflow: hidden;
     }
 
     blockquote {
@@ -70,6 +71,9 @@ html, body {
         font-weight: bold;
         color: #000;
         margin: 0;
+      }
+      img {
+        margin: 0 10px 0 0;
       }
     }
 
@@ -88,6 +92,9 @@ html, body {
       padding: 10px 20px 20px 20px;
       border: solid 1px #eae2e8;
       box-shadow: 1px 1px 0 #f1e4ee;
+      img {
+        max-width: 100% !important;
+      }
       .task-title {
         font-size: 14px;
         font-weight: bold;
@@ -103,6 +110,15 @@ html, body {
       }
     }
     .task-types {
+      overflow: hidden;
+      &.inline {
+        float: right;
+        margin: 0 0 5px 0;
+        .item {
+          clear: none;
+          margin: 0 10px 0 0;
+        }
+      }
       .item {
         float: left;
         clear: left;
