@@ -188,10 +188,14 @@ var eTextBookEditor = Backbone.Model.extend({
         for(var i = 0; i < modules.length; i++) {
             var module = $(modules[i]);
             module.attr('moduleId', i + 1);
+            var blockIndex = 1;
             for(var j = 0; j < module.find('block').length; j++) {
                 var block = $(module.find('block')[j]);
-                block.attr('blockId', j + 1);
-                block.find('block-index').html(j + 1 + '.');
+                if(block.attr('index-disable') != '1') {
+                    block.attr('blockId', blockIndex);
+                    block.find('block-index').html(blockIndex + '.');
+                    blockIndex++;
+                } else { block.find('block-index').html(''); }
             }
         }
         return html;

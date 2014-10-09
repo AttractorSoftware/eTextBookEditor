@@ -182,9 +182,17 @@ html, body {
             .e-text-book-editor .desktop e-text-book module blocks block block-headline block-title, .e-text-book-editor .desktop e-text-book module blocks rule block-headline block-title, .e-text-book-editor .desktop e-text-book module blocks .header block-headline block-title {
               float: left;
               width: 100%; }
+              .e-text-book-editor .desktop e-text-book module blocks block block-headline block-title label, .e-text-book-editor .desktop e-text-book module blocks rule block-headline block-title label, .e-text-book-editor .desktop e-text-book module blocks .header block-headline block-title label {
+                width: 100%; }
               .e-text-book-editor .desktop e-text-book module blocks block block-headline block-title input, .e-text-book-editor .desktop e-text-book module blocks rule block-headline block-title input, .e-text-book-editor .desktop e-text-book module blocks .header block-headline block-title input {
                 float: left;
                 width: 100%; }
+              .e-text-book-editor .desktop e-text-book module blocks block block-headline block-title .index-disable, .e-text-book-editor .desktop e-text-book module blocks rule block-headline block-title .index-disable, .e-text-book-editor .desktop e-text-book module blocks .header block-headline block-title .index-disable {
+                font-weight: normal;
+                float: right; }
+                .e-text-book-editor .desktop e-text-book module blocks block block-headline block-title .index-disable input, .e-text-book-editor .desktop e-text-book module blocks rule block-headline block-title .index-disable input, .e-text-book-editor .desktop e-text-book module blocks .header block-headline block-title .index-disable input {
+                  width: auto;
+                  margin: 3px 5px 0 0; }
           .e-text-book-editor .desktop e-text-book module blocks block block-content, .e-text-book-editor .desktop e-text-book module blocks rule block-content, .e-text-book-editor .desktop e-text-book module blocks .header block-content {
             float: left;
             width: 100%;
