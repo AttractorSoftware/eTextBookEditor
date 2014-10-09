@@ -23,10 +23,12 @@ var inlineEditInput = inlineEdit.extend({
 
     ,finishEdit: function() {
         this.viewCont.html(this.editCont.find('.widget').val());
-        if(this.editCont.find('.index-disable input').prop('checked')) {
-            this.get('cont').parent().parent().attr('index-disable', 1);
-        } else {
-            this.get('cont').parent().parent().attr('index-disable', 0);
+        if(this.get('cont').parent().parent().prop('tagName') != "E-TEXT-BOOK") {
+            if(this.editCont.find('.index-disable input').prop('checked')) {
+                this.get('cont').parent().parent().attr('index-disable', 1);
+            } else {
+                this.get('cont').parent().parent().attr('index-disable', 0);
+            }
         }
     }
 

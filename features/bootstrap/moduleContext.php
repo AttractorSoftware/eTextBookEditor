@@ -199,7 +199,7 @@ class ModuleContext extends eTextBookContext
      */
     public function setDataForModule($title, $keyQuestions, $description)
     {
-        $this->findCss('module-title input')->setValue($title);
+        $this->findCss('module-title input[type="text"]')->setValue($title);
         $this->findCss('module-questions textarea')->setValue($keyQuestions);
         $this->findCss('module-description textarea')->setValue($description);
     }
@@ -250,7 +250,7 @@ class ModuleContext extends eTextBookContext
         $addBlockLink = $addBlockButton->find('css', '.add-block');
         $addBlockLink->click();
         $lastBlock = $desktop->find('css', 'block');
-        $blockTitleInput = $lastBlock->find('css', 'block-title edit-element input');
+        $blockTitleInput = $lastBlock->find('css', 'block-title edit-element input[type="text"]');
         $blockTitleInput->setValue($title);
         $editButton = $lastBlock->find('css', 'control-panel item.edit');
         $editButton->click();
@@ -356,9 +356,8 @@ class ModuleContext extends eTextBookContext
 
         $display = $this->findCss('.e-text-book-viewer');
 
-        assertEquals($display->find('css', 'module-title view-element')->getHTML(), $title);
-        assertEquals($display->find('css', 'module-questions view-element')->getHTML(), $questions);
-        assertEquals($display->find('css', 'module-description view-element')->getHTML(), $description);
+        assertEquals($display->find('css', '.module .questions')->getHTML(), $questions);
+        assertEquals($display->find('css', '.module .description')->getHTML(), $description);
     }
 
 
