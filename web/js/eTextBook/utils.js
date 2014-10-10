@@ -33,7 +33,8 @@ var eTextBookUtils = function() {
                 this.firstZero(date.getFullYear()) +
                 this.firstZero(date.getHours()) +
                 this.firstZero(date.getMinutes()) +
-                this.firstZero(date.getSeconds());
+                this.firstZero(date.getSeconds()) +
+                Math.ceil(Math.random() * 100000);
     };
 
     this.firstZero = function(value) {

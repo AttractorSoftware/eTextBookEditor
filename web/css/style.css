@@ -819,6 +819,22 @@ html, body {
 #advance-control-panel li {
   cursor: pointer; }
 
+#save-notify {
+  display: none;
+  padding: 9px;
+  position: fixed;
+  left: 100%;
+  top: 0;
+  margin: 0 51px 0 -100px;
+  height: 38px;
+  width: 100px;
+  text-align: center;
+  font-size: 13px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.3); }
+  #save-notify.show {
+    display: block; }
+
 html.display-page {
   width: 100%;
   overflow-x: hidden; }
@@ -1164,7 +1180,7 @@ image-description {
     -webkit-transition: top .5s ease;
     transition: top .5s ease; }
     .book .book-summary .summary .chapter {
-      list-style: decimal inside; }
+      list-style: none; }
       .book .book-summary .summary .chapter .fa {
         display: inline-block;
         font-family: 'Glyphicons Halflings';
@@ -1186,12 +1202,14 @@ image-description {
         white-space: nowrap;
         position: relative; }
       .book .book-summary .summary .chapter .exercises-list {
+        height: 0;
         padding-left: 20px;
-        max-height: 0;
         overflow: hidden;
         -webkit-transition: max-height 0.8s;
         -moz-transition: max-height 0.8s;
         transition: max-height 0.8s; }
+        .book .book-summary .summary .chapter .exercises-list a {
+          padding: 0; }
       .book .book-summary .summary .chapter i.fa-check {
         display: none;
         position: absolute;
@@ -1206,7 +1224,7 @@ image-description {
       background: transparent;
       text-decoration: none; }
     .book .book-summary .summary .chapter.active .exercises-list, .book .book-summary .summary .chapter:hover .exercises-list {
-      max-height: 300px; }
+      height: auto; }
 .book .book-body {
   width: 100%;
   position: absolute;

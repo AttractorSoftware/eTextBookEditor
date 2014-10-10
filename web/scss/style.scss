@@ -1089,4 +1089,22 @@ html, body {
   li { cursor: pointer; }
 }
 
+#save-notify {
+  display: none;
+  padding: 9px;
+  position: fixed;
+  left: 100%;
+  top: 0;
+  margin: 0 51px 0 -100px;
+  height: 38px;
+  width: 100px;
+  text-align: center;
+  font-size: 13px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.3);
+  &.show {
+    display: block;
+  }
+}
+
 @import '../book-template/scss/style';

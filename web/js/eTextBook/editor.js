@@ -150,13 +150,33 @@ var eTextBookEditor = Backbone.Model.extend({
 
     ,save: function() {
         var $this = this;
+        this.showSaveNotify();
         $.post(this.get('cont').attr('update-action'), {
             book: this.get('cont').attr('book')
             ,module: this.get('cont').attr('module')
             ,content: this.getContent()
         }, function(response) {
+            $this.hideSaveNotify();
             $this.updateDisplay(true);
         });
+    }
+
+    ,showSaveNotify: function() {
+        this.notifyInterval = setInterval(function(){
+             if($('#save-notify').hasClass('show')) {
+                 $('#save-notify').fadeOut(function(){ $('#save-notify').removeClass('show') });
+             } else {
+                 $('#save-notify').fadeIn(function(){ $('#save-notify').addClass('show') });
+             }
+        }, 1000);
+    }
+
+    ,hideSaveNotify: function() {
+        clearInterval(this.notifyInterval);
+        setTimeout(function(){
+            $('#save-notify').fadeOut();
+            $('#save-notify').removeClass('show');
+        }, 1000);
     }
 
     ,clearEditElements: function(html) {
@@ -196,9 +216,17 @@ var eTextBookEditor = Backbone.Model.extend({
                     block.find('block-index').html(blockIndex + '.');
                     blockIndex++;
                 } else { block.find('block-index').html(''); }
+                this.checkBlock(block);
             }
         }
         return html;
+    }
+
+    ,checkBlock: function(block) {
+        var id = $(block).attr('id');
+        if(!id) {
+            $(block).attr('id', App.eTextBookUtils.generateUID());
+        }
     }
 
     ,setAnimation: function(html) {

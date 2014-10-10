@@ -44,13 +44,3 @@
     {% include 'eTextBookLoungeBundle:Default:file-manager.html.twig' with { 'book': book } %}
 
 {% endblock %}
-
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="/css/lilac-theme/css/style.css"/>
-{% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    <script src="/js/eTextBook/templateFormat.js"></script>
-{% endblock %}

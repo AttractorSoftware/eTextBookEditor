@@ -46,6 +46,8 @@
 
     {#{% include 'eTextBookLoungeBundle:Book:advance-control-panel.html.twig' %}#}
 
+    <div id="save-notify">Сохранение</div>
+
     <div class="e-text-book-editor" book="{{ book.slug }}" module="{{ currentModule }}"
          update-action="{{ path('book-update-module') }}">
         <div class="desktop">
