@@ -455,7 +455,7 @@ image-description {
       transition: top .5s ease;
 
       .chapter {
-        list-style: decimal inside;
+        list-style: none;
         .fa {
           display: inline-block;
           font-family: 'Glyphicons Halflings';
@@ -482,12 +482,15 @@ image-description {
           position: relative;
         }
         .exercises-list {
+          height: 0;
           padding-left: 20px;
-          max-height: 0;
           overflow: hidden;
           -webkit-transition: max-height 0.8s;
           -moz-transition: max-height 0.8s;
           transition: max-height 0.8s;
+          a {
+            padding: 0;
+          }
         }
         i.fa-check {
           display: none;
@@ -511,7 +514,7 @@ image-description {
       }
       .chapter.active, .chapter:hover {
         .exercises-list {
-          max-height: 300px;
+          height: auto;
         }
       }
     }

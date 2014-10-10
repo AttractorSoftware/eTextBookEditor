@@ -142,7 +142,9 @@ var FileManager = function(cont) {
         this.viewAudioPath = this.audioPath + '/' + $(audio).attr('title');
         this.audioPlayer.find('audio').html('');
         this.audioPlayer.find('audio').append('<source src="' + this.viewAudioPath + '" type="audio/mpeg">');
-        this.audioPlayer.find('audio')[0].load();
+        if($.isFunction(this.audioPlayer.find('audio')[0].load)){
+            this.audioPlayer.find('audio')[0].load();
+        }
         this.audios.removeClass('selected');
         $(audio).addClass('selected');
     }
@@ -172,4 +174,5 @@ var FileManager = function(cont) {
     this.init();
 }
 
-App.fileManager = new FileManager($('.file-manager'));
+App.fileManager = new FileManager($('.file-manager'))
+

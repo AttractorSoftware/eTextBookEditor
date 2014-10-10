@@ -231,9 +231,20 @@ html, body {
               block-title {
                 float: left;
                 width: 100%;
+                label {
+                  width: 100%;
+                }
                 input {
                   float: left;
                   width: 100%;
+                }
+                .index-disable {
+                  font-weight: normal;
+                  float: right;
+                  input {
+                    width: auto;
+                    margin: 3px 5px 0 0;
+                  }
                 }
               }
             }
@@ -1039,7 +1050,7 @@ html, body {
 
 .addBookContainer {
   float: right;
-  margin: 45px 0 0 0;
+  margin: -20px 0 0 0;
 }
 
 #bookFormModal {
@@ -1076,6 +1087,24 @@ html, body {
 
 #advance-control-panel {
   li { cursor: pointer; }
+}
+
+#save-notify {
+  display: none;
+  padding: 9px;
+  position: fixed;
+  left: 100%;
+  top: 0;
+  margin: 0 51px 0 -100px;
+  height: 38px;
+  width: 100px;
+  text-align: center;
+  font-size: 13px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.3);
+  &.show {
+    display: block;
+  }
 }
 
 @import '../book-template/scss/style';

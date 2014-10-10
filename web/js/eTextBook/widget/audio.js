@@ -39,7 +39,7 @@
         this.editCont.find('.add-audio').bind('click', function() {
             App.fileManager.pickFile(function(path) {
                 $this.editCont.find('audio-list .add-audio').before(
-                    App.eTextBookTemplate.getTemplateWithParams('audioItem')({ path: path })
+                    App.eTextBookTemplate.getTemplate('audioItem').replace("&lt;%= path %&gt;", path).replace("<%= path %>", path)
                 );
                 $this.bindRemoveEvent();
             });

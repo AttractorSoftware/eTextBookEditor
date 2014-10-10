@@ -150,13 +150,33 @@ var eTextBookEditor = Backbone.Model.extend({
 
     ,save: function() {
         var $this = this;
+        this.showSaveNotify();
         $.post(this.get('cont').attr('update-action'), {
             book: this.get('cont').attr('book')
             ,module: this.get('cont').attr('module')
             ,content: this.getContent()
         }, function(response) {
+            $this.hideSaveNotify();
             $this.updateDisplay(true);
         });
+    }
+
+    ,showSaveNotify: function() {
+        this.notifyInterval = setInterval(function(){
+             if($('#save-notify').hasClass('show')) {
+                 $('#save-notify').fadeOut(function(){ $('#save-notify').removeClass('show') });
+             } else {
+                 $('#save-notify').fadeIn(function(){ $('#save-notify').addClass('show') });
+             }
+        }, 1000);
+    }
+
+    ,hideSaveNotify: function() {
+        clearInterval(this.notifyInterval);
+        setTimeout(function(){
+            $('#save-notify').fadeOut();
+            $('#save-notify').removeClass('show');
+        }, 1000);
     }
 
     ,clearEditElements: function(html) {
@@ -188,13 +208,25 @@ var eTextBookEditor = Backbone.Model.extend({
         for(var i = 0; i < modules.length; i++) {
             var module = $(modules[i]);
             module.attr('moduleId', i + 1);
+            var blockIndex = 1;
             for(var j = 0; j < module.find('block').length; j++) {
                 var block = $(module.find('block')[j]);
-                block.attr('blockId', j + 1);
-                block.find('block-index').html(j + 1 + '.');
+                if(block.attr('index-disable') != '1') {
+                    block.attr('blockId', blockIndex);
+                    block.find('block-index').html(blockIndex + '.');
+                    blockIndex++;
+                } else { block.find('block-index').html(''); }
+                this.checkBlock(block);
             }
         }
         return html;
+    }
+
+    ,checkBlock: function(block) {
+        var id = $(block).attr('id');
+        if(!id) {
+            $(block).attr('id', App.eTextBookUtils.generateUID());
+        }
     }
 
     ,setAnimation: function(html) {
@@ -203,7 +235,7 @@ var eTextBookEditor = Backbone.Model.extend({
             var block = $(blocks[i]);
             switch(block.prop('localName')) {
                 case "block":  {
-                    block.attr('data-anijs', "if: scroll, on: window, do: flipInX animated, before: scrollReveal");
+                    block.attr('data-anijs', "");
                     break;
                 }
                 case "rule": {
@@ -211,7 +243,7 @@ var eTextBookEditor = Backbone.Model.extend({
                     break;
                 }
                 default: {
-                    block.attr('data-anijs', "if: scroll, on: window, do: bounceInLeft animated, before: scrollReveal");
+                    block.attr('data-anijs', "");
                     break;
                 }
             }

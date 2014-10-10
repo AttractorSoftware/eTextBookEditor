@@ -36,6 +36,10 @@ var NavigationController = function () {
     };
 
     this.activateWidgets = function() {
+        templateFormat.setRootTag($('e-text-book'));
+        templateFormat.parseData();
+        templateFormat.reDraw();
+
         for(var i = 0; i < $('body').find('widget').length; i++) {
             var widgetCont = $($('body').find('widget')[i]);
             var widget = App.eTextBookWidgetRepository.getWidgetBySlug(widgetCont.attr('widget-slug'));

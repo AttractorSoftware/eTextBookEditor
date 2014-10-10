@@ -182,9 +182,17 @@ html, body {
             .e-text-book-editor .desktop e-text-book module blocks block block-headline block-title, .e-text-book-editor .desktop e-text-book module blocks rule block-headline block-title, .e-text-book-editor .desktop e-text-book module blocks .header block-headline block-title {
               float: left;
               width: 100%; }
+              .e-text-book-editor .desktop e-text-book module blocks block block-headline block-title label, .e-text-book-editor .desktop e-text-book module blocks rule block-headline block-title label, .e-text-book-editor .desktop e-text-book module blocks .header block-headline block-title label {
+                width: 100%; }
               .e-text-book-editor .desktop e-text-book module blocks block block-headline block-title input, .e-text-book-editor .desktop e-text-book module blocks rule block-headline block-title input, .e-text-book-editor .desktop e-text-book module blocks .header block-headline block-title input {
                 float: left;
                 width: 100%; }
+              .e-text-book-editor .desktop e-text-book module blocks block block-headline block-title .index-disable, .e-text-book-editor .desktop e-text-book module blocks rule block-headline block-title .index-disable, .e-text-book-editor .desktop e-text-book module blocks .header block-headline block-title .index-disable {
+                font-weight: normal;
+                float: right; }
+                .e-text-book-editor .desktop e-text-book module blocks block block-headline block-title .index-disable input, .e-text-book-editor .desktop e-text-book module blocks rule block-headline block-title .index-disable input, .e-text-book-editor .desktop e-text-book module blocks .header block-headline block-title .index-disable input {
+                  width: auto;
+                  margin: 3px 5px 0 0; }
           .e-text-book-editor .desktop e-text-book module blocks block block-content, .e-text-book-editor .desktop e-text-book module blocks rule block-content, .e-text-book-editor .desktop e-text-book module blocks .header block-content {
             float: left;
             width: 100%;
@@ -780,7 +788,7 @@ html, body {
 
 .addBookContainer {
   float: right;
-  margin: 45px 0 0 0; }
+  margin: -20px 0 0 0; }
 
 #bookFormModal .book-info {
   width: 355px;
@@ -810,6 +818,22 @@ html, body {
 
 #advance-control-panel li {
   cursor: pointer; }
+
+#save-notify {
+  display: none;
+  padding: 9px;
+  position: fixed;
+  left: 100%;
+  top: 0;
+  margin: 0 51px 0 -100px;
+  height: 38px;
+  width: 100px;
+  text-align: center;
+  font-size: 13px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.3); }
+  #save-notify.show {
+    display: block; }
 
 html.display-page {
   width: 100%;
@@ -1156,7 +1180,7 @@ image-description {
     -webkit-transition: top .5s ease;
     transition: top .5s ease; }
     .book .book-summary .summary .chapter {
-      list-style: decimal inside; }
+      list-style: none; }
       .book .book-summary .summary .chapter .fa {
         display: inline-block;
         font-family: 'Glyphicons Halflings';
@@ -1178,12 +1202,14 @@ image-description {
         white-space: nowrap;
         position: relative; }
       .book .book-summary .summary .chapter .exercises-list {
+        height: 0;
         padding-left: 20px;
-        max-height: 0;
         overflow: hidden;
         -webkit-transition: max-height 0.8s;
         -moz-transition: max-height 0.8s;
         transition: max-height 0.8s; }
+        .book .book-summary .summary .chapter .exercises-list a {
+          padding: 0; }
       .book .book-summary .summary .chapter i.fa-check {
         display: none;
         position: absolute;
@@ -1198,7 +1224,7 @@ image-description {
       background: transparent;
       text-decoration: none; }
     .book .book-summary .summary .chapter.active .exercises-list, .book .book-summary .summary .chapter:hover .exercises-list {
-      max-height: 300px; }
+      height: auto; }
 .book .book-body {
   width: 100%;
   position: absolute;
