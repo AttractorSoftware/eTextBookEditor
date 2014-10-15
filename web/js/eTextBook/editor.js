@@ -19,16 +19,12 @@ var eTextBookEditor = Backbone.Model.extend({
                 var thisNote = $(this);
                 var updatePastedText = function(someNote){
                     var original = someNote.code();
-                    var cleaned = $this.CleanPastedHTML(original); //this is where to call whatever clean function you want. I have mine in a different file, called CleanPastedHTML.
-                    someNote.code('').html(cleaned); //this sets the displayed content editor to the cleaned pasted code.
+                    var cleaned = $this.CleanPastedHTML(original);
+                    someNote.code('').html(cleaned);
                 };
                 setTimeout(function () {
-                    //this kinda sucks, but if you don't do a setTimeout,
-                    //the function is called before the text is really pasted.
                     updatePastedText(thisNote);
                 }, 10);
-
-
             }
         };
         this.clearViewElements(this.desktop);
@@ -50,6 +46,10 @@ var eTextBookEditor = Backbone.Model.extend({
         if(panel.length) {
             $('#clearMSEntities').bind('click', function(){
                 $this.clearMSEntities();
+            });
+            $('#saveModule').bind('click', function() {
+                $this.save();
+                return false;
             });
         }
     }

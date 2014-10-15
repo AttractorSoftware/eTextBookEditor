@@ -25,8 +25,8 @@ class BookController extends Controller
 
         foreach ($fileManager->fileList($booksDir) as $fileName) {
             $filePart = explode('.', $fileName);
-            $filePart = end($filePart);
-            if ($filePart == 'etb') {
+            $extension = end($filePart);
+            if ($extension == 'etb' && $filePart[0] != '') {
                 $books[] = new Book($booksDir . $fileName);
             }
         }

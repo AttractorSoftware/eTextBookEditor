@@ -45,6 +45,7 @@ module.exports = function (grunt) {
                 src: [
                     'bower_components/bootstrap/dist/css/bootstrap.min.css'
                     ,'bower_components/summernote/dist/summernote.css'
+                    ,'bower_components/summernote/dist/summernote-bs3.css'
                     ,'bower_components/components-font-awesome/css/font-awesome.min.css'
                     ,'bower_components/animate.css/animate.min.css'
                     , 'web/css/style.css'
