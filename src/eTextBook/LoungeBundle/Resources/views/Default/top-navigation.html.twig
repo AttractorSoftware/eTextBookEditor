@@ -47,14 +47,14 @@
         <ul class="nav navbar-nav navbar-right">
             <li>
                 {% if not app.user %}
-                    <a href="{{ path('login') }}">
+                    <a href="{{ path('enter') }}">
                         <span class="glyphicon glyphicon-home"></span>
-                        Войти
+                        войти | регистрироваться
                     </a>
                 {% else %}
                     <a href="{{ path('logout') }}">
                         <span class="glyphicon glyphicon-home"></span>
-                        Выйти
+                        {{ app.user.username }} | выйти
                     </a>
                 {% endif %}
             </li>

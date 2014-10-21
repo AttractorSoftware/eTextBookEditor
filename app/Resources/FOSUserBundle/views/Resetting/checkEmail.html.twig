@@ -1,0 +1,13 @@
+{% extends "::lounge-template.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block pageHeader %}
+    <h1>Проверьте почту</h1>
+{% endblock %}
+
+{% block pageContent %}
+<p>
+{{ 'resetting.check_email'|trans({'%email%': email}) }}
+</p>
+{% endblock %}

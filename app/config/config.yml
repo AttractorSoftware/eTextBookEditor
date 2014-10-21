@@ -15,11 +15,12 @@ framework:
     templating:
         engines: ['twig']
         #assets_version: SomeVersionScheme
-    default_locale:  "%locale%"
+    default_locale:  ru
     trusted_proxies: ~
     session:         ~
     fragments:       ~
     http_method_override: true
+    translator: { fallback: ru }
 
 # Twig Configuration
 twig:
@@ -65,6 +66,11 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:     { type: memory }
 
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: eTextBook\SpawnBundle\Entity\User
+
 services:
   transliterate:
     class: eTextBook\LoungeBundle\Lib\Transliterate
@@ -78,8 +84,6 @@ services:
     class: eTextBook\LoungeBundle\UseCases\Book\UpdateETBFile
   bookLoader:
     class: eTextBook\LoungeBundle\UseCases\Book\Loader
-
-
 
 parameters:
       books_dir: %kernel.root_dir%/../web/books/

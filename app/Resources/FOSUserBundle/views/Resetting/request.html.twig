@@ -1,0 +1,9 @@
+{% extends "::lounge-template.html.twig" %}
+
+{% block pageHeader %}
+    <h1>Запрос на востановление пароля</h1>
+{% endblock %}
+
+{% block pageContent %}
+    {% include "FOSUserBundle:Resetting:request_content.html.twig" %}
+{% endblock %}

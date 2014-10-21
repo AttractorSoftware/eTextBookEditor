@@ -1,0 +1,9 @@
+{% extends "::lounge-template.html.twig" %}
+
+{% block pageHeader %}
+    <h1>Ваш профиль</h1>
+{% endblock %}
+
+{% block pageContent %}
+    {% include "FOSUserBundle:Profile:show_content.html.twig" %}
+{% endblock %}

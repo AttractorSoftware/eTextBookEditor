@@ -932,6 +932,8 @@ e-text-book-editor .display e-text-book, .e-text-book-viewer e-text-book {
           float: left;
           width: 100%;
           padding: 10px 0 0 0; }
+      e-text-book-editor .display e-text-book blocks block question img, .e-text-book-viewer e-text-book blocks block question img {
+        max-width: 100%; }
       e-text-book-editor .display e-text-book blocks block translate-comparative, .e-text-book-viewer e-text-book blocks block translate-comparative {
         float: left;
         width: 100%; }

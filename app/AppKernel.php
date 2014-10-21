@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new eTextBook\SpawnBundle\eTextBookSpawnBundle(),
             new eTextBook\LoungeBundle\eTextBookLoungeBundle(),
             new eTextBook\APIBundle\eTextBookAPIBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -25,6 +25,14 @@ class DefaultController extends Controller {
     }
 
     /**
+     * @Route("/enter", name="enter")
+     * @Template()
+     */
+    public function enterAction() {
+        return array();
+    }
+
+    /**
      * @Route("/login", name="login")
      */
     public function loginAction(Request $request) {

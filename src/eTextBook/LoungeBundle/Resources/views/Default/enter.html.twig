@@ -1,0 +1,19 @@
+{% extends "::lounge-template.html.twig" %}
+
+{% block pageHeader %}
+    <h1>Авторизация</h1>
+{% endblock %}
+
+{% block pageContent %}
+    <div class="row">
+        <div class="col-sm-6">
+            <h2>Вход</h2>
+            {{ render(controller('FOSUserBundle:Security:login')) }}
+        </div>
+        <div class="col-sm-6">
+            <h2>Регистрация</h2>
+            {{ render(controller('FOSUserBundle:Registration:register')) }}
+        </div>
+    </div>
+
+{% endblock %}

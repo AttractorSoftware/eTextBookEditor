@@ -1,0 +1,16 @@
+{% extends "::lounge-template.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block pageHeader %}
+    <h1>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</h1>
+{% endblock %}
+
+{% block pageContent %}
+    Теперь вы можете приступить к созданию книг. <br /> Перейдите на <a href="{{ path('books') }}">страницу списка книг</a> кликните по ссылке "создать новый учебник" в правом верхнем углу страницы и создайте свою первую книгу. <br />
+    Перед началом работ рекомендуем ознакомиться с <a href="{{ path('documentation') }}">документацией</a>.
+    {% if app.session is not empty %}
+        {% set targetUrl = app.session.get('_security.' ~ app.security.token.providerKey ~ '.target_path') %}
+        {% if targetUrl is not empty %}<p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>{% endif %}
+    {% endif %}
+{% endblock %}

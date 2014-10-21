@@ -112,6 +112,11 @@ e-text-book-editor .display, .e-text-book-viewer {
             padding: 10px 0 0 0;
           }
         }
+        question {
+          img {
+            max-width: 100%;
+          }
+        }
         translate-comparative {
           float: left;
           width: 100%;
