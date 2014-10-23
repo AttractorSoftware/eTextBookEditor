@@ -3,20 +3,23 @@
 {% block pageHeader %}
     <h2>{{ book.title }}</h2>
     <div class="row">
-        <div class="col-sm-8">
+        <div class="col-sm-7">
             <h4>
                 <span>{{ book.authors }}</span>
                 ISBN:&nbsp;{{ book.ISBN }}
             </h4>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-5">
             <div class="control">
                 <a href="/books/{{ book.slug }}.etb" class="btn btn-success btn-xs book-download"><span
                             class="glyphicon glyphicon-save"></span>Скачать учебник</a>
                 /
+                <a href="/publish/{{ book.slug }}" class="edit-link btn btn-primary btn-xs"><span
+                            class="glyphicon glyphicon-thumbs-up"></span>Опубликовать учебник</a>
+                /
                 <a href="{{ path('book-view', {'slug': book.slug, 'module': ' ' }) }}"
-                   class="edit-link btn btn-primary btn-xs"><span class="glyphicon glyphicon-eye-open"></span>Просмотр
-                    учебника</a>
+                   class="edit-link btn btn-primary btn-xs">
+                    <span class="glyphicon glyphicon-eye-open"></span>Просмотр учебника</a>
             </div>
         </div>
     </div>

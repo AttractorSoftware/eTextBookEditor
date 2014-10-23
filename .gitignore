@@ -17,6 +17,8 @@
 /web/tmp/*
 
 /web/css/main-style.css
+/web/css/style.css
+/web/css/style.css.map
 /web/css/main-style.min.css
 /web/book-template/css/main-style.css
 /web/book-template/css/main-style.min.css
@@ -27,3 +29,4 @@
 /web/book-template/js/script.min.js
 
 /web/version.html
+/web/publicBooks/

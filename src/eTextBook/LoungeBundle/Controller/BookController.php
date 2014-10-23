@@ -17,7 +17,8 @@ class BookController extends Controller
      * @Route("/books", name="books")
      * @Template()
      */
-    public function indexAction() {
+    public function indexAction()
+    {
         $books = array();
         $entityManager = $this->getDoctrine()->getManager();
         $books['publicBooks'] = $entityManager->getRepository('eTextBookLoungeBundle:Book')
@@ -26,16 +27,18 @@ class BookController extends Controller
             ->setParameter('isPublic', true)
             ->getQuery()
             ->getResult();
-        if($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
+        if ($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
             $books['userBooks'] = $this->getUser()->getBooks();
         }
+
         return $books;
     }
 
     /**
      * @Route("/book/create", name="book-create")
      */
-    public function createAction(Request $request) {
+    public function createAction(Request $request)
+    {
         $bookData = $request->get('book');
         $transliterate = $this->get('transliterate');
         $bookSlug = Sluggable\Urlizer::urlize($transliterate->transliterate($bookData['title'], 'ru'), '-');
@@ -56,19 +59,23 @@ class BookController extends Controller
         if (!$creator->execute()) {
             $response = array(
                 'status' => 'failed'
-                ,'reason' => 'Учебник с таким названием уже существует'
+            ,
+                'reason' => 'Учебник с таким названием уже существует'
             );
         } else {
             $response = array(
                 'status' => 'success'
-                ,'data' => array(
+            ,
+                'data' => array(
                     'slug' => $bookSlug
                 )
             );
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($book);
             $entityManager->flush();
-        } return new JsonResponse($response);
+        }
+
+        return new JsonResponse($response);
     }
 
     /**
@@ -85,6 +92,34 @@ class BookController extends Controller
             'modules' => $modules,
             'currentModule' => $module == ' ' && count($modules) > 0 ? $modules[0]->slug : $module
         );
+    }
+
+    /**
+     * @Route("/publish/{slug}", name="book-publish")
+     */
+    public function publishAction($slug)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $book = $em->getRepository('eTextBookLoungeBundle:Book')->findOneBy(
+            array('slug' => $slug)
+        );
+
+        if (!$book) {
+            throw $this->createNotFoundException(
+                'No product found for id ' . $slug
+            );
+        }
+
+        $book->setIsPublic(1);
+        $em->flush();
+        $book = $this->get('bookLoader')->load($slug);
+
+        $updater = $this->get('updateETBFile');
+        $updater->setBook($book);
+        $updater->publishBook($slug);
+
+        return $this->redirect($this->generateUrl('books'));
+
     }
 
     /**
@@ -205,7 +240,8 @@ class BookController extends Controller
     /**
      * @Route("/book/upload", name="book-upload")
      */
-    public function bookUpload(Request $request) {
+    public function bookUpload(Request $request)
+    {
         $bookFile = $request->files->get('book-file');
         $extension = explode(".", $bookFile->getClientOriginalName());
         $tmpTitle = date('dmYHis') . '.' . end($extension);

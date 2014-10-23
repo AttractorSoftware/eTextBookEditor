@@ -16,7 +16,7 @@
 {% block pageContent %}
    {% if app.user %}
        <div class="col-sm-9">
-           {% include 'eTextBookLoungeBundle:Book:book-list.html.twig' with { 'books' : publicBooks } %}
+           {% include 'eTextBookLoungeBundle:Book:book-list.html.twig' with { 'books' : publicBooks, 'flag':'public' } %}
        </div>
        <div class="col-sm-3">
            <div class="addBookContainer">
@@ -24,7 +24,7 @@
                <a id="addBookButton" href="#" data-toggle="modal" data-target="#bookFormModal"> Создать новый учебник </a>
                {% include 'eTextBookLoungeBundle:Book:form.html.twig' %}
            </div>
-           {% include 'eTextBookLoungeBundle:Book:book-list.html.twig' with { 'books' : userBooks } %}
+           {% include 'eTextBookLoungeBundle:Book:book-list.html.twig' with { 'books' : userBooks, 'flag':'private' } %}
        </div>
    {% else %}
 

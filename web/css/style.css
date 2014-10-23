@@ -791,7 +791,8 @@ html, body {
   margin: 0 0 0 10px; }
 
 #bookFormModal .book-info {
-  margin: 0 0 0 210px; }
+  margin: 0 0 0 210px;
+  width: 340px; }
   #bookFormModal .book-info input[type="file"] {
     width: 100%; }
 #bookFormModal .book-cover {
@@ -1338,3 +1339,5 @@ image-description {
       text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5); }
       .html5-controls .full-screen .glyphicon:hover {
         color: #fff; }
+
+/*# sourceMappingURL=style.css.map */

@@ -87,5 +87,6 @@ services:
 
 parameters:
       books_dir: %kernel.root_dir%/../web/books/
+      public_dir: %kernel.root_dir%/../web/publicBooks/
       book_tmp_dir: %kernel.root_dir%/../web/tmp/
       book_template_dir: %kernel.root_dir%/../web/book-template/

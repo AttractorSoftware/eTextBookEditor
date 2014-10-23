@@ -10,11 +10,13 @@ class UpdateETBFile
     private $book;
     private $tmpDir;
     private $bookTmpDir;
+    private $publicDir;
 
     public function __construct()
     {
         global $kernel;
         $this->booksDir = $kernel->getContainer()->getParameter('books_dir');
+        $this->publicDir = $kernel->getContainer()->getParameter('public_dir');
         $this->tmpDir = $kernel->getContainer()->getParameter('book_tmp_dir');
         $this->templateDir = $kernel->getContainer()->getParameter('book_template_dir');
         $this->fileManager = $kernel->getContainer()->get('fileManager');
@@ -70,6 +72,7 @@ class UpdateETBFile
         $this->createModuleFile($moduleTitle, $moduleSlug);
         $this->updateBookSummary($moduleTitle, $moduleSlug);
         $this->pack();
+
         return $moduleSlug;
     }
 
@@ -88,6 +91,30 @@ class UpdateETBFile
     public function getBookInfo()
     {
         return json_decode(file_get_contents($this->tmpDir . $this->book->getSlug() . '/book.info'));
+    }
+
+    public function publishBook($slug)
+    {
+        $this->pack();
+
+        function recurse_copy($src, $dst)
+        {
+            $dir = opendir($src);
+            @mkdir($dst, 0777, true);
+            while (false !== ($file = readdir($dir))) {
+                if (($file != '.') && ($file != '..')) {
+                    if (is_dir($src . '/' . $file)) {
+                        recurse_copy($src . '/' . $file, $dst . '/' . $file);
+                    } else {
+                        copy($src . '/' . $file, $dst . '/' . $file);
+                    }
+                }
+            }
+            closedir($dir);
+        }
+
+        recurse_copy($this->tmpDir . $slug, $this->publicDir . $slug);
+        copy($this->booksDir . $slug . '.etb', $this->publicDir . $slug . '.etb');
     }
 
     public function setBookInfo($data)
@@ -118,6 +145,7 @@ class UpdateETBFile
         foreach ($info['modules'] as $module) {
             $summaryContent .= $this->createSummary($module['title'], $module['slug'], $summaryTemplate);
         }
+
         return $summaryContent;
     }
 
@@ -128,6 +156,7 @@ class UpdateETBFile
         $summaryContent->setChapterAttributes($moduleSlug, $moduleTitle);
         $result = $summaryContent->outertext;
         $summaryContent->destroy();
+
         return $result;
     }
 
