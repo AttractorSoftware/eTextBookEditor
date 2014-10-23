@@ -85,37 +85,4 @@ class User extends BaseUser {
     {
         return $this->books;
     }
-
-    /**
-     * Add editedBooks
-     *
-     * @param \eTextBook\LoungeBundle\Entity\Book $editedBooks
-     * @return User
-     */
-    public function addEditedBook(\eTextBook\LoungeBundle\Entity\Book $editedBooks)
-    {
-        $this->editedBooks[] = $editedBooks;
-
-        return $this;
-    }
-
-    /**
-     * Remove editedBooks
-     *
-     * @param \eTextBook\LoungeBundle\Entity\Book $editedBooks
-     */
-    public function removeEditedBook(\eTextBook\LoungeBundle\Entity\Book $editedBooks)
-    {
-        $this->editedBooks->removeElement($editedBooks);
-    }
-
-    /**
-     * Get editedBooks
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getEditedBooks()
-    {
-        return $this->editedBooks;
-    }
 }

@@ -37,44 +37,57 @@ class Book {
     /**
      * @var string
      *
-     * @ORM\Column(name="authors", type="string")
+     * @ORM\Column(name="authors", type="string", nullable=true)
      */
     private $authors;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="editor", type="string")
+     * @ORM\Column(name="editor", type="string", nullable=true)
      */
     private $editor;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="isbn", type="string")
+     * @ORM\Column(name="isbn", type="string", nullable=true)
      */
     private $isbn;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="cover", type="string")
+     * @ORM\Column(name="cover", type="string", nullable=true)
      */
     private $cover;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="source", type="string")
+     * @ORM\Column(name="source", type="string", nullable=true)
      */
     private $source;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="file", type="string")
+     * @ORM\Column(name="file", type="string", nullable=true)
      */
     private $file;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="is_public", type="boolean")
+     */
+    private $isPublic = false;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="\eTextBook\SpawnBundle\Entity\User", inversedBy="books")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    protected $user;
 
     private $modules;
 
@@ -89,6 +102,15 @@ class Book {
             ,'modules' => $this->modules
             ,'source' => $this->source
         );
+    }
+
+    public function getSourceExtension() {
+        if($this->getSource() != '') {
+            $sourceExtension = explode(".", $this->getSource());
+            $sourceExtension = end($sourceExtension);
+        } else { $sourceExtension = 'etb'; }
+
+        return $sourceExtension;
     }
 
     public function __construct() {
@@ -296,5 +318,52 @@ class Book {
     public function getSource()
     {
         return $this->source;
+    }
+
+
+    /**
+     * Set user
+     *
+     * @param \eTextBook\SpawnBundle\Entity\User $user
+     * @return Book
+     */
+    public function setUser(\eTextBook\SpawnBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \eTextBook\SpawnBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set isPublic
+     *
+     * @param boolean $isPublic
+     * @return Book
+     */
+    public function setIsPublic($isPublic)
+    {
+        $this->isPublic = $isPublic;
+
+        return $this;
+    }
+
+    /**
+     * Get isPublic
+     *
+     * @return boolean 
+     */
+    public function getIsPublic()
+    {
+        return $this->isPublic;
     }
 }

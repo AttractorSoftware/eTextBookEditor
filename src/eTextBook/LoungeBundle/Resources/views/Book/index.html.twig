@@ -2,49 +2,33 @@
 
 {% block pageHeader %}
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-9">
             <h1> Учебники </h1>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-3">
             {% if app.user %}
-                <div class="addBookContainer">
-                    <span class="glyphicon glyphicon-file"></span>
-                    <a id="addBookButton" href="#" data-toggle="modal" data-target="#bookFormModal"> Создать новый учебник </a>
-                    {% include 'eTextBookLoungeBundle:Book:form.html.twig' %}
-                </div>
+                <h1>Мои учебники</h1>
             {% endif %}
         </div>
     </div>
 {% endblock %}
 
 {% block pageContent %}
-    <ul class="list-unstyled book-list">
-        {% for book in books %}
-            <li id="{{ book.slug }}" class="item">
-                <div class="cover" style="background-image: url(/tmp/{{ book.slug }}/content/cover.png)" data-anijs="if: scroll, on: window, do: flipInY animated, before: scrollReveal, after: removeAnim">
-                    <div class="source-type {{ book.sourceExtension }}"></div>
-                </div>
-                {% if book.source | length > 0 %}
-                    <a class="title" href="/tmp/{{ book.slug }}/{{ book.source }}">{{ book.title }}</a>
-                {% else %}
-                    <a class="title" href="{{ path('book-view', {'slug': book.slug, 'module': ' ' })  }}">
-                        {{ book.title }}
-                    </a>
-                {% endif %}
-                <span class="authors"> {{ book.authors }} </span>
-                {% if app.user and book.source | length == 0 %}
-                    <a href="{{ path('book-edit', {'slug': book.slug, 'module': ' ' })  }}" class="edit-link btn btn-primary btn-xs">
-                        <span class="glyphicon glyphicon-edit"></span>
-                        Редактировать
-                    </a>
-                    <a href="tmp/{{ book.slug }}/index.html" class="view-link btn btn-success btn-xs">
-                        <span class="glyphicon glyphicon-eye-open"></span>
-                        Эмулятор
-                    </a>
-                {% endif %}
-            </li>
-        {% endfor %}
-    </ul>
+   {% if app.user %}
+       <div class="col-sm-9">
+           {% include 'eTextBookLoungeBundle:Book:book-list.html.twig' with { 'books' : publicBooks } %}
+       </div>
+       <div class="col-sm-3">
+           <div class="addBookContainer">
+               <span class="glyphicon glyphicon-file"></span>
+               <a id="addBookButton" href="#" data-toggle="modal" data-target="#bookFormModal"> Создать новый учебник </a>
+               {% include 'eTextBookLoungeBundle:Book:form.html.twig' %}
+           </div>
+           {% include 'eTextBookLoungeBundle:Book:book-list.html.twig' with { 'books' : userBooks } %}
+       </div>
+   {% else %}
+
+   {% endif %}
 {% endblock %}
 
 

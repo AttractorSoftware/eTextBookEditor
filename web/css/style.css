@@ -712,7 +712,7 @@ html, body {
   margin: 0 0 5px 0; }
 .book-list .item {
   float: left;
-  width: 265px;
+  width: 255px;
   margin: 0 15px 25px 0; }
   .book-list .item .cover {
     float: left;
@@ -787,11 +787,10 @@ html, body {
     margin: 0 10px 0 0; }
 
 .addBookContainer {
-  float: right;
-  margin: -20px 0 0 0; }
+  float: left;
+  margin: 0 0 0 10px; }
 
 #bookFormModal .book-info {
-  width: 355px;
   margin: 0 0 0 210px; }
   #bookFormModal .book-info input[type="file"] {
     width: 100%; }

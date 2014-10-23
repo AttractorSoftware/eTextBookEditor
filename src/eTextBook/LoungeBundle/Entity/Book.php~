@@ -37,44 +37,57 @@ class Book {
     /**
      * @var string
      *
-     * @ORM\Column(name="authors", type="string")
+     * @ORM\Column(name="authors", type="string", nullable=true)
      */
     private $authors;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="editor", type="string")
+     * @ORM\Column(name="editor", type="string", nullable=true)
      */
     private $editor;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="isbn", type="string")
+     * @ORM\Column(name="isbn", type="string", nullable=true)
      */
     private $isbn;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="cover", type="string")
+     * @ORM\Column(name="cover", type="string", nullable=true)
      */
     private $cover;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="source", type="string")
+     * @ORM\Column(name="source", type="string", nullable=true)
      */
     private $source;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="file", type="string")
+     * @ORM\Column(name="file", type="string", nullable=true)
      */
     private $file;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="is_public", type="boolean")
+     */
+    private $isPublic = false;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="\eTextBook\SpawnBundle\Entity\User", inversedBy="books")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    protected $user;
 
     private $modules;
 
@@ -273,5 +286,52 @@ class Book {
     public function getFile()
     {
         return $this->file;
+    }
+
+    /**
+     * Set source
+     *
+     * @param string $source
+     * @return Book
+     */
+    public function setSource($source)
+    {
+        $this->source = $source;
+
+        return $this;
+    }
+
+    /**
+     * Get source
+     *
+     * @return string 
+     */
+    public function getSource()
+    {
+        return $this->source;
+    }
+
+
+    /**
+     * Set user
+     *
+     * @param \eTextBook\SpawnBundle\Entity\User $user
+     * @return Book
+     */
+    public function setUser(\eTextBook\SpawnBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \eTextBook\SpawnBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

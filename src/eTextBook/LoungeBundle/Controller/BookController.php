@@ -17,28 +17,25 @@ class BookController extends Controller
      * @Route("/books", name="books")
      * @Template()
      */
-    public function indexAction()
-    {
-        $fileManager = $this->get('fileManager');
-        $booksDir = $this->container->getParameter('books_dir');
+    public function indexAction() {
         $books = array();
-
-        foreach ($fileManager->fileList($booksDir) as $fileName) {
-            $filePart = explode('.', $fileName);
-            $extension = end($filePart);
-            if ($extension == 'etb' && $filePart[0] != '') {
-                $books[] = new Book($booksDir . $fileName);
-            }
+        $entityManager = $this->getDoctrine()->getManager();
+        $books['publicBooks'] = $entityManager->getRepository('eTextBookLoungeBundle:Book')
+            ->createQueryBuilder('book')
+            ->where('book.isPublic = :isPublic')
+            ->setParameter('isPublic', true)
+            ->getQuery()
+            ->getResult();
+        if($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            $books['userBooks'] = $this->getUser()->getBooks();
         }
-
-        return array('books' => $books);
+        return $books;
     }
 
     /**
      * @Route("/book/create", name="book-create")
      */
-    public function createAction(Request $request)
-    {
+    public function createAction(Request $request) {
         $bookData = $request->get('book');
         $transliterate = $this->get('transliterate');
         $bookSlug = Sluggable\Urlizer::urlize($transliterate->transliterate($bookData['title'], 'ru'), '-');
@@ -51,6 +48,7 @@ class BookController extends Controller
         $book->setCover(isset($bookData['cover']) ? $bookData['cover'] : '');
         $book->setFile(isset($bookData['file']) ? $bookData['file'] : '');
         $book->setSlug($bookSlug);
+        $book->setUser($this->getUser());
 
         $creator = $this->get('createETBFile');
         $creator->setBook($book);
@@ -67,6 +65,9 @@ class BookController extends Controller
                     'slug' => $bookSlug
                 )
             );
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($book);
+            $entityManager->flush();
         } return new JsonResponse($response);
     }
 
