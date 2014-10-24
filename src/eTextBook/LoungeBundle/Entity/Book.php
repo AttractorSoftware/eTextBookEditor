@@ -89,7 +89,28 @@ class Book {
      */
     protected $user;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="\eTextBook\SpawnBundle\Entity\User")
+     * @ORM\JoinTable(name="users_books",
+     *      joinColumns={@ORM\JoinColumn(name="book_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")}
+     *      )
+     **/
+    private $editUsers;
+
     private $modules;
+
+    public function hasEditPermissionForUser($userId) {
+        if($this->getUser()->getId() == $userId ) {
+            return true;
+        } else {
+            foreach($this->getEditUsers() as $user) {
+                if($user->getId() == $userId) {
+                    return true;
+                }
+            }
+        } return false;
+    }
 
     public function toArray() {
         return array(
@@ -365,5 +386,39 @@ class Book {
     public function getIsPublic()
     {
         return $this->isPublic;
+    }
+
+
+    /**
+     * Add editUsers
+     *
+     * @param \eTextBook\SpawnBundle\Entity\User $editUsers
+     * @return Book
+     */
+    public function addEditUser(\eTextBook\SpawnBundle\Entity\User $editUsers)
+    {
+        $this->editUsers[] = $editUsers;
+
+        return $this;
+    }
+
+    /**
+     * Remove editUsers
+     *
+     * @param \eTextBook\SpawnBundle\Entity\User $editUsers
+     */
+    public function removeEditUser(\eTextBook\SpawnBundle\Entity\User $editUsers)
+    {
+        $this->editUsers->removeElement($editUsers);
+    }
+
+    /**
+     * Get editUsers
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getEditUsers()
+    {
+        return $this->editUsers;
     }
 }

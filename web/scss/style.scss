@@ -1033,17 +1033,42 @@ html, body {
 
 .page-header {
   .control {
-    float: right;
-    margin: 10px 0 0 0;
-    span {
-      color: #fff;
-      margin: 0 3px 0 0;
+    .btn {
+      float: left;
+      clear: left;
+      width: 100%;
+      margin: 0 0 5px;
+      text-align: left;
+      span {
+        float: left;
+        margin: 2px 5px 0 0;
+        text-align: left;
+      }
     }
   }
   h4 {
     padding: 0 15px;
     span {
-      margin: 0 10px 0 0;
+      margin: 8px 0 0 -10px;
+      cursor: pointer;
+    }
+  }
+}
+
+.add-permission {
+  cursor: pointer;
+}
+
+.permission-user {
+  margin: 0 15px 0 0;
+  span {
+    position: relative;
+    top: 1px;
+    cursor: pointer;
+    font-size: 10px;
+    color: #999;
+    &:hover {
+      color: #ff0000;
     }
   }
 }

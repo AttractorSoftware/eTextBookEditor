@@ -27,11 +27,7 @@ class User extends BaseUser {
     protected $books;
 
     /**
-     * @ORM\ManyToMany(targetEntity="\eTextBook\LoungeBundle\Entity\Book")
-     * @ORM\JoinTable(name="users_books",
-     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="book_id", referencedColumnName="id")}
-     *      )
+     * @ORM\ManyToMany(targetEntity="\eTextBook\LoungeBundle\Entity\Book", mappedBy="editUsers")
      **/
     private $editedBooks;
 
@@ -85,6 +81,7 @@ class User extends BaseUser {
     {
         return $this->books;
     }
+
 
     /**
      * Add editedBooks

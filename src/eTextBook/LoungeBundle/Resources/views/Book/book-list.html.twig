@@ -1,11 +1,12 @@
 <ul class="list-unstyled book-list">
-    {% if flag == 'public' %}
-        {% set dir = '/publicBooks/' %}
-    {% else %}
-        {% set dir = '/tmp/' %}
-    {% endif %}
 
     {% for book in books %}
+        {% if book.isPublic %}
+            {% set dir = '/publicBooks/' %}
+        {% else %}
+            {% set dir = '/tmp/' %}
+        {% endif %}
+
         <li id="{{ book.slug }}" class="item">
             <div class="cover" style="background-image: url({{ dir }}{{ book.slug }}/content/cover.png)"
                  data-anijs="if: scroll, on: window, do: flipInY animated, before: scrollReveal, after: removeAnim">
@@ -19,7 +20,7 @@
                 </a>
             {% endif %}
             <span class="authors"> {{ book.authors }} </span>
-            {% if flag != 'public' and app.user and book.source | length == 0 %}
+            {% if app.user and book.hasEditPermissionForUser(app.user.id) and book.source | length == 0 %}
                 <a href="{{ path('book-edit', {'slug': book.slug, 'module': ' ' }) }}"
                    class="edit-link btn btn-primary btn-xs">
                     <span class="glyphicon glyphicon-edit"></span>

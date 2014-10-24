@@ -775,16 +775,35 @@ html, body {
   background: #eee;
   border-top: solid 1px #E7E7E7; }
 
-.page-header .control {
-  float: right;
-  margin: 10px 0 0 0; }
-  .page-header .control span {
-    color: #fff;
-    margin: 0 3px 0 0; }
+.page-header .control .btn {
+  float: left;
+  clear: left;
+  width: 100%;
+  margin: 0 0 5px;
+  text-align: left; }
+  .page-header .control .btn span {
+    float: left;
+    margin: 2px 5px 0 0;
+    text-align: left; }
 .page-header h4 {
   padding: 0 15px; }
   .page-header h4 span {
-    margin: 0 10px 0 0; }
+    margin: 8px 0 0 -10px;
+    cursor: pointer; }
+
+.add-permission {
+  cursor: pointer; }
+
+.permission-user {
+  margin: 0 15px 0 0; }
+  .permission-user span {
+    position: relative;
+    top: 1px;
+    cursor: pointer;
+    font-size: 10px;
+    color: #999; }
+    .permission-user span:hover {
+      color: #ff0000; }
 
 .addBookContainer {
   float: left;
@@ -1339,5 +1358,3 @@ image-description {
       text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5); }
       .html5-controls .full-screen .glyphicon:hover {
         color: #fff; }
-
-/*# sourceMappingURL=style.css.map */

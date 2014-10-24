@@ -1,0 +1,68 @@
+<div class="modal fade" id="permissionFormModal" role="dialog" action="{{ path('save-edit-permissions', { 'bookSlug' : book.slug }) }}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title">Управление правами редактирования</h4>
+            </div>
+            <form
+                ng-controller="App.moduleForm.controller"
+                name="moduleForm"
+                book-slug="{{ book.slug }}"
+                create-action="{{ path('book-create-module') }}"
+                >
+                <div class="modal-body">
+                    <div id="alertBox" style="display: none" class="alert alert-success" role="alert">QQQ</div>
+                    <div class="form-group">
+                        <label for="moduleTitle">
+                            Email пользователя:
+                        </label>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="input-group">
+                                    <input autofocus="autofocus"
+                                           id="emailInput"
+                                           class="form-control"
+                                           type="text"
+                                           required />
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-default add-permission" type="button">
+                                            <span class="glyphicon glyphicon-plus"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <p class="help-block">Добавьте email-лы пользователей, которым хотите предоставить права на редактирование этого учебника. Указанные пользователи должны быть зарегестрированы в системе, в противном случае указаные адреса будут проигнорированы. После того как укажите всех необходимых пользователей нажмите кнопку "Сохранить".</p>
+                            </div>
+                        </div>
+
+                        <hr/>
+                        <div class="permission-user-list">
+                            <div class="current-users">
+                                {% for user in book.editUsers() %}
+                                    <div class="user">{{ user.email }}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="moduleFormClose" type="button" class="btn btn-default" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove"></span>
+                        Закрыть
+                    </button>
+                    <button
+                        id="savePermissions"
+                        type="button"
+                        class="btn btn-primary"
+                        >
+                        <span class="glyphicon glyphicon-ok"></span>
+                        Сохранить
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

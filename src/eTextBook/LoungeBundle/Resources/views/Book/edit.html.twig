@@ -1,66 +1,81 @@
 {% extends '::lounge-template.html.twig' %}
 
 {% block pageHeader %}
-    <h2>{{ book.title }}</h2>
     <div class="row">
-        <div class="col-sm-7">
+        <div class="col-sm-10">
+            <h2>{{ book.title }}</h2>
             <h4>
                 <span>{{ book.authors }}</span>
                 ISBN:&nbsp;{{ book.ISBN }}
             </h4>
         </div>
-        <div class="col-sm-5">
-            <div class="control">
-                <a href="/books/{{ book.slug }}.etb" class="btn btn-success btn-xs book-download"><span
-                            class="glyphicon glyphicon-save"></span>Скачать учебник</a>
-                /
-                <a href="/publish/{{ book.slug }}" class="edit-link btn btn-primary btn-xs"><span
-                            class="glyphicon glyphicon-thumbs-up"></span>Опубликовать учебник</a>
-                /
-                <a href="{{ path('book-view', {'slug': book.slug, 'module': ' ' }) }}"
-                   class="edit-link btn btn-primary btn-xs">
-                    <span class="glyphicon glyphicon-eye-open"></span>Просмотр учебника</a>
-            </div>
+        <div class="col-sm-2">
+            {% if dbBook.hasEditPermissionForUser(app.user.id) %}
+                <div class="control">
+                    <a href="/books/{{ book.slug }}.etb" class="btn btn-success btn-xs book-download">
+                        <span class="glyphicon glyphicon-save"></span>
+                        Скачать учебник
+                    </a>
+                    <a href="{{ path('book-view', {'slug': book.slug, 'module': ' ' }) }}" class="edit-link btn btn-primary btn-xs">
+                        <span class="glyphicon glyphicon-eye-open"></span>
+                        Просмотр учебника
+                    </a>
+                    <a class="btn btn-primary btn-xs" href="#" data-toggle="modal" data-target="#permissionFormModal">
+                        <span class="glyphicon glyphicon-user"></span>
+                        Права редактирования
+                    </a>
+                    <a href="/publish/{{ book.slug }}" class="edit-link btn btn-primary btn-xs">
+                        <span class="glyphicon glyphicon-thumbs-up"></span>
+                        Опубликовать учебник
+                    </a>
+                </div>
+            {% endif %}
         </div>
     </div>
+    {% include 'eTextBookLoungeBundle:Book:permission-form.html.twig' with { 'book': dbBook } %}
 {% endblock %}
 
 {% block pageContent %}
-    <ol id="moduleList" class="breadcrumb">
-        {% for module in modules %}
-            {% if(module.slug != currentModule) %}
-                <li>
-                    <a href="{{ path('book-edit', { 'slug': book.slug, 'module': module.slug }) }}">
-                        {{ module.title }}
-                    </a>
-                </li>
-            {% else %}
-                <li class="active"> {{ module.title }} </li>
-            {% endif %}
-        {% endfor %}
-        <li>
-            <a href="#" id="addModuleBtn" data-toggle="modal" data-target="#moduleFormModal">
-                Добавить
-            </a>
-        </li>
-    </ol>
+    {% if dbBook.hasEditPermissionForUser(app.user.id) %}
+        <ol id="moduleList" class="breadcrumb">
+            {% for module in modules %}
+                {% if(module.slug != currentModule) %}
+                    <li>
+                        <a href="{{ path('book-edit', { 'slug': book.slug, 'module': module.slug }) }}">
+                            {{ module.title }}
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="active"> {{ module.title }} </li>
+                {% endif %}
+            {% endfor %}
+            <li>
+                <a href="#" id="addModuleBtn" data-toggle="modal" data-target="#moduleFormModal">
+                    Добавить
+                </a>
+            </li>
+        </ol>
 
-    {% include 'eTextBookLoungeBundle:Book:module-form.html.twig' with { 'book': book } %}
+        {% include 'eTextBookLoungeBundle:Book:module-form.html.twig' with { 'book': book } %}
 
-    {% include 'eTextBookLoungeBundle:Book:advance-control-panel.html.twig' %}
+        {% include 'eTextBookLoungeBundle:Book:advance-control-panel.html.twig' %}
 
-    <div id="save-notify">Сохранение</div>
+        <div id="save-notify">Сохранение</div>
 
-    <div class="e-text-book-editor" book="{{ book.slug }}" module="{{ currentModule }}"
-         update-action="{{ path('book-update-module') }}">
-        <div class="desktop">
-            {% set moduleContent = currentModule != ' ' ? book.getModuleContent(currentModule) : book.getFirstModuleContent() %}
-            {{ moduleContent|raw }}
+        <div class="e-text-book-editor" book="{{ book.slug }}" module="{{ currentModule }}"
+             update-action="{{ path('book-update-module') }}">
+            <div class="desktop">
+                {% set moduleContent = currentModule != ' ' ? book.getModuleContent(currentModule) : book.getFirstModuleContent() %}
+                {{ moduleContent|raw }}
+            </div>
+            <div class="display e-text-book-viewer"></div>
         </div>
-        <div class="display e-text-book-viewer"></div>
-    </div>
 
-    {% include 'eTextBookLoungeBundle:Book:js-templates.html.twig' %}
-    {% include 'eTextBookLoungeBundle:Default:file-manager.html.twig' with { 'book': book } %}
-
+        {% include 'eTextBookLoungeBundle:Book:js-templates.html.twig' %}
+        {% include 'eTextBookLoungeBundle:Default:file-manager.html.twig' with { 'book': book } %}
+    {% else %}
+        <div class="alert alert-warning">
+            У вас нет прав на редактирование данного учебника. Свяжитесь с пользователем {{ dbBook.user.username }} ({{ dbBook.user.email }}) по вопросу предоставления прав.
+        </div>
+    {% endif %}
 {% endblock %}

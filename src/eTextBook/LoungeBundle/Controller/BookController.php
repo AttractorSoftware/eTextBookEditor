@@ -2,6 +2,7 @@
 
 namespace eTextBook\LoungeBundle\Controller;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -10,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Gedmo\Sluggable\Util as Sluggable;
 use eTextBook\LoungeBundle\Lib\Book;
 use eTextBook\LoungeBundle\Entity\Book as eBook;
+
 
 class BookController extends Controller
 {
@@ -27,8 +29,12 @@ class BookController extends Controller
             ->setParameter('isPublic', true)
             ->getQuery()
             ->getResult();
+
         if ($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
             $books['userBooks'] = $this->getUser()->getBooks();
+            $books['userBooks'] = new ArrayCollection(
+                array_merge($books['userBooks']->toArray(), $this->getUser()->getEditedBooks()->toArray())
+            );
         }
 
         return $books;
@@ -82,12 +88,15 @@ class BookController extends Controller
      * @Route("/book/edit/{slug}/{module}", name="book-edit")
      * @Template()
      */
-    public function editAction($slug, $module)
-    {
+    public function editAction($slug, $module) {
+        $entityManager = $this->getDoctrine()->getManager();
         $book = new Book($this->container->getParameter('books_dir') . $slug . '.etb');
+        $dbBook = $entityManager->getRepository('eTextBookLoungeBundle:Book')->findOneBySlug($slug);
         $modules = $book->getModules();
 
         return array(
+            'hasEditPermissions' => $dbBook->hasEditPermissionForUser($this->getUser()->getId()),
+            'dbBook' => $dbBook,
             'book' => $book,
             'modules' => $modules,
             'currentModule' => $module == ' ' && count($modules) > 0 ? $modules[0]->slug : $module
@@ -253,6 +262,42 @@ class BookController extends Controller
 
         return new JsonResponse(array('fileName' => $tmpTitle));
     }
+
+    /**
+     * @Route("/save-edit-permissions/{bookSlug}", name="save-edit-permissions")
+     */
+    public function saveEditPermissionsAction($bookSlug, Request $request) {
+        $entityManager = $this->getDoctrine()->getManager();
+        $book = $entityManager->getRepository("eTextBookLoungeBundle:Book")->findOneBySlug($bookSlug);
+        $currentUser = $this->getUser();
+        $result = array('status' => 1);
+        if(!$book->hasEditPermissionForUser($currentUser->getId())) {
+            $result['status'] = 0;
+            $result['reason'] = 'No permissions';
+        } else {
+            foreach ($book->getEditUsers() as $user) {
+                $book->getEditUsers()->removeElement($user);
+            }
+            $entityManager->persist($book);
+            $entityManager->flush();
+
+            if($request->get('users') != "") {
+                foreach($request->get('users') as $userEmail) {
+                    $user = $entityManager->getRepository('eTextBookSpawnBundle:User')->findOneByEmail($userEmail);
+                    if(is_object($user)) {
+                        $book->addEditUser($user);
+                    }
+                }
+
+                $entityManager->persist($book);
+                $entityManager->flush();
+            }
+
+        }
+
+        return new JsonResponse($result);
+    }
+
 }
 
 
