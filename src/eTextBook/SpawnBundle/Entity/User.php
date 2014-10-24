@@ -43,8 +43,8 @@ class User extends BaseUser {
     /**
      * Constructor
      */
-    public function __construct()
-    {
+    public function __construct() {
+        parent::__construct();
         $this->books = new \Doctrine\Common\Collections\ArrayCollection();
     }
 

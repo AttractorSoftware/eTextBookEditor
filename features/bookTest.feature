@@ -1,7 +1,8 @@
 #noinspection CucumberUndefinedStep
 Feature: Создание нового учебника
   Scenario: Создаем новый учебник и проверяем его
-    Given Открываем страницу "http://staff:swordfish@localhost/login"
+    Given Открываем страницу авторизации
+    And   Авторизовываемся как администратор
     And   Кликаем по ссылке с классом "book-list-link"
     When  Кликаем по ссылке добавить учебник
     And   Заполняем форму учебника случайными значениями

@@ -52,6 +52,38 @@ class FeatureContext extends eTextBookContext
     }
 
     /**
+     * @Given /^Открываем страницу авторизации$/
+     */
+    public function openAuthPage()
+    {
+        eTextBookDriver::getInstance()->openPage("http://localhost/enter");
+        sleep(1);
+        $this->getDriver()->resizeWindow(1200, 756);
+    }
+
+    /**
+     * @Given /^Авторизовываемся как "([^"]*)", "([^"]*)"$/
+     */
+    public function authenticatedAs($username, $password)
+    {
+        $this->findCss('input#username')->setValue($username);
+        $this->findCss('input#password')->setValue($password);
+        $this->findCss('#_submit')->click();
+        sleep(2);
+    }
+
+    /**
+     * @Given /^Авторизовываемся как администратор$/
+     */
+    public function authenticatedAsAdmin()
+    {
+        $this->findCss('input#username')->setValue("admin");
+        $this->findCss('input#password')->setValue("adminadmin");
+        $this->findCss('#_submit')->click();
+        sleep(2);
+    }
+
+    /**
      * @Given /^Закрываем страницу$/
      */
     public function closeBrowser()
