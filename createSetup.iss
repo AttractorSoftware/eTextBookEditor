@@ -1,5 +1,5 @@
 ﻿#define MyAppName "Электронные учебники"
-#define MyAppVersion "0.3.1-beta"
+#define MyAppVersion "0.4.0-beta"
 #define MyAppPublisher "IT-Attractor"
 #define MyAppURL "http://www.it-attractor.com"
 #define LaunchProgram "Запустить приложение"
@@ -27,7 +27,7 @@ OutputBaseFilename=ebook-setup-{#MyAppVersion}
 Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
 
 [Files]
-Source: "F:\node-webkit-win32-v0.10.4\*"; Excludes: "createSetup.iss, README.md, libEGL.dll, libGLESv2.dll, locales, app\img\Thumbs.db, app\img\Thumbs.db:encryptable, .gitignore" ; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
+Source: "F:\node-webkit-win32-v0.10.4\*"; Excludes: "createSetup.iss, README.md, libEGL.dll, tests, testAssets, libGLESv2.dll, tests, app\img\Thumbs.db, app\img\Thumbs.db:encryptable, .gitignore" ; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
 Source: "F:\node-webkit-win32-v0.10.4\icon.ico"; DestDir: "{app}"; DestName: "icon.ico"; Flags: ignoreversion
 
 [Tasks]
@@ -35,9 +35,9 @@ Name: "desktopicon"; Description: "{#CreateDesktopIcon}"; GroupDescription: "{#D
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\ebook.exe"; WorkingDir: "{app}"; IconFilename: "{app}/icon.ico"
+Name: "{group}\Удалить приложение"; Filename: "{app}\unins000.exe"; WorkingDir: "{app}"
 Name: "{userstartup}\{#MyAppName}"; Filename: "{app}\ebook.exe"; WorkingDir: "{app}"; IconFilename: "{app}/icon.ico"
 Name: "{userstartup}\Удалить приложение"; Filename: "{app}\unins000.exe"; WorkingDir: "{app}"
-Name: "{group}\Удалить приложение"; Filename: "{app}\unins000.exe"; WorkingDir: "{app}"
 Name: "{userdesktop}\{#MyAppName}"; Filename: "{app}\ebook.exe"; WorkingDir: "{app}"; IconFilename: "{app}/icon.ico"; Tasks: desktopicon
 
 [Run]
