@@ -28,9 +28,20 @@ var html5Player = function(target) {
     );
 
     this.init = function() {
+        this.audioFake();
         this.appendControls();
         this.activateControls();
         this.listenEvents();
+    }
+
+    this.audioFake = function() {
+        if(this.target.prop('tagName') == 'AUDIO') {
+            var video = $('<video></video>');
+            video.html(this.target.html());
+            this.target.after(video);
+            this.target.remove();
+            this.target = video;
+        }
     }
 
     this.listenEvents = function() {
@@ -40,9 +51,7 @@ var html5Player = function(target) {
     this.appendControls = function() {
         this.target.removeAttr('controls');
         this.target.after(this.controls);
-
         this.controlHeight = parseInt(this.controls.height());
-
         this.controls.css({
             marginTop: -this.controlHeight-this.marginBottom - 5,
             width: this.width - 10
@@ -131,11 +140,3 @@ var html5Player = function(target) {
 
     this.init();
 }
-
-$(function() {
-    setTimeout(function(){
-        for(var i = 0; i < $('video').length; i++) {
-            new html5Player($('video')[i]);
-        }
-    }, 1000);
-});

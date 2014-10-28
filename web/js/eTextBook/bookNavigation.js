@@ -31,7 +31,6 @@ var NavigationController = function () {
         $('a[href="' + activeChapter + '"]').closest('.chapter').addClass('active');
         window.scrollTo(0, storage.local.scrollPositions[activeChapterIndex]);
         _this.activateWidgets();
-        console.debug('aa');
         AniJS.run();
     };
 
@@ -46,6 +45,10 @@ var NavigationController = function () {
             widget = new widget();
             widget.contentContainer = widgetCont.find('widget-content');
             widget.viewActivate();
+        }
+
+        for(var i = 0; i < $('video, audio').length; i++) {
+            new html5Player($('video, audio')[i]);
         }
     };
 

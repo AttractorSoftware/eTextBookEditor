@@ -115,7 +115,7 @@ class Book {
     public function toArray() {
         return array(
             'title' => $this->title
-            ,'cover' => '/tmp/' . $this->slug . '/content/cover.png'
+            ,'cover' => '/' . $this->slug . '/content/cover.png'
             ,'slug' => $this->slug
             ,'authors' => $this->authors
             ,'editor' => $this->editor

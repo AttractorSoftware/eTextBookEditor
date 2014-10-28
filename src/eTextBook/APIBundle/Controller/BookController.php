@@ -16,19 +16,18 @@ class BookController extends Controller {
      * @Route("/books")
      */
     public function booksAction() {
-        $fileManager = $this->get('fileManager');
-        $bookLoader = $this->get('bookLoader');
+        $books = array();
+        $entityManager = $this->getDoctrine()->getManager();
+        $books = $entityManager->getRepository('eTextBookLoungeBundle:Book')
+            ->createQueryBuilder('book')
+            ->where('book.isPublic = :isPublic')
+            ->setParameter('isPublic', true)
+            ->getQuery()
+            ->getResult();
 
-        $booksDir = $this->container->getParameter('books_dir');
-        $result = array('books' => array());
-
-        foreach ($fileManager->fileList($booksDir) as $fileName) {
-            $fileParts = explode('.', $fileName);
-            $extension = end($fileParts);
-            if ($extension == 'etb') {
-                $book = $bookLoader->load($fileParts[0]);
-                $result['books'][] = $book->toArray();
-            }
+        $result = array();
+        foreach($books as $book) {
+            $result[] = $book->toArray();
         }
 
         return new JsonResponse($result);
