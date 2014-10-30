@@ -30,6 +30,6 @@ class BookController extends Controller {
             $result[] = $book->toArray();
         }
 
-        return new JsonResponse($result);
+        return new JsonResponse(array('books' => $result));
     }
 }
