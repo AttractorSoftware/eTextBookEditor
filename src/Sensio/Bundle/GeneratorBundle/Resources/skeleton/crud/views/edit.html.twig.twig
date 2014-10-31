@@ -1,0 +1,22 @@
+{% block extends %}
+    {{ "{% extends 'eTextBookSpawnBundle::layout.html.twig' %}" }}
+{% endblock extends %}
+
+{% block body %}
+{{ "{% block pageContent -%}" }}
+    <div class="page-header">
+        <h1>
+            {{ entity }} edit
+            {% set hide_edit, hide_delete = true, false %}
+            {% include 'crud/views/others/record_actions.html.twig.twig' %}
+        </h1>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            {{ '{% form_theme edit_form with "SensioGeneratorBundle:Form:fields.html.twig" %}' }}
+            {{ '{{ form(edit_form) }}' }}
+        </div>
+    </div>
+
+{{ "{% endblock %}" }}
+{% endblock body %}

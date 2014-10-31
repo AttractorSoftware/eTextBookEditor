@@ -15,3 +15,6 @@ security:
                 csrf_provider: form.csrf_provider
             logout:       true
             anonymous:    true
+
+    access_control:
+        - { path: ^/spawn/, role: ROLE_ADMIN }

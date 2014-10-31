@@ -1,0 +1,48 @@
+    {% extends 'eTextBookSpawnBundle::layout.html.twig' %}
+
+{% block pageContent -%}
+    <h1>User list</h1>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Salt</th>
+                <th>Password</th>
+                <th>Lastlogin</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td>{{ entity.id }}</td>
+                <td><a href="{{ path('spawn_user_edit', { 'id': entity.id }) }}">{{ entity.username }}</a></td>
+                <td>{{ entity.usernameCanonical }}</td>
+                <td>{{ entity.email }}</td>
+                <td>{{ entity.enabled }}</td>
+                <td>{% if entity.lastLogin %}{{ entity.lastLogin|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td class="actions">
+                    <ul>
+                        <li>
+                            <a class="action-edit label label-primary" href="{{ path('spawn_user_edit', { 'id': entity.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul class="pagination">
+        {% for page in 1..pages %}
+            <li {% if page == current_page %} class="active" {% endif %}>
+                <a href="?page={{ page }}">{{ page }}</a>
+            </li>
+    {% endfor %}
+    </ul>
+
+{% endblock %}
+

@@ -1,0 +1,26 @@
+<nav class="navbar navbar-default main-menu" role="navigation" data-anijs="if: load, on: window, do: bounceInDown animated">
+    <div class="container">
+        <ul class="nav navbar-nav">
+            <li {% if app.request.attributes.get('_route') == 'spawn_user' %} class="active" {% endif %}>
+                <a href="{{ path('spawn_user') }}">
+                    <span class="glyphicon glyphicon-user"></span>
+                    Пользователи
+                </a>
+            </li>
+            <li {% if app.request.attributes.get('_route') == 'spawn_book' %} class="active" {% endif %}>
+                <a href="{{ path('spawn_book') }}" class="book-list-link">
+                    <span class="glyphicon glyphicon-book"></span>
+                    Учебники
+                </a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="{{ path('home-page') }}">
+                    <span class="glyphicon glyphicon-home"></span>
+                    Основной сайт
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>

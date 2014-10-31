@@ -1,0 +1,21 @@
+    {% extends 'eTextBookSpawnBundle::layout.html.twig' %}
+
+{% block pageContent -%}
+    <div class="page-header">
+        <h1>
+            User creation
+                        
+
+
+<a href="{{ path('spawn_user') }}" class="btn btn-primary">
+    Back to the list
+</a>        </h1>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            {% form_theme form with "SensioGeneratorBundle:Form:fields.html.twig" %}
+            {{ form(form) }}
+        </div>
+    </div>
+
+{% endblock %}

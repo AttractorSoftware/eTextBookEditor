@@ -1,0 +1,50 @@
+
+    /**
+{% block phpdoc_method_header %}
+     * Lists all {{ entity }} entities.
+{% endblock phpdoc_method_header %}
+     *
+{% block phpdoc_method_annotations %}
+{% if 'annotation' == format %}
+     * @Route("/", name="{{ route_name_prefix }}")
+     * @Method("GET")
+     * @Template()
+{% endif %}
+{% endblock phpdoc_method_annotations %}
+     */
+{% block method_definition %}
+    public function indexAction()
+{% endblock method_definition %}
+    {
+{% block method_body %}
+        $em = $this->getDoctrine()->getManager();
+
+        $current_page = $this->container->get('request')->get('page') ? $this->container->get('request')->get('page') : 1;
+
+        $builder = $em->getRepository('{{ bundle }}:{{ entity }}')
+        ->createQueryBuilder('e')
+        ->setMaxResults(20)
+        ->orderBy('e.id', 'desc');
+
+        $entities = $builder->getQuery()->setFirstResult(($current_page-1)*20)->getResult();
+        $pages = $builder->select('COUNT(e)')
+        ->getQuery()
+        ->getSingleScalarResult();
+{% endblock method_body %}
+
+{% block method_return %}
+{% if 'annotation' == format %}
+        return array(
+            'entities' => $entities,
+            'pages' => ceil($pages/20),
+            'current_page' => $current_page
+        );
+{% else %}
+        return $this->render('{{ bundle }}:{{ entity|replace({'\\': '/'}) }}:index.html.twig', array(
+            'entities' => $entities,
+            'pages' => ceil($pages/20),
+            'current_page' => $current_page
+        ));
+{% endif %}
+{% endblock method_return %}
+    }

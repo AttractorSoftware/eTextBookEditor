@@ -1,0 +1,63 @@
+    {% extends 'eTextBookSpawnBundle::layout.html.twig' %}
+
+{% block pageContent -%}
+    <h1>Book</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ entity.title }}</td>
+            </tr>
+            <tr>
+                <th>Slug</th>
+                <td>{{ entity.slug }}</td>
+            </tr>
+            <tr>
+                <th>Authors</th>
+                <td>{{ entity.authors }}</td>
+            </tr>
+            <tr>
+                <th>Editor</th>
+                <td>{{ entity.editor }}</td>
+            </tr>
+            <tr>
+                <th>Isbn</th>
+                <td>{{ entity.isbn }}</td>
+            </tr>
+            <tr>
+                <th>Cover</th>
+                <td>{{ entity.cover }}</td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>{{ entity.source }}</td>
+            </tr>
+            <tr>
+                <th>File</th>
+                <td>{{ entity.file }}</td>
+            </tr>
+            <tr>
+                <th>Ispublic</th>
+                <td>{{ entity.isPublic }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        
+    <a href="{{ path('spawn_book_delete', { 'id': entity.id }) }}" class="btn btn-danger action-delete">
+        Delete
+    </a>
+
+    <a href="{{ path('spawn_book_edit', { 'id': entity.id }) }}" class="btn btn-primary">
+        Edit
+    </a>
+
+<a href="{{ path('spawn_book') }}" class="btn btn-primary">
+    Back to the list
+</a>{% endblock %}
+

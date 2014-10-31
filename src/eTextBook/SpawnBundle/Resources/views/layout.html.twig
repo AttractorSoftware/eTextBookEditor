@@ -1,0 +1,29 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+    {% include 'eTextBookSpawnBundle:Default:top-navigation.html.twig' %}
+
+    <div class="container" style="position: relative;">
+
+        <div class="page-header">
+            {% block pageHeader %}{% endblock %}
+        </div>
+
+        {% block breadcrumb %}{% endblock %}
+
+        {% block pageContent %}{% endblock %}
+    </div>
+
+    {% block footer %}
+        <div class="footer"></div>
+    {% endblock %}
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/main-style.min.css') }}"/>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/script.js') }}"></script>
+{% endblock %}

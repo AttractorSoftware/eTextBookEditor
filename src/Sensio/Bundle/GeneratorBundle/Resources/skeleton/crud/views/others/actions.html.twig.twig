@@ -1,0 +1,12 @@
+
+                    <ul>
+
+                        {%- for action in record_actions %}
+
+                            <li>
+                                <a class="action-{{ action }} label label-{% if action == 'edit' %}primary{% else %}danger{% endif %}" href="{{ "{{ path('" ~ route_name_prefix ~ "_" ~ action ~ "', { 'id': entity.id }) }}" }}">{{ action }}</a>
+                            </li>
+
+                        {%- endfor %}
+
+                    </ul>
