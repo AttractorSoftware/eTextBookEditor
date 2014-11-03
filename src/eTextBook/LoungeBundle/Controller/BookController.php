@@ -93,7 +93,6 @@ class BookController extends Controller
         $book = new Book($this->container->getParameter('books_dir') . $slug . '.etb');
         $dbBook = $entityManager->getRepository('eTextBookLoungeBundle:Book')->findOneBySlug($slug);
         $modules = $book->getModules();
-
         return array(
             'hasEditPermissions' => $dbBook->hasEditPermissionForUser($this->getUser()->getId()),
             'dbBook' => $dbBook,

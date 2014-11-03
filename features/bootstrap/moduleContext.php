@@ -88,7 +88,7 @@ class ModuleContext extends eTextBookContext
      */
     public function latestBookLinkClick()
     {
-        $links = $this->findAllCss('.book-list li');
+        $links = $this->findAllCss('.my-book-list .book-list li');
         $latestBook = $this->getVar('latestBook');
         foreach ($links as $link) {
             $titleLink = $link->find('css', 'a.title');

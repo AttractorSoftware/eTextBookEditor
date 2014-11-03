@@ -4,6 +4,7 @@ var bookForm = function() {
     this.modal = $('#bookFormModal');
     this.alertBox = this.modal.find('#alertBox');
     this.action = $this.modal.find('form').attr('action');
+    this.bookEditLink = this.modal.find('form').attr('edit-link');
 
     this.init = function() {
         this.cover = new AjaxUploader({
@@ -78,12 +79,12 @@ var bookForm = function() {
                     $this.modal.find('.modal-footer .btn-primary').show();
                 } else {
                     $this.success('Учебник успешно создан');
-                    $('.book-list').append(
+                    $('.my-book-list .book-list').append(
                         '<li id="' + response.data.slug + '" class="item">' +
                             '<div class="cover" style="background-image: url(/tmp/' + response.data.slug + '/content/cover.png)"></div>' +
                             '<a class="title" href="/book/view/' + response.data.slug + '/%20"> ' + book.title + '</a>' +
                             '<span class="authors"></span>' +
-                            '<a class="edit-link btn btn-primary btn-xs" href="/book/edit/' + response.data.slug + '/%20">'+
+                            '<a class="edit-link btn btn-primary btn-xs" href="' + $this.bookEditLink.replace(":slug", response.data.slug).replace(":module", "%20") + '">'+
                                 'Редактировать'+
                             '</a>'+
                             '<a class="view-link btn btn-success btn-xs" href="/tmp/' + response.data.slug + '/index.html">' +

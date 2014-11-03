@@ -9,7 +9,12 @@
                 <h4 class="modal-title">Новый учебник</h4>
             </div>
 
-            <form ng-controller="App.bookForm.controller" name="bookForm" action="{{ path('book-create') }}">
+            <form
+                    ng-controller="App.bookForm.controller"
+                    name="bookForm"
+                    action="{{ path('book-create') }}"
+                    edit-link="{{ path('book-edit', { 'slug' : ':slug', 'module': ':module' }) }}"
+                >
                 <div class="modal-body">
                     <div id="alertBox" style="display: none" class="alert alert-success" role="alert">QQQ</div>
 
