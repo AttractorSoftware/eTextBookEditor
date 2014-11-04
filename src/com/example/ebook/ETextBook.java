@@ -14,6 +14,7 @@ public class ETextBook {
     private File sourcesFolder;
     private String title = "default title";
     private String slug;
+    private String source = "";
 
     public ETextBook(File file) {
         this.sourcesFile = file;
@@ -41,6 +42,7 @@ public class ETextBook {
             try {
                 JSONObject infoJson = new JSONObject(stringBuilder.toString());
                 this.title = infoJson.getString("title");
+                this.source = infoJson.getString("source");
             } catch(JSONException e) {
                 System.out.println("Bad json info");
             }
@@ -55,5 +57,8 @@ public class ETextBook {
         return slug;
     }
 
+    public String getSource() {
+        return source;
+    }
 }
 

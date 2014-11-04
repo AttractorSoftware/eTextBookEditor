@@ -23,7 +23,7 @@ public class Player {
         for(ETextBook book: this.bookList) {
             String sep = ",";
             if(pos == this.bookList.size()) { sep = ""; }
-            result += "{ slug: '" + book.getSlug() + "', title: '" + book.getTitle() + "'}" + sep;
+            result += "{ slug: '" + book.getSlug() + "', title: '" + book.getTitle() + "', source: '" + book.getSource() + "'}" + sep;
             pos++;
         }
         return "[" + result + "]";

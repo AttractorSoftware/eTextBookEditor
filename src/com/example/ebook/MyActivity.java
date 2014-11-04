@@ -23,6 +23,8 @@ public class MyActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
+        getWindow().addFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
         webView = (WebView) findViewById(R.id.webview);
 
         WebSettings webSettings = webView.getSettings();

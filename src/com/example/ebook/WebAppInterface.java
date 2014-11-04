@@ -1,8 +1,10 @@
 package com.example.ebook;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Environment;
 import android.webkit.WebView;
 import org.apache.http.HttpConnection;
@@ -40,11 +42,10 @@ public class    WebAppInterface {
         webView.loadUrl("javascript:app.drawShelfs()");
     }
 
-
     public void getRepositoryBookList() throws IOException {
         HttpGet httpGet = new HttpGet(Config.getInstance().getParameter("repositoryUrl") + "/api/books");
         HttpParams httpParams = new BasicHttpParams();
-        HttpConnectionParams.setConnectionTimeout(httpParams, 3000);
+        HttpConnectionParams.setConnectionTimeout(httpParams, 10000);
         HttpConnectionParams.setSoTimeout(httpParams, 5000);
         HttpClient httpClient = new DefaultHttpClient(httpParams);
 
@@ -58,63 +59,23 @@ public class    WebAppInterface {
     }
 
     public void readBook(String bookSlug) {
-        System.out.print(bookSlug);
         webView.loadUrl("file:///sdcard/eTextBook/cache/" + bookSlug + "/index.html");
         webView.getSettings().setDomStorageEnabled(true);
     }
 
-    public void downloadBook(String bookSlug) {
-        try {
-            URL url = new URL(Config.getInstance().getParameter("repositoryUrl") + "/books/"+bookSlug+".etb");
-            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.setRequestMethod("GET");
-            urlConnection.connect();
+    public void readSource(String bookSlug, String sourceSlug) {
+        Uri path = Uri.fromFile(new File("sdcard/eTextBook/cache/" + bookSlug + "/" + sourceSlug));
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setDataAndType(path, "application/pdf");
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        mContext.startActivity(intent);
+    }
 
-
-            File SDCardRoot = Environment.getExternalStorageDirectory();
-            //create a new file, specifying the path, and the filename
-            //which we want to save the file as.
-            File file = new File(SDCardRoot + "/eTextBook", bookSlug + ".etb");
-
-            //this will be used to write the downloaded data into the file we created
-            FileOutputStream fileOutput = new FileOutputStream(file);
-
-            //this will be used in reading the data from the internet
-            InputStream inputStream = urlConnection.getInputStream();
-
-            //this is the total size of the file
-            int totalSize = urlConnection.getContentLength();
-            //variable to store total downloaded bytes
-            int downloadedSize = 0;
-
-            //create a buffer...
-            byte[] buffer = new byte[1024];
-            int bufferLength = 0; //used to store a temporary size of the buffer
-
-            //now, read through the input buffer and write the contents to the file
-            while ( (bufferLength = inputStream.read(buffer)) > 0 ) {
-                //add the data in the buffer to the file in the file output stream (the file on the sd card
-                fileOutput.write(buffer, 0, bufferLength);
-                //add up the size so we know how much is downloaded
-                downloadedSize += bufferLength;
-                //this is where you would do something to report the prgress, like this maybe
-                if(downloadedSize == totalSize) {
-                    player.loadBooksFromArchive();
-                    webView.loadUrl("javascript:app.setStorageBooks(" + player.getBookList() + ")");
-                    webView.loadUrl("javascript:app.drawShelfs()");
-                    webView.loadUrl("javascript:app.switchScreen('shelf')");
-                }
-
-            }
-            //close the output stream when done
-            fileOutput.close();
-
-        //catch some possible errors...
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void downloadBook(String bookSlug) throws MalformedURLException {
+        DownloadBookTask downloadTask = new DownloadBookTask();
+        downloadTask.setWebView(webView);
+        downloadTask.setPlayer(player);
+        downloadTask.execute(bookSlug);
     }
 
     public boolean isConnected() {

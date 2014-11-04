@@ -58,7 +58,10 @@ var App = function() {
             shelf.find('.book-list').append(this.createStorageBook(this.storageBooks[i]));
         }
         $('.storageList .book').click(function() {
-            Android.readBook($(this).attr('href'));
+            if($(this).hasClass('source')) {
+                Android.readSource($(this).attr('href'), $(this).attr('source'));
+            } else { Android.readBook($(this).attr('href')); }
+
             return false;
         });
     }
@@ -78,6 +81,8 @@ var App = function() {
         $('.remoteList .book').click(function() {
             var book = $(this);
             $this.switchScreen('uploading');
+            $('#uploading.screen').css({ backgroundImage: $(book).css('backgroundImage')});
+            $('#uploading.screen .book-title').html(book.attr('title'));
             setTimeout(function(){
                 Android.downloadBook(book.attr('href'));
             }, 500)
@@ -86,11 +91,15 @@ var App = function() {
     }
 
     this.createStorageBook = function(book) {
-        return $('<a href="'+ book.slug +'" class="book" style="background-image: url(file:///sdcard/eTextBook/cache/'+ book.slug +'/content/cover.png)"></a>');
+        if(book.source != '') {
+            return $('<a href="'+ book.slug +'" title="' + book.title + '" class="book source" source="'+ book.source +'" style="background-image: url(file:///sdcard/eTextBook/cache/'+ book.slug +'/content/cover.png)"></a>');
+        } else {
+            return $('<a href="'+ book.slug +'" title="' + book.title + '" class="book" style="background-image: url(file:///sdcard/eTextBook/cache/'+ book.slug +'/content/cover.png)"></a>');
+        }
     }
 
     this.createRemoteBook = function(book) {
-        return $('<a href="'+ book.slug +'" class="book" style="background-image: url(http://192.168.0.144/tmp/'+ book.slug +'/content/cover.png)"></a>');
+        return $('<a href="'+ book.slug +'" title="' + book.title + '" class="book" style="background-image: url(http://textbooks-demo.it-attractor.net/publicBooks/'+ book.slug +'/content/cover.png)"></a>');
     }
 
     this.createShelf= function() {
@@ -108,10 +117,9 @@ var App = function() {
         );
     }
 
-    this.updateProgress = function(currentSize, allSize) {
-        if(currentSize == allSize) {
-            this.drawShelfs();
-        }
+    this.updateUploadingProgress = function(percents) {
+        $('.uploading-progress .fill').css({ width: percents + '%'});
+        $('.uploading-progress .display').html(percents + '%');
     }
 
     this.setRemoteBooks = function(books) {
