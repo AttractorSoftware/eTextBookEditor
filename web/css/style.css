@@ -178,7 +178,36 @@ html, body {
               display: none;
               float: left; }
             .e-text-book-editor .desktop e-text-book module blocks block block-headline block-categories, .e-text-book-editor .desktop e-text-book module blocks rule block-headline block-categories, .e-text-book-editor .desktop e-text-book module blocks .header block-headline block-categories {
-              float: left; }
+              float: left;
+              margin: -20px 0 20px 0; }
+              .e-text-book-editor .desktop e-text-book module blocks block block-headline block-categories .item, .e-text-book-editor .desktop e-text-book module blocks rule block-headline block-categories .item, .e-text-book-editor .desktop e-text-book module blocks .header block-headline block-categories .item {
+                float: left;
+                width: 38px;
+                height: 36px;
+                background: url("/img/book-icons-sprite.png") no-repeat;
+                margin: 0 5px 0 0;
+                opacity: 0.2;
+                cursor: pointer; }
+                .e-text-book-editor .desktop e-text-book module blocks block block-headline block-categories .item:hover, .e-text-book-editor .desktop e-text-book module blocks block block-headline block-categories .item.selected, .e-text-book-editor .desktop e-text-book module blocks rule block-headline block-categories .item:hover, .e-text-book-editor .desktop e-text-book module blocks rule block-headline block-categories .item.selected, .e-text-book-editor .desktop e-text-book module blocks .header block-headline block-categories .item:hover, .e-text-book-editor .desktop e-text-book module blocks .header block-headline block-categories .item.selected {
+                  opacity: 1; }
+                .e-text-book-editor .desktop e-text-book module blocks block block-headline block-categories .item.type-01, .e-text-book-editor .desktop e-text-book module blocks rule block-headline block-categories .item.type-01, .e-text-book-editor .desktop e-text-book module blocks .header block-headline block-categories .item.type-01 {
+                  background-position: left top; }
+                .e-text-book-editor .desktop e-text-book module blocks block block-headline block-categories .item.type-02, .e-text-book-editor .desktop e-text-book module blocks rule block-headline block-categories .item.type-02, .e-text-book-editor .desktop e-text-book module blocks .header block-headline block-categories .item.type-02 {
+                  background-position: left -41px; }
+                .e-text-book-editor .desktop e-text-book module blocks block block-headline block-categories .item.type-03, .e-text-book-editor .desktop e-text-book module blocks rule block-headline block-categories .item.type-03, .e-text-book-editor .desktop e-text-book module blocks .header block-headline block-categories .item.type-03 {
+                  background-position: left -80px; }
+                .e-text-book-editor .desktop e-text-book module blocks block block-headline block-categories .item.type-04, .e-text-book-editor .desktop e-text-book module blocks rule block-headline block-categories .item.type-04, .e-text-book-editor .desktop e-text-book module blocks .header block-headline block-categories .item.type-04 {
+                  background-position: left -122px; }
+                .e-text-book-editor .desktop e-text-book module blocks block block-headline block-categories .item.type-05, .e-text-book-editor .desktop e-text-book module blocks rule block-headline block-categories .item.type-05, .e-text-book-editor .desktop e-text-book module blocks .header block-headline block-categories .item.type-05 {
+                  background-position: left -161px; }
+                .e-text-book-editor .desktop e-text-book module blocks block block-headline block-categories .item.type-06, .e-text-book-editor .desktop e-text-book module blocks rule block-headline block-categories .item.type-06, .e-text-book-editor .desktop e-text-book module blocks .header block-headline block-categories .item.type-06 {
+                  background-position: left -201px; }
+                .e-text-book-editor .desktop e-text-book module blocks block block-headline block-categories .item.type-07, .e-text-book-editor .desktop e-text-book module blocks rule block-headline block-categories .item.type-07, .e-text-book-editor .desktop e-text-book module blocks .header block-headline block-categories .item.type-07 {
+                  background-position: left -241px; }
+                .e-text-book-editor .desktop e-text-book module blocks block block-headline block-categories .item.type-08, .e-text-book-editor .desktop e-text-book module blocks rule block-headline block-categories .item.type-08, .e-text-book-editor .desktop e-text-book module blocks .header block-headline block-categories .item.type-08 {
+                  background-position: left -281px; }
+                .e-text-book-editor .desktop e-text-book module blocks block block-headline block-categories .item.type-09, .e-text-book-editor .desktop e-text-book module blocks rule block-headline block-categories .item.type-09, .e-text-book-editor .desktop e-text-book module blocks .header block-headline block-categories .item.type-09 {
+                  background-position: left -321px; }
             .e-text-book-editor .desktop e-text-book module blocks block block-headline block-title, .e-text-book-editor .desktop e-text-book module blocks rule block-headline block-title, .e-text-book-editor .desktop e-text-book module blocks .header block-headline block-title {
               float: left;
               width: 100%; }
@@ -934,10 +963,34 @@ e-text-book-editor .display e-text-book, .e-text-book-viewer e-text-book {
         float: left;
         width: 17%;
         height: 30px; }
-        e-text-book-editor .display e-text-book blocks block block-categories block-category, .e-text-book-viewer e-text-book blocks block block-categories block-category {
+        e-text-book-editor .display e-text-book blocks block block-categories .item, .e-text-book-viewer e-text-book blocks block block-categories .item {
           float: left;
-          width: 30px;
-          height: 30px; }
+          width: 38px;
+          height: 36px;
+          background: url("/img/book-icons-sprite.png") no-repeat;
+          margin: 0 5px 0 0;
+          opacity: 0.2;
+          cursor: pointer; }
+          e-text-book-editor .display e-text-book blocks block block-categories .item:hover, e-text-book-editor .display e-text-book blocks block block-categories .item.selected, .e-text-book-viewer e-text-book blocks block block-categories .item:hover, .e-text-book-viewer e-text-book blocks block block-categories .item.selected {
+            opacity: 1; }
+          e-text-book-editor .display e-text-book blocks block block-categories .item.type-01, .e-text-book-viewer e-text-book blocks block block-categories .item.type-01 {
+            background-position: left top; }
+          e-text-book-editor .display e-text-book blocks block block-categories .item.type-02, .e-text-book-viewer e-text-book blocks block block-categories .item.type-02 {
+            background-position: left -41px; }
+          e-text-book-editor .display e-text-book blocks block block-categories .item.type-03, .e-text-book-viewer e-text-book blocks block block-categories .item.type-03 {
+            background-position: left -80px; }
+          e-text-book-editor .display e-text-book blocks block block-categories .item.type-04, .e-text-book-viewer e-text-book blocks block block-categories .item.type-04 {
+            background-position: left -122px; }
+          e-text-book-editor .display e-text-book blocks block block-categories .item.type-05, .e-text-book-viewer e-text-book blocks block block-categories .item.type-05 {
+            background-position: left -161px; }
+          e-text-book-editor .display e-text-book blocks block block-categories .item.type-06, .e-text-book-viewer e-text-book blocks block block-categories .item.type-06 {
+            background-position: left -201px; }
+          e-text-book-editor .display e-text-book blocks block block-categories .item.type-07, .e-text-book-viewer e-text-book blocks block block-categories .item.type-07 {
+            background-position: left -241px; }
+          e-text-book-editor .display e-text-book blocks block block-categories .item.type-08, .e-text-book-viewer e-text-book blocks block block-categories .item.type-08 {
+            background-position: left -281px; }
+          e-text-book-editor .display e-text-book blocks block block-categories .item.type-09, .e-text-book-viewer e-text-book blocks block block-categories .item.type-09 {
+            background-position: left -321px; }
       e-text-book-editor .display e-text-book blocks block block-title, .e-text-book-viewer e-text-book blocks block block-title {
         float: left;
         font-weight: bold;

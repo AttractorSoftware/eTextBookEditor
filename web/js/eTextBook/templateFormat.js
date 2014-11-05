@@ -28,17 +28,16 @@ var templateFormat = {
            var position = task.find('block-index').html();
            var title = task.find('block-title view-element').html();
            var content = task.find('block-content').html();
+           var categories = task.find('block-categories').html();
            task.addClass('row').addClass('block').addClass('task').html(
                '<div class="col-sm-1 position">'
                    + position +
                    '<div class="visible-xs task-types inline">' +
-                       '<div class="item"></div>' +
-                       '<div class="item"></div>' +
+                       categories +
                    '</div>' +
                '</div>' +
                '<div class="col-sm-1 hidden-xs task-types">' +
-                    '<div class="item"></div>' +
-                    '<div class="item"></div>' +
+                   categories +
                '</div>' +
                '<div class="col-sm-10 block-content">' +
                    '<div class="task-content">' +

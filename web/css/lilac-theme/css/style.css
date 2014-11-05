@@ -87,9 +87,29 @@ html, body {
         margin: 0 10px 0 0; }
     .module .block .task-types .item {
       float: left;
-      clear: left;
-      width: 40px;
-      height: 40px;
-      border-radius: 20px;
-      background: #cdc8cc;
-      margin: 10px 0 0 0; }
+      width: 38px;
+      height: 36px;
+      background: url("/img/book-icons-sprite.png") no-repeat;
+      margin: 0 5px 0 0;
+      opacity: 0.2;
+      cursor: pointer; }
+      .module .block .task-types .item:hover, .module .block .task-types .item.selected {
+        opacity: 1; }
+      .module .block .task-types .item.type-01 {
+        background-position: left top; }
+      .module .block .task-types .item.type-02 {
+        background-position: left -41px; }
+      .module .block .task-types .item.type-03 {
+        background-position: left -80px; }
+      .module .block .task-types .item.type-04 {
+        background-position: left -122px; }
+      .module .block .task-types .item.type-05 {
+        background-position: left -161px; }
+      .module .block .task-types .item.type-06 {
+        background-position: left -201px; }
+      .module .block .task-types .item.type-07 {
+        background-position: left -241px; }
+      .module .block .task-types .item.type-08 {
+        background-position: left -281px; }
+      .module .block .task-types .item.type-09 {
+        background-position: left -321px; }

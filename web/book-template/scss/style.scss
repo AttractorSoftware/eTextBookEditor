@@ -90,10 +90,24 @@ e-text-book-editor .display, .e-text-book-viewer {
           float: left;
           width: 17%;
           height: 30px;
-          block-category {
+          .item {
             float: left;
-            width: 30px;
-            height: 30px;
+            width: 38px;
+            height: 36px;
+            background: url('/img/book-icons-sprite.png') no-repeat;
+            margin: 0 5px 0 0;
+            opacity: 0.2;
+            cursor: pointer;
+            &:hover, &.selected { opacity: 1; }
+            &.type-01 { background-position: left top; }
+            &.type-02 { background-position: left -41px; }
+            &.type-03 { background-position: left -80px; }
+            &.type-04 { background-position: left -122px; }
+            &.type-05 { background-position: left -161px; }
+            &.type-06 { background-position: left -201px; }
+            &.type-07 { background-position: left -241px; }
+            &.type-08 { background-position: left -281px; }
+            &.type-09 { background-position: left -321px; }
           }
         }
         block-title {

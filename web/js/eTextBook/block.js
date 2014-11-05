@@ -3,10 +3,12 @@ var eTextBookBlock = Backbone.Model.extend({
         this.cont = this.get('cont');
         this.editElements = {};
         this.editable = false;
+        this.categories = this.cont.find('block-categories .item');
         this.addControlPanel();
         this.addEditElements();
         this.activateWidget();
         this.activateWidgetSelect();
+        this.activateWidgetCategorySelect();
     }, addControlPanel: function () {
 
         var $this = this;
@@ -32,7 +34,10 @@ var eTextBookBlock = Backbone.Model.extend({
         for (var i in this.editElements) {
             this.editElements[i].startEdit();
         }
+        this.categories.show();
     }, finishEdit: function () {
+        this.categories.hide();
+        this.cont.find('block-categories .item.selected').show();
         this.get('cont').attr('editable', 0);
         this.editable = false;
         for (var i = 0 in this.editElements) {
@@ -93,6 +98,22 @@ var eTextBookBlock = Backbone.Model.extend({
         if($this.cont.find('widget-content').html() == '') {
             $($this.cont.find('.widget-type-list .item')[0]).trigger('click');
         }
+    }, activateWidgetCategorySelect: function() {
+        var $this = this;
+        if(!this.categories.length) {
+            this.cont.find('block-categories').html(
+                $(App.eTextBookTemplate.getTemplate('block')).find('block-categories').html()
+            );
+            this.categories = this.cont.find('block-categories .item');
+            this.categories.hide();
+        }
+        this.categories.bind('click', function() {
+            if($this.editable) {
+                if($(this).hasClass('selected')) {
+                    $(this).removeClass('selected');
+                } else { $(this).addClass('selected'); }
+            }
+        });
     }
 
 });
