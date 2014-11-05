@@ -89,7 +89,7 @@ html, body {
       float: left;
       width: 38px;
       height: 36px;
-      background: url("/img/book-icons-sprite.png") no-repeat;
+      background: url("../img/book-icons-sprite.png") no-repeat;
       margin: 0 5px 0 0;
       opacity: 0.2;
       cursor: pointer; }
