@@ -65,6 +65,7 @@ html, body {
     }
 
     .block-content {
+      font-size: 18px;
       h1 {
         text-align: left;
         font-size: 20px;
@@ -85,6 +86,7 @@ html, body {
       border-radius: 3px 0 0 3px;
       box-shadow: 1px 1px 0 #f1e4ee;
       overflow: hidden;
+      font-size: 18px;
     }
 
     .task-content {
@@ -101,7 +103,7 @@ html, body {
         margin: 0 0 10px 0;
       }
       .simple-text {
-        font-size: 14px;
+        font-size: 18px;
         line-height: 18px;
         overflow: hidden;
         img {

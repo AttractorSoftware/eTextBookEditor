@@ -44,14 +44,16 @@ html, body {
     font-size: 14px;
     border-left: solid 5px #e9b4ea;
     padding: 5px 0 5px 20px; }
-  .module .block .block-content h1 {
-    text-align: left;
-    font-size: 20px;
-    font-weight: bold;
-    color: #000;
-    margin: 0; }
-  .module .block .block-content img {
-    margin: 0 10px 0 0; }
+  .module .block .block-content {
+    font-size: 18px; }
+    .module .block .block-content h1 {
+      text-align: left;
+      font-size: 20px;
+      font-weight: bold;
+      color: #000;
+      margin: 0; }
+    .module .block .block-content img {
+      margin: 0 10px 0 0; }
   .module .block .rule-content {
     background: #fff;
     padding: 10px 20px 20px 20px;
@@ -59,7 +61,8 @@ html, body {
     border-left: solid 5px #e9b4ea;
     border-radius: 3px 0 0 3px;
     box-shadow: 1px 1px 0 #f1e4ee;
-    overflow: hidden; }
+    overflow: hidden;
+    font-size: 18px; }
   .module .block .task-content {
     background: #fff;
     padding: 10px 20px 20px 20px;
@@ -72,7 +75,7 @@ html, body {
       font-weight: bold;
       margin: 0 0 10px 0; }
     .module .block .task-content .simple-text {
-      font-size: 14px;
+      font-size: 18px;
       line-height: 18px;
       overflow: hidden; }
       .module .block .task-content .simple-text img {
