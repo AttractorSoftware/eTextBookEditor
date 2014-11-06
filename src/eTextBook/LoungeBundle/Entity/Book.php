@@ -10,7 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="book")
  * @ORM\Entity
  */
-class Book {
+class Book
+{
     /**
      * @var integer
      *
@@ -100,48 +101,63 @@ class Book {
 
     private $modules;
 
-    public function hasEditPermissionForUser($userId) {
-        if($this->getUser()->getId() == $userId ) {
+    public function hasEditPermissionForUser($userId)
+    {
+        if ($this->getUser()->getId() == $userId) {
             return true;
         } else {
-            foreach($this->getEditUsers() as $user) {
-                if($user->getId() == $userId) {
+            foreach ($this->getEditUsers() as $user) {
+                if ($user->getId() == $userId) {
                     return true;
                 }
             }
-        } return false;
+        }
+
+        return false;
     }
 
-    public function toArray() {
+    public function toArray()
+    {
         return array(
             'title' => $this->title
-            ,'cover' => '/' . $this->slug . '/content/cover.png'
-            ,'slug' => $this->slug
-            ,'authors' => $this->authors
-            ,'editor' => $this->editor
-            ,'isbn' => $this->isbn
-            ,'modules' => $this->modules
-            ,'source' => $this->source
+        ,
+            'cover' => '/' . $this->slug . '/content/cover.png'
+        ,
+            'slug' => $this->slug
+        ,
+            'authors' => $this->authors
+        ,
+            'editor' => $this->editor
+        ,
+            'isbn' => $this->isbn
+        ,
+            'modules' => $this->modules
+        ,
+            'source' => $this->source
         );
     }
 
-    public function getSourceExtension() {
-        if($this->getSource() != '') {
-            $sourceExtension = explode(".", $this->getSource());
-            $sourceExtension = end($sourceExtension);
-        } else { $sourceExtension = 'etb'; }
+    public function getSourceExtension()
+    {
+        if ($this->getFile() != '') {
+            $sourceFileExtension = explode(".", $this->getFile());
+            $sourceFileExtension = end($sourceFileExtension);
+        } else {
+            $sourceFileExtension = 'etb';
+        }
 
-        return $sourceExtension;
+        return $sourceFileExtension;
     }
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->modules = array();
     }
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -164,7 +180,7 @@ class Book {
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -187,7 +203,7 @@ class Book {
     /**
      * Get authors
      *
-     * @return string 
+     * @return string
      */
     public function getAuthors()
     {
@@ -210,7 +226,7 @@ class Book {
     /**
      * Get editor
      *
-     * @return string 
+     * @return string
      */
     public function getEditor()
     {
@@ -233,7 +249,7 @@ class Book {
     /**
      * Get isbn
      *
-     * @return string 
+     * @return string
      */
     public function getIsbn()
     {
@@ -256,7 +272,7 @@ class Book {
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
@@ -311,11 +327,12 @@ class Book {
     /**
      * Get file
      *
-     * @return string 
+     * @return string
      */
     public function getFile()
     {
-        return $this->file;
+        $sourceFileName = $this->file;
+        return $sourceFileName;
     }
 
     /**
@@ -334,7 +351,7 @@ class Book {
     /**
      * Get source
      *
-     * @return string 
+     * @return string
      */
     public function getSource()
     {
@@ -358,7 +375,7 @@ class Book {
     /**
      * Get user
      *
-     * @return \eTextBook\SpawnBundle\Entity\User 
+     * @return \eTextBook\SpawnBundle\Entity\User
      */
     public function getUser()
     {
@@ -381,7 +398,7 @@ class Book {
     /**
      * Get isPublic
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getIsPublic()
     {
@@ -415,7 +432,7 @@ class Book {
     /**
      * Get editUsers
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getEditUsers()
     {

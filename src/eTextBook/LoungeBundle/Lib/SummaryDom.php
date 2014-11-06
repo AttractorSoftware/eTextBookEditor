@@ -10,8 +10,7 @@ class SummaryDom extends SimpleHtmlDom
         $stripRN = true,
         $defaultBRText = DEFAULT_BR_TEXT,
         $defaultSpanText = DEFAULT_SPAN_TEXT
-    )
-    {
+    ) {
         $this->clear();
 
         // set the length of content before we do anything to it.
@@ -357,10 +356,13 @@ class SummaryDom extends SimpleHtmlDom
     public function getExercisesList()
     {
         $exercises = array();
+        $indexDisableProperty ='index-disable';
         foreach ($this->find('block') as $exercise) {
-            $id = $exercise->id;
-            $title = $exercise->find('block-title view-element', 0)->innertext;
-            $exercises[$id] = $title;
+            if ($exercise->$indexDisableProperty != "1" || ! isset($exercise->$indexDisableProperty)) {
+                $id = $exercise->id;
+                $title = $exercise->find('block-title view-element', 0)->innertext;
+                $exercises[$id] = $title;
+            };
         }
 
         return $exercises;

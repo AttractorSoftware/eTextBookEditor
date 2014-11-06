@@ -64,14 +64,12 @@ class BookController extends Controller
 
         if (!$creator->execute()) {
             $response = array(
-                'status' => 'failed'
-            ,
+                'status' => 'failed',
                 'reason' => 'Учебник с таким названием уже существует'
             );
         } else {
             $response = array(
-                'status' => 'success'
-            ,
+                'status' => 'success',
                 'data' => array(
                     'slug' => $bookSlug
                 )
@@ -88,7 +86,8 @@ class BookController extends Controller
      * @Route("/book/edit/{slug}/{module}", name="book-edit")
      * @Template()
      */
-    public function editAction($slug, $module) {
+    public function editAction($slug, $module)
+    {
         $entityManager = $this->getDoctrine()->getManager();
         $book = new Book($this->container->getParameter('books_dir') . $slug . '.etb');
         $dbBook = $entityManager->getRepository('eTextBookLoungeBundle:Book')->findOneBySlug($slug);
@@ -265,12 +264,13 @@ class BookController extends Controller
     /**
      * @Route("/save-edit-permissions/{bookSlug}", name="save-edit-permissions")
      */
-    public function saveEditPermissionsAction($bookSlug, Request $request) {
+    public function saveEditPermissionsAction($bookSlug, Request $request)
+    {
         $entityManager = $this->getDoctrine()->getManager();
         $book = $entityManager->getRepository("eTextBookLoungeBundle:Book")->findOneBySlug($bookSlug);
         $currentUser = $this->getUser();
         $result = array('status' => 1);
-        if(!$book->hasEditPermissionForUser($currentUser->getId())) {
+        if (!$book->hasEditPermissionForUser($currentUser->getId())) {
             $result['status'] = 0;
             $result['reason'] = 'No permissions';
         } else {
@@ -280,10 +280,10 @@ class BookController extends Controller
             $entityManager->persist($book);
             $entityManager->flush();
 
-            if($request->get('users') != "") {
-                foreach($request->get('users') as $userEmail) {
+            if ($request->get('users') != "") {
+                foreach ($request->get('users') as $userEmail) {
                     $user = $entityManager->getRepository('eTextBookSpawnBundle:User')->findOneByEmail($userEmail);
-                    if(is_object($user)) {
+                    if (is_object($user)) {
                         $book->addEditUser($user);
                     }
                 }

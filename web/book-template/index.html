@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, user-scalable=yes">
     <meta charset="utf-8"/>
-    <title>-- title --</title>
+    <title></title>
     <link rel="stylesheet" type="text/css" href="css/main-style.min.css"/>
 </head>
 <body>
@@ -11,23 +11,20 @@
 
     <div class="page-header">
         <span id="show-book-summary" class="btn left glyphicon glyphicon-th-list" title="Мазмуну"></span>
-
+        <span id="book-back-button" class="btn left glyphicon glyphicon-arrow-left"
+              onClick="history.go(-1);return true;" title="Назад"></span>
         <h2 class="book-name"><!-- book-name --></h2>
     </div>
 
     <div class="book-summary">
-
         <ul id="moduleList" class="summary">
             <!-- module-link -->
         </ul>
-
     </div>
 
     <div id="book-body" class="book-body display e-text-book-viewer"></div>
-
 </div>
 
 <script src="js/script.min.js"></script>
-
 </body>
 </html>

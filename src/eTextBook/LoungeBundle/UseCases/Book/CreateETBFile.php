@@ -30,21 +30,17 @@ class CreateETBFile
     public function execute()
     {
         if (!is_file($this->booksDir . $this->book->getSlug() . '.etb')) {
+            $this->createBooksTempDir();
             $this->createStructure();
-            $this->copyTemplateFiles();
-            $this->createCover();
             $this->createSourceFile();
             $this->createInfoFile();
-            $this->createIndexFile();
-            $this->pack();
-
-
-            $fileIterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($this->bookTmpDir));
-            foreach ($fileIterator as $item) {
-                if (!is_dir($item->getPathname())) {
-                    chmod($item->getPathname(), 0777);
-                }
+            $this->createCover();
+            if ($this->book->getFile() == '') {
+                $this->copyTemplateFiles();
+                $this->createIndexFile();
             }
+            $this->pack();
+            $this->changeDirectoriesPermissions();
 
             return true;
         } else {
@@ -55,7 +51,9 @@ class CreateETBFile
     public function createCover()
     {
         if ($this->book->getCover() != '') {
-            copy($this->tmpDir . 'cover/' . $this->book->getCover(), $this->bookTmpDir . '/content/cover.png');
+            $uploadedCoverLocation = $this->tmpDir . 'cover/' . $this->book->getCover();
+            $booksCoverLocation = $this->bookTmpDir . 'content/cover.png';
+            copy($uploadedCoverLocation, $booksCoverLocation);
         }
     }
 
@@ -69,13 +67,13 @@ class CreateETBFile
     public function createInfoFile()
     {
         $info = array(
-            'title' => $this->book->getTitle()
-            , 'authors' => $this->book->getAuthors()
-            , 'slug' => $this->book->getSlug()
-            , 'editor' => $this->book->getEditor()
-            , 'isbn' => $this->book->getIsbn()
-            , 'modules' => array()
-            , 'source' => $this->book->getFile()
+            'title' => $this->book->getTitle(),
+            'authors' => $this->book->getAuthors(),
+            'slug' => $this->book->getSlug(),
+            'editor' => $this->book->getEditor(),
+            'isbn' => $this->book->getIsbn(),
+            'modules' => array(),
+            'source' => $this->book->getFile()
         );
         file_put_contents($this->bookTmpDir . 'book.info', json_encode($info));
     }
@@ -94,7 +92,6 @@ class CreateETBFile
 
     public function createStructure()
     {
-        mkdir($this->bookTmpDir, 0777, true);
         mkdir($this->bookTmpDir . 'css', 0777, true);
         mkdir($this->bookTmpDir . 'js', 0777, true);
         mkdir($this->bookTmpDir . 'img', 0777, true);
@@ -120,5 +117,20 @@ class CreateETBFile
             unlink($bookFile);
         }
         $this->fileManager->zip($this->bookTmpDir, $bookFile);
+    }
+
+    public function createBooksTempDir()
+    {
+        mkdir($this->bookTmpDir, 0777, true);
+    }
+
+    private function changeDirectoriesPermissions()
+    {
+        $fileIterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($this->bookTmpDir));
+        foreach ($fileIterator as $item) {
+            if (!is_dir($item->getPathname())) {
+                chmod($item->getPathname(), 0777);
+            }
+        }
     }
 }

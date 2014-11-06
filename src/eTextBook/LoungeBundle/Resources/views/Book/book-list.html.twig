@@ -10,17 +10,19 @@
         <li id="{{ book.slug }}" class="item">
             <div class="cover" style="background-image: url({{ dir }}{{ book.slug }}/content/cover.png)"
                  data-anijs="if: scroll, on: window, do: flipInY animated, before: scrollReveal, after: removeAnim">
-                <div class="source-type {{ book.sourceExtension }}"></div>
+                <div class="source-type {{ book.sourceFileExtension }}"></div>
             </div>
-            {% if book.source | length > 0 %}
-                <a class="title" href="{{ dir }}{{ book.slug }}/{{ book.source }}">{{ book.title }}</a>
+            {% if book.file | length > 0 %}
+                <a class="title" href="{{ dir }}{{ book.slug }}/{{ book.file }}">
+                    {{ book.title }}
+                </a>
             {% else %}
                 <a class="title" href="{{ path('book-view', {'slug': book.slug, 'module': ' ' }) }}">
                     {{ book.title }}
                 </a>
             {% endif %}
             <span class="authors"> {{ book.authors }} </span>
-            {% if app.user and book.hasEditPermissionForUser(app.user.id) and book.source | length == 0 %}
+            {% if app.user and book.hasEditPermissionForUser(app.user.id) and book.file | length == 0 %}
                 <a href="{{ path('book-edit', {'slug': book.slug, 'module': ' ' }) }}"
                    class="edit-link btn btn-primary btn-xs">
                     <span class="glyphicon glyphicon-edit"></span>
@@ -29,6 +31,12 @@
                 <a href="tmp/{{ book.slug }}/index.html" class="view-link btn btn-success btn-xs">
                     <span class="glyphicon glyphicon-eye-open"></span>
                     Эмулятор
+                </a>
+            {% endif %}
+            {% if app.user and book.hasEditPermissionForUser(app.user.id) and book.file | length > 0 %}
+                <a href="/publish/{{ book.slug }}" class="edit-link btn btn-primary btn-xs">
+                    <span class="glyphicon glyphicon-thumbs-up"></span>
+                    Опубликовать учебник
                 </a>
             {% endif %}
         </li>
