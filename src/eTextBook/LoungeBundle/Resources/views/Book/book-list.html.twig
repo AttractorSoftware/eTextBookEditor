@@ -28,9 +28,12 @@
                     <span class="glyphicon glyphicon-edit"></span>
                     Редактировать
                 </a>
-                <a href="tmp/{{ book.slug }}/index.html" class="view-link btn btn-success btn-xs">
+                <a href="publicBooks/{{ book.slug }}/index.html" class="view-link btn btn-success btn-xs">
                     <span class="glyphicon glyphicon-eye-open"></span>
                     Эмулятор
+                </a>
+                <a href="/publicBooks/pdf/{{ book.slug }}.pdf" class="btn btn-success btn-xs">
+                    <span class="glyphicon glyphicon-print"></span>
                 </a>
             {% endif %}
             {% if app.user and book.hasEditPermissionForUser(app.user.id) and book.file | length > 0 %}

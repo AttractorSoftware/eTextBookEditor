@@ -24,7 +24,7 @@
                         <span class="glyphicon glyphicon-user"></span>
                         Права редактирования
                     </a>
-                    <a href="/publish/{{ book.slug }}" class="edit-link btn btn-primary btn-xs">
+                    <a href="{{ path('book-publish', { 'slug': book.slug}) }}" class="edit-link btn btn-primary btn-xs">
                         <span class="glyphicon glyphicon-thumbs-up"></span>
                         Опубликовать учебник
                     </a>

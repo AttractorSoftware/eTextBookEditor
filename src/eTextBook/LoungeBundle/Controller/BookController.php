@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Gedmo\Sluggable\Util as Sluggable;
 use eTextBook\LoungeBundle\Lib\Book;
 use eTextBook\LoungeBundle\Entity\Book as eBook;
+use eTextBook\LoungeBundle\UseCases\Book\PrintPublic;
 
 
 class BookController extends Controller
@@ -121,9 +122,28 @@ class BookController extends Controller
         $em->flush();
         $book = $this->get('bookLoader')->load($slug);
 
+        $moduleList = array();
+
+        foreach($book->getModules() as $module) {
+            $page = "http://" . $_SERVER['SERVER_NAME'] . "/tmp/" . $book->getSlug() . "/modules/" . $module->slug . ".html";
+            if(file_exists($this->get('kernel')->getRootDir() . '/../web/tmp/'. $book->getSlug().'/modules/'. $module->slug . '.html')) {
+                $moduleList[] = $page;
+            }
+        }
+
         $updater = $this->get('updateETBFile');
         $updater->setBook($book);
         $updater->publishBook($slug);
+
+        $printPublic = new PrintPublic();
+        $printPublic->setBook($book);
+        $printPublic->setBookPath($this->get('kernel')->getRootDir() . '/../web/tmp/');
+        $printPublic->setPrintPath($this->get('kernel')->getRootDir() . '/../web/printBooks/');
+        $printPublic->generate();
+
+        $this->get('knp_snappy.pdf')->generate(
+            $this->get('kernel')->getRootDir() . '/../web/printBooks/' . $book->getSlug(). '.html',
+            $this->get('kernel')->getRootDir() . '/../web/publicBooks/pdf/' . $book->getSlug(). '.pdf', array(), true);
 
         return $this->redirect($this->generateUrl('books'));
 

@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new eTextBook\LoungeBundle\eTextBookLoungeBundle(),
             new eTextBook\APIBundle\eTextBookAPIBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

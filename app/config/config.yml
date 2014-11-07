@@ -71,6 +71,12 @@ fos_user:
     firewall_name: main
     user_class: eTextBook\SpawnBundle\Entity\User
 
+knp_snappy:
+    pdf:
+        enabled:    true
+        binary:     /usr/local/bin/wkhtmltopdf
+        options:    []
+
 services:
   transliterate:
     class: eTextBook\LoungeBundle\Lib\Transliterate
