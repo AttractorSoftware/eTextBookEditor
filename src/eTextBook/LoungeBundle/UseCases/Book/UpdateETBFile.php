@@ -191,6 +191,7 @@ class UpdateETBFile
     {
         copy($this->templateDir . "/css/main-style.min.css", $this->bookTmpDir . 'css/main-style.min.css');
         copy($this->templateDir . "/js/script.min.js", $this->bookTmpDir . 'js/script.min.js');
+        copy($this->templateDir . "/js/print.min.js", $this->bookTmpDir . 'js/print.min.js');
         $this->fileManager->copyFilesFromDirectory($this->templateDir . "/fonts", $this->bookTmpDir . 'fonts');
         $this->fileManager->copyFilesFromDirectory($this->templateDir . "/img", $this->bookTmpDir . 'img');
     }

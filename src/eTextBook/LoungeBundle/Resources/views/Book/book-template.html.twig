@@ -1,0 +1,18 @@
+<li id="{{ book.slug }}" class="item">
+    <div class="cover" style="background-image: url({{ dir }}{{ book.slug }}/content/cover.png)">
+        <div class="source-type {{ book.sourceExtension }}"></div>
+    </div>
+    {% if book.file | length > 0 %}
+        <a class="title" href="{{ dir }}{{ book.slug }}/{{ book.file }}">
+            {{ book.title }}
+        </a>
+    {% else %}
+        <a class="title" href="{{ path('book-view', {'slug': book.slug, 'module': ' ' }) }}">
+            {{ book.title }}
+        </a>
+    {% endif %}
+    <span class="authors"> {{ book.authors }} </span>
+    <div class="book-controls">
+        {% block bookControls %}{% endblock %}
+    </div>
+</li>

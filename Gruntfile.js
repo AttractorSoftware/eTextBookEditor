@@ -40,6 +40,13 @@ module.exports = function (grunt) {
                 ],
                 dest: 'web/book-template/js/script.js'
             }
+            ,print: {
+                src: [
+                    'bower_components/jquery/dist/jquery.min.js'
+                    , 'web/js/eTextBook/templateFormat.js'
+                ],
+                dest: 'web/book-template/js/print.js'
+            }
         }, concat_css: {
             main: {
                 src: [
@@ -79,6 +86,11 @@ module.exports = function (grunt) {
             ,template: {
                 files: {
                     'web/book-template/js/script.min.js': '<%= concat.template.dest %>'
+                }
+            }
+            ,print: {
+                files: {
+                    'web/book-template/js/print.min.js': '<%= concat.print.dest %>'
                 }
             }
         }

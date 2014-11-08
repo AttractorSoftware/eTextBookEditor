@@ -1,0 +1,27 @@
+{% extends '::lounge-template.html.twig' %}
+
+{% block pageHeader %}
+    <div class="row">
+        <div class="col-sm-12">
+            <h1> Мои учебники</h1>
+            <div class="addBookContainer">
+                <span class="glyphicon glyphicon-file"></span>
+                <a id="addBookButton" href="#" data-toggle="modal" data-target="#bookFormModal"> Создать новый учебник </a>
+                {% include 'eTextBookLoungeBundle:Book:form.html.twig' %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block pageContent %}
+    <div class="col-sm-12 my-book-list">
+        <ul class="list-unstyled book-list">
+            {% for book in books %}
+                {% include 'eTextBookLoungeBundle:Book:private-book.html.twig' with {
+                'book': book,
+                'dir': '/tmp/'
+                } %}
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

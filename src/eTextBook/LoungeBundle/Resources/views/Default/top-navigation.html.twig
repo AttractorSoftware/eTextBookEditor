@@ -8,9 +8,15 @@
                 </a>
             </li>
             <li {% if app.request.attributes.get('_route') == 'books' %} class="active" {% endif %}>
-                <a href="{{ path('books') }}" class="book-list-link">
+                <a href="{{ path('books') }}">
                     <span class="glyphicon glyphicon-book"></span>
                     Учебники
+                </a>
+            </li>
+            <li {% if app.request.attributes.get('_route') == 'my-books' %} class="active" {% endif %}>
+                <a href="{{ path('my-books') }}" class="book-list-link">
+                    <span class="glyphicon glyphicon-book"></span>
+                    Мои учебники
                 </a>
             </li>
             <li {% if app.request.attributes.get('_route') == 'readers' %} class="active" {% endif %}>
@@ -20,27 +26,9 @@
                 </a>
             </li>
             <li>
-                <a href="#">
-                    <span class="glyphicon glyphicon-pencil"></span>
-                    Редакторы
-                </a>
-            </li>
-            <li>
                 <a href="{{ path('documentation') }}">
                     <span class="glyphicon glyphicon-user"></span>
                     Авторам
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <span class="glyphicon glyphicon-cog"></span>
-                    Разработчикам
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <span class="glyphicon glyphicon-envelope"></span>
-                    Обратная связь
                 </a>
             </li>
         </ul>

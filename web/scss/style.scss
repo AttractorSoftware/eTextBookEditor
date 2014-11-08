@@ -972,13 +972,10 @@ html, body {
     color: #333;
     text-decoration: none;
   }
-  li {
-    margin: 0 0 5px 0;
-  }
   .item {
     float: left;
     width: 255px;
-    margin: 0 15px 25px 0;
+    margin: 0 15px 50px 0;
     .cover {
       float: left;
       width: 125px;
@@ -996,6 +993,13 @@ html, body {
         &.pdf { background-image: url('/img/file-ico/pdf.png'); }
         &.etb { background-image: url('/img/file-ico/etb.png'); }
         &.mobi { background-image: url('/img/file-ico/mobi.png'); }
+      }
+    }
+    .book-controls {
+      float: left;
+      width: 100%;
+      a {
+        color: #fff;
       }
     }
     .title {
@@ -1024,7 +1028,7 @@ html, body {
   }
   a.edit-link {
     color: #fff;
-    margin: 0 0 0 23px;
+    margin: 0 0 0 15px;
   }
   a.view-link {
     color: #fff;
@@ -1094,8 +1098,8 @@ html, body {
 }
 
 .addBookContainer {
-  float: left;
-  margin: 0 0 0 10px;
+  float: right;
+  margin: -25px 0 0 10px;
 }
 
 #bookFormModal {

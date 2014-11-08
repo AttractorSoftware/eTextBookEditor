@@ -20,25 +20,31 @@ class BookController extends Controller
      * @Route("/books", name="books")
      * @Template()
      */
-    public function indexAction()
-    {
-        $books = array();
+    public function indexAction() {
         $entityManager = $this->getDoctrine()->getManager();
-        $books['publicBooks'] = $entityManager->getRepository('eTextBookLoungeBundle:Book')
+        $books = $entityManager->getRepository('eTextBookLoungeBundle:Book')
             ->createQueryBuilder('book')
             ->where('book.isPublic = :isPublic')
             ->setParameter('isPublic', true)
             ->getQuery()
             ->getResult();
+        return array('books' => $books);
+    }
 
+    /**
+     * @Route("/my-books", name="my-books")
+     * @Template()
+     */
+    public function myBooksAction() {
         if ($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
-            $books['userBooks'] = $this->getUser()->getBooks();
-            $books['userBooks'] = new ArrayCollection(
-                array_merge($books['userBooks']->toArray(), $this->getUser()->getEditedBooks()->toArray())
+            $books = $this->getUser()->getBooks();
+            $books = new ArrayCollection(
+                array_merge($books->toArray(), $this->getUser()->getEditedBooks()->toArray())
             );
+        } else {
+            $books = array();
         }
-
-        return $books;
+        return array('books' => $books);
     }
 
     /**
@@ -120,16 +126,8 @@ class BookController extends Controller
 
         $book->setIsPublic(1);
         $em->flush();
+
         $book = $this->get('bookLoader')->load($slug);
-
-        $moduleList = array();
-
-        foreach($book->getModules() as $module) {
-            $page = "http://" . $_SERVER['SERVER_NAME'] . "/tmp/" . $book->getSlug() . "/modules/" . $module->slug . ".html";
-            if(file_exists($this->get('kernel')->getRootDir() . '/../web/tmp/'. $book->getSlug().'/modules/'. $module->slug . '.html')) {
-                $moduleList[] = $page;
-            }
-        }
 
         $updater = $this->get('updateETBFile');
         $updater->setBook($book);
@@ -137,12 +135,20 @@ class BookController extends Controller
 
         $printPublic = new PrintPublic();
         $printPublic->setBook($book);
+        $printPublic->setETBBook(new Book($this->container->getParameter('books_dir') . $slug . '.etb'));
         $printPublic->setBookPath($this->get('kernel')->getRootDir() . '/../web/tmp/');
-        $printPublic->setPrintPath($this->get('kernel')->getRootDir() . '/../web/printBooks/');
+        $printPublic->setPrintPath($this->get('kernel')->getRootDir() . '/../web/publicBooks/');
         $printPublic->generate();
 
-        $this->get('knp_snappy.pdf')->generate(
-            $this->get('kernel')->getRootDir() . '/../web/printBooks/' . $book->getSlug(). '.html',
+        $knp = $this->get('knp_snappy.pdf');
+
+
+            $knp->setOption('disable-forms', true);
+            $knp->setOption('javascript-delay', 3000);
+            $knp->setOption('debug-javascript', true);
+            $knp->setOption('no-stop-slow-scripts', true);
+            $knp->generate(
+            $this->get('kernel')->getRootDir() . '/../web/publicBooks/' . $book->getSlug(). '/print.html',
             $this->get('kernel')->getRootDir() . '/../web/publicBooks/pdf/' . $book->getSlug(). '.pdf', array(), true);
 
         return $this->redirect($this->generateUrl('books'));

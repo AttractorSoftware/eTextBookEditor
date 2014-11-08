@@ -1,0 +1,37 @@
+{% extends 'eTextBookLoungeBundle:Book:book-template.html.twig' %}
+
+{% block bookControls %}
+    {% if book.file | length == 0 %}
+        <a href="{{ path('book-edit', {'slug': book.slug, 'module': ' ' }) }}"
+           class="edit-link btn btn-primary btn-xs">
+            <span class="glyphicon glyphicon-edit"></span>
+            Редактировать
+        </a>
+    {% endif %}
+    <a
+        href="{{ path('book-publish', { 'slug': book.slug }) }}"
+        class="edit-link btn btn-primary btn-xs"
+        title="Опубликовать"
+    >
+        <span class="glyphicon glyphicon-thumbs-up"></span>
+    </a>
+
+    {% if book.file | length == 0 %}
+        <a
+            href="{{ dir }}{{ book.slug }}/index.html"
+            class="view-link btn btn-success btn-xs"
+            title="Просмотр"
+        >
+            <span class="glyphicon glyphicon-eye-open"></span>
+        </a>
+    {% else %}
+        <a
+            href="{{ dir }}{{ book.slug }}/{{ book.file }}"
+            class="view-link btn btn-success btn-xs"
+            title="Просмотр"
+        >
+            <span class="glyphicon glyphicon-eye-open"></span>
+        </a>
+    {% endif %}
+
+{% endblock %}

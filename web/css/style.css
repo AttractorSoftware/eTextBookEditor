@@ -737,12 +737,10 @@ html, body {
 .book-list a {
   color: #333;
   text-decoration: none; }
-.book-list li {
-  margin: 0 0 5px 0; }
 .book-list .item {
   float: left;
   width: 255px;
-  margin: 0 15px 25px 0; }
+  margin: 0 15px 50px 0; }
   .book-list .item .cover {
     float: left;
     width: 125px;
@@ -763,6 +761,11 @@ html, body {
         background-image: url("/img/file-ico/etb.png"); }
       .book-list .item .cover .source-type.mobi {
         background-image: url("/img/file-ico/mobi.png"); }
+  .book-list .item .book-controls {
+    float: left;
+    width: 100%; }
+    .book-list .item .book-controls a {
+      color: #fff; }
   .book-list .item .title {
     float: left;
     width: 100%;
@@ -785,7 +788,7 @@ html, body {
   margin: 0 3px 0 0; }
 .book-list a.edit-link {
   color: #fff;
-  margin: 0 0 0 23px; }
+  margin: 0 0 0 15px; }
 .book-list a.view-link {
   color: #fff; }
 
@@ -835,8 +838,8 @@ html, body {
       color: #ff0000; }
 
 .addBookContainer {
-  float: left;
-  margin: 0 0 0 10px; }
+  float: right;
+  margin: -25px 0 0 10px; }
 
 #bookFormModal .book-info {
   margin: 0 0 0 210px;
@@ -1419,5 +1422,3 @@ audio-item .html5-controls {
       text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5); }
       .html5-controls .full-screen .glyphicon:hover {
         color: #fff; }
-
-/*# sourceMappingURL=style.css.map */

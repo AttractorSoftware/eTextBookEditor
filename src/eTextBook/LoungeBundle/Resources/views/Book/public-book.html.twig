@@ -1,0 +1,23 @@
+{% extends 'eTextBookLoungeBundle:Book:book-template.html.twig' %}
+
+{% block bookControls %}
+    <a href="/books/{{ book.slug }}.etb" class="btn btn-primary btn-xs book-download">
+        <span class="glyphicon glyphicon-save"></span>
+        Загрузить
+    </a>
+    {% if book.file | length == 0 %}
+        <a href="{{ dir }}{{ book.slug }}/index.html" class="view-link btn btn-success btn-xs">
+            <span class="glyphicon glyphicon-eye-open"></span>
+            Читать
+        </a>
+    {% else %}
+        <a href="{{ dir }}{{ book.slug }}/{{ book.file }}" class="view-link btn btn-success btn-xs">
+            <span class="glyphicon glyphicon-eye-open"></span>
+            Читать
+        </a>
+    {% endif %}
+    <a href="/publicBooks/pdf/{{ book.slug }}.pdf" class="btn btn-success btn-xs">
+        <span class="glyphicon glyphicon-print"></span>
+        Печать
+    </a>
+{% endblock %}
