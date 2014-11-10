@@ -43,7 +43,15 @@ module.exports = function (grunt) {
             ,print: {
                 src: [
                     'bower_components/jquery/dist/jquery.min.js'
+                    , 'bower_components/underscore/underscore.js'
+                    , 'bower_components/backbone/backbone.js'
+                    , 'web/js/app.js'
                     , 'web/js/eTextBook/templateFormat.js'
+                    , 'web/js/eTextBook/utils.js'
+                    , 'web/js/eTextBook/widget.js'
+                    , 'web/js/eTextBook/widgetRepository.js'
+                    , 'web/js/eTextBook/widget/*.js'
+                    , 'web/js/clearPrint.js'
                 ],
                 dest: 'web/book-template/js/print.js'
             }

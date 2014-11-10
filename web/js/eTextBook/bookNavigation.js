@@ -101,6 +101,34 @@ var NavigationController = function () {
     }
     _this.openLastReadingPlace();
 
+    this.searchActivate = function() {
+
+        $('#book-search-button').bind('click', function() {
+           if($('.search-panel').hasClass('open')) {
+               $('.search-panel').removeClass('open');
+               Android.searchClear();
+           } else {
+               $('.search-panel').addClass('open');
+           }
+        });
+
+        $('.search-panel .do-search').bind('click', function(){
+            if($('.search-panel input').val().length > 2) {
+                Android.search($('.search-panel input').val());
+            }
+        });
+
+        $('.search-panel .next').bind('click', function(){
+            Android.searchNext();
+        });
+
+        $('.search-panel .prev').bind('click', function(){
+            Android.searchPrev();
+        });
+    }
+
+    this.searchActivate();
+
 };
 
 App.NavigationController = new NavigationController();
