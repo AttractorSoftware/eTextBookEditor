@@ -34,6 +34,7 @@ public class MyActivity extends Activity {
         webSettings.setSupportZoom(true) ;
         webSettings.setBuiltInZoomControls(true);
         webSettings.setDisplayZoomControls(false);
+        webSettings.setAllowUniversalAccessFromFileURLs(true);
 
         webView.setWebChromeClient(new WebChromeClient());
         webView.setWebViewClient(new WebViewClient());

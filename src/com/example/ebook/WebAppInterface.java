@@ -19,6 +19,7 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
 
 import java.io.*;
+import java.lang.reflect.Method;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -30,16 +31,58 @@ public class    WebAppInterface {
     Context mContext;
     WebView webView;
     Player player;
+    String currentSearchWord;
+    int currentSearchStep = 1;
 
     WebAppInterface(Context c, WebView w, Player p) {
         mContext = c;
         webView = w;
         player = p;
+
+        webView.setFindListener(new WebView.FindListener() {
+            @Override
+            public void onFindResultReceived(int i, int i2, boolean b) {
+                currentSearchStep = i;
+            }
+        });
     }
 
     public void getStorageBookList() {
         webView.loadUrl("javascript:app.setStorageBooks(" + player.getBookList() + ")");
         webView.loadUrl("javascript:app.drawShelfs()");
+    }
+
+    public void search(String findString) {
+        this.currentSearchWord = findString;
+        this.webView.findAllAsync(findString);
+        try {
+            for (Method m : WebView.class.getDeclaredMethods()) {
+                if (m.getName().equals("setFindIsUp")) {
+                    m.setAccessible(true);
+                    m.invoke(this.webView, true);
+                    break;
+                }
+            }
+        } catch (Throwable ignored) {}
+    }
+
+    public void searchNext() {
+        currentSearchStep++;
+        for(int i = 0; i < currentSearchStep; i++) {
+            this.webView.findNext(true);
+        }
+    }
+
+    public void searchPrev() {
+        this.webView.findNext(false);
+        currentSearchStep--;
+        for(int i = 0; i < currentSearchStep; i++) {
+            this.webView.findNext(true);
+        }
+    }
+
+    public void searchClear() {
+        this.webView.clearMatches();
     }
 
     public void getRepositoryBookList() throws IOException {
