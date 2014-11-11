@@ -144,6 +144,12 @@ class BookController extends Controller
         $knp->setOption('disable-forms', true);
         $knp->setOption('javascript-delay', 2000);
         $knp->setOption('no-stop-slow-scripts', true);
+        $knp->setOption('viewport-size', 1024);
+        $knp->setOption('margin-left', 3);
+        $knp->setOption('margin-right', 3);
+        $knp->setOption('margin-top', 3);
+        $knp->setOption('margin-bottom', 3);
+        $knp->setOption('orientation', 'Landscape');
         $knp->generate(
         $this->get('kernel')->getRootDir() . '/../web/publicBooks/' . $book->getSlug(). '/print.html',
         $this->get('kernel')->getRootDir() . '/../web/publicBooks/pdf/' . $book->getSlug(). '.pdf', array(), true);

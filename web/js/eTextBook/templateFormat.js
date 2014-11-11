@@ -5,10 +5,10 @@ var templateFormat = {
     }
 
     ,parseData: function() {
-        this.parseModuleData();
+        //this.parseModuleData(); //Deprecated
     }
 
-    ,parseModuleData: function() {
+    ,parseModuleData: function() { // Deprecated
         this.moduleTitle = this.rootTag.find('module-title view-element').html();
         this.moduleDescription = this.rootTag.find('module-description view-element').html();
         this.moduleQuestions = this.rootTag.find('module-questions view-element').html();
@@ -85,26 +85,33 @@ var templateFormat = {
     }
 
     ,reDrawModuleData: function() {
-        this.rootTag.find('module-title, module-background-image, module-questions, module-description').remove();
-        var title = this.moduleTitle.split(' ');
-        this.rootTag.find('module').addClass('module').prepend(
-            '<div class="row">' +
-                '<div class="col-sm-4 title">' +
-                    '<div class="wrap">' +
-                        '<span>' + title[0] + '</span> <br />' +
-                        '<strong>'+ title[1] + '</strong>' +
+        for(var i = 0; i < $('module').length; i++) {
+            var module = $($('module')[i]);
+            this.moduleTitle = module.find('module-title view-element').html();
+            this.moduleDescription = module.find('module-description view-element').html();
+            this.moduleQuestions = module.find('module-questions view-element').html();
+
+            module.find('module-title, module-background-image, module-questions, module-description').remove();
+            var title = this.moduleTitle.split(' ');
+            module.addClass('module').prepend(
+                '<div class="row">' +
+                    '<div class="col-sm-4 title">' +
+                        '<div class="wrap">' +
+                            '<span>' + title[0] + '</span> <br />' +
+                            '<strong>'+ title[1] + '</strong>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="col-sm-8 wallpaper">' +
+                        '<div class="wrap"></div>' +
                     '</div>' +
                 '</div>' +
-                '<div class="col-sm-8 wallpaper">' +
-                    '<div class="wrap"></div>' +
-                '</div>' +
-            '</div>' +
-            '<div class="row">' +
-                '<div class="col-sm-4 questions">' + this.moduleQuestions + '</div>' +
-                '<div class="col-sm-8 description">' +
-                    this.moduleDescription +
-                '</div>' +
-            '</div>'
-        );
+                '<div class="row">' +
+                    '<div class="col-sm-4 questions">' + this.moduleQuestions + '</div>' +
+                    '<div class="col-sm-8 description">' +
+                        this.moduleDescription +
+                    '</div>' +
+                '</div>'
+            );
+        }
     }
 }
