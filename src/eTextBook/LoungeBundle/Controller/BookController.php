@@ -141,15 +141,12 @@ class BookController extends Controller
         $printPublic->generate();
 
         $knp = $this->get('knp_snappy.pdf');
-
-
-            $knp->setOption('disable-forms', true);
-            $knp->setOption('javascript-delay', 3000);
-            $knp->setOption('debug-javascript', true);
-            $knp->setOption('no-stop-slow-scripts', true);
-            $knp->generate(
-            $this->get('kernel')->getRootDir() . '/../web/publicBooks/' . $book->getSlug(). '/print.html',
-            $this->get('kernel')->getRootDir() . '/../web/publicBooks/pdf/' . $book->getSlug(). '.pdf', array(), true);
+        $knp->setOption('disable-forms', true);
+        $knp->setOption('javascript-delay', 2000);
+        $knp->setOption('no-stop-slow-scripts', true);
+        $knp->generate(
+        $this->get('kernel')->getRootDir() . '/../web/publicBooks/' . $book->getSlug(). '/print.html',
+        $this->get('kernel')->getRootDir() . '/../web/publicBooks/pdf/' . $book->getSlug(). '.pdf', array(), true);
 
         return $this->redirect($this->generateUrl('books'));
 

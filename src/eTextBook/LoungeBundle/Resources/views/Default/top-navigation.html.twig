@@ -13,12 +13,14 @@
                     Учебники
                 </a>
             </li>
-            <li {% if app.request.attributes.get('_route') == 'my-books' %} class="active" {% endif %}>
-                <a href="{{ path('my-books') }}" class="book-list-link">
-                    <span class="glyphicon glyphicon-book"></span>
-                    Мои учебники
-                </a>
-            </li>
+            {% if app.user %}
+                <li {% if app.request.attributes.get('_route') == 'my-books' %} class="active" {% endif %}>
+                    <a href="{{ path('my-books') }}" class="book-list-link">
+                        <span class="glyphicon glyphicon-book"></span>
+                        Мои учебники
+                    </a>
+                </li>
+            {% endif %}
             <li {% if app.request.attributes.get('_route') == 'readers' %} class="active" {% endif %}>
                 <a href="{{ path('readers') }}">
                     <span class="glyphicon glyphicon-phone"></span>
