@@ -21,11 +21,13 @@ public class ETextBook {
         String[] filePathParts = this.sourcesFile.getName().split("\\.");
         this.slug = filePathParts[0];
         this.sourcesFolder = new File(Config.getInstance().getParameter("cacheDir") + "/" + this.slug);
-        ZipReader zipReader = new ZipReader(sourcesFile.getPath(), new File(Config.getInstance().getParameter("cacheDir") + "/" + this.slug));
-        try {
-            zipReader.extract();
-        } catch(IOException e) {
-            System.out.println("File not found");
+        if(!this.sourcesFolder.isDirectory()) {
+            ZipReader zipReader = new ZipReader(sourcesFile.getPath(), new File(Config.getInstance().getParameter("cacheDir") + "/" + this.slug));
+            try {
+                zipReader.extract();
+            } catch(IOException e) {
+                System.out.println("File not found");
+            }
         }
         this.loadBookInfo();
     }
