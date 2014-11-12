@@ -10,14 +10,16 @@
             <span class="glyphicon glyphicon-eye-open"></span>
             Читать
         </a>
+
+        <a href="/publicBooks/pdf/{{ book.slug }}.pdf" class="btn btn-success btn-xs">
+            <span class="glyphicon glyphicon-print"></span>
+            Печать
+        </a>
     {% else %}
         <a href="{{ dir }}{{ book.slug }}/{{ book.file }}" class="view-link btn btn-success btn-xs">
             <span class="glyphicon glyphicon-eye-open"></span>
             Читать
         </a>
     {% endif %}
-    <a href="/publicBooks/pdf/{{ book.slug }}.pdf" class="btn btn-success btn-xs">
-        <span class="glyphicon glyphicon-print"></span>
-        Печать
-    </a>
+
 {% endblock %}
