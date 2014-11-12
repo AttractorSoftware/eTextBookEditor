@@ -125,7 +125,7 @@ var NavigationController = function () {
         $('.search-panel .prev').bind('click', function(){
             Android.searchPrev();
         });
-    }
+    };
 
     this.searchActivate();
 

@@ -356,12 +356,14 @@ class SummaryDom extends SimpleHtmlDom
     public function getExercisesList()
     {
         $exercises = array();
-        $indexDisableProperty ='index-disable';
+        $indexDisableProperty = 'index-disable';
         foreach ($this->find('block') as $exercise) {
-            if ($exercise->$indexDisableProperty != "1" || ! isset($exercise->$indexDisableProperty)) {
+            if ($exercise->$indexDisableProperty != "1") {
                 $id = $exercise->id;
                 $title = $exercise->find('block-title view-element', 0)->innertext;
-                $exercises[$id] = $title;
+                if ($title != '') {
+                    $exercises[$id] = $title;
+                }
             };
         }
 
