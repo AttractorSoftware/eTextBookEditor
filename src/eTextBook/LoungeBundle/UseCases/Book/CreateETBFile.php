@@ -64,8 +64,7 @@ class CreateETBFile
         }
     }
 
-    public function createInfoFile()
-    {
+    public function createInfoFile() {
         $info = array(
             'title' => $this->book->getTitle(),
             'authors' => $this->book->getAuthors(),

@@ -111,8 +111,7 @@ class BookController extends Controller
     /**
      * @Route("/publish/{slug}", name="book-publish")
      */
-    public function publishAction($slug)
-    {
+    public function publishAction($slug) {
         $em = $this->getDoctrine()->getManager();
         $book = $em->getRepository('eTextBookLoungeBundle:Book')->findOneBy(
             array('slug' => $slug)
@@ -125,6 +124,8 @@ class BookController extends Controller
         }
 
         $book->setIsPublic(1);
+        $book->setPublicAt(new \DateTime());
+        $book->versionIncrement();
         $em->flush();
 
         $book = $this->get('bookLoader')->load($slug);

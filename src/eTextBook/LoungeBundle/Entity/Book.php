@@ -10,8 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="book")
  * @ORM\Entity
  */
-class Book
-{
+class Book {
     /**
      * @var integer
      *
@@ -31,7 +30,7 @@ class Book
     /**
      * @var string
      *
-     * @ORM\Column(name="slug", type="string")
+     * @ORM\Column(name="slug", type="string", nullable=true)
      */
     private $slug;
 
@@ -80,7 +79,7 @@ class Book
     /**
      * @var string
      *
-     * @ORM\Column(name="is_public", type="boolean")
+     * @ORM\Column(name="is_public", type="boolean", nullable=true)
      */
     private $isPublic = false;
 
@@ -101,8 +100,20 @@ class Book
 
     private $modules;
 
-    public function hasEditPermissionForUser($userId)
-    {
+    /** @ORM\Column(name="version", type="integer") */
+    private $version = 1;
+
+    /** @ORM\Column(name="public_at", type="datetime", nullable=true) */
+    private $publicAt;
+
+    public function versionIncrement() {
+        $currentVersion = $this->version;
+        if($currentVersion == '') { $currentVersion = 1; }
+        $currentVersion++;
+        $this->version = $currentVersion;
+    }
+
+    public function hasEditPermissionForUser($userId) {
         if ($this->getUser()->getId() == $userId) {
             return true;
         } else {
@@ -437,5 +448,51 @@ class Book
     public function getEditUsers()
     {
         return $this->editUsers;
+    }
+
+    /**
+     * Set version
+     *
+     * @param integer $version
+     * @return Book
+     */
+    public function setVersion($version)
+    {
+        $this->version = $version;
+
+        return $this;
+    }
+
+    /**
+     * Get version
+     *
+     * @return integer 
+     */
+    public function getVersion()
+    {
+        return $this->version;
+    }
+
+    /**
+     * Set publicAt
+     *
+     * @param \DateTime $publicAt
+     * @return Book
+     */
+    public function setPublicAt($publicAt)
+    {
+        $this->publicAt = $publicAt;
+
+        return $this;
+    }
+
+    /**
+     * Get publicAt
+     *
+     * @return \DateTime 
+     */
+    public function getPublicAt()
+    {
+        return $this->publicAt;
     }
 }
