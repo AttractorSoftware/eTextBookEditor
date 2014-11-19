@@ -183,29 +183,31 @@ var eTextBookWidgetCheckEndingsTimes = eTextBookWidget.extend({
     }
 
     ,viewActivate: function() {
-        var html = this.generateEndingsOptions(JSON.parse(this.contentContainer.find('.endings-list').html()));
-        var items = this.contentContainer.find('.words .item');
-        this.contentContainer.find('.title').html(
-            '<div class="e-title">өткөн <br /> чак</div>' +
-            '<div class="e-title">учур <br /> чак</div>' +
-            '<div class="e-title">келер <br /> чак</div>'
-        );
-        for(var i = 0; i < items.length; i++) {
-            var item = $(items[i]);
-            item.append('<select type="future" class="not-saved">' + html.future + '</select>');
-            item.append('<select type="real" class="not-saved">' + html.real + '</select>');
-            item.append('<select type="past" class="not-saved">' + html.past + '</select>');
-        }
-        items.find('select').bind('change', function() {
-            var value = $(this).parent().attr($(this).attr('type'));
-            if(value == $(this).val()) {
-                $(this).addClass('success');
-                $(this).removeClass('failed');
-            } else {
-                $(this).addClass('failed');
-                $(this).removeClass('success');
+        if(this.contentContainer.find('.endings-list').html() != '') {
+            var html = this.generateEndingsOptions(JSON.parse(this.contentContainer.find('.endings-list').html()));
+            var items = this.contentContainer.find('.words .item');
+            this.contentContainer.find('.title').html(
+                '<div class="e-title">өткөн <br /> чак</div>' +
+                    '<div class="e-title">учур <br /> чак</div>' +
+                    '<div class="e-title">келер <br /> чак</div>'
+            );
+            for(var i = 0; i < items.length; i++) {
+                var item = $(items[i]);
+                item.append('<select type="future" class="not-saved">' + html.future + '</select>');
+                item.append('<select type="real" class="not-saved">' + html.real + '</select>');
+                item.append('<select type="past" class="not-saved">' + html.past + '</select>');
             }
-        });
+            items.find('select').bind('change', function() {
+                var value = $(this).parent().attr($(this).attr('type'));
+                if(value == $(this).val()) {
+                    $(this).addClass('success');
+                    $(this).removeClass('failed');
+                } else {
+                    $(this).addClass('failed');
+                    $(this).removeClass('success');
+                }
+            });
+        }
     }
 });
 
