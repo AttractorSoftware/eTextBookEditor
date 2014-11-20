@@ -27,7 +27,7 @@
         <div class="tab-content">
             <div class="tab-pane active image" id="images">
                 <div class="list">
-                    {% for image in book.images %}
+                    {% for image in package.bookImages %}
                         <div
                             class="item {{ image['extension'] }}"
                             data-toggle="tooltip"
@@ -49,7 +49,7 @@
 
             <div class="tab-pane video" id="videos">
                 <div class="list">
-                    {% for video in book.videos %}
+                    {% for video in package.bookVideos %}
                         <div
                             class="item {{ video['extension'] }}"
                             data-toggle="tooltip"
@@ -71,7 +71,7 @@
 
             <div class="tab-pane audio" id="audios">
                 <div class="list">
-                    {% for audio in book.audios %}
+                    {% for audio in package.bookAudios %}
                         <div
                             class="item {{ audio['extension'] }}"
                             data-toggle="tooltip"

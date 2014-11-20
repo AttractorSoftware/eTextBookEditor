@@ -154,11 +154,26 @@ var eTextBookEditor = Backbone.Model.extend({
         $.post(this.get('cont').attr('update-action'), {
             book: this.get('cont').attr('book')
             ,module: this.get('cont').attr('module')
-            ,content: this.getContent()
+            ,content: this.getContent().replace(/\s+/g, ' ')
+            ,blocks: this.collectIndexBlocks()
         }, function(response) {
             $this.hideSaveNotify();
             $this.updateDisplay(true);
         });
+    }
+
+    ,collectIndexBlocks: function() {
+        var blocks = this.display.find('blocks block');
+        var result = [];
+        for(var i = 0; i < blocks.length; i++) {
+            var block = $(blocks[i]);
+            if(block.attr('index-disable') == 0) {
+                result.push({
+                    id: block.attr('id'),
+                    title: block.find('block-title view-element').html()
+                });
+            }
+        } return result;
     }
 
     ,showSaveNotify: function() {

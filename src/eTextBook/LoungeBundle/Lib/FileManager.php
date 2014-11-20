@@ -57,6 +57,19 @@ class FileManager {
         return $zip->close();
     }
 
+    public function unzip($zipFile, $destinationPath) {
+        $zip = new \ZipArchive();
+        $archive = $zip->open($zipFile);
+        if ($archive === true) {
+            if(!is_dir($destinationPath)) {
+                mkdir($destinationPath, 0777);
+            }
+            $zip->extractTo($destinationPath);
+            $zip->close();
+        }
+        return $archive;
+    }
+
     public function fileList($dir) {
         $files = array();
         foreach(new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($dir, \FilesystemIterator::SKIP_DOTS), \RecursiveIteratorIterator::CHILD_FIRST) as $path) {

@@ -102,9 +102,27 @@ class BookPackageTest extends eTextBookTestCase {
 
         $package->setTmpFolderPath($this->bookTmpFolderPath);
         $package->setTemplateFolderPath($this->bookTemplateFolderPath);
-        $package->setPrivateBooksFolderPath($this->bookPrivateBooksFolderPath);
+        $package->setBooksFolderPath($this->bookPrivateBooksFolderPath);
         $package->createBootstrapFiles();
         $package->pack();
+
+        $this->assertEquals(
+            true,
+            file_exists($this->bookPrivateBooksFolderPath . $package->getBook()->getSlug() . '.etb')
+        );
+    }
+
+    public function testBookUnpack() {
+        $package = new BookPackage($this->createFixtureBook());
+        $package->updateBookSlug();
+
+        $package->setTmpFolderPath($this->bookTmpFolderPath);
+        $package->setTemplateFolderPath($this->bookTemplateFolderPath);
+        $package->setBooksFolderPath($this->bookPrivateBooksFolderPath);
+        $package->createBootstrapFiles();
+        $package->pack();
+
+        $package->unpack();
 
         $this->assertEquals(
             true,

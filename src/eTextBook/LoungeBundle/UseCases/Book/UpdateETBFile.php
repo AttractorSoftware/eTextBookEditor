@@ -28,8 +28,7 @@ class UpdateETBFile
         $this->bookTmpDir = $this->tmpDir . $this->book->getSlug() . '/';
     }
 
-    public function updateModuleContent($bookName, $moduleSlug, $content)
-    {
+    public function updateModuleContent($bookName, $moduleSlug, $content) {
         $moduleFilePath = $this->tmpDir . $bookName . '/modules/' . $moduleSlug . '.html';
         $moduleContent = new SummaryDom();
         $moduleContent->loadWithBreaks($moduleFilePath);

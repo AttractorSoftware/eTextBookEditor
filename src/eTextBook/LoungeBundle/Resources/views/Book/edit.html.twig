@@ -10,13 +10,13 @@
             </h4>
         </div>
         <div class="col-sm-2">
-            {% if dbBook.hasEditPermissionForUser(app.user.id) %}
+            {% if book.hasEditPermissionForUser(app.user.id) %}
                 <div class="control">
                     <a href="/books/{{ book.slug }}.etb" class="btn btn-success btn-xs book-download">
                         <span class="glyphicon glyphicon-save"></span>
                         Скачать учебник
                     </a>
-                    <a href="{{ path('book-view', {'slug': book.slug, 'module': ' ' }) }}" class="edit-link btn btn-primary btn-xs">
+                    <a href="/tmp/{{ book.slug }}/index.html" class="edit-link btn btn-primary btn-xs">
                         <span class="glyphicon glyphicon-eye-open"></span>
                         Просмотр учебника
                     </a>
@@ -32,13 +32,13 @@
             {% endif %}
         </div>
     </div>
-    {% include 'eTextBookLoungeBundle:Book:permission-form.html.twig' with { 'book': dbBook } %}
+    {% include 'eTextBookLoungeBundle:Book:permission-form.html.twig' with { 'book': book } %}
 {% endblock %}
 
 {% block pageContent %}
-    {% if dbBook.hasEditPermissionForUser(app.user.id) %}
+    {% if book.hasEditPermissionForUser(app.user.id) %}
         <ol id="moduleList" class="breadcrumb">
-            {% for module in modules %}
+            {% for module in package.bookModules %}
                 {% if(module.slug != currentModule) %}
                     <li>
                         <a href="{{ path('book-edit', { 'slug': book.slug, 'module': module.slug }) }}">
@@ -65,14 +65,13 @@
         <div class="e-text-book-editor" book="{{ book.slug }}" module="{{ currentModule }}"
              update-action="{{ path('book-update-module') }}">
             <div class="desktop">
-                {% set moduleContent = currentModule != ' ' ? book.getModuleContent(currentModule) : book.getFirstModuleContent() %}
-                {{ moduleContent|raw }}
+                {{ currentModuleContent|raw }}
             </div>
             <div class="display e-text-book-viewer"></div>
         </div>
 
         {% include 'eTextBookLoungeBundle:Book:js-templates.html.twig' %}
-        {% include 'eTextBookLoungeBundle:Default:file-manager.html.twig' with { 'book': book } %}
+        {% include 'eTextBookLoungeBundle:Default:file-manager.html.twig' with { 'package': package } %}
     {% else %}
         <div class="alert alert-warning">
             У вас нет прав на редактирование данного учебника. Свяжитесь с пользователем {{ dbBook.user.username }} ({{ dbBook.user.email }}) по вопросу предоставления прав.

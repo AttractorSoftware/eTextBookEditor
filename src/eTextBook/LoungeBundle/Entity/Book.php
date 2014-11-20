@@ -100,6 +100,9 @@ class Book {
 
     private $modules;
 
+    /** @ORM\Column(name="control_file_sum", type="string") */
+    private $controlFileSum = 1;
+
     /** @ORM\Column(name="version", type="integer") */
     private $version = 1;
 
@@ -145,6 +148,10 @@ class Book {
             'modules' => $this->modules
         ,
             'source' => $this->source
+        ,
+            'md5' => $this->controlFileSum
+        ,
+            'version' => $this->version
         );
     }
 
@@ -494,5 +501,28 @@ class Book {
     public function getPublicAt()
     {
         return $this->publicAt;
+    }
+
+    /**
+     * Set controlFileSum
+     *
+     * @param string $controlFileSum
+     * @return Book
+     */
+    public function setControlFileSum($controlFileSum)
+    {
+        $this->controlFileSum = $controlFileSum;
+
+        return $this;
+    }
+
+    /**
+     * Get controlFileSum
+     *
+     * @return string 
+     */
+    public function getControlFileSum()
+    {
+        return $this->controlFileSum;
     }
 }

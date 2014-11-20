@@ -18,6 +18,9 @@ var NavigationController = function () {
 
     this.openLastReadingPlace = function () {
         var link = storage.local.chapters[storage.local.activeChapter];
+        if(link == undefined) {
+            link = $($("#moduleList .chapter-link")[0]).attr('href');
+        }
         this.bookBody.attr('data-url', link);
         this.bookBody.load(link + ' e-text-book', this.onAjaxLoadComplete);
     };

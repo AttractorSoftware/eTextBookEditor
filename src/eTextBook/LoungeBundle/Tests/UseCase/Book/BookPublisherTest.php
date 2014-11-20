@@ -8,24 +8,42 @@ use eTextBook\LoungeBundle\UseCases\Book\BookPackage;
 use eTextBook\LoungeBundle\UseCases\Book\BookPublisher;
 
 class BookPublisherTest extends eTextBookTestCase {
-    private $book;
-    private $package;
+    private $client;
+    private $entityManager;
+    private $bookTemplateFolderPath;
+    private $bookTmpFolderPath;
+    private $bookPrivateBooksFolderPath;
+    private $bookPublishBooksFolderPath;
 
     public function __construct() {
-        $currentDateTime = new \DateTime();
-        $this->book = new Book();
-        $this->book->setTitle('Unit test book');
-        $this->book->setAuthors('Unit test authors');
+        $this->client = static::createClient();
+        $this->entityManager = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+        $this->bookTmpFolderPath = $this->client->getContainer()->getParameter('book_tmp_dir');
+        $this->bookTemplateFolderPath = $this->client->getContainer()->getParameter('book_template_dir');
+        $this->bookPrivateBooksFolderPath = $this->client->getContainer()->getParameter('books_dir');
+        $this->bookPublishBooksFolderPath = $this->client->getContainer()->getParameter('public_dir');
+    }
 
-        $client = static::createClient();
-        $this->entityManager = $client->getContainer()->get('doctrine.orm.entity_manager');
-        $this->entityManager->persist($this->book);
+    public function createFixtureBook() {
+        $book = new Book();
+        $book->setTitle('Unit test book');
+        $book->setAuthors('Unit test authors');
+        $this->entityManager->persist($book);
         $this->entityManager->flush();
-
-        $this->package = new BookPackage($this->book);
+        return $book;
     }
 
-    public function testCreateBook() {
-        $publisher = new BookPublisher($this->package);
+    public function testPublish() {
+        $package = new BookPackage($this->createFixtureBook());
+        $package->setTmpFolderPath($this->bookTmpFolderPath);
+        $package->setTemplateFolderPath($this->bookTemplateFolderPath);
+        $package->setBooksFolderPath($this->bookPrivateBooksFolderPath);
+        $package->updateBookSlug();
+        $package->createBootstrapFiles();
+        $publisher = new BookPublisher($package);
+        $publisher->setPublishBooksFolderPath($this->bookPublishBooksFolderPath);
+        $publisher->publish();
     }
+
+
 }

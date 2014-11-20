@@ -3,15 +3,15 @@
 namespace eTextBook\LoungeBundle\Controller;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use eTextBook\LoungeBundle\Lib\BookPacker;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Gedmo\Sluggable\Util as Sluggable;
-use eTextBook\LoungeBundle\Lib\Book;
-use eTextBook\LoungeBundle\Entity\Book as eBook;
-use eTextBook\LoungeBundle\UseCases\Book\PrintPublic;
+use eTextBook\LoungeBundle\Entity\Book;
+use eTextBook\LoungeBundle\UseCases\Book\BookPackage;
+use eTextBook\LoungeBundle\UseCases\Book\BookPublisher;
 
 
 class BookController extends Controller
@@ -50,41 +50,38 @@ class BookController extends Controller
     /**
      * @Route("/book/create", name="book-create")
      */
-    public function createAction(Request $request)
-    {
+    public function createAction(Request $request) {
+        $entityManager = $this->getDoctrine()->getManager();
         $bookData = $request->get('book');
-        $transliterate = $this->get('transliterate');
-        $bookSlug = Sluggable\Urlizer::urlize($transliterate->transliterate($bookData['title'], 'ru'), '-');
-
-        $book = new eBook();
+        $book = new Book();
         $book->setTitle(isset($bookData['title']) ? $bookData['title'] : '');
         $book->setAuthors(isset($bookData['authors']) ? $bookData['authors'] : '');
         $book->setEditor(isset($bookData['editor']) ? $bookData['editor'] : '');
         $book->setIsbn(isset($bookData['isbn']) ? $bookData['isbn'] : '');
         $book->setCover(isset($bookData['cover']) ? $bookData['cover'] : '');
         $book->setFile(isset($bookData['file']) ? $bookData['file'] : '');
-        $book->setSlug($bookSlug);
         $book->setUser($this->getUser());
 
-        $creator = $this->get('createETBFile');
-        $creator->setBook($book);
+        $entityManager->persist($book);
+        $entityManager->flush();
 
-        if (!$creator->execute()) {
-            $response = array(
-                'status' => 'failed',
-                'reason' => 'Учебник с таким названием уже существует'
-            );
-        } else {
-            $response = array(
-                'status' => 'success',
-                'data' => array(
-                    'slug' => $bookSlug
-                )
-            );
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($book);
-            $entityManager->flush();
-        }
+        $package = new BookPackage($book);
+        $package->setBooksFolderPath($this->container->getParameter('books_dir'));
+        $package->setTemplateFolderPath($this->container->getParameter('book_template_dir'));
+        $package->setTmpFolderPath($this->container->getParameter('book_tmp_dir'));
+        $package->updateBookSlug();
+        $package->createBootstrapFiles();
+        $package->pack();
+
+        $entityManager->persist($book);
+        $entityManager->flush();
+
+        $response = array(
+            'status' => 'success',
+            'data' => array(
+                'slug' => $book->getSlug()
+            )
+        );
 
         return new JsonResponse($response);
     }
@@ -96,14 +93,26 @@ class BookController extends Controller
     public function editAction($slug, $module)
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $book = new Book($this->container->getParameter('books_dir') . $slug . '.etb');
-        $dbBook = $entityManager->getRepository('eTextBookLoungeBundle:Book')->findOneBySlug($slug);
-        $modules = $book->getModules();
+        $book = $entityManager->getRepository('eTextBookLoungeBundle:Book')->findOneBySlug($slug);
+        $package = new BookPackage($book);
+        $package->setTmpFolderPath($this->container->getParameter('book_tmp_dir'));
+        $package->setBooksFolderPath($this->container->getParameter('books_dir'));
+        $package->updateBookSlug();
+        $package->unpack();
+        $modules = $package->getBookModules();
+
+        if($module == " ") {
+            $currentModuleContent = isset($modules[0]->slug) ? $package->getBookModuleContent($modules[0]->slug) : '';
+        } else {
+            $currentModuleContent = $package->getBookModuleContent($module);
+        }
+
+
         return array(
-            'hasEditPermissions' => $dbBook->hasEditPermissionForUser($this->getUser()->getId()),
-            'dbBook' => $dbBook,
+            'hasEditPermissions' => $book->hasEditPermissionForUser($this->getUser()->getId()),
             'book' => $book,
-            'modules' => $modules,
+            'package' => $package,
+            'currentModuleContent' => $currentModuleContent,
             'currentModule' => $module == ' ' && count($modules) > 0 ? $modules[0]->slug : $module
         );
     }
@@ -123,37 +132,38 @@ class BookController extends Controller
             );
         }
 
-        $book->setIsPublic(1);
-        $book->setPublicAt(new \DateTime());
-        $book->versionIncrement();
+        $package = new BookPackage($book);
+        $package->setBooksFolderPath($this->container->getParameter('books_dir'));
+        $package->setTemplateFolderPath($this->container->getParameter('book_template_dir'));
+        $package->setTmpFolderPath($this->container->getParameter('book_tmp_dir'));
+        $package->updateBookSlug();
+        $publisher = new BookPublisher($package);
+        $publisher->setPublishBooksFolderPath($this->container->getParameter('public_dir'));
+        $publisher->publish();
+
+        $em->persist($package->getBook());
         $em->flush();
 
-        $book = $this->get('bookLoader')->load($slug);
-
-        $updater = $this->get('updateETBFile');
-        $updater->setBook($book);
-        $updater->publishBook($slug);
-
-        $printPublic = new PrintPublic();
-        $printPublic->setBook($book);
-        $printPublic->setETBBook(new Book($this->container->getParameter('books_dir') . $slug . '.etb'));
-        $printPublic->setBookPath($this->get('kernel')->getRootDir() . '/../web/tmp/');
-        $printPublic->setPrintPath($this->get('kernel')->getRootDir() . '/../web/publicBooks/');
-        $printPublic->generate();
-
-        $knp = $this->get('knp_snappy.pdf');
-        $knp->setOption('disable-forms', true);
-        $knp->setOption('javascript-delay', 2000);
-        $knp->setOption('no-stop-slow-scripts', true);
-        $knp->setOption('viewport-size', 1024);
-        $knp->setOption('margin-left', 3);
-        $knp->setOption('margin-right', 3);
-        $knp->setOption('margin-top', 3);
-        $knp->setOption('margin-bottom', 3);
-        $knp->setOption('orientation', 'Landscape');
-        $knp->generate(
-        $this->get('kernel')->getRootDir() . '/../web/publicBooks/' . $book->getSlug(). '/print.html',
-        $this->get('kernel')->getRootDir() . '/../web/publicBooks/pdf/' . $book->getSlug(). '.pdf', array(), true);
+//        $printPublic = new PrintPublic();
+//        $printPublic->setBook($book);
+//        $printPublic->setETBBook(new Book($this->container->getParameter('books_dir') . $slug . '.etb'));
+//        $printPublic->setBookPath($this->get('kernel')->getRootDir() . '/../web/tmp/');
+//        $printPublic->setPrintPath($this->get('kernel')->getRootDir() . '/../web/publicBooks/');
+//        $printPublic->generate();
+//
+//        $knp = $this->get('knp_snappy.pdf');
+//        $knp->setOption('disable-forms', true);
+//        $knp->setOption('javascript-delay', 2000);
+//        $knp->setOption('no-stop-slow-scripts', true);
+//        $knp->setOption('viewport-size', 1024);
+//        $knp->setOption('margin-left', 3);
+//        $knp->setOption('margin-right', 3);
+//        $knp->setOption('margin-top', 3);
+//        $knp->setOption('margin-bottom', 3);
+//        $knp->setOption('orientation', 'Landscape');
+//        $knp->generate(
+//        $this->get('kernel')->getRootDir() . '/../web/publicBooks/' . $book->getSlug(). '/print.html',
+//        $this->get('kernel')->getRootDir() . '/../web/publicBooks/pdf/' . $book->getSlug(). '.pdf', array(), true);
 
         return $this->redirect($this->generateUrl('books'));
 
@@ -178,38 +188,41 @@ class BookController extends Controller
     /**
      * @Route("/book/create/module", name="book-create-module")
      */
-    public function createModuleAction(Request $request)
-    {
+    public function createModuleAction(Request $request) {
+        $entityManager = $this->getDoctrine()->getManager();
         $moduleData = $request->get('module');
-        $book = $this->get('bookLoader')->load($moduleData['bookSlug']);
-
-        $updater = $this->get('updateETBFile');
-        $updater->setBook($book);
-        $moduleSlug = $updater->addModule($moduleData['title']);
-
+        $book = $entityManager->getRepository('eTextBookLoungeBundle:Book')->findOneBySlug($moduleData['bookSlug']);
+        $package = new BookPackage($book);
+        $package->setTemplateFolderPath($this->container->getParameter('book_template_dir'));
+        $package->setTmpFolderPath($this->container->getParameter('book_tmp_dir'));
+        $package->setBooksFolderPath($this->container->getParameter('books_dir'));
+        $package->updateBookSlug();
+        $moduleSlug = $package->addModule($moduleData['title']);
+        $package->pack();
         $response = array('status' => 'success', 'data' => array('slug' => $moduleSlug));
-
         return new JsonResponse($response);
     }
 
     /**
      * @Route("/book/update/module", name="book-update-module")
      */
-    public function updateModule(Request $request)
-    {
-        $updater = $this->get('updateETBFile');
-
+    public function updateModule(Request $request) {
         $content = $request->get('content');
-        $bookName = $request->get('book');
+        $bookSlug = $request->get('book');
         $moduleSlug = $request->get('module');
+        $indexTasks = $request->get('blocks');
 
-        $book = new eBook();
-        $book->setSlug($bookName);
-
-        $updater->setBook($book);
-        $updater->updateModuleContent($bookName, $moduleSlug, $content);
-        $updater->copyTemplateFiles();
-        $updater->pack();
+        $book = $this->getDoctrine()->getManager()->getRepository('eTextBookLoungeBundle:Book')->findOneBySlug($bookSlug);
+        $package = new BookPackage($book);
+        $package->setTmpFolderPath($this->container->getParameter('book_tmp_dir'));
+        $package->setBooksFolderPath($this->container->getParameter('books_dir'));
+        $package->setTemplateFolderPath($this->container->getParameter('book_template_dir'));
+        $package->updateBookSlug();
+        $package->createBootstrapFiles();
+        $package->updateModuleContent($moduleSlug, $content);
+        $package->updateBookInfoSummary($moduleSlug, $indexTasks);
+        $package->updateBookSummary();
+        $package->pack();
 
         return new JsonResponse(array('status' => 'success'));
     }
