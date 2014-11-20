@@ -24,9 +24,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-/**
- * Created by ashedrin on 8/18/14.
- */
 public class    WebAppInterface {
     Context mContext;
     WebView webView;

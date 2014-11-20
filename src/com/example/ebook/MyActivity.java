@@ -17,7 +17,9 @@ public class MyActivity extends Activity {
     WebView webView;
     Player player;
 
-    /** Called when the activity is first created. */
+    /**
+     * Called when the activity is first created.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,8 +33,9 @@ public class MyActivity extends Activity {
         webSettings.setJavaScriptEnabled(true);
         webSettings.setPluginState(WebSettings.PluginState.ON_DEMAND);
         webSettings.setUseWideViewPort(true);
-        webSettings.setSupportZoom(true) ;
+        webSettings.setSupportZoom(true);
         webSettings.setBuiltInZoomControls(true);
+        webSettings.setDomStorageEnabled(true);
         webSettings.setDisplayZoomControls(false);
         webSettings.setAllowUniversalAccessFromFileURLs(true);
 
@@ -43,7 +46,7 @@ public class MyActivity extends Activity {
 
         try {
             this.copyDefaultBooks();
-        } catch(IOException e) {
+        } catch (IOException e) {
             System.out.println("Default books not found");
         }
 
@@ -70,9 +73,11 @@ public class MyActivity extends Activity {
 
         String archivePath = Config.getInstance().getParameter("archiveDir");
         File archiveFolder = new File(archivePath);
-        if(!archiveFolder.exists()){ archiveFolder.mkdirs(); }
+        if (!archiveFolder.exists()) {
+            archiveFolder.mkdirs();
+        }
 
-        for(String book: bookList) {
+        for (String book : bookList) {
             this.copy(assetManager.open("books/" + book), archivePath + "/" + book);
         }
     }
@@ -88,7 +93,7 @@ public class MyActivity extends Activity {
             while ((bytesRead = input.read(buf)) > 0) {
                 output.write(buf, 0, bytesRead);
             }
-        } catch(IOException e) {
+        } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
