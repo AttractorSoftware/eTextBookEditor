@@ -27,7 +27,8 @@
         "gedmo/doctrine-extensions": "dev-master",
         "friendsofsymfony/user-bundle" : "~2.0@dev",
         "stof/doctrine-extensions-bundle": "~1.1@dev",
-        "knplabs/knp-snappy-bundle": "dev-master"
+        "knplabs/knp-snappy-bundle": "dev-master",
+        "h4cc/wkhtmltopdf-amd64": "0.11.0-RC1"
     },
     "scripts": {
         "post-install-cmd": [

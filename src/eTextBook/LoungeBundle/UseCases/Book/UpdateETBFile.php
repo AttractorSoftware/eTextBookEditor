@@ -32,33 +32,16 @@ class UpdateETBFile
         $moduleFilePath = $this->tmpDir . $bookName . '/modules/' . $moduleSlug . '.html';
         $moduleContent = new SummaryDom();
         $moduleContent->loadWithBreaks($moduleFilePath);
-        $content = str_replace('/tmp/' . $bookName . '/', '', $content);
+
+        $content = str_replace('/tmp/' . $bookName . '/', '', $content); // This was FIX for an old books
         $moduleContent->find('.e-text-book-viewer', 0)->innertext = $content;
 
         $exercisesIDList = $moduleContent->getExercisesList();
         $moduleContent->save($moduleFilePath);
-        if (sizeof($exercisesIDList) != 0) {
+        if (sizeof($exercisesIDList) > 0) {
             $this->addExercisesToSummary($bookName, $moduleSlug, $exercisesIDList);
         }
         $moduleContent->destroy();
-    }
-
-    public function addExercisesToSummary($bookName, $moduleSlug, $exercisesIDList)
-    {
-        $indexFilePath = $this->tmpDir . $bookName . '/index.html';
-        $summaryTemplate = file_get_contents($this->templateDir . "/summaryLinkTemplate.html");
-
-        if (!file_exists($indexFilePath)) {
-            $indexTemplate = file_get_contents($this->templateDir . "/index.html");
-            $summaryContent = $this->getBookSummaryFromInfo($summaryTemplate);
-            $this->fillIndexFile($indexTemplate, $summaryContent, $indexFilePath);
-        }
-
-        $indexContent = new SummaryDom();
-        $indexContent->loadWithBreaks($indexFilePath);
-        $indexContent->insertExercisesIntoChapter($moduleSlug, $exercisesIDList);
-        $indexContent->save($indexFilePath);
-        $indexContent->destroy();
     }
 
 
@@ -74,6 +57,74 @@ class UpdateETBFile
 
         return $moduleSlug;
     }
+
+    private function updateBookSummary($moduleTitle, $moduleSlug)
+    {
+        $indexFilePath = $this->tmpDir . $this->book->getSlug() . '/index.html';
+
+        if (file_exists($indexFilePath)) {
+            $summaryTemplate = file_get_contents($this->templateDir . "/summaryLinkTemplate.html");
+            $summaryContent = $this->createSummary($moduleTitle, $moduleSlug, $summaryTemplate);
+            $indexTemplate = file_get_contents($this->tmpDir . $this->book->getSlug() . '/index.html');
+        } else {
+            $indexTemplate = file_get_contents($this->templateDir . "/index.html");
+            $summaryContent = $this->getBookSummaryFromInfo($summaryTemplate);
+        }
+
+        $this->fillIndexFile($indexTemplate, $summaryContent, $indexFilePath);
+    }
+
+    public function addExercisesToSummary($bookName, $moduleSlug, $exercisesIDList)
+    {
+        $indexFilePath = $this->tmpDir . $bookName . '/index.html';
+        $indexTemplate = file_get_contents($this->templateDir . "/index.html");
+
+        if (!file_exists($indexFilePath)) {
+            $summaryTemplate = file_get_contents($this->templateDir . "/summaryLinkTemplate.html");
+            $summaryContent = $this->getBookSummaryFromInfo($summaryTemplate);
+            $this->fillIndexFile($indexTemplate, $summaryContent, $indexFilePath);
+        }
+
+        $indexContent = new SummaryDom();
+        $indexContent->loadWithBreaks($indexFilePath);
+        $indexContent->insertExercisesIntoChapter($moduleSlug, $exercisesIDList);
+        $indexContent->updateSummaryAndIndexFileTemplate($indexTemplate);
+        $indexContent->save($indexFilePath);
+        $indexContent->destroy();
+    }
+
+    private function getBookSummaryFromInfo($summaryTemplate)
+    {
+        $info = json_decode(file_get_contents($this->bookTmpDir . 'book.info'), true);
+        $summaryContent = '';
+        foreach ($info['modules'] as $module) {
+            $summaryContent .= $this->createSummary($module['title'], $module['slug'], $summaryTemplate);
+        }
+
+        return $summaryContent;
+    }
+
+    private function createSummary($moduleTitle, $moduleSlug, $summaryTemplate)
+    {
+        $summaryContent = new SummaryDom();
+        $summaryContent->loadWithBreaks($summaryTemplate);
+        $summaryContent->setChapterAttributes($moduleSlug, $moduleTitle);
+        $result = $summaryContent->outertext;
+        $summaryContent->destroy();
+
+        return $result;
+    }
+
+    private function fillIndexFile($indexTemplate, $summaryContent, $indexPath)
+    {
+        $indexContent = new SummaryDom();
+        $indexContent->loadWithBreaks($indexTemplate);
+        $indexContent->setBookAttributes($this->book->getTitle());
+        $indexContent->setSummaryList($summaryContent);
+        $indexContent->save($indexPath);
+        $indexContent->destroy();
+    }
+
 
     private function createModuleFile($moduleTitle, $moduleSlug)
     {
@@ -121,53 +172,6 @@ class UpdateETBFile
         file_put_contents($this->tmpDir . $this->book->getSlug() . '/book.info', json_encode($data));
     }
 
-    private function updateBookSummary($moduleTitle, $moduleSlug)
-    {
-        $indexFilePath = $this->tmpDir . $this->book->getSlug() . '/index.html';
-        $summaryTemplate = file_get_contents($this->templateDir . "/summaryLinkTemplate.html");
-
-        if (file_exists($indexFilePath)) {
-            $summaryContent = $this->createSummary($moduleTitle, $moduleSlug, $summaryTemplate);
-            $indexTemplate = file_get_contents($this->tmpDir . $this->book->getSlug() . '/index.html');
-        } else {
-            $indexTemplate = file_get_contents($this->templateDir . "/index.html");
-            $summaryContent = $this->getBookSummaryFromInfo($summaryTemplate);
-        }
-
-        $this->fillIndexFile($indexTemplate, $summaryContent, $indexFilePath);
-    }
-
-    private function getBookSummaryFromInfo($summaryTemplate)
-    {
-        $info = json_decode(file_get_contents($this->bookTmpDir . 'book.info'), true);
-        $summaryContent = '';
-        foreach ($info['modules'] as $module) {
-            $summaryContent .= $this->createSummary($module['title'], $module['slug'], $summaryTemplate);
-        }
-
-        return $summaryContent;
-    }
-
-    private function createSummary($moduleTitle, $moduleSlug, $summaryTemplate)
-    {
-        $summaryContent = new SummaryDom();
-        $summaryContent->loadWithBreaks($summaryTemplate);
-        $summaryContent->setChapterAttributes($moduleSlug, $moduleTitle);
-        $result = $summaryContent->outertext;
-        $summaryContent->destroy();
-
-        return $result;
-    }
-
-    private function fillIndexFile($indexTemplate, $summaryContent, $indexPath)
-    {
-        $indexContent = new SummaryDom();
-        $indexContent->loadWithBreaks($indexTemplate);
-        $indexContent->setBookAttributes($this->book->getTitle());
-        $indexContent->setSummaryList($summaryContent);
-        $indexContent->save($indexPath);
-        $indexContent->destroy();
-    }
 
     public function execute()
     {

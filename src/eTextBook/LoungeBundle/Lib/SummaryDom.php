@@ -10,7 +10,8 @@ class SummaryDom extends SimpleHtmlDom
         $stripRN = true,
         $defaultBRText = DEFAULT_BR_TEXT,
         $defaultSpanText = DEFAULT_SPAN_TEXT
-    ) {
+    )
+    {
         $this->clear();
 
         // set the length of content before we do anything to it.
@@ -299,7 +300,7 @@ class SummaryDom extends SimpleHtmlDom
         } else {
             $text = $path;
         }
-        $this ->load($text, true, false);
+        $this->load($text, true, false);
     }
 
     public function loadWithoutBreaks($path)
@@ -309,7 +310,7 @@ class SummaryDom extends SimpleHtmlDom
         } else {
             $text = $path;
         }
-        $this ->load($text);
+        $this->load($text);
     }
 
     public function setTitle($title)
@@ -330,13 +331,22 @@ class SummaryDom extends SimpleHtmlDom
 
     public function getSummaryList()
     {
-        return $this->find('#moduleList', 0);
+        return $this->find('#moduleList', 0)->innertext;
     }
 
     public function setSummaryList($content)
     {
         $this->find('.summary', 0)->innertext .= $content;
     }
+
+
+    public function updateSummaryAndIndexFileTemplate($indexFileTemplate)
+    {
+        $tempSummary = $this->getSummaryList();
+        $this->loadWithBreaks($indexFileTemplate);
+        $this->setSummaryList($tempSummary);
+    }
+
 
     public function getModulesList()
     {

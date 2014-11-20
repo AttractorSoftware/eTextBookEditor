@@ -428,6 +428,19 @@ image-description {
     background: #fff;
     border-bottom: 1px solid rgba(0, 0, 0, 0.07);
     margin: 0;
+    #search-field {
+      width: 100px;
+      height: 22px;
+      margin-top: 15px;
+      background: transparent !important;
+      border: 1px solid #7e888b;
+      box-shadow: none;
+      padding: 0 5px;
+      line-height: 22px;
+      color: #7e888b !important;
+      text-transform: none;
+      text-align: left;
+    }
     h1, h2 {
       margin: 0;
       font-size: 20px;
@@ -454,6 +467,7 @@ image-description {
     }
   }
   .book-summary {
+    display: none;
     position: fixed;
     top: 50px;
     left: -250px;
@@ -575,6 +589,7 @@ image-description {
 
 .book.with-summary {
   .book-summary {
+    display: block;
     left: 0;
   }
   .book-body {

@@ -10,10 +10,16 @@
 <div class="book">
 
     <div class="page-header">
-        <span id="show-book-summary" class="btn left glyphicon glyphicon-th-list" title="Мазмуну"></span>
-        <span id="book-back-button" class="btn left glyphicon glyphicon-arrow-left"
+        <span id="show-book-summary" class="btn left glyphicon glyphicon-th-list"></span>
+        <span id="book-back-button" class="btn left glyphicon glyphicon glyphicon-book"
               onclick="history.go(-1);return true;" title="Назад"></span>
-        <span id="book-search-button" class="btn left glyphicon glyphicon-search" title="Поиск"></span>
+
+        <div class="search-form">
+            <!--<input type="text" id="search-field" class="btn left" size="20" autocomplete="off">-->
+            <span id="search-button" class="btn left glyphicon glyphicon-search"></span>
+            <span id="search-previous" class="btn left glyphicon glyphicon-arrow-left"></span>
+            <span id="search-next" class="btn left glyphicon glyphicon-arrow-right"></span>
+        </div>
         <h2 class="book-name">-- book-title --</h2>
     </div>
 
@@ -22,6 +28,7 @@
         <span class="do-search">
             <span class="glyphicon glyphicon-search"></span>
         </span>
+
         <div class="prev">
             <span class="glyphicon glyphicon-arrow-left"></span>
         </div>

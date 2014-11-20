@@ -1216,6 +1216,18 @@ image-description {
   background: #fff;
   border-bottom: 1px solid rgba(0, 0, 0, 0.07);
   margin: 0; }
+  .book .page-header #search-field {
+    width: 100px;
+    height: 22px;
+    margin-top: 15px;
+    background: transparent !important;
+    border: 1px solid #7e888b;
+    box-shadow: none;
+    padding: 0 5px;
+    line-height: 22px;
+    color: #7e888b !important;
+    text-transform: none;
+    text-align: left; }
   .book .page-header h1, .book .page-header h2 {
     margin: 0;
     font-size: 20px;
@@ -1238,6 +1250,7 @@ image-description {
   .book .page-header .left {
     float: left !important; }
 .book .book-summary {
+  display: none;
   position: fixed;
   top: 50px;
   left: -250px;
@@ -1332,6 +1345,7 @@ image-description {
     padding-top: 20px; }
 
 .book.with-summary .book-summary {
+  display: block;
   left: 0; }
 .book.with-summary .book-body {
   left: 250px; }
@@ -1449,3 +1463,5 @@ audio-item .html5-controls {
     margin: 0 0 0 10px;
     border-radius: 3px;
     font-size: 12px; }
+
+/*# sourceMappingURL=style.css.map */

@@ -31,6 +31,7 @@ module.exports = function (grunt) {
                     , 'web/js/app.js'
                     , 'web/js/eTextBook/objectStorage.js'
                     , 'web/js/eTextBook/bookNavigation.js'
+                    , 'web/js/eTextBook/search.js'
                     , 'web/js/eTextBook/utils.js'
                     , 'web/js/eTextBook/widget.js'
                     , 'web/js/eTextBook/widgetRepository.js'
