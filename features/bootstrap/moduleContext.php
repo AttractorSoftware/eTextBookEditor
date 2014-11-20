@@ -147,7 +147,7 @@ class ModuleContext extends eTextBookContext
         $module = array('title' => $form->find('css', '#moduleTitle')->getValue());
         $this->setVar('latestModule', $module);
         $form->find('css', '#moduleFormSubmit')->click();
-        sleep(1);
+        sleep(2);
     }
 
     /**

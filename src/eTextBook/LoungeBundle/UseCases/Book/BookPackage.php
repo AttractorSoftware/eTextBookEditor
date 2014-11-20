@@ -104,12 +104,14 @@ class BookPackage {
         $summaryContent = '';
         foreach($modules as $module) {
             $taskListContent = '';
-            foreach($module->tasks as $task) {
-                $taskListContent .= str_replace(
-                    array('-- taskId --', '-- taskTitle --'),
-                    array($task->id, $task->title),
-                    file_get_contents($this->templateFolderPath . 'summaryTaskTemplate.html')
-                );
+            if(isset($module->tasks)) {
+                foreach($module->tasks as $task) {
+                    $taskListContent .= str_replace(
+                        array('-- taskId --', '-- taskTitle --'),
+                        array($task->id, $task->title),
+                        file_get_contents($this->templateFolderPath . 'summaryTaskTemplate.html')
+                    );
+                }
             }
             $moduleContent = str_replace(
                 array('-- moduleSlug --', '-- moduleTitle --', '-- taskList --'),
