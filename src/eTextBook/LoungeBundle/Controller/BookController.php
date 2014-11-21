@@ -90,24 +90,19 @@ class BookController extends Controller
      * @Route("/book/edit/{slug}/{module}", name="book-edit")
      * @Template()
      */
-    public function editAction($slug, $module)
-    {
+    public function editAction($slug, $module) {
         $entityManager = $this->getDoctrine()->getManager();
         $book = $entityManager->getRepository('eTextBookLoungeBundle:Book')->findOneBySlug($slug);
         $package = new BookPackage($book);
         $package->setTmpFolderPath($this->container->getParameter('book_tmp_dir'));
         $package->setBooksFolderPath($this->container->getParameter('books_dir'));
         $package->updateBookSlug();
-        $package->unpack();
         $modules = $package->getBookModules();
-
         if($module == " ") {
             $currentModuleContent = isset($modules[0]->slug) ? $package->getBookModuleContent($modules[0]->slug) : '';
         } else {
             $currentModuleContent = $package->getBookModuleContent($module);
         }
-
-
         return array(
             'hasEditPermissions' => $book->hasEditPermissionForUser($this->getUser()->getId()),
             'book' => $book,

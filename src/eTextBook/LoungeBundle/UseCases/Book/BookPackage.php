@@ -35,8 +35,10 @@ class BookPackage {
 
     public function unpack($zipFilePath = '') {
         $bookFile = $zipFilePath == '' ? $this->booksFolderPath . $this->book->getSlug() . '.etb': $zipFilePath;
-        if (is_file($this->currentBookFolderPath)) { $this->fileManager->removeDir($this->currentBookFolderPath); }
-        $this->fileManager->unzip($bookFile, $this->currentBookFolderPath);
+        if (is_dir($this->currentBookFolderPath)) { $this->fileManager->removeDir($this->currentBookFolderPath); }
+        if(!is_file($bookFile)) {
+            die("Book file not found " . $bookFile);
+        } else { $this->fileManager->unzip($bookFile, $this->currentBookFolderPath); }
         $this->collectImages();
         $this->collectAudios();
         $this->collectVideos();
