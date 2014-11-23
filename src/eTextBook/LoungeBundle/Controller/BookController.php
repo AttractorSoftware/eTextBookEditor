@@ -97,6 +97,7 @@ class BookController extends Controller
         $package->setTmpFolderPath($this->container->getParameter('book_tmp_dir'));
         $package->setBooksFolderPath($this->container->getParameter('books_dir'));
         $package->updateBookSlug();
+        $package->collectContentFiles();
         $modules = $package->getBookModules();
         if($module == " ") {
             $currentModuleContent = isset($modules[0]->slug) ? $package->getBookModuleContent($modules[0]->slug) : '';
@@ -135,30 +136,10 @@ class BookController extends Controller
         $publisher = new BookPublisher($package);
         $publisher->setPublishBooksFolderPath($this->container->getParameter('public_dir'));
         $publisher->publish();
+        $publisher->publishPdf($this->get('knp_snappy.pdf'));
 
         $em->persist($package->getBook());
         $em->flush();
-
-//        $printPublic = new PrintPublic();
-//        $printPublic->setBook($book);
-//        $printPublic->setETBBook(new Book($this->container->getParameter('books_dir') . $slug . '.etb'));
-//        $printPublic->setBookPath($this->get('kernel')->getRootDir() . '/../web/tmp/');
-//        $printPublic->setPrintPath($this->get('kernel')->getRootDir() . '/../web/publicBooks/');
-//        $printPublic->generate();
-//
-//        $knp = $this->get('knp_snappy.pdf');
-//        $knp->setOption('disable-forms', true);
-//        $knp->setOption('javascript-delay', 2000);
-//        $knp->setOption('no-stop-slow-scripts', true);
-//        $knp->setOption('viewport-size', 1024);
-//        $knp->setOption('margin-left', 3);
-//        $knp->setOption('margin-right', 3);
-//        $knp->setOption('margin-top', 3);
-//        $knp->setOption('margin-bottom', 3);
-//        $knp->setOption('orientation', 'Landscape');
-//        $knp->generate(
-//        $this->get('kernel')->getRootDir() . '/../web/publicBooks/' . $book->getSlug(). '/print.html',
-//        $this->get('kernel')->getRootDir() . '/../web/publicBooks/pdf/' . $book->getSlug(). '.pdf', array(), true);
 
         return $this->redirect($this->generateUrl('books'));
 
@@ -225,8 +206,7 @@ class BookController extends Controller
     /**
      * @Route("/book/file-upload", name="book-file-upload")
      */
-    public function fileUploadAction(Request $request)
-    {
+    public function fileUploadAction(Request $request) {
         $file = $request->files->get('upload-file');
         $bookSlug = $request->get('slug');
         $fileType = explode('/', $file->getMimeType());
@@ -234,20 +214,17 @@ class BookController extends Controller
         $fileName = $file->getClientOriginalName();
 
         switch ($fileType[0]) {
-            case 'image':
-            {
+            case 'image': {
                 $uploadFilePath = $tmpDir . $bookSlug . '/content/img/';
                 $file->move($uploadFilePath, $fileName);
                 break;
             }
-            case 'audio':
-            {
+            case 'audio': {
                 $uploadFilePath = $tmpDir . $bookSlug . '/content/audio/';
                 $file->move($uploadFilePath, $fileName);
                 break;
             }
-            case 'video':
-            {
+            case 'video': {
                 $uploadFilePath = $tmpDir . $bookSlug . '/content/video/';
                 $file->move($uploadFilePath, $fileName);
                 break;

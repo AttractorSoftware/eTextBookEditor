@@ -39,6 +39,10 @@ class BookPackage {
         if(!is_file($bookFile)) {
             die("Book file not found " . $bookFile);
         } else { $this->fileManager->unzip($bookFile, $this->currentBookFolderPath); }
+        $this->collectContentFiles();
+    }
+
+    public function collectContentFiles() {
         $this->collectImages();
         $this->collectAudios();
         $this->collectVideos();
@@ -140,7 +144,8 @@ class BookPackage {
 
     public function updateModuleContent($moduleSlug, $content) {
         $moduleFilePath = $this->currentBookFolderPath . 'modules/' . $moduleSlug . '.html';
-        file_put_contents($moduleFilePath, $content);
+        $moduleContent = str_replace("/tmp/". $this->book->getSlug() ."/content/", "content/", $content);
+        file_put_contents($moduleFilePath, $moduleContent);
     }
 
     private function createModuleFile($moduleTitle, $moduleSlug) {
@@ -246,6 +251,10 @@ class BookPackage {
 
     public function setTemplateFolderPath($templateFolderPath) {
         $this->templateFolderPath = $templateFolderPath;
+    }
+
+    public function getTemplateFolderPath() {
+        return $this->templateFolderPath;
     }
 
     public function setBooksFolderPath($booksFolderPath) {

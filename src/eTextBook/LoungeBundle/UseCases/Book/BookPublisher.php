@@ -17,8 +17,6 @@ class BookPublisher {
             $this->package->getBook()->versionIncrement();
         } else { $this->package->getBook()->setIsPublic(true); }
 
-        $bookCurrentVersion = $this->package->getBook()->getVersion();
-        $bookPreviousVersion = $bookCurrentVersion == 1 ? 1 : $bookCurrentVersion-1;
         $previousVersionFilePath =
             $this->package->getBooksFolderPath() . $this->package->getBook()->getSlug() . '.etb';
 
@@ -39,6 +37,44 @@ class BookPublisher {
 
     public function setPublishBooksFolderPath($publishBooksFolderPath) {
         $this->publishBooksFolderPath = $publishBooksFolderPath;
+    }
+
+    public function publishPdf($pdfGenerator) {
+        $this->generateCommonModulesFile();
+        $this->generatePdfFile($pdfGenerator);
+    }
+
+    public function generatePdfFile($pdfGenerator) {
+        $pdfGenerator->setOption('disable-forms', true);
+        $pdfGenerator->setOption('javascript-delay', 2000);
+        $pdfGenerator->setOption('no-stop-slow-scripts', true);
+        $pdfGenerator->setOption('viewport-size', 1024);
+        $pdfGenerator->setOption('margin-left', 3);
+        $pdfGenerator->setOption('margin-right', 3);
+        $pdfGenerator->setOption('margin-top', 3);
+        $pdfGenerator->setOption('margin-bottom', 3);
+        $pdfGenerator->setOption('zoom', 0.8);
+        $pdfGenerator->setOption('minimum-font-size', 14);
+        $bookSlug = $this->package->getBook()->getSlug();
+        $pdfGenerator->generate(
+            $this->publishBooksFolderPath . $bookSlug . '/print.html',
+            $this->publishBooksFolderPath . 'pdf/' . $bookSlug. '.pdf', array(), true
+        );
+    }
+
+    public function generateCommonModulesFile() {
+        $bookSlug = $this->package->getBook()->getSlug();
+        $modules = $this->package->getBookModules();
+        $content = '';
+        foreach($modules as $module) {
+            $content .= $this->package->getBookModuleContent($module->slug);
+        }
+        $changeContentPath = str_replace("/tmp/". $bookSlug . "/", "", $content);
+        copy($this->package->getTemplateFolderPath() . "/js/print.min.js", $this->package->getBooksFolderPath(). $bookSlug . '/js/print.min.js');
+        file_put_contents(
+            $this->publishBooksFolderPath . $bookSlug . "/print.html",
+            str_replace('-- modules --', $changeContentPath, file_get_contents($this->package->getTemplateFolderPath() . 'printTemplate.html'))
+        );
     }
 
 }

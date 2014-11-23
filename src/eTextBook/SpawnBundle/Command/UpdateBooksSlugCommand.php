@@ -38,7 +38,8 @@ class UpdateBooksSlugCommand extends ContainerAwareCommand {
                 $package->updateBookSlug();
                 $package->unpack();
             }
+            $entityManager->persist($book);
             echo $book->getTitle() . " - " . $oldSlug . " | " . $book->getSlug() . "\n";
-        }
+        } $entityManager->flush();
     }
 }

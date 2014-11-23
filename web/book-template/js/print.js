@@ -4242,6 +4242,9 @@ var clearPrint = {
 
     ,clearFormElements: function() {
         this.rootElement.find('select, input').remove();
+        this.rootElement.find('image-description image-title').show();
+        this.rootElement.find('image-description image-view span').remove();
+        this.rootElement.find('image-description descs').remove();
     }
 }
 
