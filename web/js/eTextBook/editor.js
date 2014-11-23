@@ -51,7 +51,45 @@ var eTextBookEditor = Backbone.Model.extend({
                 $this.save();
                 return false;
             });
+            $('#convertInlineImages').bind('click', function() {
+                $this.convertInlineImages();
+                return false;
+            });
         }
+    }
+
+    ,convertInlineImages: function() {
+        var images = this.desktop.find('img');
+        this.inlineImages = [];
+        for(var i = 0; i < images.length; i++) {
+            var image = $(images[i]);
+            if(this.isInlineImage(image)) {
+                this.inlineImages.push(image);
+            }
+        } this.saveInlineImagesAsFiles();
+    }
+
+    ,saveInlineImagesAsFiles: function() {
+        var $this = this;
+        var image = this.inlineImages[0];
+        var extension = image.attr('src').split(';')[0].split('/')[1];
+        $.post('/app_dev.php/save-inline-image', {
+            bookSlug: this.get('cont').attr('book'),
+            extension: extension,
+            imageContent: image.attr('src')
+        }, function(response) {
+            if(response.status == 'ok') {
+                image.attr('src', response.filePath);
+                $this.inlineImages.splice(0, 1);
+                if($this.inlineImages.length) {
+                    $this.saveInlineImagesAsFiles();
+                }
+            }
+        });
+    }
+
+    ,isInlineImage: function(image) {
+        return image.attr('src').length > 1000;
     }
 
     ,clearMSEntities: function() {

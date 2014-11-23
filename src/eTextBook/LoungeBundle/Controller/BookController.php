@@ -312,6 +312,19 @@ class BookController extends Controller
         return new JsonResponse($result);
     }
 
+    /**
+     * @Route("/save-inline-image", name="save-inline-image")
+     */
+    public function saveInlineImage(Request $request) {
+        $content = $request->get('imageContent');
+        $bookSlug = $request->get('bookSlug');
+        $fileExtension = $request->get('extension');
+        $fileName = 'inline' . rand(10000, 1000000) . '.' . $fileExtension;
+        file_put_contents($this->container->getParameter('book_tmp_dir') . $bookSlug . '/content/img/' . $fileName, file_get_contents($content));
+        $result = array('status' => 'ok', 'filePath' => '/tmp/' . $bookSlug . '/content/img/' . $fileName);
+        return new JsonResponse($result);
+    }
+
 }
 
 
