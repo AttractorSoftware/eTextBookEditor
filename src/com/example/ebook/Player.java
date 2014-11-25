@@ -38,7 +38,8 @@ public class Player {
                 ETextBook book = new ETextBook(file);
                 eList.add(book);
             }
-        } this.bookList = eList;
+        }
+        this.bookList = eList;
     }
 
     public ETextBook getBookByPosition(int position) {

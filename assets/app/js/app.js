@@ -28,11 +28,58 @@ var App = function() {
             }
         });
 
+        this.repositoryUrl = Android.getRepositoryUrl();
+
         setTimeout(function(){
             Android.getStorageBookList();
             Android.getRepositoryBookList();
             $this.switchScreen('shelf');
         }, 2000);
+    }
+
+    this.markUpdateBook = function() {
+        for(var i = 0; i < this.storageBooks.length; i++) {
+            var book = this.storageBooks[i];
+            var updateVersionSlug = this.getUpdateVersionSlug(book);
+            if(updateVersionSlug) {
+                $('.storageList #' + book.slug).addClass('has-update').attr('update-slug', updateVersionSlug);
+            }
+        }
+    }
+
+    this.bookSlugSplit = function(slug) {
+        var slugParts = slug.split('-');
+        return {
+            id: slugParts[0],
+            version: slugParts[slugParts.length-1]
+        }
+    }
+
+    this.getUpdateVersionSlug = function(book) {
+        var bookData = this.bookSlugSplit(book.slug);
+        for(var i = 0; i < this.remoteBooks.length; i++) {
+            var remoteBook = this.remoteBooks[i];
+            var remoteBookData = this.bookSlugSplit(remoteBook.slug);
+            if(bookData.id == remoteBookData.id && remoteBookData.version > bookData.version) {
+                return remoteBook.slug;
+            }
+        } return false;
+    }
+
+    this.hideAlreadyDownloadBooks = function() {
+        for(var i = 0; i < this.storageBooks.length; i++) {
+            var storageBook = this.storageBooks[i];
+            var storageBookData = this.bookSlugSplit(storageBook.slug);
+            for(var j = 0; j < this.remoteBooks.length; j++) {
+                var remoteBook = this.remoteBooks[j];
+                var remoteBookData = this.bookSlugSplit(remoteBook.slug);
+                if(remoteBookData.id == storageBookData.id) {
+                    if($($('.remoteList .book')[j]).attr('id') == remoteBook.slug) {
+                        $($('.remoteList .book')[j]).hide();
+                    }
+                }
+            }
+        }
     }
 
     this.switchScreen = function(screen) {
@@ -43,6 +90,8 @@ var App = function() {
     this.drawShelfs = function() {
         $this.renderStorageBooks();
         $this.renderRemoteBooks();
+        $this.markUpdateBook();
+        $this.hideAlreadyDownloadBooks();
     }
 
     this.renderStorageBooks = function() {
@@ -58,9 +107,30 @@ var App = function() {
             shelf.find('.book-list').append(this.createStorageBook(this.storageBooks[i]));
         }
         $('.storageList .book').click(function() {
-            if($(this).hasClass('source')) {
-                Android.readSource($(this).attr('href'), $(this).attr('source'));
-            } else { Android.readBook($(this).attr('href')); }
+            if($(this).hasClass('has-update')) {
+                if(!confirm('Доступна новая версия книги. Загрузить обновленную версию?')) {
+                    if($(this).hasClass('source')) {
+                        Android.readSource($(this).attr('href'), $(this).attr('source'));
+                    } else { Android.readBook($(this).attr('href')); }
+                } else {
+                    var book = $(this);
+                    $this.switchScreen('uploading');
+                    $('#uploading.screen').css({ backgroundImage: $(book).css('backgroundImage')});
+                    $('#uploading.screen .book-title').html(book.attr('title'));
+                    setTimeout(function(){
+                        Android.downloadBook(book.attr('update-slug'));
+                    }, 500);
+                    $this.downloadComplete = function() {
+                        if(Android.removeOldBook($(book).attr('href'))) {
+                            $('.storageList #' + $(book).attr('href')).remove();
+                        }
+                    };
+                }
+            } else {
+                if($(this).hasClass('source')) {
+                    Android.readSource($(this).attr('href'), $(this).attr('source'));
+                } else { Android.readBook($(this).attr('href')); }
+            }
 
             return false;
         });
@@ -85,21 +155,22 @@ var App = function() {
             $('#uploading.screen .book-title').html(book.attr('title'));
             setTimeout(function(){
                 Android.downloadBook(book.attr('href'));
-            }, 500)
+            }, 500);
+            $this.downloadComplete = function(){};
             return false;
         });
     }
 
     this.createStorageBook = function(book) {
         if(book.source != '') {
-            return $('<a href="'+ book.slug +'" title="' + book.title + '" class="book source" source="'+ book.source +'" style="background-image: url(file:///sdcard/eTextBook/cache/'+ book.slug +'/content/cover.png)"></a>');
+            return $('<a href="'+ book.slug +'" id="'+ book.slug +'" title="' + book.title + '" class="book source" source="'+ book.source +'" style="background-image: url(file:///sdcard/eTextBook/cache/'+ book.slug +'/content/cover.png)"><span class="update-ico"></span></a>');
         } else {
-            return $('<a href="'+ book.slug +'" title="' + book.title + '" class="book" style="background-image: url(file:///sdcard/eTextBook/cache/'+ book.slug +'/content/cover.png)"></a>');
+            return $('<a href="'+ book.slug +'" id="'+ book.slug +'" title="' + book.title + '" class="book" style="background-image: url(file:///sdcard/eTextBook/cache/'+ book.slug +'/content/cover.png)"><span class="update-ico"></span></a>');
         }
     }
 
     this.createRemoteBook = function(book) {
-        return $('<a href="'+ book.slug +'" title="' + book.title + '" class="book" style="background-image: url(http://textbooks-demo.it-attractor.net/publicBooks/'+ book.slug +'/content/cover.png)"></a>');
+        return $('<a href="'+ book.slug +'" id="'+ book.slug +'" title="' + book.title + '" class="book" style="background-image: url(' + $this.repositoryUrl + '/publicBooks/'+ book.slug +'/content/cover.png)"></a>');
     }
 
     this.createShelf= function() {
@@ -135,6 +206,8 @@ var App = function() {
             this.screens[i].hide();
         }
     };
+
+    this.downloadComplete = function() {}
 
     this.init();
 };

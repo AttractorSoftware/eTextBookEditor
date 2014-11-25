@@ -88,6 +88,8 @@ public class MyActivity extends Activity {
             while ((bytesRead = input.read(buf)) > 0) {
                 output.write(buf, 0, bytesRead);
             }
+            output.close();
+            input.close();
         } catch(IOException e) {
             System.out.println(e.getMessage());
         }

@@ -116,6 +116,18 @@ html, body {
     text-decoration: none; }
     .shelf .book.last {
       margin-right: 0; }
+    .shelf .book.has-update .update-ico {
+      display: block; }
+    .shelf .book .update-ico {
+      display: none;
+      float: left;
+      width: 25px;
+      height: 25px;
+      background: url("../img/refresh.png");
+      background-size: contain;
+      position: relative;
+      left: 30px;
+      top: -10px; }
 
 .shelf-title {
   float: left;

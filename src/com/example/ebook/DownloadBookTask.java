@@ -68,13 +68,12 @@ public class DownloadBookTask extends AsyncTask<String, Integer, Long> {
                     webView.loadUrl("javascript:app.drawShelfs()");
                     webView.loadUrl("javascript:app.switchScreen('shelf')");
                     webView.loadUrl("javascript:app.updateUploadingProgress('0')");
+                    fileOutput.close();
+                    inputStream.close();
+                    webView.loadUrl("javascript:app.downloadComplete()");
                 }
             }
-            fileOutput.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        } catch (IOException e) { e.printStackTrace(); }
         return null;
     }
 

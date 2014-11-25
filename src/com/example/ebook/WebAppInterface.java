@@ -81,6 +81,10 @@ public class    WebAppInterface {
         }
     }
 
+    public String getRepositoryUrl() {
+        return Config.getInstance().getParameter("repositoryUrl");
+    }
+
     public void searchClear() {
         this.webView.clearMatches();
     }
@@ -119,6 +123,12 @@ public class    WebAppInterface {
         downloadTask.setWebView(webView);
         downloadTask.setPlayer(player);
         downloadTask.execute(bookSlug);
+    }
+
+    public boolean removeOldBook(String bookSlug) {
+        File bookFile = new File("sdcard/eTextBook/" + bookSlug + ".etb");
+        boolean deleted = bookFile.delete();
+        return deleted;
     }
 
     public boolean isConnected() {

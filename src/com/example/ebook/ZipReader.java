@@ -59,6 +59,8 @@ public class ZipReader {
                 finally {
                     fileOut.flush();
                     fileOut.close();
+                    fileOut = null;
+                    System.gc();
                 }
 
             }

@@ -34,7 +34,7 @@ public class ETextBook {
 
     private void loadBookInfo() {
         File infoFile = new File(this.sourcesFolder.getPath() + "/book.info");
-        try{
+        try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(infoFile)));
             StringBuilder stringBuilder = new StringBuilder();
             String readLine;
@@ -48,6 +48,7 @@ public class ETextBook {
             } catch(JSONException e) {
                 System.out.println("Bad json info");
             }
+            reader.close();
         } catch(IOException e) { System.out.println("Configuration file not found!"); }
     }
 
