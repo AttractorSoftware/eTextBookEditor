@@ -66,7 +66,11 @@ var eTextBookEditor = Backbone.Model.extend({
             if(this.isInlineImage(image)) {
                 this.inlineImages.push(image);
             }
-        } this.saveInlineImagesAsFiles();
+        }
+        if(this.inlineImages.length) {
+            this.saveInlineImagesAsFiles();
+        }
+
     }
 
     ,saveInlineImagesAsFiles: function() {
@@ -159,6 +163,9 @@ var eTextBookEditor = Backbone.Model.extend({
     }
 
     ,updateDisplay: function(missSave) {
+
+        this.convertInlineImages();
+
         var book = $(this.desktop.html());
 
         book = this.clearEditElements(book);
