@@ -1,4 +1,4 @@
-var App = function() {
+var App = function () {
 
     var $this = this;
 
@@ -11,15 +11,15 @@ var App = function() {
     this.storageBooks = [];
     this.remoteBooks = [];
 
-    this.init = function() {
+    this.init = function () {
 
         var is_resize = false;
 
-        $(window).resize(function() {
-            if(!is_resize) {
+        $(window).resize(function () {
+            if (!is_resize) {
                 is_resize = true;
-                this.setTimeout(function() {
-                    for(var i in $this.screens) {
+                this.setTimeout(function () {
+                    for (var i in $this.screens) {
                         $this.screens[i].calculateSizes();
                     }
                     $this.drawShelfs();
@@ -87,25 +87,26 @@ var App = function() {
         this.screens[screen].show();
     }
 
-    this.drawShelfs = function() {
+    this.drawShelfs = function () {
         $this.renderStorageBooks();
         $this.renderRemoteBooks();
         $this.markUpdateBook();
         $this.hideAlreadyDownloadBooks();
     }
 
-    this.renderStorageBooks = function() {
+    this.renderStorageBooks = function () {
         $('.storageList').html('');
         var shelf = this.createShelf();
         $('.storageList').append(shelf);
-        for(var i = 0, j = 0; i < this.storageBooks.length; i++, j++) {
-            if(j == Math.round((this.screens.shelf.width - 126) / 65)) {
+        for (var i = 0, j = 0; i < this.storageBooks.length; i++, j++) {
+            if (j == Math.round((this.screens.shelf.width - 126) / 65)) {
                 shelf = this.createShelf();
                 $('.storageList').append(shelf);
                 j = 0;
             }
             shelf.find('.book-list').append(this.createStorageBook(this.storageBooks[i]));
         }
+
         $('.storageList .book').click(function() {
             if($(this).hasClass('has-update')) {
                 if(!confirm('Доступна новая версия книги. Загрузить обновленную версию?')) {
@@ -136,24 +137,24 @@ var App = function() {
         });
     }
 
-    this.renderRemoteBooks = function() {
+    this.renderRemoteBooks = function () {
         $('.remoteList').html('');
         var shelf = this.createShelf();
         $('.remoteList').append(shelf);
-        for(var i = 0, j = 0; i < this.remoteBooks.length; i++, j++) {
-            if(j == Math.round((this.screens.shelf.width - 126) / 65)) {
+        for (var i = 0, j = 0; i < this.remoteBooks.length; i++, j++) {
+            if (j == Math.round((this.screens.shelf.width - 126) / 65)) {
                 shelf = this.createShelf();
                 $('.remoteList').append(shelf);
                 j = 0;
             }
             shelf.find('.book-list').append(this.createRemoteBook(this.remoteBooks[i]));
         }
-        $('.remoteList .book').click(function() {
+        $('.remoteList .book').click(function () {
             var book = $(this);
             $this.switchScreen('uploading');
             $('#uploading.screen').css({ backgroundImage: $(book).css('backgroundImage')});
             $('#uploading.screen .book-title').html(book.attr('title'));
-            setTimeout(function(){
+            setTimeout(function () {
                 Android.downloadBook(book.attr('href'));
             }, 500);
             $this.downloadComplete = function(){};
@@ -162,7 +163,7 @@ var App = function() {
     }
 
     this.createStorageBook = function(book) {
-        if(book.source != '') {
+        if(book.source != '' && book.source != 'null') {
             return $('<a href="'+ book.slug +'" id="'+ book.slug +'" title="' + book.title + '" class="book source" source="'+ book.source +'" style="background-image: url(file:///sdcard/eTextBook/cache/'+ book.slug +'/content/cover.png)"><span class="update-ico"></span></a>');
         } else {
             return $('<a href="'+ book.slug +'" id="'+ book.slug +'" title="' + book.title + '" class="book" style="background-image: url(file:///sdcard/eTextBook/cache/'+ book.slug +'/content/cover.png)"><span class="update-ico"></span></a>');
@@ -173,36 +174,36 @@ var App = function() {
         return $('<a href="'+ book.slug +'" id="'+ book.slug +'" title="' + book.title + '" class="book" style="background-image: url(' + $this.repositoryUrl + '/publicBooks/'+ book.slug +'/content/cover.png)"></a>');
     }
 
-    this.createShelf= function() {
+    this.createShelf = function () {
         var id = Math.ceil(Math.random() * 100000);
         return $(
-            '<div class="shelf" id="' + id + '">' +
+                '<div class="shelf" id="' + id + '">' +
                 '<div class="left-side">' +
-                    '<div class="right-side">' +
-                        '<div class="middle-side">' +
-                            '<div class="book-list"></div>' +
-                        '</div>' +
-                    '</div>' +
+                '<div class="right-side">' +
+                '<div class="middle-side">' +
+                '<div class="book-list"></div>' +
                 '</div>' +
-            '</div>'
+                '</div>' +
+                '</div>' +
+                '</div>'
         );
     }
 
-    this.updateUploadingProgress = function(percents) {
+    this.updateUploadingProgress = function (percents) {
         $('.uploading-progress .fill').css({ width: percents + '%'});
         $('.uploading-progress .display').html(percents + '%');
     }
 
-    this.setRemoteBooks = function(books) {
+    this.setRemoteBooks = function (books) {
         this.remoteBooks = books;
     }
 
-    this.setStorageBooks = function(books) {
+    this.setStorageBooks = function (books) {
         this.storageBooks = books;
     }
 
-    this.hideAllScreens = function() {
-        for(var i in this.screens) {
+    this.hideAllScreens = function () {
+        for (var i in this.screens) {
             this.screens[i].hide();
         }
     };
@@ -212,4 +213,4 @@ var App = function() {
     this.init();
 };
 
-$(function(){ app = new App(); });
+$(function () { app = new App(); });
