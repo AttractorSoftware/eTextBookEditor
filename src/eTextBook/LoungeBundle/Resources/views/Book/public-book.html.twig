@@ -1,5 +1,11 @@
 {% extends 'eTextBookLoungeBundle:Book:book-template.html.twig' %}
 
+{% block publicData %}
+    <span class="public-data">
+        Редакция {{ book.version }}, от {{ book.publicAt.format('d.m.Y') }}
+    </span>
+{% endblock %}
+
 {% block bookControls %}
     <a href="/books/{{ book.slug }}.etb" class="btn btn-primary btn-xs book-download">
         <span class="glyphicon glyphicon-save"></span>

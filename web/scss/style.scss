@@ -976,6 +976,11 @@ html, body {
     float: left;
     width: 255px;
     margin: 0 15px 50px 0;
+    .public-data {
+      float: left;
+      width: 100%;
+      text-align: center;
+    }
     .cover {
       float: left;
       width: 125px;

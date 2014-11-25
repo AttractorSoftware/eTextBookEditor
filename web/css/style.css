@@ -741,6 +741,10 @@ html, body {
   float: left;
   width: 255px;
   margin: 0 15px 50px 0; }
+  .book-list .item .public-data {
+    float: left;
+    width: 100%;
+    text-align: center; }
   .book-list .item .cover {
     float: left;
     width: 125px;
@@ -1463,5 +1467,3 @@ audio-item .html5-controls {
     margin: 0 0 0 10px;
     border-radius: 3px;
     font-size: 12px; }
-
-/*# sourceMappingURL=style.css.map */
