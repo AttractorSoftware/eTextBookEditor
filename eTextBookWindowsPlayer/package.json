@@ -1,0 +1,22 @@
+{
+    "name": "EBookReader",
+    "main": "app://ebook/app/app.html",
+    "description": "Ридер для электронных учебников на платфоме Windows",
+    "version": "0.3.1",
+    "keywords": [ "demo", "node-webkit" ],
+    "window": {
+        "title": "Электронные учебники",
+        "icon": "./icon.png",
+        "toolbar": true,
+        "frame": true,
+        "width": 800,
+        "height": 500,
+        "position": "mouse",
+        "min_width": 510,
+        "min_height": 400
+    },
+    "webkit": {
+        "plugin": true,
+        "page-cache": true
+    }
+}
