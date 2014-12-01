@@ -1,0 +1,145 @@
+html, body {
+  float: left;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  margin: 0;
+  padding: 0; }
+
+.screen {
+  display: none;
+  float: left;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  position: absolute;
+  left: 0;
+  top: 0;
+  border: none; }
+
+#loading.screen, #uploading.screen {
+  background: #008800 url("../img/emblem-library.png") no-repeat center 40%;
+  background-size: 100px;
+  color: #fff;
+  font-family: Myriad Pro;
+  text-align: center; }
+  #loading.screen span, #uploading.screen span {
+    display: block;
+    position: relative;
+    top: 40%;
+    margin: 110px 0 0 0;
+    font-size: 18px; }
+  #loading.screen .book-title, #uploading.screen .book-title {
+    margin: -50px 0 0 0;
+    top: 28%;
+    height: 25px;
+    overflow: hidden; }
+  #loading.screen .uploading-progress, #uploading.screen .uploading-progress {
+    border-radius: 0;
+    font-size: 14px;
+    top: 45%;
+    margin: 0 auto;
+    width: 200px;
+    background: none; }
+    #loading.screen .uploading-progress .display, #uploading.screen .uploading-progress .display {
+      position: relative;
+      top: 5px; }
+    #loading.screen .uploading-progress .progress-bar, #uploading.screen .uploading-progress .progress-bar {
+      width: 100%;
+      height: 5px;
+      border-radius: 0;
+      margin: 0;
+      overflow: hidden;
+      background: #fff;
+      border: solid 1px #008000; }
+      #loading.screen .uploading-progress .progress-bar .fill, #uploading.screen .uploading-progress .progress-bar .fill {
+        float: left;
+        width: 0;
+        margin: -2px 0 0 0;
+        background: #147FDB;
+        height: 5px;
+        transition: all 1s ease; }
+
+#shelf.screen {
+  background: url("../img/bg.png"); }
+  #shelf.screen .soros {
+    float: left;
+    width: 79px;
+    height: 54px;
+    background: url("../img/soros-logo.png");
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    margin: -27px 0 0 -40px; }
+
+.shelf {
+  position: relative;
+  float: left;
+  width: 100%;
+  height: 83px;
+  margin: 50px 0 0 0; }
+  .shelf .left-side {
+    float: left;
+    width: 100%;
+    height: 87px;
+    padding: 0 0 0 54px;
+    background: url("../img/shelf-left.png") no-repeat left top; }
+  .shelf .right-side {
+    float: left;
+    width: 100%;
+    height: 87px;
+    padding: 0 54px 0 0;
+    background: url("../img/shelf-right.png") no-repeat right top; }
+  .shelf .middle-side {
+    float: left;
+    width: 100%;
+    height: 87px;
+    background: url("../img/shelf-middle.png") repeat-x left 47px; }
+  .shelf .book-list {
+    float: left;
+    width: 110%;
+    height: 110px;
+    margin: -25px 0 0 0;
+    overflow: hidden; }
+  .shelf .book {
+    float: left;
+    width: 58px;
+    height: 95px;
+    background: no-repeat center center;
+    background-size: 100% auto;
+    margin: 0 7px 150px 0;
+    padding: 10px 5px 0 10px;
+    background-image: url(../img/empty-book.png);
+    font-size: 10px;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none; }
+    .shelf .book.last {
+      margin-right: 0; }
+    .shelf .book.has-update .update-ico {
+      display: block; }
+    .shelf .book .update-ico {
+      display: none;
+      float: left;
+      width: 25px;
+      height: 25px;
+      background: url("../img/refresh.png");
+      background-size: contain;
+      position: relative;
+      left: 30px;
+      top: -10px; }
+
+.shelf-title {
+  float: left;
+  width: 100%;
+  font-size: 17px;
+  padding: 20px 20px 0 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #bbb;
+  text-shadow: 1px 1px 0 #fff;
+  letter-spacing: -1px; }
+
+@media (min-width: 310px) {
+  .book {
+    margin-right: 10px; } }

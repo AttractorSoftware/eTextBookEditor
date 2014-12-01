@@ -1,0 +1,7 @@
+.idea/
+out/
+assets/books/*
+bin/*
+gen/*
+tests/bin/*
+tests/gen/*
