@@ -14,17 +14,27 @@
 <body>
 <div id="uploading" class="screen">
     <span>Загрузка учебника...</span>
+
+    <h1 class="book-title"></h1>
+
+    <div id="progressBar" class="progress">
+        <div class="progress-bar progress-bar-striped active" role="progressbar">
+            0%
+        </div>
+    </div>
 </div>
 <div id="loading" class="screen" style="display: block">
     <span>Электронные учебники</span>
 </div>
+
 <div id="shelf" class="screen">
     <div class="soros"></div>
-    <div class="shelf-title">Скаченные учебники</div>
+    <div class="shelf-title">Загруженные учебники</div>
     <div class="storageList"></div>
-    <div class="shelf-title">Доступные для скачивания</div>
+    <div class="shelf-title">Доступные для загрузки</div>
     <div class="remoteList"></div>
 </div>
+
 <div id="modal" class="modal fade bs-example-modal-md" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-sm">
@@ -34,18 +44,18 @@
                     <span aria-hidden="true">×</span>
                     <span class="sr-only">Close</span>
                 </button>
-                <h4 class="modal-title" id="myLargeModalLabel">Информация о книге</h4>
+                <h4 class="modal-title" id="myLargeModalLabel">Сообщение</h4>
             </div>
             <div class="modal-body">
                 <h4 class="book-title">Название: </h4>
                 <h4 class="book-authors">Авторы: </h4>
-                <h4 class="book-isbn">ISBN: </h4>
                 <a href="#" class="btn btn-primary download" data-toggle="modal"
-                   data-target=".bs-example-modal-sm">Скачать книгу</a>
+                   data-target=".bs-example-modal-sm">Загрузить книгу</a>
             </div>
         </div>
     </div>
 </div>
 
+<div id="messageBar">some messages will be here</div>
 </body>
 </html>

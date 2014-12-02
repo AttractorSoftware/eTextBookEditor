@@ -63,13 +63,12 @@ html, body {
     padding: 0 20px;
 }
 
-
 .shelf .middle-side {
     width: calc(100% - 108px);
     position: relative;
     height: 87px;
     margin: auto;
-    background: url("../img/shelf-middle.png") repeat-x left 47px;
+    background: url('../img/shelf-middle.png') repeat-x left 47px;
 }
 
 .middle-side:before, .middle-side:after {
@@ -80,9 +79,11 @@ html, body {
     height: 87px;
     background: url("../img/shelf-left.png") no-repeat left top;
 }
-.middle-side:before{
+
+.middle-side:before {
     left: -54px;
 }
+
 .middle-side:after {
     right: -54px;
     background: url("../img/shelf-right.png") no-repeat right top;
@@ -96,7 +97,9 @@ html, body {
     overflow: hidden;
 }
 
-::-webkit-scrollbar { width: 0 !important }
+::-webkit-scrollbar {
+    width: 0 !important
+}
 
 .book {
     float: left;
@@ -132,4 +135,52 @@ html, body {
     .book {
         margin-right: 10px;
     }
+}
+
+#messageBar, #progressBar {
+    position: relative;
+    min-width: 250px;
+    height: auto;
+    padding: 15px 0;
+    text-align: center;
+    vertical-align: middle;
+    display: none;
+    color: #fff;
+    font-family: Myriad Pro, serif;
+    box-shadow: none;
+}
+
+#progressBar {
+    background: none;
+    left: 25%;
+    right: 25%;
+    width: 50%;
+    top: 25%;
+}
+
+.progress-bar {
+    border-radius: 5px;
+    height: 20px;
+    overflow: hidden;
+    min-width: 100px;
+}
+
+.has-update {
+    position: relative;
+}
+
+.has-update:after {
+    content: ' ';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    bottom: 20px;
+    right: 0;
+}
+
+#uploading .book-title {
+    position: relative;
+    top: 25%;
+    margin: 85px 0 0 0;
+    font-size: 22px;
 }
