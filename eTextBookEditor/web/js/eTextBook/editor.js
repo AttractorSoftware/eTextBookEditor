@@ -170,6 +170,7 @@ var eTextBookEditor = Backbone.Model.extend({
 
         book = this.clearEditElements(book);
         book = this.setIndexes(book);
+        book = this.setAnimation(book);
 
         this.display.html('');
         this.display.append(book);
@@ -293,11 +294,11 @@ var eTextBookEditor = Backbone.Model.extend({
         for(var i = 0; i < blocks.length; i++) {
             var block = $(blocks[i]);
             switch(block.prop('localName')) { // Clear animation for old books
-                case "block":  {
+                case "BLOCK":  {
                     block.attr('data-anijs', "");
                     break;
                 }
-                case "rule": {
+                case "RULE": {
                     block.attr('data-anijs', "");
                     break;
                 }
