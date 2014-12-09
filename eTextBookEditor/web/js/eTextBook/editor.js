@@ -170,7 +170,6 @@ var eTextBookEditor = Backbone.Model.extend({
 
         book = this.clearEditElements(book);
         book = this.setIndexes(book);
-        book = this.setAnimation(book);
 
         this.display.html('');
         this.display.append(book);
