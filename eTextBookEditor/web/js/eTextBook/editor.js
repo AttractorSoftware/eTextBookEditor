@@ -299,7 +299,7 @@ var eTextBookEditor = Backbone.Model.extend({
                     break;
                 }
                 case "rule": {
-                    block.attr('data-anijs', "if: scroll, on: window, do: rollIn animated, before: scrollReveal");
+                    block.attr('data-anijs', "");
                     break;
                 }
                 default: {
