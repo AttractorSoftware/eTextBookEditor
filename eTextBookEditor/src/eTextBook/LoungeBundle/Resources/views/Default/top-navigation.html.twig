@@ -4,33 +4,33 @@
             <li {% if app.request.attributes.get('_route') == 'home-page' %} class="active" {% endif %}>
                 <a href="{{ path('home-page') }}">
                     <span class="glyphicon glyphicon-info-sign"></span>
-                    О проекте
+                    {{ 'О проекте'|trans }}
                 </a>
             </li>
             <li {% if app.request.attributes.get('_route') == 'books' %} class="active" {% endif %}>
                 <a href="{{ path('books') }}">
                     <span class="glyphicon glyphicon-book"></span>
-                    Учебники
+                    {{ 'Учебники'|trans }}
                 </a>
             </li>
             {% if app.user %}
                 <li {% if app.request.attributes.get('_route') == 'my-books' %} class="active" {% endif %}>
                     <a href="{{ path('my-books') }}" class="book-list-link">
                         <span class="glyphicon glyphicon-book"></span>
-                        Мои учебники
+                        {{ 'Мои учебники'|trans }}
                     </a>
                 </li>
             {% endif %}
             <li {% if app.request.attributes.get('_route') == 'readers' %} class="active" {% endif %}>
                 <a href="{{ path('readers') }}">
                     <span class="glyphicon glyphicon-phone"></span>
-                    Ридеры
+                    {{ 'Ридеры'|trans }}
                 </a>
             </li>
             <li>
                 <a href="{{ path('documentation') }}">
                     <span class="glyphicon glyphicon-user"></span>
-                    Авторам
+                    {{ 'Авторам'|trans }}
                 </a>
             </li>
         </ul>
@@ -39,12 +39,12 @@
                 {% if not app.user %}
                     <a href="{{ path('enter') }}">
                         <span class="glyphicon glyphicon-home"></span>
-                        войти | регистрироваться
+                        {% trans %}Войти | Зарегистрироваться{% endtrans %}
                     </a>
                 {% else %}
                     <a href="{{ path('logout') }}">
                         <span class="glyphicon glyphicon-home"></span>
-                        {{ app.user.username }} | выйти
+                        {{ app.user.username }} | {% trans %}Выйти{% endtrans %}
                     </a>
                 {% endif %}
             </li>

@@ -5,11 +5,15 @@
     <h4>
         {{ book.authors }}
         <span>ISBN: {{ book.ISBN }}</span>
+
         <div class="control">
             <a href="/books/{{ book.slug }}.etb" class="btn btn-success btn-xs book-download">
-                <span class="glyphicon glyphicon-save"></span>Скачать учебник</a>
+                <span class="glyphicon glyphicon-save"></span>
+                {{ 'Скачать учебник'|trans }}</a>
             {% if app.user %}
-                / <a href="{{ path('book-edit', {'slug': book.slug, 'module': ' ' })  }}" class="edit-link btn btn-primary btn-xs"><span class="glyphicon glyphicon-edit"></span>Редактировать</a>
+                / <a href="{{ path('book-edit', {'slug': book.slug, 'module': ' ' }) }}"
+                     class="edit-link btn btn-primary btn-xs"><span class="glyphicon glyphicon-edit"></span>
+                {{ 'Редактировать'|trans }}</a>
             {% endif %}
         </div>
     </h4>
@@ -33,7 +37,8 @@
 
     {% include 'eTextBookLoungeBundle:Book:module-form.html.twig' with { 'book': book } %}
 
-    <div class="e-text-book-editor view-mode" book="{{ book.slug }}" module="{{ currentModule }}" update-action="{{ path('book-update-module') }}">
+    <div class="e-text-book-editor view-mode" book="{{ book.slug }}" module="{{ currentModule }}"
+         update-action="{{ path('book-update-module') }}">
         <div class="e-text-book-viewer">
             {% set moduleContent = currentModule != ' ' ? book.getModuleContent(currentModule) : book.getFirstModuleContent() %}
             {{ moduleContent|raw }}

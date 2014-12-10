@@ -4,9 +4,9 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">
                     <span aria-hidden="true">&times;</span>
-                    <span class="sr-only">Close</span>
+                    <span class="sr-only">{{ 'Закрыть'|trans }}</span>
                 </button>
-                <h4 class="modal-title">Новый модуль</h4>
+                <h4 class="modal-title">{{ 'Новый модуль'|trans }}</h4>
             </div>
             <form
                 ng-controller="App.moduleForm.controller"
@@ -20,7 +20,7 @@
                         <label for="moduleTitle">
                             Название модуля:
                             <span class="label label-danger" ng-show="moduleForm.title.$error.required">
-                                обязательно для заполнения
+                                {{ 'обязательно для заполнения'|trans }}
                             </span>
                         </label>
                         <input autofocus="autofocus"
@@ -35,7 +35,7 @@
                 <div class="modal-footer">
                     <button id="moduleFormClose" type="button" class="btn btn-default" data-dismiss="modal">
                         <span class="glyphicon glyphicon-remove"></span>
-                        Закрыть
+                        {{ 'Закрыть'|trans }}
                     </button>
                     <button
                         id="moduleFormSubmit"
@@ -45,7 +45,7 @@
                         ng-disabled="moduleForm.$invalid || isUnchanged(book)"
                         >
                         <span class="glyphicon glyphicon-ok"></span>
-                        Добавить модуль
+                        {{ 'Добавить модуль'|trans }}
                     </button>
                 </div>
             </form>

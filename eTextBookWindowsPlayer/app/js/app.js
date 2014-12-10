@@ -115,7 +115,7 @@ var App = function () {
                     .on('end', function () {
                         file.end();
                         $this.showProgress(downloadedState);
-                        if (checksum !== undefined) {
+                        if (checksum != undefined && checksum.length != 0) {
                             require('calculateCheckSumOfFileAndCheck')
                             (temporaryName, checksum, function (checksumIsOK) {
                                 if (checksumIsOK) {

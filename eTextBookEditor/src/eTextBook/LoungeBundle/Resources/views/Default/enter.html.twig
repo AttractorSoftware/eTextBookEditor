@@ -1,17 +1,17 @@
 {% extends "::lounge-template.html.twig" %}
 
 {% block pageHeader %}
-    <h1>Авторизация</h1>
+    <h1>{% trans %}Авторизация{% endtrans %}</h1>
 {% endblock %}
 
 {% block pageContent %}
     <div class="row">
         <div class="col-sm-6">
-            <h2>Вход</h2>
+            <h2>{% trans %}Вход{% endtrans %}</h2>
             {{ render(controller('FOSUserBundle:Security:login')) }}
         </div>
         <div class="col-sm-6">
-            <h2>Регистрация</h2>
+            <h2>{% trans %}Регистрация{% endtrans %}</h2>
             {{ render(controller('FOSUserBundle:Registration:register')) }}
         </div>
     </div>

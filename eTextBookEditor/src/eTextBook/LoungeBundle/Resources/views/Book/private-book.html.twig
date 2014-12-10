@@ -5,13 +5,13 @@
         <a href="{{ path('book-edit', {'slug': book.slug, 'module': ' ' }) }}"
            class="edit-link btn btn-primary btn-xs">
             <span class="glyphicon glyphicon-edit"></span>
-            Редактировать
+            {{ 'Редактировать'|trans }}
         </a>
     {% endif %}
     <a
         href="{{ path('book-publish', { 'slug': book.slug }) }}"
         class="edit-link btn btn-primary btn-xs"
-        title="Опубликовать"
+        title="{{ 'Опубликовать'|trans }}"
     >
         <span class="glyphicon glyphicon-thumbs-up"></span>
     </a>
@@ -20,16 +20,14 @@
         <a
             href="{{ dir }}{{ book.slug }}/index.html"
             class="view-link btn btn-success btn-xs"
-            title="Просмотр"
+            title="{{ 'Просмотр'|trans }}"
         >
             <span class="glyphicon glyphicon-eye-open"></span>
         </a>
     {% else %}
-        <a
-            href="{{ dir }}{{ book.slug }}/{{ book.file }}"
+        <a href="{{ dir }}{{ book.slug }}/{{ book.file }}"
             class="view-link btn btn-success btn-xs"
-            title="Просмотр"
-        >
+            title="{{ 'Просмотр'|trans }}" >
             <span class="glyphicon glyphicon-eye-open"></span>
         </a>
     {% endif %}

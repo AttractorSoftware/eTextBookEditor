@@ -1,5 +1,5 @@
 ﻿#define MyAppName "Электронные учебники"
-#define MyAppVersion "0.4.0-beta"
+#define MyAppVersion "1.3.0"
 #define MyAppPublisher "IT-Attractor"
 #define MyAppURL "http://www.it-attractor.com"
 #define LaunchProgram "Запустить приложение"
@@ -27,7 +27,7 @@ OutputBaseFilename=ebook-setup-{#MyAppVersion}
 Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
 
 [Files]
-Source: "F:\node-webkit-win32-v0.10.4\*"; Excludes: "createSetup.iss, README.md, libEGL.dll, tests, testAssets, libGLESv2.dll, tests, app\img\Thumbs.db, app\img\Thumbs.db:encryptable, .gitignore" ; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
+Source: "F:\node-webkit-win32-v0.10.4\*"; Excludes: "createSetup.iss, README.md, app\img\Thumbs.db, app\img\Thumbs.db:encryptable, .gitignore" ; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
 Source: "F:\node-webkit-win32-v0.10.4\icon.ico"; DestDir: "{app}"; DestName: "icon.ico"; Flags: ignoreversion
 
 [Tasks]

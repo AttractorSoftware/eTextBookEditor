@@ -14,19 +14,19 @@
                 <div class="control">
                     <a href="/books/{{ book.slug }}.etb" class="btn btn-success btn-xs book-download">
                         <span class="glyphicon glyphicon-save"></span>
-                        Скачать учебник
+                        {{ 'Скачать учебник'|trans }}
                     </a>
                     <a href="/tmp/{{ book.slug }}/index.html" class="edit-link btn btn-primary btn-xs">
                         <span class="glyphicon glyphicon-eye-open"></span>
-                        Просмотр учебника
+                        {{ 'Просмотр учебника'|trans }}
                     </a>
                     <a class="btn btn-primary btn-xs" href="#" data-toggle="modal" data-target="#permissionFormModal">
                         <span class="glyphicon glyphicon-user"></span>
-                        Права редактирования
+                        {{ 'Права редактирования'|trans }}
                     </a>
                     <a href="{{ path('book-publish', { 'slug': book.slug}) }}" class="edit-link btn btn-primary btn-xs">
                         <span class="glyphicon glyphicon-thumbs-up"></span>
-                        Опубликовать учебник
+                        {{ 'Опубликовать учебник'|trans }}
                     </a>
                 </div>
             {% endif %}
@@ -51,7 +51,7 @@
             {% endfor %}
             <li>
                 <a href="#" id="addModuleBtn" data-toggle="modal" data-target="#moduleFormModal">
-                    Добавить
+                    {{ 'Добавить'|trans }}
                 </a>
             </li>
         </ol>
@@ -60,7 +60,7 @@
 
         {% include 'eTextBookLoungeBundle:Book:advance-control-panel.html.twig' %}
 
-        <div id="save-notify">Сохранение</div>
+        <div id="save-notify">{{ 'Сохранение'|trans }}</div>
 
         <div class="e-text-book-editor" book="{{ book.slug }}" module="{{ currentModule }}"
              update-action="{{ path('book-update-module') }}">
@@ -74,7 +74,7 @@
         {% include 'eTextBookLoungeBundle:Default:file-manager.html.twig' with { 'package': package } %}
     {% else %}
         <div class="alert alert-warning">
-            У вас нет прав на редактирование данного учебника. Свяжитесь с пользователем {{ dbBook.user.username }} ({{ dbBook.user.email }}) по вопросу предоставления прав.
+            {{ 'Текст для прав1'|trans }}
         </div>
     {% endif %}
 {% endblock %}

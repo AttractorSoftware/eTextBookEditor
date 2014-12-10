@@ -13,6 +13,11 @@ class DefaultController extends Controller {
      * @Template()
      */
     public function indexAction() {
+        $request = $this->getRequest();
+        if($request->get('_route') == 'e_text_book_nonlocalized') {
+            return $this->redirect($this->generateUrl('e_text_book_homepage'));
+        }
+
         return array();
     }
 

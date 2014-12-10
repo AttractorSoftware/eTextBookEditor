@@ -4,9 +4,9 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">
                     <span aria-hidden="true">&times;</span>
-                    <span class="sr-only">Close</span>
+                    <span class="sr-only">{{ 'Закрыть'|trans }}</span>
                 </button>
-                <h4 class="modal-title">Новый учебник</h4>
+                <h4 class="modal-title">{{ 'Новый учебник'|trans }}</h4>
             </div>
 
             <form
@@ -20,7 +20,7 @@
 
                     <div class="book-cover">
                         <div class="form-group">
-                            <label for="bookCover">Обложка:</label>
+                            <label for="bookCover">{{ 'Обложка'|trans }}:</label>
                             <div class="cover-view">
                                 <input
                                     id="bookCover"
@@ -36,9 +36,9 @@
                     <div class="book-info">
                         <div class="form-group">
                             <label for="bookTitle">
-                                Название учебника:
+                                {{ 'Название учебника'|trans }}:
                             <span class="label label-danger" ng-show="bookForm.title.$error.required">
-                                обязательно для заполнения
+                                {{ 'Обязательно для заполнения'|trans }}
                             </span>
                             </label>
                             <input autofocus="autofocus"
@@ -52,7 +52,7 @@
 
                         <div class="form-group">
                             <label for="bookAuthors">
-                                Авторы:
+                                {{ 'Авторы'|trans }}:
                             </label>
                             <input
                                 id="bookAuthors"
@@ -63,7 +63,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="bookEditor">Под редакцией:</label>
+                            <label for="bookEditor">{{ 'Под редакцией'|trans }}:</label>
                             <input
                                 id="bookEditor"
                                 class="form-control"
@@ -83,7 +83,7 @@
                         </div>
                         <div class="form-group">
                             <label for="">
-                                Файл книги (PDF, mobi, fb2, ...)
+                                {{ 'Файл книги'|trans }} (PDF, mobi, fb2, ...)
                                 <span class="loading"></span>
                             </label>
                             <input
@@ -98,7 +98,7 @@
                 <div class="modal-footer">
                     <button id="bookFormClose" type="button" class="btn btn-default" data-dismiss="modal">
                         <span class="glyphicon glyphicon-remove"></span>
-                        Закрыть
+                        {{ 'Закрыть'|trans }}
                     </button>
                     <button
                         id="bookFormSubmit"
@@ -107,7 +107,7 @@
                         ng-click="submit(book)"
                         ng-disabled="bookForm.$invalid || isUnchanged(book)">
                         <span class="glyphicon glyphicon-ok"></span>
-                        Создать учебник
+                        {{ 'Создать учебник'|trans }}
                     </button>
                 </div>
             </form>

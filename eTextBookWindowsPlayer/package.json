@@ -7,7 +7,7 @@
     "window": {
         "title": "Электронные учебники",
         "icon": "./icon.png",
-        "toolbar": true,
+        "toolbar": false,
         "frame": true,
         "width": 800,
         "height": 500,
@@ -15,6 +15,7 @@
         "min_width": 510,
         "min_height": 400
     },
+    "node-main": "node-main.js",
     "webkit": {
         "plugin": true,
         "page-cache": true

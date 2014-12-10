@@ -3,7 +3,7 @@
 <div class="template" name="module">
     <module>
         <module-title>
-            <edit-element>Название модуля</edit-element>
+            <edit-element>{{ 'Название модуля'|trans }}</edit-element>
             <view-element class="module-element"></view-element>
         </module-title>
         <module-background-image>&nbsp;</module-background-image>
@@ -11,7 +11,7 @@
             <view-element class="module-element"></view-element>
         </module-questions>
         <module-description>
-            <view-element class="module-element">Описание модуля</view-element>
+            <view-element class="module-element">{{ 'Описание модуля'|trans }}</view-element>
         </module-description>
         <blocks></blocks>
     </module>
@@ -20,14 +20,14 @@
 <div class="template" name="addModuleButton">
     <add-module-button>
         <wrap>
-            <a href="#" class="add-module">Добавить модуль</a>
+            <a href="#" class="add-module">{{ 'Добавить модуль'|trans }}</a>
         </wrap>
     </add-module-button>
 </div>
 
 <div class="template" name="moduleControlPanel">
     <control-panel class="module-panel">
-        <item class="edit" title="Редактировать">
+        <item class="edit" title="{{ 'Редактировать'|trans }}">
             <span class="glyphicon glyphicon-pencil"></span>
         </item>
     </control-panel>
@@ -66,49 +66,57 @@
         <wrap>
             <button
                     class="add-header btn btn-primary btn-xs"
-                    title="Блок заголовок"
+                    title="{{ 'Блок заголовок'|trans }}"
                     >
                 <span class="glyphicon glyphicon-flag"></span>
-                Добавить заголовок
+                {{ 'Добавить заголовок'|trans }}
             </button>
             <button
                     class="add-block btn btn-primary btn-xs popover-dismiss"
                     data-toggle="popover"
-                    title="Блок задание"
-                    data-content="<img src='/img/task-sample.png'> <div class='popover-text'>Задания представляют из себя текст задания и управляющие инструменты, которые вы сможете добавить после того как добавите блок задания.</div>"
+                    title="{{ 'Блок задание'|trans }}"
+                    data-content="<img src='/img/task-sample.png'>
+                    <div class='popover-text'>
+                    {{ 'Текст для добавления задания'|trans }}
+                    </div>"
                     data-trigger="hover"
                     data-html="true"
                     data-placement="top"
                     >
                 <span class="glyphicon glyphicon-ok-sign"></span>
-                Добавить задание
+                {{ 'Добавить задание'|trans }}
             </button>
             <button
                     class="add-rule btn btn-primary btn-xs popover-dismiss"
                     data-toggle="popover"
-                    title="Блок правило"
-                    data-content="<img src='/img/rule-sample.png'> <div class='popover-text'>Правило представляет из себя обычный текст, помещенный в зеленный прямоугольник. Используется для заострения внимания на вызказывание.</div>"
+                    title="{{ 'Блок правило'|trans }}"
+                    data-content="<img src='/img/rule-sample.png'>
+                    <div class='popover-text'>
+                    {{ 'Текст для добавления правила'|trans }}
+                    </div>"
                     data-trigger="hover"
                     data-html="true"
                     data-placement="top"
                     >
                 <span class="glyphicon glyphicon-info-sign"></span>
-                Добавить правило
+                {{ 'Добавить правило'|trans }}
             </button>
         </wrap>
-        <span class="label label-primary trigger">Добавить блок</span>
+        <span class="label label-primary trigger">
+            {{ 'Добавить блок'|trans }}
+        </span>
     </add-block-button>
 </div>
 
 <div class="template" name="blockControlPanel">
     <control-panel>
-        <item class="edit" title="Редактировать">
+        <item class="edit" title="{{ 'Редактировать'|trans }}">
             <span class="glyphicon glyphicon-pencil"></span>
         </item>
-        <item class="duplicate" title="Дублировать">
+        <item class="duplicate" title="{{ 'Дублировать'|trans }}">
             <span class="glyphicon glyphicon-repeat"></span>
         </item>
-        <item class="remove" title="Удалить">
+        <item class="remove" title="{{ 'Удалить'|trans }}">
             <span class="glyphicon glyphicon-trash"></span>
         </item>
     </control-panel>
@@ -121,12 +129,12 @@
 <div class="template" name="audioItem">
     <audio-item>
         <audio controls>
-            <source src='{{ "<%= path %>" | raw  }}' type="audio/mpeg">
+            <source src='{{ "<%= path %>" | raw }}' type="audio/mpeg">
         </audio>
         <edit-element class="glyphicon glyphicon-remove"></edit-element>
         <view-element class="description"></view-element>
         <edit-element class="description">
-            <label>Описание аудио файла</label>
+            <label>{{ 'Описание аудио файла'|trans }}</label>
             <textarea></textarea>
         </edit-element>
     </audio-item>
@@ -202,7 +210,7 @@
 <div class="template" name="checkEndingsWidget">
     <div class="check-endings">
         <div class="words">
-            <label class="title">Слова:</label>
+            <label class="title">{{ 'Слова'|trans }}:</label>
 
             <div class="list"></div>
         </div>
@@ -247,6 +255,7 @@
     <div class="task delete-point">
         <view-element data-right-answer-ID="">
             <h5></h5>
+
             <form action="" class="choices-list">
             </form>
         </view-element>
@@ -256,18 +265,18 @@
 <div class="template" name="testWidgetEditElement">
     <edit-element class="add-question">
         <div class="question">
-            <label>Вопрос: </label>
+            <label>{{ 'Вопрос'|trans }}: </label>
             <input placeholder="Вопрос" type="text">
 
             <div class="add glyphicon glyphicon-plus"></div>
         </div>
         <div class="choices">
-            <label>Варианты ответов: </label>
+            <label>{{ 'Варианты ответов'|trans }}: </label>
 
             <form action="" class="choices-list">
             </form>
             <div class="add-choice">
-                <input placeholder="Вариант ответа" type="text">
+                <input placeholder="{{ 'Вариант ответа'|trans }}" type="text">
 
                 <div class="add glyphicon glyphicon-plus"></div>
             </div>
@@ -277,7 +286,8 @@
 
 <div class="template" name="choiceRadioButton">
     <div class="choice delete-point">
-        <input type="radio" class="choiceRadioButton" name="answer"><label for="choice"></label>
+        <input type="radio" class="choiceRadioButton" name="answer">
+        <label for="choice"></label>
 
         <div class="glyphicon glyphicon-remove"></div>
     </div>
@@ -287,7 +297,7 @@
 <div class="template" name="checkEndingsTimesWidget">
     <div class="check-endings times">
         <div class="words">
-            <label class="title">Слова:</label>
+            <label class="title">{{ 'Слова'|trans }}:</label>
 
             <div class="list"></div>
         </div>
@@ -298,7 +308,7 @@
 <div class="template" name="checkEndingsTimesEditElements">
     <edit-element class="endings-edit-list">
         <edit-element class="endings future">
-            <label class="title">Буд.:</label>
+            <label class="title">{{ 'Буд.'|trans }}:</label>
 
             <div class="list">
                 <edit-element class="add-ending">
@@ -310,7 +320,7 @@
         </edit-element>
 
         <edit-element class="endings real">
-            <label class="title">Наст.:</label>
+            <label class="title">{{ 'Наст.'|trans }}:</label>
 
             <div class="list">
                 <edit-element class="add-ending">
@@ -322,7 +332,7 @@
         </edit-element>
 
         <edit-element class="endings past">
-            <label class="title">Прош.:</label>
+            <label class="title">{{ 'Прош.'|trans }}:</label>
 
             <div class="list">
                 <edit-element class="add-ending">
@@ -376,7 +386,7 @@
 
 <div class="template" name="checkboxListWidgetAddElement">
     <edit-element class="add-checkbox">
-        <label>Слово или выражение</label>
+        <label>{{ 'Слово или выражение'|trans }}</label>
         <input autofocus="autofocus" type="text"/>
 
         <div class="add glyphicon glyphicon-plus"></div>

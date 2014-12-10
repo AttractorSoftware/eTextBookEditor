@@ -3,7 +3,7 @@
 {% block pageHeader %}
     <div class="row">
         <div class="col-sm-12">
-            <h1> Учебники </h1>
+            <h1>{{ 'Учебники'|trans }}</h1>
         </div>
     </div>
 {% endblock %}
@@ -13,8 +13,8 @@
         <ul class="list-unstyled book-list">
             {% for book in books %}
                 {% include 'eTextBookLoungeBundle:Book:public-book.html.twig' with {
-                    'book': book,
-                    'dir': '/publicBooks/'
+                'book': book,
+                'dir': '/publicBooks/'
                 } %}
             {% endfor %}
         </ul>

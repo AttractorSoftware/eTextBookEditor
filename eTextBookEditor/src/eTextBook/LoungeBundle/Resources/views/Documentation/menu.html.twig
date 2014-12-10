@@ -1,11 +1,19 @@
 <ul class="list-unstyled">
     <li>
-        <a href="{{ path('documentation') }}">Доступ к редактированию</a>
+        <a href="{{ path('documentation') }}">
+            {% trans %}
+            Доступ к редактированию
+            {% endtrans %}
+        </a>
     </li>
     <li>
-        <a href="{{ path('documentation-create-book') }}">Созание нового учебника</a>
+        <a href="{{ path('documentation-create-book') }}">
+            {% trans %}
+            Создание нового учебника
+            {% endtrans %}
+        </a>
     </li>
     {#<li>#}
-        {#<a href="#">Link</a>#}
+    {#<a href="#">Link</a>#}
     {#</li>#}
 </ul>

@@ -10,14 +10,14 @@
         <div class="close glyphicon glyphicon-remove-circle"></div>
         <!-- Nav tabs -->
         <ul class="nav nav-tabs">
-            <li class="active"><a href="#images" data-toggle="tab">Картинки</a></li>
-            <li><a href="#videos" data-toggle="tab">Видео</a></li>
-            <li><a href="#audios" data-toggle="tab">Аудио</a></li>
+            <li class="active"><a href="#images" data-toggle="tab">{% trans %}Картинки{% endtrans %}</a></li>
+            <li><a href="#videos" data-toggle="tab">{% trans %}Видео{% endtrans %}</a></li>
+            <li><a href="#audios" data-toggle="tab">{% trans %}Аудио{% endtrans %}</a></li>
 
             <div class="form-group upload-container">
                 <label for="uploadInput">
                     <span class="glyphicon glyphicon-folder-open"></span>
-                    Загрузить файл
+                    {% trans %}Загрузить файл{% endtrans %}
                 </label>
                 <input type="file" id="uploadInput" name="upload-file">
             </div>
@@ -41,8 +41,12 @@
                 <div class="player">
                     <div class="display"></div>
                     <div class="buttons">
-                        <div class="btn btn-primary btn-sm select"> <span class="glyphicon glyphicon-ok"></span> Выбрать</div>
-                        <div class="btn btn-danger btn-sm remove"> <span class="glyphicon glyphicon-remove"></span> Удалить</div>
+                        <div class="btn btn-primary btn-sm select">
+                            <span class="glyphicon glyphicon-ok"></span>
+                            {% trans %}Выбрать{% endtrans %}</div>
+                        <div class="btn btn-danger btn-sm remove">
+                            <span class="glyphicon glyphicon-remove"></span>
+                            {% trans %}Удалить{% endtrans %}</div>
                     </div>
                 </div>
             </div>
@@ -63,8 +67,12 @@
                 <div class="player">
                     <video controls></video>
                     <div class="buttons">
-                        <div class="btn btn-primary btn-sm select"> <span class="glyphicon glyphicon-ok"></span> Выбрать</div>
-                        <div class="btn btn-danger btn-sm remove"> <span class="glyphicon glyphicon-remove"></span> Удалить</div>
+                        <div class="btn btn-primary btn-sm select">
+                            <span class="glyphicon glyphicon-ok"></span>
+                            {% trans %}Выбрать{% endtrans %}</div>
+                        <div class="btn btn-danger btn-sm remove">
+                            <span class="glyphicon glyphicon-remove"></span>
+                            {% trans %}Удалить{% endtrans %}</div>
                     </div>
                 </div>
             </div>
@@ -84,11 +92,15 @@
                 </div>
                 <div class="player">
                     <audio controls>
-                        Your browser does not support the audio element.
+                        Ваш браузер не поддерживает данный формат аудио.
                     </audio>
                     <div class="buttons">
-                        <div class="btn btn-primary btn-sm select"> <span class="glyphicon glyphicon-ok"></span> Выбрать</div>
-                        <div class="btn btn-danger btn-sm remove"> <span class="glyphicon glyphicon-remove"></span> Удалить</div>
+                        <div class="btn btn-primary btn-sm select">
+                            <span class="glyphicon glyphicon-ok"></span>
+                            {% trans %}Выбрать{% endtrans %}</div>
+                        <div class="btn btn-danger btn-sm remove">
+                            <span class="glyphicon glyphicon-remove"></span>
+                            {% trans %}Удалить{% endtrans %}</div>
                     </div>
                 </div>
             </div>

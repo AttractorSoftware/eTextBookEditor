@@ -6,10 +6,23 @@ e_text_book_api:
     type:     annotation
     prefix:   /
 
+
+e_text_book_homepage:
+    pattern:  /{_locale}/
+    defaults: { _controller: eTextBookLoungeBundle:Default:index }
+    requirements:
+        _locale: ru|kg
+
+e_text_book_nonlocalized:
+    pattern:  /
+    defaults: { _controller: eTextBookLoungeBundle:Default:index }
+
 e_text_book_lounge:
     resource: "@eTextBookLoungeBundle/Controller/"
     type:     annotation
-    prefix:   /
+    prefix:   /{_locale}/
+    requirements:
+            _locale: ru|kg
 
 e_text_book_spawn:
     resource: "@eTextBookSpawnBundle/Controller/"
@@ -18,4 +31,5 @@ e_text_book_spawn:
 
 logout:
     path:   /logout
+
 

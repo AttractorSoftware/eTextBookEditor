@@ -3,10 +3,11 @@
 {% block pageHeader %}
     <div class="row">
         <div class="col-sm-12">
-            <h1> Мои учебники</h1>
+            <h1> {{ 'Мои учебники'|trans }}</h1>
             <div class="addBookContainer">
                 <span class="glyphicon glyphicon-file"></span>
-                <a id="addBookButton" href="#" data-toggle="modal" data-target="#bookFormModal"> Создать новый учебник </a>
+                <a id="addBookButton" href="#" data-toggle="modal" data-target="#bookFormModal">
+                     {{ 'Создать новый учебник'|trans }}</a>
                 {% include 'eTextBookLoungeBundle:Book:form.html.twig' %}
             </div>
         </div>
