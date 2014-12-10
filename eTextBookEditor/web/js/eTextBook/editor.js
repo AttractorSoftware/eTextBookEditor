@@ -293,13 +293,13 @@ var eTextBookEditor = Backbone.Model.extend({
         var blocks = html.find('rule, block, div.header.block');
         for(var i = 0; i < blocks.length; i++) {
             var block = $(blocks[i]);
-            switch(block.prop('localName')) {
-                case "block":  {
+            switch(block.prop('localName')) { // Clear animation for old books
+                case "BLOCK":  {
                     block.attr('data-anijs', "");
                     break;
                 }
-                case "rule": {
-                    block.attr('data-anijs', "if: scroll, on: window, do: rollIn animated, before: scrollReveal");
+                case "RULE": {
+                    block.attr('data-anijs', "");
                     break;
                 }
                 default: {
