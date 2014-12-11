@@ -1161,4 +1161,8 @@ html, body {
   }
 }
 
+.language-changer {
+  a { margin: 0 10px 0 0; }
+}
+
 @import '../book-template/scss/style';

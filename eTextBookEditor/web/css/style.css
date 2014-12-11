@@ -890,6 +890,9 @@ html, body {
   #save-notify.show {
     display: block; }
 
+.language-changer a {
+  margin: 0 10px 0 0; }
+
 html.display-page {
   width: 100%;
   overflow-x: hidden; }

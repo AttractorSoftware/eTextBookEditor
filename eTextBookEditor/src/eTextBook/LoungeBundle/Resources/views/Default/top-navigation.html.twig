@@ -51,3 +51,20 @@
         </ul>
     </div>
 </nav>
+
+<div class="container">
+    <div class="pull-right language-changer">
+        <a
+            class="label label-{% if app.request.locale == 'ru' %}primary{% else %}default{% endif %}"
+            href="{{ path('home-page', { '_locale' : 'ru' }) }}"
+        >
+            Русский
+        </a>
+        <a
+             href="{{ path('home-page', { '_locale' : 'kg' }) }}"
+             class="label label-{% if app.request.locale == 'kg' %}primary{% else %}default{% endif %}"
+        >
+            Кыргызча
+        </a>
+    </div>
+</div>
