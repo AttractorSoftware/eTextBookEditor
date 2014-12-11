@@ -25,5 +25,7 @@
 {% endblock %}
 
 {% block javascripts %}
+    <script src="{{ asset('js/translator.js') }}"></script>
+    {% include 'eTextBookLoungeBundle:Default:_js_translate_list.html.twig' %}
     <script src="{{ asset('js/script.js') }}"></script>
 {% endblock %}

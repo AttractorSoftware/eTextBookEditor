@@ -1,7 +1,7 @@
 var eTextBookWidgetCheckEndings = eTextBookWidget.extend({
     defaults: {
         slug: "check-endings"
-        ,title: "Проверка окончаний"
+        ,title: Translator._("Проверка окончаний")
         ,templateName: 'checkEndingsWidget'
         ,ico: '<span class="glyphicon glyphicon-compressed"></span>'
     }
