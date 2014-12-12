@@ -56,8 +56,9 @@ class FeatureContext extends eTextBookContext
      */
     public function openAuthPage()
     {
-        eTextBookDriver::getInstance()->openPage("http://localhost/enter");
+        eTextBookDriver::getInstance()->openPage("http://localhost");
         sleep(1);
+        $this->findCss('#loginLink')->click();
         $this->getDriver()->resizeWindow(1200, 756);
     }
 

@@ -29,6 +29,7 @@ module.exports = function (grunt) {
                     , 'bower_components/anijs/dist/anijs-min.js'
                     , 'bower_components/anijs/dist/helpers/scrollreveal/anijs-helper-scrollreveal.js'
                     , 'web/js/app.js'
+                    , 'web/js/translator.js'
                     , 'web/js/eTextBook/objectStorage.js'
                     , 'web/js/eTextBook/bookNavigation.js'
                     , 'web/js/eTextBook/search.js'

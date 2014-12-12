@@ -37,7 +37,7 @@
         <ul class="nav navbar-nav navbar-right">
             <li>
                 {% if not app.user %}
-                    <a href="{{ path('enter') }}">
+                    <a href="{{ path('enter') }}" id="loginLink">
                         <span class="glyphicon glyphicon-home"></span>
                         {% trans %}Войти | Зарегистрироваться{% endtrans %}
                     </a>

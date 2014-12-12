@@ -332,7 +332,7 @@ class ModuleContext extends eTextBookContext
         $links = $this->findAllCss('.book-list li');
         $latestBook = $this->getVar('latestBook');
         foreach ($links as $link) {
-            $titleLink = $link->find('css', 'a.title');
+            $titleLink = $link->find('css', '.title');
             if (is_object($titleLink) && trim($titleLink->getHTML()) == $latestBook['title']) {
                 $link->find('css', '.view-link')->click();
                 sleep(2);
