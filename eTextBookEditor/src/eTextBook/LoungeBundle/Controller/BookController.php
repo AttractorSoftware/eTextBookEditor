@@ -14,8 +14,7 @@ use eTextBook\LoungeBundle\UseCases\Book\BookPackage;
 use eTextBook\LoungeBundle\UseCases\Book\BookPublisher;
 
 
-class BookController extends Controller
-{
+class BookController extends Controller {
     /**
      * @Route("/books", name="books")
      * @Template()
@@ -142,23 +141,6 @@ class BookController extends Controller
         $em->flush();
 
         return $this->redirect($this->generateUrl('books'));
-
-    }
-
-    /**
-     * @Route("/book/view/{slug}/{module}", name="book-view")
-     * @Template()
-     */
-    public function viewAction($slug, $module)
-    {
-        $book = new Book($this->container->getParameter('books_dir') . $slug . '.etb');
-        $modules = $book->getModules();
-
-        return array(
-            'book' => $book,
-            'modules' => $modules,
-            'currentModule' => $module == ' ' && count($modules) > 0 ? $modules[0]->slug : $module
-        );
     }
 
     /**
