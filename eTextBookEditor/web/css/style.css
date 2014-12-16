@@ -893,6 +893,27 @@ html, body {
 .language-changer a {
   margin: 0 10px 0 0; }
 
+.header-without-top-margin {
+  margin-top: 0; }
+
+.doc-menu .current .glyphicon {
+  display: inline; }
+.doc-menu .current a {
+  padding: 0; }
+.doc-menu li {
+  margin: 0 0 5px; }
+.doc-menu a {
+  padding: 0 0 0 12px; }
+.doc-menu .glyphicon {
+  display: none;
+  font-size: 8px;
+  position: relative;
+  top: -2px;
+  color: #428BCA; }
+
+.doc-image {
+  max-width: 100%; }
+
 html.display-page {
   width: 100%;
   overflow-x: hidden; }

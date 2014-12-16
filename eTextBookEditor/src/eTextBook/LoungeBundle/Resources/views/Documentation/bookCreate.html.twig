@@ -1,0 +1,49 @@
+{% extends 'eTextBookLoungeBundle:Documentation:layout.html.twig' %}
+
+{% block pageHeader %}
+    <h1>Создание нового учебника</h1>
+{% endblock %}
+
+{% block docContent %}
+    <p>
+        В основном меню, в самом верху странице, после регистрации, появится раздел "Мои учебники" вам необходимо перейти в него.
+    </p>
+    <p>
+        <img
+            class="doc-image"
+            src="/img/documentation/my-books-link-mark.jpg"
+            alt="Ссылка на страницу учебников пользователя"/>
+    </p>
+    <p>
+        Справа от заголовка страницы "Мои учебники" вы сможете найти ссылку "Создать новый учебник".
+    </p>
+    <p>
+        <img
+            class="doc-image"
+            src="/img/documentation/create-book-link-mark.jpg"
+            alt="Ссылка для создания учебника" />
+    </p>
+    <p>
+        После того как вы кликните по ссылке перед вами откроется окно в котором надо будет указать общие данные учебника, название, имена авторов и так далее.
+    </p>
+    <p>
+        <img
+            class="doc-image"
+            src="/img/documentation/book-form.jpg"
+            alt="Форма создания учебника"/>
+    </p>
+    <p>
+        После создания учебника он отобразится у вас в списке и вы сможете перейти к его редактированию.
+        Попробуйте создать модули в учебнике и добавить различные типы упражнений.
+    </p>
+
+    <a href="{{ path('documentation-register') }}" class="btn btn-primary pull-left">
+        <span class="glyphicon glyphicon-backward"></span>
+        Предыдущий шаг
+    </a>
+    <a href="{{ path('documentation-module-create') }}" class="btn btn-primary pull-right">
+        Следующий шаг
+        <span class="glyphicon glyphicon-forward"></span>
+    </a>
+{% endblock %}
+

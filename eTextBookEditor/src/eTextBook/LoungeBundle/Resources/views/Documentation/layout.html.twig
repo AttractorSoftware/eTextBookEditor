@@ -1,0 +1,12 @@
+{% extends "::lounge-template.html.twig" %}
+
+{% block pageContent %}
+    <div class="row">
+        <div class="col-sm-3">
+            {% include 'eTextBookLoungeBundle:Documentation:menu.html.twig' %}
+        </div>
+        <div class="col-sm-9">
+            {% block docContent %}{% endblock %}
+        </div>
+    </div>
+{% endblock %}

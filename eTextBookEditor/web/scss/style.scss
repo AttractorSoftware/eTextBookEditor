@@ -1165,4 +1165,32 @@ html, body {
   a { margin: 0 10px 0 0; }
 }
 
+.header-without-top-margin {
+  margin-top: 0;
+}
+
+.doc-menu {
+  .current {
+    .glyphicon { display: inline; }
+    a { padding: 0; }
+  }
+  li {
+    margin: 0 0 5px;
+  }
+  a {
+    padding: 0 0 0 12px;
+  }
+  .glyphicon {
+    display: none;
+    font-size: 8px;
+    position: relative;
+    top: -2px;
+    color: #428BCA;
+  }
+}
+
+.doc-image {
+  max-width: 100%;
+}
+
 @import '../book-template/scss/style';

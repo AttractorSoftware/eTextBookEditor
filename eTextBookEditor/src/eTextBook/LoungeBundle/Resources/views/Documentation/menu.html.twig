@@ -1,19 +1,44 @@
-<ul class="list-unstyled">
-    <li>
+<ul class="list-unstyled doc-menu">
+    <li class="{% if app.request.attributes.get('_route') == 'documentation' %}current{% endif %}">
+        <span class="glyphicon glyphicon-chevron-right"></span>
         <a href="{{ path('documentation') }}">
-            {% trans %}
-            Доступ к редактированию
-            {% endtrans %}
+            Работа с редактором
+        </a>
+    </li>
+    <li class="{% if app.request.attributes.get('_route') == 'documentation-register' %}current{% endif %}">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        <a href="{{ path('documentation-register') }}">
+            Регистрация
+        </a>
+    </li>
+    <li class="{% if app.request.attributes.get('_route') == 'documentation-book-create' %}current{% endif %}">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        <a href="{{ path('documentation-book-create') }}">
+            Созание нового учебника
+        </a>
+    </li>
+    <li class="{% if app.request.attributes.get('_route') == 'documentation-module-create' %}current{% endif %}">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        <a href="{{ path('documentation-module-create') }}">
+            Добавление модулей
+        </a>
+    </li>
+    <li class="{% if app.request.attributes.get('_route') == 'documentation-task-create' %}current{% endif %}">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        <a href="{{ path('documentation-task-create') }}">
+            Добавление упражнений
         </a>
     </li>
     <li>
-        <a href="{{ path('documentation-create-book') }}">
-            {% trans %}
-            Создание нового учебника
-            {% endtrans %}
+        <a href="#">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+            Права редактирования
         </a>
     </li>
-    {#<li>#}
-    {#<a href="#">Link</a>#}
-    {#</li>#}
+    <li>
+        <a href="#">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+            Публикация учебника
+        </a>
+    </li>
 </ul>
