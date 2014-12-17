@@ -41,4 +41,10 @@
             Публикация учебника
         </a>
     </li>
+    <li class="{% if app.request.attributes.get('_route') == 'documentation-other-formats' %}current{% endif %}">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        <a href="{{ path('documentation-other-formats') }}">
+            Публикация имеющихся книг
+        </a>
+    </li>
 </ul>

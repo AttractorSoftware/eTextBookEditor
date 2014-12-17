@@ -66,4 +66,12 @@ class DocumentationController {
         return array();
     }
 
+    /**
+     * @Route("/other-formats", name="documentation-other-formats")
+     * @Template
+     */
+    public function otherFormatsAction() {
+        return array();
+    }
+
 }
