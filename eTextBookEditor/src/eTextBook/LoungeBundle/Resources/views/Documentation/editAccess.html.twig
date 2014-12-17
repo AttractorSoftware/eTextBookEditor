@@ -1,0 +1,33 @@
+{% extends 'eTextBookLoungeBundle:Documentation:layout.html.twig' %}
+
+{% block pageHeader %}
+    <h1>Права редактирования</h1>
+{% endblock %}
+
+{% block docContent %}
+    <p>
+        В случае совместной работы над учебником может понадобиться возможность редактирования учебника несколькими людьми, для этих целей реализована возможность предоставления доступа к редактированию учебника.
+        Для того что бы предоставить доступ к редактированию, кликаем по кнопке "Права редактирования" в редакторе учебника.
+    </p>
+    <p><img class="doc-image" src="/img/documentation/book-controls.png" alt="Кнопки управления книгой"/></p>
+    <p>Откроется окно предоставления прав к учебнику.</p>
+    <p><img class="doc-image" src="/img/documentation/access-form.png" alt="Форма предосталения прав к учебнику"/></p>
+    <p>
+        Необходимо добавить адреса почты пользователей которыму вы хотите предоставить доступ.
+        Пользователи должны быть зарегестрированы под этими почтовыми адресами, не важно до или после предоставления прав.
+    </p>
+    <div class="alert alert-warning">
+        ВНИМАНИЕ! <br />
+        В редакторе не предусмотренно единовременное редактирование учебника сразу несколькими пользователями.
+        В случае если учебник будет редактироваться одновременно возможна потеря редактируемых данных одного из пользователей.
+    </div>
+    <a href="{{ path('documentation-edit-access') }}" class="btn btn-primary pull-left">
+        <span class="glyphicon glyphicon-backward"></span>
+        Предыдущий шаг
+    </a>
+    <a href="{{ path('documentation-publish') }}" class="btn btn-primary pull-right">
+        Следующий шаг
+        <span class="glyphicon glyphicon-forward"></span>
+    </a>
+{% endblock %}
+

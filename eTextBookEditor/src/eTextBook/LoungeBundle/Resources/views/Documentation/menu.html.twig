@@ -29,15 +29,15 @@
             Добавление упражнений
         </a>
     </li>
-    <li>
-        <a href="#">
-            <span class="glyphicon glyphicon-chevron-right"></span>
+    <li class="{% if app.request.attributes.get('_route') == 'documentation-edit-access' %}current{% endif %}">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        <a href="{{ path('documentation-edit-access') }}">
             Права редактирования
         </a>
     </li>
-    <li>
-        <a href="#">
-            <span class="glyphicon glyphicon-chevron-right"></span>
+    <li class="{% if app.request.attributes.get('_route') == 'documentation-publish' %}current{% endif %}">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        <a href="{{ path('documentation-publish') }}">
             Публикация учебника
         </a>
     </li>

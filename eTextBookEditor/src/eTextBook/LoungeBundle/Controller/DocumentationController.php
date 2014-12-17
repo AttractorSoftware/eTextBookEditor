@@ -50,4 +50,20 @@ class DocumentationController {
         return array();
     }
 
+    /**
+     * @Route("/edit-access", name="documentation-edit-access")
+     * @Template
+     */
+    public function editAccessAction() {
+        return array();
+    }
+
+    /**
+     * @Route("/publish", name="documentation-publish")
+     * @Template
+     */
+    public function publishAction() {
+        return array();
+    }
+
 }
