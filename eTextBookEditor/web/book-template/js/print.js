@@ -3170,7 +3170,7 @@ App.eTextBookWidgetRepository = new eTextBookWidgetRepository();
 var eTextBookWidgetCheckEndingsTimes = eTextBookWidget.extend({
     defaults: {
         slug: "check-endings-times"
-        ,title: "Проверка окончаний времен"
+        ,title: Translator._("Проверка окончаний времен")
         ,templateName: 'checkEndingsTimesWidget'
         ,ico: '<span class="glyphicon glyphicon-compressed"></span>'
     }
@@ -3384,7 +3384,7 @@ App.eTextBookWidgetRepository.registerWidget(eTextBookWidgetCheckEndingsTimes);
     var eTextBookWidgetAudio = eTextBookWidget.extend({
     defaults: {
         slug: "audio"
-        ,title: "Аудио записи"
+        ,title: Translator._("Аудио записи")
         ,templateName: 'audioWidget'
         ,ico: '<span class="glyphicon glyphicon-music"></span>'
     }
@@ -3620,7 +3620,7 @@ App.eTextBookWidgetRepository.registerWidget(eTextBookWidgetCheckEndings);
 var eTextBookWidgetCheckboxList = eTextBookWidget.extend({
     defaults: {
         slug: "checkbox-list"
-        ,title: "Вхождение в множество"
+        ,title: Translator._("Вхождение в множество")
         ,templateName: 'checkboxListWidget'
         ,ico: '<span class="glyphicon glyphicon-log-in"></span>'
     }
@@ -3707,7 +3707,7 @@ App.eTextBookWidgetRepository.registerWidget(eTextBookWidgetCheckboxList);
 var eTextBookWidgetImageDescription = eTextBookWidget.extend({
     defaults: {
         slug: "image-description",
-        title: "Описание картинки",
+        title: Translator._("Описание картинки"),
         templateName: 'imageDescription', ico: '<span class="glyphicon glyphicon-picture"></span>'
     },
 
@@ -3822,7 +3822,7 @@ App.eTextBookWidgetRepository.registerWidget(eTextBookWidgetImageDescription);
 var eTextBookWidgetLogicStatement = eTextBookWidget.extend({
 	 defaults: {
 		  slug: "logic-statement",
-		  title: "Верно, не верно",
+		  title: Translator._("Верно, не верно"),
 		  templateName: 'logicStatementWidget'
          ,ico: '<span class="glyphicon glyphicon-ok-sign"></span>'
 	 },
@@ -3922,7 +3922,7 @@ App.eTextBookWidgetRepository.registerWidget(eTextBookWidgetLogicStatement);
 var eTextBookWidgetQuestion = eTextBookWidget.extend({
 	 defaults: {
 		  slug: "question",
-		  title: "Текстовое задание",
+		  title: Translator._("Текстовое задание"),
 		  templateName: 'questionWidget'
          ,ico: '<span class="glyphicon glyphicon-font"></span>'
 	 },
@@ -4081,7 +4081,7 @@ App.eTextBookWidgetRepository.registerWidget(eTextBookWidgetTest);
 var eTextBookWidgetTranslateComparative = eTextBookWidget.extend({
     defaults: {
         slug: "translate-comparative"
-        ,title: "Сравнение перевода"
+        ,title: Translator._("Сравнение перевода")
         ,templateName: 'translateComparativeWidget'
         ,ico: '<span class="glyphicon glyphicon-random"></span>'
     }
@@ -4191,7 +4191,7 @@ App.eTextBookWidgetRepository.registerWidget(eTextBookWidgetTranslateComparative
 var eTextBookWidgetVideo = eTextBookWidget.extend({
     defaults: {
         slug: "video"
-        ,title: "Видео записи"
+        ,title: Translator._("Видео записи")
         ,templateName: 'videoWidget'
         ,ico: '<span class="glyphicon glyphicon-facetime-video"></span>'
     }

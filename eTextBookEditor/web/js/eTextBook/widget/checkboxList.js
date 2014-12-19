@@ -1,7 +1,7 @@
 var eTextBookWidgetCheckboxList = eTextBookWidget.extend({
     defaults: {
         slug: "checkbox-list"
-        ,title: "Вхождение в множество"
+        ,title: Translator._("Вхождение в множество")
         ,templateName: 'checkboxListWidget'
         ,ico: '<span class="glyphicon glyphicon-log-in"></span>'
     }

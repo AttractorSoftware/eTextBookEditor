@@ -871,8 +871,10 @@ html, body {
   float: left;
   width: 100%; }
 
-#advance-control-panel li {
-  cursor: pointer; }
+#advance-control-panel {
+  display: none; }
+  #advance-control-panel li {
+    cursor: pointer; }
 
 #save-notify {
   display: none;

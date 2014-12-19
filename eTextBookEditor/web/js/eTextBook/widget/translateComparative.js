@@ -1,7 +1,7 @@
 var eTextBookWidgetTranslateComparative = eTextBookWidget.extend({
     defaults: {
         slug: "translate-comparative"
-        ,title: "Сравнение перевода"
+        ,title: Translator._("Сравнение перевода")
         ,templateName: 'translateComparativeWidget'
         ,ico: '<span class="glyphicon glyphicon-random"></span>'
     }

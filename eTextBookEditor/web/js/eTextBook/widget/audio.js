@@ -1,7 +1,7 @@
     var eTextBookWidgetAudio = eTextBookWidget.extend({
     defaults: {
         slug: "audio"
-        ,title: "Аудио записи"
+        ,title: Translator._("Аудио записи")
         ,templateName: 'audioWidget'
         ,ico: '<span class="glyphicon glyphicon-music"></span>'
     }

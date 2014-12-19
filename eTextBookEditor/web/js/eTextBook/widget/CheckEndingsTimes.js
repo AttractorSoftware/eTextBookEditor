@@ -1,7 +1,7 @@
 var eTextBookWidgetCheckEndingsTimes = eTextBookWidget.extend({
     defaults: {
         slug: "check-endings-times"
-        ,title: "Проверка окончаний времен"
+        ,title: Translator._("Проверка окончаний времен")
         ,templateName: 'checkEndingsTimesWidget'
         ,ico: '<span class="glyphicon glyphicon-compressed"></span>'
     }

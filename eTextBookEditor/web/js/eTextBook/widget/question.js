@@ -1,7 +1,7 @@
 var eTextBookWidgetQuestion = eTextBookWidget.extend({
 	 defaults: {
 		  slug: "question",
-		  title: "Текстовое задание",
+		  title: Translator._("Текстовое задание"),
 		  templateName: 'questionWidget'
          ,ico: '<span class="glyphicon glyphicon-font"></span>'
 	 },

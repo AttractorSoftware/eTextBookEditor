@@ -63,7 +63,7 @@ var eTextBookBlock = Backbone.Model.extend({
 
         var $this = this;
         var selector = $('<select class="widget-selector"></select>');
-        var label = $('<edit-element><label>Тип задания: </label></edit-element>');
+        var label = $('<edit-element><label>' + Translator._('Тип задания') +': </label></edit-element>');
         var widgetTypeList = $('<edit-element class="widget-type-list"></edit-element>');
         this.cont.find('widget').prepend(label, widgetTypeList);
         selector.empty();

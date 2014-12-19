@@ -1,7 +1,7 @@
 var eTextBookWidgetVideo = eTextBookWidget.extend({
     defaults: {
         slug: "video"
-        ,title: "Видео записи"
+        ,title: Translator._("Видео записи")
         ,templateName: 'videoWidget'
         ,ico: '<span class="glyphicon glyphicon-facetime-video"></span>'
     }

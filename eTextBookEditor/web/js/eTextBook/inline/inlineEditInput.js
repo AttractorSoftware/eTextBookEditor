@@ -4,8 +4,8 @@ var inlineEditInput = inlineEdit.extend({
         this.editCont = $('<edit-element class="'
             + this.get('editElementClass')
             + '"><label>' +
-                'Заголовок задания:' +
-                '<div class="index-disable"><input type="checkbox">Не индексировать</div>' +
+                Translator._('Заголовок задания') + ':' +
+                '<div class="index-disable"><input type="checkbox">' + Translator._('Не индексировать') + '</div>' +
             '</label>' +
 			  '<input type="text" class="widget">' +
 			  '</edit-element>');
