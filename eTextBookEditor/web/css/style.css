@@ -810,6 +810,19 @@ html, body {
   height: 50px;
   background: #eee;
   border-top: solid 1px #E7E7E7; }
+  .footer .contact-link {
+    float: left;
+    margin: 16px 0 0 0; }
+    .footer .contact-link a {
+      color: #555; }
+
+.navbar-brand {
+  font-size: 24px; }
+  .navbar-brand span {
+    font-size: 12px; }
+  .navbar-brand .logo {
+    float: left;
+    margin: -9px 0 0 0; }
 
 .page-header .control .btn {
   float: left;

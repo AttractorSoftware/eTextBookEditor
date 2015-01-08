@@ -1,5 +1,13 @@
 <nav class="navbar navbar-default main-menu" role="navigation" data-anijs="if: load, on: window, do: bounceInDown animated">
     <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{{ path('home-page') }}">
+                <div class="logo">
+                    Редактор <br />
+                    <span>электронных учебников</span>
+                </div>
+            </a>
+        </div>
         <ul class="nav navbar-nav">
             <li {% if app.request.attributes.get('_route') == 'home-page' %} class="active" {% endif %}>
                 <a href="{{ path('home-page') }}">
@@ -31,6 +39,12 @@
                 <a href="{{ path('documentation') }}">
                     <span class="glyphicon glyphicon-user"></span>
                     {{ 'Авторам'|trans }}
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('development') }}">
+                    <span class="glyphicon glyphicon-cog"></span>
+                    {{ 'Разработчикам'|trans }}
                 </a>
             </li>
         </ul>

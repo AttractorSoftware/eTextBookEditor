@@ -25,6 +25,14 @@ class DefaultController extends Controller {
     }
 
     /**
+     * @Route("/development", name="development")
+     * @Template()
+     */
+    public function developmentAction() {
+        return array();
+    }
+
+    /**
      * @Route("/enter", name="enter")
      * @Template()
      */

@@ -1058,6 +1058,22 @@ html, body {
   height: 50px;
   background: #eee;
   border-top: solid 1px #E7E7E7;
+  .contact-link {
+    float: left;
+    margin: 16px 0 0 0;
+    a {
+      color: #555;
+    }
+  }
+}
+
+.navbar-brand {
+  font-size: 24px;
+  span { font-size: 12px; }
+  .logo {
+    float: left;
+    margin: -9px 0 0 0;
+  }
 }
 
 .page-header {

@@ -1,0 +1,33 @@
+{% extends '::lounge-template.html.twig' %}
+
+{% block pageHeader %}
+    <h1> {{ 'Разработчикам'|trans }}</h1>
+{% endblock %}
+
+{% block pageContent %}
+    <p>
+        Если вы являетесь разработчиком, вы можете принять участие в разработке проекта. <br />
+        PHP и Javascript разработчики могут сделать свой вклад в развитие редактора. <br />
+        Android разработчик внести и улучшить приложение для проигрывания создаваемых книг.
+    </p>
+    <p>
+        Код проекта находится в открытом доступе <a href="https://github.com/ITAttractor/eTextBookEditor" target="_blank">
+            https://github.com/ITAttractor/eTextBookEditor
+        </a>
+    </p>
+    <p>
+        Все что вам нужно это создать собственную ветку разработки проекта (fork), как это сделать подробно описанно по этой
+        <a href="https://help.github.com/articles/fork-a-repo/">
+            ссылке
+        </a>. <br />
+        На этой <a href="https://help.github.com/articles/syncing-a-fork/" target="_blank">странице</a> вы сможете найти описание как поддерживать синхронизацию между вашим форком и основной веткой разработки. <br />
+        После того как вы внесете изменения в код и закомитети их, на странице комита в github, вы сможете предложить добавить свои изменения в основную ветку разработки.
+        После проверки изменений они будут добавлены в основную ветку репозитория.
+    </p>
+    <p>
+        В случае возникновения каких-либо вопросов вы можете задать их в <a href="https://groups.google.com/forum/#!forum/kg-etextbook-editor-issues" target="_blank">группе поддержки</a>, отправив свой вопрос по электронной почте на адрес <br />
+        <a href="mailto:kg-etextbook-editor-issues@googlegroups.com">kg-etextbook-editor-issues@googlegroups.com</a>
+    </p>
+
+{% endblock %}
+
