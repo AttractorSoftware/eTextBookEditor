@@ -610,7 +610,10 @@ image-description {
 }
 
 audio-item {
-  video { margin-top: -250px !important; }
+  video {
+    margin-top: -250px !important;
+    height: 1px;
+  }
   .html5-controls {
     position: relative;
     top: 35px;

@@ -1401,7 +1401,8 @@ image-description {
   color: #555; }
 
 audio-item video {
-  margin-top: -250px !important; }
+  margin-top: -250px !important;
+  height: 1px; }
 audio-item .html5-controls {
   position: relative;
   top: 35px; }
